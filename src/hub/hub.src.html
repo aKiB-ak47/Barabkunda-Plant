@@ -1,0 +1,435 @@
+<title>বাড়বকুণ্ড এলপিজি প্ল্যান্ট · গুণমান ও রক্ষণাবেক্ষণ রিপোর্ট · Akib Fateh</title>
+<meta name="author" content="Akib Fateh">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wdth,wght@75..125,300..800&family=Hind+Siliguri:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Dancing+Script:wght@600;700&display=swap">
+<style>
+:root {
+  --ink: #060a12; --deck: #0b111c; --plate: #111a29; --plate2: #162133; --seam: #1f2c42; --seam2: #2c3d5a;
+  --text: #edf2f8; --muted: #a0aec1; --dim: #6b7c93;
+  --flame: #ff8a2b; --flame2: #ffc46b; --ember: #ff5b3a; --flame-soft: rgba(255,138,43,.12);
+  --gas: #5cc8ff; --gas-soft: rgba(92,200,255,.12); --ok: #43d39e; --warn: #f4c24f; --crit: #ff6a5c; --crit-soft: rgba(255,106,92,.10);
+  --f-display: "Anek Bangla", "Hind Siliguri", "Noto Sans Bengali", system-ui, sans-serif;
+  --f-body: "Hind Siliguri", "Noto Sans Bengali", "Segoe UI", system-ui, sans-serif;
+  --f-code: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --f-sign: "Dancing Script", "Segoe Script", cursive;
+  --r: 18px; color-scheme: dark;
+}
+* { box-sizing: border-box }
+html { background: var(--ink); scroll-behavior: smooth; scroll-padding-top: 74px }
+body { background: var(--ink); color: var(--text); font: 16px/1.65 var(--f-body); -webkit-font-smoothing: antialiased; overflow-x: hidden }
+body::after { content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(1100px 620px at 85% -10%, var(--flame-soft), transparent 60%), radial-gradient(900px 520px at -10% 35%, var(--gas-soft), transparent 60%) }
+.wm { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: .05; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='340'%3E%3Cg transform='rotate(-18 300 170)' fill='%23ffffff' font-family='Arial' font-weight='700'%3E%3Cpath d='M130 120c10 18 26 28 26 46a26 26 0 0 1-52 0c0-13 8-21 13-28 3 8 5 13 10 16 0-13 0-23 3-34z'/%3E%3Ctext x='170' y='158' font-size='40' letter-spacing='3'%3EBM LP GAS%3C/text%3E%3Ctext x='172' y='186' font-size='14' letter-spacing='5'%3EBARABKUNDA LPG PLANT%3C/text%3E%3Ctext x='330' y='286' font-size='13' letter-spacing='3'%3EAKIB FATEH%3C/text%3E%3C/g%3E%3C/svg%3E"); background-size: 600px 340px }
+main, header.bar, footer { position: relative; z-index: 1 }
+a { color: var(--gas) }
+button { font: inherit; color: inherit }
+:focus-visible { outline: 2px solid var(--flame2); outline-offset: 3px; border-radius: 8px }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto } *, *::before, *::after { animation: none !important; transition: none !important } }
+.wrap { max-width: 1240px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)) }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.2 }
+p { margin: 0 }
+.lat, .code { font-family: var(--f-code); font-size: .88em }
+/* top bar */
+.bar { position: sticky; top: 0; z-index: 30; background: rgba(8,12,20,.82); backdrop-filter: blur(14px) saturate(1.3); -webkit-backdrop-filter: blur(14px) saturate(1.3); border-bottom: 1px solid var(--seam) }
+.bar .wrap { display: flex; align-items: center; gap: 14px; padding-block: 10px }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); white-space: nowrap }
+.brand svg { width: 30px; height: 30px; flex: none }
+.brand b { display: block; font: 700 16px/1.1 var(--f-display) } .brand small { display: block; font-size: 11.5px; color: var(--muted); letter-spacing: .02em }
+.nav { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; flex: 1; min-width: 0; justify-content: center }
+.nav::-webkit-scrollbar { display: none }
+.nav a { color: var(--muted); text-decoration: none; font-size: 14px; padding: 7px 12px; border-radius: 99px; white-space: nowrap }
+.nav a:hover { color: var(--text); background: var(--plate) }
+.by { font-family: var(--f-sign); font-size: 21px; color: var(--flame2); white-space: nowrap }
+.kbtn { appearance: none; border: 1px solid var(--seam2); background: var(--plate); color: var(--muted); border-radius: 12px; padding: 7px 12px; cursor: pointer; display: flex; gap: 8px; align-items: center; font-size: 14px; white-space: nowrap }
+.kbtn:hover { color: var(--text) } .kbtn svg { width: 16px; height: 16px }
+@media (max-width: 860px) { .nav { display: none } .by { margin-left: auto } }
+@media (max-width: 480px) { .brand small { display: none } .kbtn span { display: none } }
+/* hero */
+.hero { padding-block: 46px 10px }
+.eyebrow { color: var(--flame2); font-size: 14px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap }
+.eyebrow i { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 10px var(--ok) }
+.hero h1 { font-size: clamp(36px, 6.4vw, 76px); font-weight: 800; font-stretch: 108%; margin: 14px 0 12px; letter-spacing: -.01em }
+.hero h1 em { font-style: normal; background: linear-gradient(100deg, var(--flame), var(--flame2)); -webkit-background-clip: text; background-clip: text; color: transparent }
+.lede { font-size: clamp(17px, 2vw, 20px); color: #cfd9e6; max-width: 860px }
+.prep { margin-top: 16px; color: var(--muted); font-size: 14.5px; display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap }
+.prep .sig { font-family: var(--f-sign); font-size: 26px; color: var(--flame2); line-height: 1 }
+.cta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px }
+.go { appearance: none; border: 1px solid var(--seam2); background: var(--plate); color: var(--text); border-radius: 999px; padding: 11px 18px; font: 600 15px/1 var(--f-body); cursor: pointer; display: inline-flex; gap: 8px; align-items: center; text-decoration: none; white-space: nowrap }
+.go:hover { border-color: var(--flame) }
+.go.main { background: linear-gradient(135deg, var(--flame), var(--ember)); border-color: transparent; color: #1b0e03 }
+.go.sm { padding: 6px 12px; font-size: 14px }
+.go .arr { transition: transform .15s } .go:hover .arr { transform: translateX(3px) }
+.scene { margin-top: 26px; border: 1px solid var(--seam); border-radius: 22px; overflow: hidden; background: #08101d; position: relative }
+.scene svg { display: block; width: 100%; height: auto }
+.scene svg text { font-family: var(--f-body) }
+.flow { stroke-dasharray: 7 11; animation: dash 1.4s linear infinite } @keyframes dash { to { stroke-dashoffset: -36 } }
+.blink { animation: blink 2.4s ease-in-out infinite } @keyframes blink { 50% { opacity: .35 } }
+/* update strip */
+.upd { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; border: 1px solid color-mix(in srgb, var(--flame) 45%, var(--seam)); background: color-mix(in srgb, var(--flame) 8%, var(--plate)); border-radius: 16px; padding: 14px 18px; margin: 22px 0 0 }
+.upd .when { font-weight: 700; color: var(--flame2); white-space: nowrap }
+.upd .what { flex: 1 1 320px; min-width: 0; display: grid; gap: 6px }
+.upd .ln { display: flex; gap: 10px; align-items: center; justify-content: space-between; flex-wrap: wrap }
+.upd .ln + .ln { border-top: 1px dashed var(--seam2); padding-top: 6px }
+.upd .old { width: 100%; font-size: 14px; color: var(--muted) } .upd .old summary { cursor: pointer }
+/* sections */
+section.blk { padding-block: 54px 10px; scroll-margin-top: 70px }
+.sh { margin-bottom: 20px; display: grid; gap: 6px }
+.kick { font-size: 13.5px; color: var(--flame2); letter-spacing: .02em }
+.sh h2 { font-size: clamp(26px, 3.6vw, 40px); font-weight: 800 }
+.sh p { color: #cfd9e6; max-width: 900px }
+.card { background: linear-gradient(180deg, var(--plate2), var(--plate)); border: 1px solid var(--seam); border-radius: var(--r); padding: 20px; min-width: 0 }
+/* safety */
+.safety { border: 1px solid color-mix(in srgb, var(--crit) 55%, var(--seam)); background: linear-gradient(180deg, rgba(255,106,92,.09), rgba(255,106,92,.02)); border-radius: 22px; padding: 22px }
+.safety .head { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 16px }
+.siren { width: 44px; height: 44px; border-radius: 14px; background: rgba(255,106,92,.18); color: var(--crit); display: grid; place-items: center; flex: none }
+.sgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 12px }
+.sitem { background: rgba(6,10,18,.55); border: 1px solid var(--seam); border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 6px; min-width: 0 }
+.sitem .id { font: 600 12.5px var(--f-code); color: var(--crit) } .sitem .v { font: 800 24px/1.15 var(--f-display) }
+.sitem p { color: #d5deea; font-size: 14.5px } .sitem .ref { font-size: 12.5px; color: var(--muted); border-top: 1px dashed var(--seam2); padding-top: 6px; margin-top: auto }
+.sitem .open { align-self: flex-start; margin-top: 4px }
+/* KPI band */
+.kband { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr)); gap: 12px }
+.k { background: linear-gradient(180deg, var(--plate2), var(--plate)); border: 1px solid var(--seam); border-radius: 16px; padding: 16px; position: relative; overflow: hidden; min-width: 0 }
+.k::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 4px; background: var(--c, var(--flame)) }
+.k .t { font-size: 12.5px; color: var(--muted) } .k .v { font: 800 32px/1.15 var(--f-display); display: block; margin: 4px 0 } .k .s { font-size: 13px; color: var(--muted) }
+.k .tag { display: block; font-size: 11.5px; color: var(--c); font-weight: 600; margin-bottom: 2px } .k .t { display: block }
+/* plant flow */
+.pflow { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0; position: relative }
+@media (max-width: 960px) { .pflow { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 14px } }
+@media (max-width: 560px) { .pflow { grid-template-columns: 1fr } }
+.st { position: relative; padding: 16px 14px; border: 1px solid var(--seam); background: var(--plate); margin-right: -1px; min-width: 0 }
+.st:first-child { border-radius: 16px 0 0 16px } .st:last-child { border-radius: 0 16px 16px 0 }
+@media (max-width: 960px) { .st, .st:first-child, .st:last-child { border-radius: 14px; margin: 0 6px } }
+.st .n { font: 700 12px var(--f-code); color: var(--flame2) } .st h3 { font-size: 18px; margin: 4px 0 6px } .st p { font-size: 13.5px; color: #d5deea }
+.st .ic { width: 46px; height: 46px; margin-bottom: 8px } .st .eqs { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px }
+.chip { appearance: none; border: 1px solid var(--seam2); background: var(--deck); color: var(--muted); font-size: 12px; padding: 3px 9px; border-radius: 99px; cursor: pointer; white-space: nowrap }
+.chip:hover { color: var(--text); border-color: var(--flame) }
+.st .rtag { margin-top: 10px; font-size: 12.5px; color: var(--gas) }
+/* report cards */
+.reps { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 520px), 1fr)); gap: 18px }
+.rep { position: relative; overflow: hidden; border-radius: 24px; border: 1px solid var(--seam); background: linear-gradient(160deg, #142137, #0c1422 60%); padding: 24px; display: flex; flex-direction: column; gap: 14px; min-width: 0 }
+.rep::after { content: ""; position: absolute; width: 380px; height: 380px; right: -140px; top: -160px; border-radius: 50%; background: radial-gradient(circle, var(--glow, rgba(255,138,43,.22)), transparent 65%); pointer-events: none }
+.rep .rk { font-size: 13px; color: var(--flame2) } .rep h3 { font-size: clamp(24px, 3vw, 32px); font-weight: 800 } .rep p { color: #cfd9e6; font-size: 15px }
+.rep .mini { background: rgba(4,8,14,.5); border: 1px solid var(--seam); border-radius: 14px; padding: 10px 12px }
+.rep .mini svg { width: 100%; height: auto; display: block } .rep .mini text { fill: var(--muted); font-size: 11px; font-family: var(--f-body) }
+.rep .figs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px }
+.rep .figs div { background: rgba(4,8,14,.45); border: 1px solid var(--seam); border-radius: 12px; padding: 10px } .rep .figs b { display: block; font: 800 22px/1.2 var(--f-display) } .rep .figs span { font-size: 12.5px; color: var(--muted) }
+.rep .btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto }
+.rep.cal { --glow: rgba(92,200,255,.22) }
+/* updates + footer */
+.ulist { display: grid; gap: 8px } .ulist li { list-style: none; background: var(--plate); border: 1px solid var(--seam); border-radius: 12px; padding: 10px 14px; display: flex; gap: 12px; flex-wrap: wrap; align-items: baseline }
+.ulist { padding: 0; margin: 0 } .ulist time { color: var(--flame2); font-weight: 600; white-space: nowrap }
+footer { margin-top: 64px; border-top: 1px solid var(--seam); padding-block: 28px 90px; color: var(--muted); font-size: 14px }
+footer .wrap { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; align-items: flex-end }
+footer .sig { font-family: var(--f-sign); font-size: 38px; color: var(--flame2); line-height: 1 }
+/* viewer */
+#viewer { position: fixed; inset: 0; z-index: 100; background: var(--ink); display: flex; flex-direction: column; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px) }
+.vbar { display: flex; align-items: center; gap: 10px; padding: 8px max(12px, env(safe-area-inset-right, 0px)) 8px max(12px, env(safe-area-inset-left, 0px)); background: var(--deck); border-bottom: 1px solid var(--seam) }
+.vback { appearance: none; border: 0; border-radius: 999px; background: linear-gradient(135deg, var(--flame), var(--ember)); color: #1b0e03; font: 600 14px/1 var(--f-body); padding: 10px 15px; cursor: pointer; white-space: nowrap; flex: none }
+.vtabs { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; min-width: 0; flex: 1 } .vtabs::-webkit-scrollbar { display: none }
+.vtab { appearance: none; border: 1px solid transparent; background: none; color: var(--muted); border-radius: 10px; padding: 8px 12px; font-size: 14px; cursor: pointer; white-space: nowrap }
+.vtab:hover { color: var(--text); background: var(--plate) } .vtab[aria-selected="true"] { color: var(--text); border-color: var(--seam2); background: var(--plate2) }
+.vsig { font-family: var(--f-sign); color: var(--flame2); font-size: 18px; white-space: nowrap }
+#vframe { flex: 1; width: 100%; border: 0; background: var(--ink) }
+@media (max-width: 600px) { .vsig { display: none } }
+/* search */
+#cmd { position: fixed; inset: 0; z-index: 120; display: grid; place-items: start center; padding: 70px 16px 16px; background: rgba(3,6,10,.6); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px) }
+#cmd[hidden] { display: none }
+.cmdbox { width: min(640px, 100%); background: var(--deck); border: 1px solid var(--seam2); border-radius: 18px; box-shadow: 0 30px 80px -20px rgba(0,0,0,.6); overflow: hidden }
+.cmdin { display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-bottom: 1px solid var(--seam) } .cmdin svg { width: 18px; height: 18px; color: var(--dim); flex: none }
+.cmdin input { flex: 1; min-width: 0; border: 0; outline: 0; background: none; color: var(--text); font: 500 17px/1.4 var(--f-body) }
+.cmdlist { max-height: min(56vh, 460px); overflow-y: auto; padding: 6px }
+.cmditem { display: flex; gap: 12px; align-items: center; width: 100%; text-align: left; appearance: none; border: 0; background: none; color: var(--text); padding: 10px; border-radius: 10px; cursor: pointer; font-size: 15px }
+.cmditem small { margin-left: auto; color: var(--dim); font-size: 12.5px; white-space: nowrap } .cmditem[aria-selected="true"] { background: var(--flame-soft) }
+.cmditem .ic { width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center; background: var(--plate2); color: var(--flame); font-size: 13px; flex: none; font-weight: 700 }
+.cmdempty { padding: 18px; color: var(--dim); font-size: 14px }
+[hidden] { display: none !important }
+</style>
+<div class="wm" aria-hidden="true"></div>
+<header class="bar"><div class="wrap">
+  <a class="brand" href="#top" aria-label="বাড়বকুণ্ড এলপিজি প্ল্যান্ট"><svg viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="fl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffc46b"/><stop offset="1" stop-color="#ff5b3a"/></linearGradient></defs><path d="M16 2c4 7 10 11 10 18a10 10 0 0 1-20 0c0-5 3-8 5-11 1 3 2 5 4 6 0-5 0-9 1-13z" fill="url(#fl)"/><path d="M16 17c2 3 4 4 4 7a4 4 0 0 1-8 0c0-2 1-3 2-4 .5 1 1 2 1.6 2.3 0-2 0-3.5.4-5.3z" fill="#fff5e0" opacity=".85"/></svg>
+    <span><b>বাড়বকুণ্ড এলপিজি প্ল্যান্ট</b><small>বিএম এনার্জি (বিডি) লিমিটেড · প্ল্যান্ট ১২০১</small></span></a>
+  <nav class="nav" aria-label="অংশ"><a href="#safety">নিরাপত্তা</a><a href="#kpi">এক নজরে</a><a href="#plant">প্ল্যান্টের ধাপ</a><a href="#reports">রিপোর্ট</a><a href="#updates">হালনাগাদ</a></nav>
+  <button class="kbtn" id="openCmd" type="button" aria-label="খুঁজুন"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>খুঁজুন</span></button>
+  <span class="by">Akib Fateh</span>
+</div></header>
+
+<main id="top">
+<div class="wrap hero">
+  <p class="eyebrow"><i></i>বিএম এনার্জি (বিডি) লিমিটেড · বাড়বকুণ্ড, সীতাকুণ্ড, চট্টগ্রাম · হালনাগাদ {{updated}}</p>
+  <h1>এলপিজি প্ল্যান্টের <em>গুণমান ও রক্ষণাবেক্ষণ</em></h1>
+  <p class="lede">প্রতিটি সিলিন্ডার সঠিক ওজনে, প্রতিটি যন্ত্র ভাঙার আগেই যত্নে। দুটি গভীর রিপোর্ট এক ঠিকানায়: সিলিন্ডারের ওজন-নির্ভুলতা, আর রক্ষণাবেক্ষণ, বিশ্বমানের TPM কর্মসূচি ও যন্ত্রপাতির ছবিসহ নির্দেশিকা।</p>
+  <p class="prep">প্রস্তুত করেছেন <span class="sig">Akib Fateh</span><span>· বাড়বকুণ্ড এলপিজি প্ল্যান্ট (সিটিজি) · {{asof}}</span></p>
+  <div class="cta"><button class="go main" data-open="cal" data-view="update">ওজন-নির্ভুলতা <span class="arr">→</span></button><button class="go main" data-open="maint" data-view="summary">রক্ষণাবেক্ষণ <span class="arr">→</span></button><button class="go" data-open="maint" data-view="tpm">TPM কর্মসূচি</button><button class="go" data-open="maint" data-view="atlas">যন্ত্রপাতির ছবি</button></div>
+  <div class="scene" aria-label="বাড়বকুণ্ড এলপিজি প্ল্যান্টের চিত্র">
+<svg viewBox="0 0 1200 430" role="img" aria-label="জাহাজ থেকে বিতরণ পর্যন্ত এলপিজি প্ল্যান্টের চিত্র">
+<defs>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#070d1c"/><stop offset=".55" stop-color="#12203c"/><stop offset=".85" stop-color="#3a2a33"/><stop offset="1" stop-color="#6b3a26"/></linearGradient>
+<radialGradient id="sun" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffb86b" stop-opacity=".75"/><stop offset=".35" stop-color="#ff8a2b" stop-opacity=".28"/><stop offset="1" stop-color="#ff8a2b" stop-opacity="0"/></radialGradient>
+<linearGradient id="st" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b8c6d6"/><stop offset=".5" stop-color="#7a8ca2"/><stop offset="1" stop-color="#3d4b5e"/></linearGradient>
+<linearGradient id="mound" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4c6b3d"/><stop offset=".25" stop-color="#34492c"/><stop offset="1" stop-color="#1f2c1d"/></linearGradient>
+<linearGradient id="cyl" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7a1d1d"/><stop offset=".4" stop-color="#e2453c"/><stop offset="1" stop-color="#6b1515"/></linearGradient>
+<linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#173452"/><stop offset="1" stop-color="#0a1626"/></linearGradient>
+<linearGradient id="bigfl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffc46b"/><stop offset="1" stop-color="#ff5b3a"/></linearGradient>
+</defs>
+<rect width="1200" height="430" fill="url(#sky)"/>
+<circle cx="930" cy="320" r="260" fill="url(#sun)"/>
+<g fill="#fff" opacity=".7"><circle cx="80" cy="40" r="1.2"/><circle cx="210" cy="70" r="1"/><circle cx="340" cy="30" r="1.4"/><circle cx="520" cy="60" r="1"/><circle cx="640" cy="24" r="1.2"/><circle cx="760" cy="52" r="1"/><circle cx="1150" cy="40" r="1.3"/><circle cx="1040" cy="22" r="1"/></g>
+<path d="M1040 34c22 38 56 60 56 98a56 56 0 0 1-112 0c0-28 17-45 28-60 6 17 11 28 22 34 0-28 0-49 6-72z" fill="url(#bigfl)" opacity=".16"/>
+<path d="M0 300 C120 270 220 286 330 262 S560 240 700 258 S940 236 1200 262 L1200 430 L0 430Z" fill="#0f1a2e"/>
+<rect y="330" width="270" height="100" fill="url(#sea)"/>
+<g stroke="#3d6a94" stroke-width="1.2" opacity=".6"><path d="M10 350h60M90 362h70M30 380h80M150 392h60M60 410h90M190 372h50"/></g>
+<!-- LPG carrier at the jetty -->
+<g transform="translate(18 284)"><path d="M0 40 L210 40 L196 66 L16 66Z" fill="#7a2b2b"/><rect x="0" y="34" width="210" height="8" fill="#c9d4e2"/>
+<g fill="url(#st)"><ellipse cx="50" cy="32" rx="26" ry="16"/><ellipse cx="104" cy="32" rx="26" ry="16"/><ellipse cx="158" cy="32" rx="22" ry="14"/></g>
+<rect x="176" y="8" width="26" height="28" fill="#dfe6ee"/><rect x="180" y="12" width="18" height="6" fill="#5cc8ff" opacity=".7"/><rect x="186" y="-6" width="6" height="14" fill="#93a2b8"/></g>
+<rect x="230" y="318" width="80" height="8" fill="#5d6d81"/><g stroke="#5d6d81" stroke-width="3"><path d="M240 326v40M290 326v40"/></g>
+<text x="120" y="378" font-size="12" fill="#cfd9e6" text-anchor="middle">জাহাজ ও জেটি</text>
+<!-- pipe rack to the mounded bullets -->
+<path d="M230 322 H360" stroke="#7a8ca2" stroke-width="6"/><path class="flow" d="M230 322 H360" stroke="#2fd1ae" stroke-width="2.4" fill="none"/>
+<!-- ground -->
+<rect y="350" width="1200" height="80" fill="#0b1322"/><rect x="270" y="350" width="930" height="4" fill="#1d2b40"/>
+<path d="M300 404 H1200" stroke="#26354d" stroke-width="16"/><path d="M300 404 H1200" stroke="#5b6b82" stroke-width="1.5" stroke-dasharray="18 16"/>
+<!-- mounded bullets -->
+<path d="M352 352 Q366 262 430 256 L612 256 Q676 262 690 352Z" fill="url(#mound)"/>
+<path d="M378 300 Q392 268 432 264 L610 264 Q650 268 664 300" fill="none" stroke="#6f9a58" stroke-width="2" opacity=".6"/>
+<g fill="url(#st)" stroke="#0b1220"><ellipse cx="364" cy="330" rx="9" ry="16"/><ellipse cx="364" cy="296" rx="9" ry="16" opacity=".0"/></g>
+<g><rect x="356" y="314" width="16" height="36" fill="url(#st)" stroke="#0b1220"/><circle cx="364" cy="330" r="5" fill="#2b3646"/></g>
+<g stroke="#93a2b8" stroke-width="3"><path d="M470 256v-22M530 256v-26M590 256v-22"/></g><g fill="#ffc46b"><circle cx="470" cy="232" r="3"/><circle cx="530" cy="228" r="3"/><circle cx="590" cy="232" r="3"/></g>
+<path d="M440 240 H620" stroke="#4c9bff" stroke-width="3"/><g fill="#7fd3ff" opacity=".8"><path d="M470 242l-8 14h16zM530 242l-8 14h16zM590 242l-8 14h16z" opacity=".45"/></g>
+<text x="520" y="312" font-size="13" fill="#e6efd8" text-anchor="middle" font-weight="600">মাউন্ডেড বুলেট (মজুত)</text>
+<text x="520" y="330" font-size="11" fill="#c8d8bb" text-anchor="middle">PSV · EFV · ডিলুজ স্প্রে</text>
+<!-- fire water tank and monitor -->
+<rect x="706" y="270" width="44" height="82" rx="4" fill="#1d4f8f" stroke="#4c9bff"/><path d="M706 270 Q728 258 750 270" fill="#2a64ad"/><g stroke="#7fb6ff" stroke-width="1"><path d="M714 278v70M720 278v70M714 290h6M714 304h6M714 318h6M714 332h6"/></g>
+<text x="728" y="368" font-size="11" fill="#7fb6ff" text-anchor="middle">অগ্নি-পানি</text>
+<path d="M768 352v-56" stroke="#ff6a5c" stroke-width="4"/><path d="M768 296 l18 -8" stroke="#ff6a5c" stroke-width="5" stroke-linecap="round"/>
+<!-- pump house -->
+<rect x="796" y="314" width="70" height="38" fill="#1a2638" stroke="#2c3d5a"/><path d="M790 316 L831 296 L872 316" fill="#24344d"/><rect x="808" y="326" width="16" height="12" fill="#ffc46b" opacity=".75" class="blink"/><rect x="838" y="326" width="16" height="12" fill="#ffc46b" opacity=".55"/>
+<text x="831" y="368" font-size="11" fill="#cfd9e6" text-anchor="middle">পাম্প হাউস</text>
+<path d="M690 340 H796" stroke="#7a8ca2" stroke-width="5"/><path class="flow" d="M690 340 H796" stroke="#2fd1ae" stroke-width="2" fill="none"/>
+<path d="M866 334 H900" stroke="#7a8ca2" stroke-width="5"/><path class="flow" d="M866 334 H900" stroke="#2fd1ae" stroke-width="2" fill="none"/>
+<!-- filling shed with carousel -->
+<path d="M890 352 V286 L1000 252 L1110 286 V352Z" fill="#141f31" stroke="#2c3d5a"/><path d="M884 288 L1000 248 L1116 288" fill="none" stroke="#5d6d81" stroke-width="5"/>
+<g stroke="#2c3d5a" stroke-width="1.5"><path d="M920 280v72M960 266v86M1040 266v86M1080 280v72"/></g>
+<ellipse cx="1000" cy="330" rx="74" ry="16" fill="#0c1526" stroke="#4c9bff" stroke-width="2"/>
+<g fill="url(#cyl)"><rect x="934" y="312" width="9" height="16" rx="3"/><rect x="954" y="308" width="9" height="16" rx="3"/><rect x="975" y="306" width="9" height="16" rx="3"/><rect x="996" y="305" width="9" height="16" rx="3"/><rect x="1017" y="306" width="9" height="16" rx="3"/><rect x="1038" y="308" width="9" height="16" rx="3"/><rect x="1058" y="312" width="9" height="16" rx="3"/></g>
+<text x="1000" y="282" font-size="12.5" fill="#cfd9e6" text-anchor="middle" font-weight="600">ফিলিং শেড · ২৪ হেডের ক্যারোসেল</text>
+<rect x="1060" y="342" width="50" height="10" fill="#3ddc97" opacity=".25"/><text x="1085" y="368" font-size="11" fill="#3ddc97" text-anchor="middle">চেক-স্কেল</text>
+<!-- stacked cylinders and dispatch truck -->
+<g fill="url(#cyl)"><rect x="1128" y="330" width="10" height="20" rx="4"/><rect x="1142" y="330" width="10" height="20" rx="4"/><rect x="1156" y="330" width="10" height="20" rx="4"/><rect x="1135" y="312" width="10" height="20" rx="4"/><rect x="1149" y="312" width="10" height="20" rx="4"/></g>
+<g transform="translate(1040 382)"><rect x="0" y="0" width="98" height="26" rx="3" fill="#24344d"/><g fill="url(#cyl)"><rect x="6" y="-14" width="10" height="16" rx="3"/><rect x="20" y="-14" width="10" height="16" rx="3"/><rect x="34" y="-14" width="10" height="16" rx="3"/><rect x="48" y="-14" width="10" height="16" rx="3"/><rect x="62" y="-14" width="10" height="16" rx="3"/><rect x="76" y="-14" width="10" height="16" rx="3"/></g><rect x="98" y="2" width="30" height="24" rx="4" fill="#4c9bff"/><rect x="104" y="6" width="16" height="9" fill="#cfe6ff"/><circle cx="20" cy="30" r="8" fill="#0b1322" stroke="#93a2b8" stroke-width="2.5"/><circle cx="110" cy="30" r="8" fill="#0b1322" stroke="#93a2b8" stroke-width="2.5"/></g>
+<text x="1104" y="426" font-size="11" fill="#cfd9e6" text-anchor="middle">বিতরণ</text>
+<!-- bulk tanker at the unloading bay -->
+<g transform="translate(420 380)"><rect x="0" y="-8" width="150" height="30" rx="15" fill="url(#st)" stroke="#0b1220"/><rect x="150" y="-4" width="34" height="26" rx="4" fill="#e2453c"/><rect x="156" y="0" width="18" height="10" fill="#ffd9d4"/><rect x="-4" y="20" width="190" height="6" fill="#2b3646"/><circle cx="24" cy="30" r="8" fill="#0b1322" stroke="#93a2b8" stroke-width="2.5"/><circle cx="54" cy="30" r="8" fill="#0b1322" stroke="#93a2b8" stroke-width="2.5"/><circle cx="166" cy="30" r="8" fill="#0b1322" stroke="#93a2b8" stroke-width="2.5"/><text x="75" y="11" font-size="11" fill="#0b1220" text-anchor="middle" font-weight="700">এলপিজি ট্যাংকার</text></g>
+<path d="M600 384 Q620 360 640 352" stroke="#9fb0c4" stroke-width="5" fill="none"/>
+<!-- light poles -->
+<g><path d="M300 352v-60M700 260v-34M880 300v-50" stroke="#5d6d81" stroke-width="2"/><circle cx="300" cy="292" r="4" fill="#ffd27a"/><circle cx="300" cy="292" r="16" fill="#ffd27a" opacity=".12"/><circle cx="880" cy="250" r="4" fill="#ffd27a"/><circle cx="880" cy="250" r="16" fill="#ffd27a" opacity=".12"/></g>
+<text x="24" y="28" font-size="12" fill="#a0aec1">জাহাজ → মজুত → পাম্প → ফিলিং → ওজন-যাচাই → বিতরণ</text>
+<text x="1176" y="28" font-size="11" fill="#6b7c93" text-anchor="end">চিত্রটি ব্যাখ্যামূলক, মাপ অনুযায়ী নয়</text>
+</svg>
+  </div>
+  {{update_strip}}
+</div>
+
+<div class="wrap">
+<section class="blk" id="safety">
+  <div class="safety">
+    <div class="head"><span class="siren" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 8v5"/><path d="M12 16.5v.5"/><path d="M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></span>
+      <div><h2 style="font-size:clamp(22px,3vw,32px)">নিরাপত্তা আগে: যোগ্য প্রকৌশলীর পর্যালোচনার জন্য</h2><p style="color:var(--muted);margin-top:4px">For review by a qualified engineer · <span class="lat">NFPA 10, 25, 58</span> · এলপিজি বিধিমালা ২০০৪ · সিদ্ধান্ত-সহায়তা, নিয়ন্ত্রণ নয়।</p></div></div>
+    <div class="sgrid">
+      <div class="sitem"><span class="id">S1 · অতিরিক্ত ভরাট</span><span class="v">{{cal_mean26}} গ্রাম গড়ে</span><p>২০২৬-এ প্রতিটি ১২ কেজি সিলিন্ডারে গড় অতিরিক্ত ভরাট ({{cal_last}} পর্যন্ত); একক সিলিন্ডারে সর্বোচ্চ {{cal_max}} গ্রাম। বড় সিলিন্ডারেও বেশি ভরাট পাওয়া গেছে। অতিরিক্ত ভরা সিলিন্ডারে তাপে প্রসারণের জায়গা কমে।</p><span class="ref">NFPA 58; <span class="lat">ISO 10691</span>; এলপিজি বিধিমালা ২০০৪</span><button class="go sm open" data-open="cal" data-view="update">বিস্তারিত →</button></div>
+      <div class="sitem"><span class="id">S2 · গ্যাস ডিটেক্টর</span><span class="v">{{maint_gas_m}} মাস</span><p>SAP-এ গ্যাস ডিটেক্টর সার্ভিসের শেষ অর্ডার এপ্রিল ২০২২-এর; এর পরে কোনো ক্যালিব্রেশনের রেকর্ড নেই। শুধু বাম্প-পরীক্ষাই বলে সেন্সর কাজ করছে কি না।</p><span class="ref">প্রস্তুতকারকের ক্যালিব্রেশন ব্যবধান; <span class="lat">NFPA 58</span></span><button class="go sm open" data-open="maint" data-view="safety">বিস্তারিত →</button></div>
+      <div class="sitem"><span class="id">S3 · অগ্নিনির্বাপক ও ডিলুজ</span><span class="v">{{maint_ext_gap}} মাসের ফাঁক</span><p>অগ্নিনির্বাপক রিফিলের অর্ডারে একবার {{maint_ext_gap}} মাসের ফাঁক; ফায়ার পাম্প, হাইড্রেন্ট বা ডিলুজের নিয়মিত পরীক্ষার কোনো অর্ডার নেই।</p><span class="ref">NFPA 10; <span class="lat">NFPA 25</span>; অগ্নি প্রতিরোধ ও নির্বাপণ আইন ২০০৩</span><button class="go sm open" data-open="maint" data-view="eq-deluge">যন্ত্র দেখুন →</button></div>
+      <div class="sitem"><span class="id">S4 · লাইসেন্স</span><span class="v">{{maint_lic}} ধরন</span><p>প্ল্যান্টের {{maint_lic}} ধরনের লাইসেন্সের নবায়ন-অর্ডার নভেম্বর ২০২৩-এর পর নেই; বেশির ভাগ গাড়ির এক্সপ্লোসিভ লাইসেন্সের শেষ অর্ডার ২০২৩-এর। মেয়াদ যাচাই করুন।</p><span class="ref">বিস্ফোরক আইন ১৮৮৪; এলপিজি বিধিমালা ২০০৪</span><button class="go sm open" data-open="maint" data-view="renew">ক্যালেন্ডার →</button></div>
+    </div>
+  </div>
+</section>
+
+<section class="blk" id="kpi">
+  <div class="sh"><span class="kick">এক নজরে</span><h2>আটটি সংখ্যায় প্ল্যান্টের অবস্থা</h2><p>বাঁ দিকের রং-দাগ: নীল = ওজন-নির্ভুলতা, কমলা = রক্ষণাবেক্ষণ, সবুজ = TPM। প্রতিটি সংখ্যা প্ল্যান্টের নিজের রেকর্ড থেকে হিসাব করা।</p></div>
+  <div class="kband">
+    <div class="k" style="--c:var(--gas)"><span class="tag">ওজন-নির্ভুলতা</span><span class="t">২০২৬-এর গড় অতিরিক্ত ভরাট</span><span class="v">{{cal_mean26}} গ্রাম</span><span class="s">প্রতি ১২ কেজি সিলিন্ডারে · {{cal_n}}টি পরীক্ষা</span></div>
+    <div class="k" style="--c:var(--gas)"><span class="tag">ওজন-নির্ভুলতা</span><span class="t">প্রক্রিয়া-সক্ষমতা Cpk</span><span class="v">{{cal_cpk}}</span><span class="s">২০২৪ → ২০২৬ · লক্ষ্য ≥ ১.৩৩</span></div>
+    <div class="k" style="--c:var(--gas)"><span class="tag">ওজন-নির্ভুলতা</span><span class="t">বিনামূল্যে যাওয়া এলপিজির মূল্য</span><span class="v">{{cal_give}} লাখ</span><span class="s">মার্চ – ২৫ অক্টোবর ২০২৬, খুচরা দামে</span></div>
+    <div class="k" style="--c:var(--gas)"><span class="tag">ওজন-নির্ভুলতা</span><span class="t">পরের রাউন্ডের পূর্বাভাস</span><span class="v">{{cal_fc}} গ্রাম</span><span class="s">{{cal_fc_method}} · MAPE {{cal_fc_mape}}%</span></div>
+    <div class="k" style="--c:var(--flame)"><span class="tag">রক্ষণাবেক্ষণ</span><span class="t">মোট লিপিবদ্ধ খরচ</span><span class="v">{{maint_cost}} কোটি</span><span class="s">{{maint_n}}টি SAP অর্ডার, {{maint_from}} – {{maint_to}}</span></div>
+    <div class="k" style="--c:var(--flame)"><span class="tag">রক্ষণাবেক্ষণ</span><span class="t">পরিকল্পিত কাজের হার</span><span class="v">{{maint_pm}}%</span><span class="s">বহরের কাজ · বিশ্বমান ৮৫%</span></div>
+    <div class="k" style="--c:var(--flame)"><span class="tag">রক্ষণাবেক্ষণ</span><span class="t">বড় মেরামতের ঝুঁকি-মডেল</span><span class="v">AUC {{maint_auc}}</span><span class="s">নিউরাল নেটওয়ার্ক, আগামী ৩ মাস</span></div>
+    <div class="k" style="--c:var(--ok)"><span class="tag">TPM</span><span class="t">TPM পরিপক্বতা</span><span class="v">{{tpm_mat}} / ৫</span><span class="s">৮ স্তম্ভ · {{eq_n}}টি যন্ত্রের নির্দেশিকা</span></div>
+  </div>
+</section>
+
+<section class="blk" id="plant">
+  <div class="sh"><span class="kick">প্ল্যান্টের ধাপ</span><h2>জাহাজ থেকে গ্রাহক: কোন ধাপে কী দেখতে হবে</h2><p>বাড়বকুণ্ডের কাজ ছয় ধাপে। প্রতিটি ধাপের মূল যন্ত্রে ক্লিক করলে ছবিসহ বিবরণ খুলবে; ধাপের নিচে লেখা কোন রিপোর্ট সেই ধাপ মাপে।</p></div>
+  <div class="pflow">
+    <div class="st"><svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><path d="M4 30h40l-5 9H9z" fill="#7a2b2b"/><ellipse cx="16" cy="27" rx="7" ry="5" fill="#9fb0c4"/><ellipse cx="30" cy="27" rx="7" ry="5" fill="#9fb0c4"/><rect x="38" y="18" width="5" height="10" fill="#dfe6ee"/></svg><span class="n">০১</span><h3>গ্রহণ</h3><p>জাহাজ ও ট্যাংকার থেকে আনলোড; হোস, ব্রেকঅ্যাওয়ে, ESD।</p><div class="eqs"><button class="chip" data-open="maint" data-view="eq-breakaway">হোস</button><button class="chip" data-open="maint" data-view="eq-esdv">ESD</button><button class="chip" data-open="maint" data-view="eq-compressor">কম্প্রেসর</button></div><p class="rtag">রক্ষণাবেক্ষণ রিপোর্ট</p></div>
+    <div class="st"><svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><path d="M4 40 Q8 18 18 16 H34 Q44 18 44 40Z" fill="#34492c"/><path d="M24 16v-8" stroke="#93a2b8" stroke-width="2"/><circle cx="24" cy="8" r="2" fill="#ffc46b"/></svg><span class="n">০২</span><h3>মজুত</h3><p>মাউন্ডেড বুলেট; সেফটি ভালভ, EFV, চাপমাপক, ডিলুজ।</p><div class="eqs"><button class="chip" data-open="maint" data-view="eq-psv">PSV</button><button class="chip" data-open="maint" data-view="eq-efv">EFV</button><button class="chip" data-open="maint" data-view="eq-gauge">চাপমাপক</button></div><p class="rtag">রক্ষণাবেক্ষণ ও TPM</p></div>
+    <div class="st"><svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="14" fill="none" stroke="#5cc8ff" stroke-width="3"/><path d="M17 15 L35 24 L17 33" fill="none" stroke="#5cc8ff" stroke-width="3"/></svg><span class="n">০৩</span><h3>স্থানান্তর</h3><p>পাম্প, স্ট্রেইনার, নন-রিটার্ন ও বল ভালভ দিয়ে ফিলিং হেডারে।</p><div class="eqs"><button class="chip" data-open="maint" data-view="eq-pump">পাম্প</button><button class="chip" data-open="maint" data-view="eq-nrv_swing">NRV</button><button class="chip" data-open="maint" data-view="eq-ball">বল ভালভ</button><button class="chip" data-open="maint" data-view="eq-strainer">স্ট্রেইনার</button></div><p class="rtag">রক্ষণাবেক্ষণ ও TPM</p></div>
+    <div class="st"><svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><ellipse cx="24" cy="30" rx="20" ry="7" fill="none" stroke="#4c9bff" stroke-width="2.5"/><g fill="#e2453c"><rect x="10" y="18" width="5" height="10" rx="2"/><rect x="18" y="16" width="5" height="10" rx="2"/><rect x="26" y="16" width="5" height="10" rx="2"/><rect x="34" y="18" width="5" height="10" rx="2"/></g></svg><span class="n">০৪</span><h3>ফিলিং</h3><p>২৪ হেডের ক্যারোসেল; প্রতিটি হেডের ওজন-নির্ভুলতা।</p><div class="eqs"><button class="chip" data-open="maint" data-view="eq-filler">ফিলিং হেড</button><button class="chip" data-open="cal" data-view="update">হেডভিত্তিক ফল</button></div><p class="rtag">ওজন-নির্ভুলতা রিপোর্ট</p></div>
+    <div class="st"><svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="30" width="36" height="6" rx="2" fill="#7a8ca2"/><rect x="18" y="12" width="12" height="18" rx="4" fill="#e2453c"/><rect x="28" y="4" width="18" height="10" rx="2" fill="#06111e" stroke="#3ddc97"/></svg><span class="n">০৫</span><h3>যাচাই</h3><p>চেক-স্কেলে প্রতিটি সিলিন্ডার আবার ওজন, লিক-পরীক্ষা, সিলিন্ডার ভালভ।</p><div class="eqs"><button class="chip" data-open="maint" data-view="eq-checkscale">চেক-স্কেল</button><button class="chip" data-open="maint" data-view="eq-cylvalve">সিলিন্ডার ভালভ</button><button class="chip" data-open="cal" data-view="deep">গভীর বিশ্লেষণ</button></div><p class="rtag">ওজন-নির্ভুলতা রিপোর্ট</p></div>
+    <div class="st"><svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><rect x="2" y="22" width="30" height="12" rx="2" fill="#24344d"/><g fill="#e2453c"><rect x="5" y="14" width="5" height="9" rx="2"/><rect x="13" y="14" width="5" height="9" rx="2"/><rect x="21" y="14" width="5" height="9" rx="2"/></g><rect x="32" y="24" width="12" height="10" rx="2" fill="#4c9bff"/><circle cx="10" cy="37" r="4" fill="#0b1322" stroke="#93a2b8" stroke-width="2"/><circle cx="38" cy="37" r="4" fill="#0b1322" stroke="#93a2b8" stroke-width="2"/></svg><span class="n">০৬</span><h3>বিতরণ</h3><p>এলপিজিবাহী গাড়ির বহর: খরচ, ঝুঁকি, লাইসেন্স।</p><div class="eqs"><button class="chip" data-open="maint" data-view="fleet">বহর</button><button class="chip" data-open="maint" data-view="predict">ঝুঁকি-মডেল</button></div><p class="rtag">রক্ষণাবেক্ষণ রিপোর্ট</p></div>
+  </div>
+</section>
+
+<section class="blk" id="reports">
+  <div class="sh"><span class="kick">রিপোর্ট</span><h2>দুটি রিপোর্ট, প্রতিটি পূর্ণাঙ্গ</h2><p>প্রতিটি রিপোর্ট নিজের পাতায় খোলে; ওপরের "← কেন্দ্র" বোতাম দিয়ে এখানে ফেরা যায়।</p></div>
+  <div class="reps">
+    <article class="rep cal" id="card-cal">
+      <span class="rk">রিপোর্ট ১ · গুণমান</span><h3>সিলিন্ডারের ওজন-নির্ভুলতা</h3>
+      <p>প্রতিটি ফিলিং হেড কত বেশি বা কম ভরে, কতটা ছড়ায়, প্রক্রিয়া-সক্ষমতা, অতিরিক্ত ভরাটের খরচ, পরিসংখ্যানিক তাৎপর্য ও পরের রাউন্ডের পূর্বাভাস। প্রতিটি নতুন ওজন-পরীক্ষার পর হালনাগাদ হয়।</p>
+      <div class="mini"><svg viewBox="0 0 520 120" data-chart="cal" role="img" aria-label="প্রতিটি রাউন্ডের গড় ত্রুটি"></svg></div>
+      <div class="figs"><div><b>{{cal_mean26}} গ্রাম</b><span>২০২৬-এর গড়</span></div><div><b>{{cal_hot_n}}টি হেড</b><span>চিহ্নিত: {{cal_hot_list}}</span></div><div><b>{{cal_give}} লাখ</b><span>অতিরিক্ত ভরাটের মূল্য</span></div></div>
+      <div class="btns"><button class="go main sm" data-open="cal" data-view="update">সর্বশেষ আপডেট <span class="arr">→</span></button><button class="go sm" data-open="cal" data-view="deep">গভীর বিশ্লেষণ</button><button class="go sm" data-open="cal" data-view="slides">স্লাইড</button><button class="go sm" data-open="cal" data-view="doc">পূর্ণ রিপোর্ট</button><button class="go sm" data-open="cal" data-view="dash">ড্যাশবোর্ড</button></div>
+    </article>
+    <article class="rep" id="card-maint">
+      <span class="rk">রিপোর্ট ২ · নির্ভরযোগ্যতা</span><h3>রক্ষণাবেক্ষণ, TPM ও যন্ত্রপাতি</h3>
+      <p>SAP-এর {{maint_n}}টি অর্ডারের খরচ, প্রতিরোধমূলক কাজ, পূর্বাভাস ও ঝুঁকি-মডেল; বিশ্বমানের TPM কর্মসূচি (৮ স্তম্ভ, সূচক, রোডম্যাপ); আর NRV, বাটারফ্লাই ভালভ থেকে গ্যাস ডিটেক্টর পর্যন্ত {{eq_n}}টি যন্ত্রের ছবিসহ নির্দেশিকা।</p>
+      <div class="mini"><svg viewBox="0 0 520 120" data-chart="maint" role="img" aria-label="মাসিক রক্ষণাবেক্ষণ খরচ"></svg></div>
+      <div class="figs"><div><b>{{maint_cost}} কোটি</b><span>মোট খরচ</span></div><div><b>{{maint_pm}}%</b><span>পরিকল্পিত কাজ</span></div><div><b>{{tpm_mat}} / ৫</b><span>TPM পরিপক্বতা</span></div></div>
+      <div class="btns"><button class="go main sm" data-open="maint" data-view="summary">সারসংক্ষেপ <span class="arr">→</span></button><button class="go sm" data-open="maint" data-view="tpm">TPM কর্মসূচি</button><button class="go sm" data-open="maint" data-view="atlas">যন্ত্রপাতি</button><button class="go sm" data-open="maint" data-view="deep">তাৎপর্য ও অগ্রগতি</button><button class="go sm" data-open="maint" data-view="predict">পূর্বাভাস</button><button class="go sm" data-open="maint" data-view="all">সব অর্ডার</button></div>
+    </article>
+  </div>
+</section>
+
+<section class="blk" id="updates">
+  <div class="sh"><span class="kick">হালনাগাদ</span><h2>কবে কী যোগ হয়েছে</h2></div>
+  <ul class="ulist" id="ulist"></ul>
+</section>
+</div>
+</main>
+
+<footer><div class="wrap">
+  <div><b style="color:var(--text)">বাড়বকুণ্ড এলপিজি প্ল্যান্ট · গুণমান ও রক্ষণাবেক্ষণ রিপোর্ট</b><br>বিএম এনার্জি (বিডি) লিমিটেড, প্ল্যান্ট ১২০১, সীতাকুণ্ড, চট্টগ্রাম<br>প্রস্তুত করেছেন: <b style="color:var(--text)">Akib Fateh</b> · সিদ্ধান্ত-সহায়তার জন্য, নিয়ন্ত্রণের জন্য নয়; নিরাপত্তা-সংক্রান্ত সব হিসাব যোগ্য প্রকৌশলীর পর্যালোচনার জন্য (<span class="lat">NFPA 58</span>; এলপিজি বিধিমালা ২০০৪)।</div>
+  <div class="sig">Akib Fateh</div>
+</div></footer>
+
+<div id="viewer" hidden role="dialog" aria-modal="true" aria-label="রিপোর্ট">
+  <div class="vbar">
+    <button class="vback" id="vclose" type="button">← কেন্দ্র</button>
+    <div class="vtabs" role="tablist" aria-label="রিপোর্ট বদলান">
+      <button class="vtab" role="tab" data-k="cal">ওজন-নির্ভুলতা</button>
+      <button class="vtab" role="tab" data-k="maint">রক্ষণাবেক্ষণ ও TPM</button>
+    </div>
+    <span class="vsig">Akib Fateh</span>
+  </div>
+  <iframe id="vframe" title="রিপোর্ট"></iframe>
+</div>
+
+<div id="cmd" hidden role="dialog" aria-modal="true" aria-label="খুঁজুন">
+  <div class="cmdbox">
+    <div class="cmdin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="cmdq" type="text" autocomplete="off" placeholder="খুঁজুন: TPM, NRV, Cpk, পাম্প, লাইসেন্স…" aria-label="খুঁজুন"></div>
+    <div class="cmdlist" id="cmdlist" role="listbox"></div>
+  </div>
+</div>
+
+<script id="hubdata" type="application/json">__HUBDATA__</script>
+<script>
+(() => {
+const DATA = JSON.parse(document.getElementById("hubdata").textContent);
+const BN = "০১২৩৪৫৬৭৮৯", bn = (s) => String(s).replace(/[0-9]/g, (d) => BN[d]);
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+/* mini charts */
+function mini(svg, vals, labels, opts) {
+  const w = 520, h = 120, m = { l: 8, r: 8, t: 14, b: 20 }, n = vals.length;
+  const lo = Math.min(0, ...vals), hi = Math.max(...vals) * 1.1 || 1, bw = (w - m.l - m.r) / n;
+  const y = (v) => h - m.b - (h - m.t - m.b) * (v - lo) / (hi - lo);
+  let s = "";
+  if (opts.ref != null) s += `<line x1="${m.l}" x2="${w - m.r}" y1="${y(opts.ref)}" y2="${y(opts.ref)}" stroke="#ffc46b" stroke-dasharray="4 4" opacity=".7"/><text x="${w - m.r}" y="${y(opts.ref) - 4}" text-anchor="end" fill="#ffc46b">${opts.refLab || ""}</text>`;
+  vals.forEach((v, i) => { const x = m.l + i * bw + bw * .18, y0 = Math.min(y(0), y(v)), hh = Math.max(1.5, Math.abs(y(v) - y(0)));
+    s += `<rect x="${x.toFixed(1)}" y="${y0.toFixed(1)}" width="${(bw * .64).toFixed(1)}" height="${hh.toFixed(1)}" rx="2" fill="${opts.col(v, i)}"><title>${labels[i]}: ${opts.fmt(v)}</title></rect>`; });
+  [0, n - 1].forEach((i) => { s += `<text x="${(m.l + i * bw + bw / 2).toFixed(1)}" y="${h - 5}" text-anchor="${i ? "end" : "start"}">${labels[i]}</text>`; });
+  svg.innerHTML = s;
+}
+const calR = DATA.calr || [];
+const cs = document.querySelector('[data-chart="cal"]');
+if (cs && calR.length) mini(cs, calR.map((r) => r.m), calR.map((r) => bn(r.l)), { col: (v) => Math.abs(v) > 50 ? "#ff6a5c" : Math.abs(v) > 25 ? "#f4c24f" : "#43d39e", fmt: (v) => bn((v > 0 ? "+" : "") + v.toFixed(1)) + " গ্রাম", ref: 0, refLab: "০ গ্রাম" });
+const M = DATA.maint;
+const ms = document.querySelector('[data-chart="maint"]');
+if (ms && M) mini(ms, M.vals, M.labels, { col: (v, i) => M.inc[i] ? "#6b7c93" : "#ff8a2b", fmt: (v) => bn(v.toFixed(1)) + " লাখ টাকা" });
+/* update list */
+const MONF = ["জানুয়ারি", "ফেব্রুয়ারি", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"];
+const ld = (s) => bn(+s.slice(8)) + " " + MONF[+s.slice(5, 7) - 1] + " " + bn(s.slice(0, 4));
+const ul = document.getElementById("ulist");
+(DATA.updates || []).slice().reverse().forEach((u) => { const li = document.createElement("li"); li.innerHTML = `<time>${ld(u.date)}</time><span>${bn(u.text.replace(/[<>&]/g, ""))}</span>` + (u.open ? ` <button class="go sm" data-open="${u.open}"${u.view ? ` data-view="${u.view}"` : ""}>দেখুন →</button>` : ""); ul.appendChild(li); });
+/* viewer */
+const V = document.getElementById("viewer"), F = document.getElementById("vframe"), TABS = [...document.querySelectorAll(".vtab")];
+const cache = {};
+function reportHtml(k) {
+  if (cache[k]) return cache[k];
+  const node = document.getElementById("rep-" + k); if (!node) return null;
+  const bin = atob(node.textContent.trim()), bytes = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+  return cache[k] = new TextDecoder("utf-8").decode(bytes);
+}
+const safeHist = (fn) => { try { fn(); } catch (e) {} };
+let lastY = 0, origin = [innerWidth / 2, innerHeight / 2];
+function show(k, view, fromHash) {
+  let h = reportHtml(k); if (!h) return;
+  const guard = '<script>document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[href^=\'#\']");if(!a||e.defaultPrevented)return;var h=a.getAttribute("href");e.preventDefault();if(h&&h.length>1){if(location.hash===h){try{window.dispatchEvent(new HashChangeEvent("hashchange"))}catch(x){}var t=document.getElementById(h.slice(1));if(t)t.scrollIntoView({block:"start"})}else{location.hash=h}}});<\/script>';
+  h = h.replace(/<head>/i, '<head>' + guard + (view ? '<script>window.__tab=' + JSON.stringify(view) + '<\/script>' : ''));
+  if (V.hidden) { lastY = scrollY; V.hidden = false; document.body.style.overflow = "hidden";
+    try { if (!reduce && V.animate) V.animate([{ clipPath: `circle(0px at ${origin[0]}px ${origin[1]}px)` }, { clipPath: `circle(${Math.hypot(innerWidth, innerHeight)}px at ${origin[0]}px ${origin[1]}px)` }], { duration: 520, easing: "cubic-bezier(.7,0,.2,1)" }); } catch (e) {} }
+  F.removeAttribute("src"); F.srcdoc = h;
+  TABS.forEach((t) => t.setAttribute("aria-selected", String(t.dataset.k === k)));
+  if (!fromHash && location.hash !== "#r-" + k) safeHist(() => history.pushState(null, "", "#r-" + k));
+  try { document.getElementById("vclose").focus(); } catch (e) {}
+}
+function hide() { if (V.hidden) return; V.hidden = true; F.srcdoc = "<!doctype html><title>.</title>"; document.body.style.overflow = ""; scrollTo(0, lastY); }
+document.addEventListener("click", (e) => { const b = e.target.closest("[data-open]"); if (!b) return; e.preventDefault(); const r = b.getBoundingClientRect(); origin = [r.left + r.width / 2, r.top + r.height / 2]; closeCmd(); show(b.dataset.open, b.dataset.view); });
+TABS.forEach((t) => t.addEventListener("click", () => show(t.dataset.k)));
+document.getElementById("vclose").addEventListener("click", () => { if (location.hash.startsWith("#r-")) safeHist(() => history.pushState(null, "", location.pathname + location.search)); hide(); });
+function route() { const m = location.hash.match(/^#r-([a-z-]+)$/); if (m) show(m[1], null, true); else hide(); }
+addEventListener("hashchange", route); addEventListener("popstate", route); route();
+addEventListener("keydown", (e) => { if (e.key === "Escape" && !V.hidden && CMD.hidden) document.getElementById("vclose").click(); });
+/* search */
+const CMD = document.getElementById("cmd"), Q = document.getElementById("cmdq"), LIST = document.getElementById("cmdlist");
+const ITEMS = [
+  ["নিরাপত্তা সতর্কতা", "safety nfpa গ্যাস ডিটেক্টর অগ্নি লাইসেন্স", () => jump("safety"), "!", "এই পাতা"],
+  ["ওজন-নির্ভুলতা: সর্বশেষ আপডেট", "cal calibration overfill head হেড ওজন", ["cal", "update"], "১", "রিপোর্ট ১"],
+  ["ওজন-নির্ভুলতা: গভীর বিশ্লেষণ (তাৎপর্য, খরচ, অগ্রগতি)", "cpk significance cost giveaway তাৎপর্য খরচ অগ্রগতি", ["cal", "deep"], "১", "রিপোর্ট ১"],
+  ["ওজন-নির্ভুলতা: স্লাইড", "slides presentation", ["cal", "slides"], "১", "রিপোর্ট ১"],
+  ["ওজন-নির্ভুলতা: পূর্ণ রিপোর্ট", "full report document", ["cal", "doc"], "১", "রিপোর্ট ১"],
+  ["ওজন-নির্ভুলতা: ড্যাশবোর্ড", "dashboard heads forecast", ["cal", "dash"], "১", "রিপোর্ট ১"],
+  ["রক্ষণাবেক্ষণ: সারসংক্ষেপ", "maintenance summary sap cost খরচ", ["maint", "summary"], "২", "রিপোর্ট ২"],
+  ["রক্ষণাবেক্ষণ: নিরাপত্তা", "safety gas detector extinguisher", ["maint", "safety"], "২", "রিপোর্ট ২"],
+  ["রক্ষণাবেক্ষণ: পূর্বাভাস ও ঝুঁকি-মডেল", "forecast neural network risk predict auc", ["maint", "predict"], "২", "রিপোর্ট ২"],
+  ["রক্ষণাবেক্ষণ: তাৎপর্য ও অগ্রগতি", "significance error waterfall progress", ["maint", "deep"], "২", "রিপোর্ট ২"],
+  ["রক্ষণাবেক্ষণ: যানবাহন বহর", "fleet vehicle truck গাড়ি", ["maint", "fleet"], "২", "রিপোর্ট ২"],
+  ["রক্ষণাবেক্ষণ: নবায়ন ক্যালেন্ডার", "license renewal লাইসেন্স", ["maint", "renew"], "২", "রিপোর্ট ২"],
+  ["রক্ষণাবেক্ষণ: সব অর্ডার", "all orders search table", ["maint", "all"], "২", "রিপোর্ট ২"],
+  ["TPM কর্মসূচি", "tpm total productive maintenance pillars স্তম্ভ", ["maint", "tpm"], "T", "রিপোর্ট ২"],
+  ["TPM: সূচক ও বিশ্বমান", "kpi oee mtbf mttr world class", ["maint", "tpm-kpi"], "T", "রিপোর্ট ২"],
+  ["TPM: রক্ষণাবেক্ষণ-সূচি (CLIT)", "clit schedule pm calendar সূচি", ["maint", "tpm-pm"], "T", "রিপোর্ট ২"],
+  ["TPM: ৫এস নিরীক্ষা", "5s audit", ["maint", "tpm-am"], "T", "রিপোর্ট ২"],
+  ["TPM: রোডম্যাপ", "roadmap gantt raci", ["maint", "tpm-road"], "T", "রিপোর্ট ২"],
+  ["যন্ত্রপাতি: প্রবাহ-চিত্র", "equipment p&id flow diagram", ["maint", "atlas-flow"], "Y", "রিপোর্ট ২"],
+  ["নন-রিটার্ন ভালভ (NRV)", "nrv check valve non return", ["maint", "eq-nrv_swing"], "Y", "যন্ত্র"],
+  ["বাটারফ্লাই ভালভ", "butterfly valve", ["maint", "eq-butterfly"], "Y", "যন্ত্র"],
+  ["বল ভালভ", "ball valve", ["maint", "eq-ball"], "Y", "যন্ত্র"],
+  ["সেফটি ভালভ (PSV)", "psv prv relief safety valve", ["maint", "eq-psv"], "Y", "যন্ত্র"],
+  ["এলপিজি পাম্প", "pump", ["maint", "eq-pump"], "Y", "যন্ত্র"],
+  ["ফিলিং হেড", "filling head carousel", ["maint", "eq-filler"], "Y", "যন্ত্র"],
+  ["গ্যাস ডিটেক্টর", "gas detector lel", ["maint", "eq-detector"], "Y", "যন্ত্র"],
+  ["অগ্নিনির্বাপক", "fire extinguisher dcp", ["maint", "eq-extinguisher"], "Y", "যন্ত্র"],
+];
+let sel = 0, shown = [];
+function jump(id) { closeCmd(); const t = document.getElementById(id); if (t) t.scrollIntoView({ block: "start" }); }
+function render() {
+  const q = Q.value.trim().toLowerCase();
+  shown = ITEMS.filter((it) => !q || (it[0] + " " + it[1]).toLowerCase().includes(q));
+  sel = Math.min(sel, Math.max(0, shown.length - 1));
+  LIST.innerHTML = shown.length ? shown.map((it, i) => `<button class="cmditem" role="option" aria-selected="${i === sel}" data-i="${i}"><span class="ic">${it[3]}</span>${it[0]}<small>${it[4]}</small></button>`).join("") : '<div class="cmdempty">কিছু পাওয়া যায়নি</div>';
+}
+function run(it) { if (!it) return; if (typeof it[2] === "function") it[2](); else { closeCmd(); show(it[2][0], it[2][1]); } }
+function openCmd() { CMD.hidden = false; Q.value = ""; sel = 0; render(); setTimeout(() => Q.focus(), 10); }
+function closeCmd() { CMD.hidden = true; }
+document.getElementById("openCmd").addEventListener("click", openCmd);
+CMD.addEventListener("click", (e) => { if (e.target === CMD) closeCmd(); const b = e.target.closest(".cmditem"); if (b) run(shown[+b.dataset.i]); });
+Q.addEventListener("input", () => { sel = 0; render(); });
+addEventListener("keydown", (e) => {
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") { e.preventDefault(); CMD.hidden ? openCmd() : closeCmd(); return; }
+  if (CMD.hidden) return;
+  if (e.key === "Escape") closeCmd(); else if (e.key === "ArrowDown") { sel = Math.min(shown.length - 1, sel + 1); render(); e.preventDefault(); } else if (e.key === "ArrowUp") { sel = Math.max(0, sel - 1); render(); e.preventDefault(); } else if (e.key === "Enter") run(shown[sel]);
+});
+})();
+</script>

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://akib-ak47.github.io/Barabkunda-Plant/sitemap.xml

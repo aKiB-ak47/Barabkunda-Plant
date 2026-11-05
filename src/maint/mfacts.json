@@ -1,0 +1,737 @@
+{
+ "n": 552,
+ "types": {
+  "ZPM1": 447,
+  "ZPMD": 93,
+  "ZPM3": 12
+ },
+ "date_min": "2022-02-09",
+ "date_max": "2026-10-14",
+ "order_min": 2000334,
+ "order_max": 4011575,
+ "cost_total": 10810546.32,
+ "n_cost": 381,
+ "gmps_n": 381,
+ "gmps_with_cost": 381,
+ "cost_without_gmps": 0,
+ "teco": 0,
+ "cnf": 5,
+ "actual_dates": 5,
+ "crtd": 21,
+ "no_equip": 34,
+ "trunc": 107,
+ "backdated": 225,
+ "late_median": 25.0,
+ "mismatch": [
+  {
+   "order": 4010249,
+   "desc": "CM-DhA-11-0101 Schedule & Engine Bonat",
+   "equip_vehicle": "CM-SHA-11-3475",
+   "vehicle": "CM-DHA-11-0101"
+  },
+  {
+   "order": 4010361,
+   "desc": "CM-SHA-11-3476  Electric maint work",
+   "equip_vehicle": "CM-DHA-61-0279",
+   "vehicle": "CM-SHA-11-3476"
+  },
+  {
+   "order": 4010363,
+   "desc": "CM-DhA-61-0281 Schedule & others maint.",
+   "equip_vehicle": "CM-DHA-61-0285",
+   "vehicle": "CM-DHA-61-0281"
+  }
+ ],
+ "dups": [
+  {
+   "order": 4009968,
+   "dup_of": 4009966.0,
+   "desc": "Alternator Assy New of CM-DhA-61-0285",
+   "cost": 15466.0
+  },
+  {
+   "order": 4010243,
+   "dup_of": 4010242.0,
+   "desc": "CM-Sha-11-1264 Air filter change.",
+   "cost": 4383.0
+  },
+  {
+   "order": 4010317,
+   "dup_of": 4010316.0,
+   "desc": "CM-SHA-11-3477 Schedule & others maint.",
+   "cost": 30042.0
+  },
+  {
+   "order": 4010363,
+   "dup_of": 4010357.0,
+   "desc": "CM-DhA-61-0281 Schedule & others maint.",
+   "cost": 21757.0
+  },
+  {
+   "order": 4011305,
+   "dup_of": 4011249.0,
+   "desc": "Replace Tyre of CM-DhA-61-0287",
+   "cost": 0.0
+  },
+  {
+   "order": 4011332,
+   "dup_of": 4011305.0,
+   "desc": "Replace Tyre of CM-DhA-61-0287",
+   "cost": 61600.0
+  }
+ ],
+ "twins": [
+  4009966,
+  4010242,
+  4010316,
+  4011305
+ ],
+ "lowconf": [
+  {
+   "order": 4010371,
+   "desc": "Walkie Talkie Maintenance",
+   "cost": 11000.0
+  },
+  {
+   "order": 4010372,
+   "desc": "Fire Extinguisher Refill and accs. maint",
+   "cost": 34000.0
+  },
+  {
+   "order": 4010408,
+   "desc": "CM-DhA-61-0247 chassis hanger maint",
+   "cost": 37665.0
+  }
+ ],
+ "gap_months": [
+  "2024-07",
+  "2024-09",
+  "2024-10",
+  "2024-11",
+  "2024-12",
+  "2025-01",
+  "2025-02",
+  "2025-03",
+  "2025-05"
+ ],
+ "gap_orders": 2,
+ "zero_cost_zpm1_2022_23": [
+  48,
+  67
+ ],
+ "recent_jul_oct": {
+  "orders": 12,
+  "fleet_orders": 5,
+  "cost": 135347.85
+ },
+ "h1_2026_monthly_orders": 26.5,
+ "reg_variants_total": 60,
+ "reg_vehicles": 35,
+ "spell_forms": 53,
+ "h2_2025": {
+  "cost": 4243891.38,
+  "fleet_cost": 3743955.0,
+  "plant_cost": 499936.38,
+  "fleet_jobs": 148,
+  "cost_per_job": 25643.5274,
+  "sched_share": 39.1892,
+  "vehicles": 30,
+  "top_cat": {
+   "ক্লাচ, গিয়ারবক্স ও ড্রাইভ": 660918.0,
+   "ইঞ্জিন ওভারহল ও ব্লক": 590459.0,
+   "নির্ধারিত সার্ভিস (বিস্তারিত নেই)": 541247.0
+  }
+ },
+ "h1_2026": {
+  "cost": 4378507.0,
+  "fleet_cost": 3843340.0,
+  "plant_cost": 342690.0,
+  "fleet_jobs": 146,
+  "cost_per_job": 27065.7746,
+  "sched_share": 47.2603,
+  "vehicles": 28,
+  "top_cat": {
+   "ইঞ্জিন ওভারহল ও ব্লক": 741809.0,
+   "ক্লাচ, গিয়ারবক্স ও ড্রাইভ": 670928.0,
+   "বৈদ্যুতিক (ব্যাটারি, লাইট, ওয়্যারিং)": 579994.0
+  }
+ },
+ "jun25_jun26": {
+  "cost": 8904648.38,
+  "fleet_cost": 7869545.0,
+  "plant_cost": 842626.38,
+  "fleet_jobs": 310,
+  "cost_per_job": 26144.6678,
+  "sched_share": 42.5806,
+  "vehicles": 30,
+  "top_cat": {
+   "ক্লাচ, গিয়ারবক্স ও ড্রাইভ": 1403815.0,
+   "ইঞ্জিন ওভারহল ও ব্লক": 1332268.0,
+   "নির্ধারিত সার্ভিস (বিস্তারিত নেই)": 940792.0
+  }
+ },
+ "mar24": {
+  "cost": 524794.0,
+  "fleet_cost": 521994.0,
+  "plant_cost": 2800.0,
+  "fleet_jobs": 22,
+  "cost_per_job": 23727.0,
+  "sched_share": 27.2727,
+  "vehicles": 18,
+  "top_cat": {
+   "বৈদ্যুতিক (ব্যাটারি, লাইট, ওয়্যারিং)": 153520.0,
+   "ক্লাচ, গিয়ারবক্স ও ড্রাইভ": 136398.0,
+   "জ্বালানি ব্যবস্থা": 72622.0
+  }
+ },
+ "group_cost": {
+  "যানবাহন বহর": 9611495.09,
+  "ভবন, অফিস ও সাইট": 347460.0,
+  "ইউটিলিটি (কম্প্রেসর, পাম্প, বিদ্যুৎ)": 314270.0,
+  "নবায়ন ও লাইসেন্স": 192477.0,
+  "ফিলিং ও হ্যান্ডলিং": 187864.23,
+  "অগ্নি ও নিরাপত্তা": 150980.0,
+  "ওজন-যন্ত্র (ওয়েব্রিজ)": 6000.0,
+  "সাগর ও জেটি": 0.0
+ },
+ "top_orders": [
+  {
+   "order": 4011356,
+   "date": "2026-06-08",
+   "desc": "CM-DhA-61-0225 Engine Major Overhauling",
+   "vehicle": "CM-DHA-61-0225",
+   "group": "যানবাহন বহর",
+   "cost": 481080.0
+  },
+  {
+   "order": 4010054,
+   "date": "2025-07-31",
+   "desc": "CM-DhA-61-0246Engine Overhauling & Maint",
+   "vehicle": "CM-DHA-61-0246",
+   "group": "যানবাহন বহর",
+   "cost": 446448.0
+  },
+  {
+   "order": 4009962,
+   "date": "2025-04-29",
+   "desc": "Front Main Leaf Spring of CM-DhA-61-0226",
+   "vehicle": "CM-DHA-61-0226",
+   "group": "যানবাহন বহর",
+   "cost": 265993.0
+  },
+  {
+   "order": 4010717,
+   "date": "2026-02-09",
+   "desc": "CM-DhA-61-0279 Engine Block Assy Ser.",
+   "vehicle": "CM-DHA-61-0279",
+   "group": "যানবাহন বহর",
+   "cost": 260729.0
+  },
+  {
+   "order": 4010792,
+   "date": "2026-03-30",
+   "desc": "Air Compressor 02 external naintenance",
+   "vehicle": null,
+   "group": "ইউটিলিটি (কম্প্রেসর, পাম্প, বিদ্যুৎ)",
+   "cost": 260000.0
+  },
+  {
+   "order": 4010167,
+   "date": "2025-10-20",
+   "desc": "Bobtail C.M Sha 11-0102, 103, 1264,101 &",
+   "vehicle": null,
+   "group": "যানবাহন বহর",
+   "cost": 256000.0
+  },
+  {
+   "order": 4007364,
+   "date": "2023-09-24",
+   "desc": "Denting  Charge of CM-Sha-11-1264",
+   "vehicle": "CM-SHA-11-1264",
+   "group": "যানবাহন বহর",
+   "cost": 209476.0
+  },
+  {
+   "order": 4006775,
+   "date": "2023-07-13",
+   "desc": "pinion (Differential Axle) of CM-DhA-61-",
+   "vehicle": "CM-DHA-61-0286",
+   "group": "যানবাহন বহর",
+   "cost": 147868.0
+  },
+  {
+   "order": 4010042,
+   "date": "2025-07-06",
+   "desc": "CM-DhA-61-0225 Engine & Denting work",
+   "vehicle": "CM-DHA-61-0225",
+   "group": "যানবাহন বহর",
+   "cost": 144011.0
+  },
+  {
+   "order": 4010173,
+   "date": "2025-10-25",
+   "desc": "Barabkunda Plant Mounded Tank Area Soil",
+   "vehicle": null,
+   "group": "ভবন, অফিস ও সাইট",
+   "cost": 140000.0
+  },
+  {
+   "order": 4010589,
+   "date": "2025-12-10",
+   "desc": "CM-SHA-11-3477 Brake&Clutch plate maint.",
+   "vehicle": "CM-SHA-11-3477",
+   "group": "যানবাহন বহর",
+   "cost": 132454.0
+  },
+  {
+   "order": 4010599,
+   "date": "2025-12-22",
+   "desc": "CM-DhA-61-0286 Cabin Main Leave Servic.",
+   "vehicle": "CM-DHA-61-0286",
+   "group": "যানবাহন বহর",
+   "cost": 129445.0
+  },
+  {
+   "order": 4010254,
+   "date": "2025-10-18",
+   "desc": "CM-DhA-11-0103 Schedule & Denting-Painti",
+   "vehicle": "CM-DHA-11-0103",
+   "group": "যানবাহন বহর",
+   "cost": 112175.0
+  },
+  {
+   "order": 4007039,
+   "date": "2023-09-29",
+   "desc": "Prassure Plate Assy of CM-DhA-61-0286",
+   "vehicle": "CM-DHA-61-0286",
+   "group": "যানবাহন বহর",
+   "cost": 102783.0
+  },
+  {
+   "order": 4010355,
+   "date": "2025-11-03",
+   "desc": "Administrative building Interior Work",
+   "vehicle": null,
+   "group": "ভবন, অফিস ও সাইট",
+   "cost": 100000.0
+  }
+ ],
+ "fleet_w_cost": 7613545.0,
+ "pareto80": 17,
+ "fleet_vehicles_w": 30,
+ "top3_vehicles": [
+  [
+   "CM-DHA-61-0225",
+   967155.0
+  ],
+  [
+   "CM-DHA-61-0246",
+   679939.0
+  ],
+  [
+   "CM-DHA-61-0279",
+   463617.0
+  ]
+ ],
+ "repeats_n": 44,
+ "repeats_cost": 805002.0,
+ "weibull": {
+  "n": 275,
+  "beta": 1.1469,
+  "beta_lo": 1.0847,
+  "beta_hi": 1.2317,
+  "eta": 35.8266,
+  "eta_lo": 32.3001,
+  "eta_hi": 39.2307,
+  "mean": 34.1231,
+  "median_obs": 22.0,
+  "ks_p": 0.08,
+  "p30": 0.5577
+ },
+ "pm_share_w": 42.623,
+ "pm_only_share_w": 20.3279,
+ "pm_cost_share_w": 39.7768,
+ "plan_orders": 15,
+ "plan_released": 0,
+ "plan_list": [
+  {
+   "order": 2000552,
+   "type": "ZPM3",
+   "date": "2022-02-19",
+   "desc": "SCHEDULE MAINTENANCE OF AIR COM-01",
+   "status": "CRTD MSPT"
+  },
+  {
+   "order": 2000553,
+   "type": "ZPM3",
+   "date": "2022-08-18",
+   "desc": "SCHEDULE MAINTENANCE OF AIR COM-01",
+   "status": "CRTD MSPT"
+  },
+  {
+   "order": 2000557,
+   "type": "ZPM3",
+   "date": "2022-03-22",
+   "desc": "SCHEDULE MAINTENANCE OF AIR COM-02",
+   "status": "CRTD MSPT"
+  },
+  {
+   "order": 2000558,
+   "type": "ZPM3",
+   "date": "2022-09-18",
+   "desc": "SCHEDULE MAINTENANCE OF AIR COM-02",
+   "status": "CRTD MSPT"
+  },
+  {
+   "order": 2000695,
+   "type": "ZPM3",
+   "date": "2023-02-14",
+   "desc": "SCHEDULE MAINTENANCE OF AIR COM-01",
+   "status": "CRTD MSPT"
+  },
+  {
+   "order": 2000696,
+   "type": "ZPM3",
+   "date": "2023-03-17",
+   "desc": "SCHEDULE MAINTENANCE OF AIR COM-02",
+   "status": "CRTD MSPT"
+  },
+  {
+   "order": 2000815,
+   "type": "ZPM3",
+   "date": "2023-08-13",
+   "desc": "SCHEDULE MAINTENANCE OF AIR COM-01",
+   "status": "CRTD MSPT"
+  },
+  {
+   "order": 2000816,
+   "type": "ZPM3",
+   "date": "2024-02-09",
+   "desc": "SCHEDULE MAINTENANCE OF AIR COM-01",
+   "status": "CRTD MSPT"
+  },
+  {
+   "order": 2000817,
+   "type": "ZPM3",
+   "date": "2023-09-13",
+   "desc": "SCHEDULE MAINTENANCE OF AIR COM-02",
+   "status": "CRTD MSPT"
+  },
+  {
+   "order": 2000938,
+   "type": "ZPM3",
+   "date": "2024-11-19",
+   "desc": "Document Renewal - CM-SHA-11-3478",
+   "status": "CRTD NMAT"
+  },
+  {
+   "order": 2000993,
+   "type": "ZPM3",
+   "date": "2025-06-09",
+   "desc": "Document Renewal - CM-SHA-11-3478",
+   "status": "CRTD NMAT"
+  },
+  {
+   "order": 2000994,
+   "type": "ZPM3",
+   "date": "2025-06-09",
+   "desc": "Document Renewal - CM-SHA-11-3478",
+   "status": "CRTD NMAT"
+  },
+  {
+   "order": 4006829,
+   "type": "ZPM1",
+   "date": "2023-09-02",
+   "desc": "Air Compressor 01 maintenance",
+   "status": "CRTD MSPT RELR SETC"
+  },
+  {
+   "order": 4007500,
+   "type": "ZPM1",
+   "date": "2024-02-16",
+   "desc": "Air Compressor 01 maintenance",
+   "status": "CRTD MSPT RELR SETC"
+  },
+  {
+   "order": 4010580,
+   "type": "ZPM1",
+   "date": "2026-02-01",
+   "desc": "Air compressor -1 maintenance.",
+   "status": "CRTD MSPT RELR SETC"
+  }
+ ],
+ "sched_interval": {
+  "n": 102,
+  "median": 70.5,
+  "p25": 42.5,
+  "p75": 101.5
+ },
+ "fire_ext": [
+  {
+   "order": 4005433,
+   "date": "2022-08-25",
+   "desc": "Fire Extingusher Refilling.",
+   "status": "REL GMPS NMAT SETC",
+   "cost": 50700.0
+  },
+  {
+   "order": 4006355,
+   "date": "2023-05-15",
+   "desc": "Fire Extinguisher Refilling.",
+   "status": "REL NMAT SETC",
+   "cost": 0.0
+  },
+  {
+   "order": 4010372,
+   "date": "2025-12-14",
+   "desc": "Fire Extinguisher Refill and accs. maint",
+   "status": "REL GMPS NMAT SETC",
+   "cost": 34000.0
+  },
+  {
+   "order": 4011399,
+   "date": "2026-06-15",
+   "desc": "Fire Extenguishers Refilled and Maint.",
+   "status": "REL GMPS NMAT SETC",
+   "cost": 35980.0
+  }
+ ],
+ "gas_mon": [
+  {
+   "order": 4004850,
+   "date": "2022-04-21",
+   "desc": "Servicing Gas monitor",
+   "status": "REL NMAT SETC",
+   "cost": 0.0
+  }
+ ],
+ "fire_sys": [
+  {
+   "order": 4006414,
+   "date": "2023-05-30",
+   "desc": "Repaire of Fire monitor,4\" gate valve.",
+   "status": "REL NMAT SETC",
+   "cost": 0.0
+  },
+  {
+   "order": 4010016,
+   "date": "2025-09-21",
+   "desc": "Fire Fighting Pipe line valve Maint.",
+   "status": "REL GMPS NMAT SETC",
+   "cost": 19300.0
+  }
+ ],
+ "weigh": [
+  {
+   "order": 4004638,
+   "date": "2022-02-24",
+   "desc": "Bridge Scale Callibration.",
+   "status": "REL NMAT SETC",
+   "cost": 0.0
+  },
+  {
+   "order": 2000506,
+   "date": "2022-02-27",
+   "desc": "BSTI Verifi. of Weight Scales-Shitakunda",
+   "status": "REL NMAT SETC",
+   "cost": 0.0
+  },
+  {
+   "order": 2000843,
+   "date": "2023-11-10",
+   "desc": "BSTI Renewal -1201(Chattagram Plant)",
+   "status": "REL NMAT SETC",
+   "cost": 0.0
+  },
+  {
+   "order": 4007248,
+   "date": "2023-12-10",
+   "desc": "Weight Bridge  Scale Maintenance of Weig",
+   "status": "REL NMAT SETC",
+   "cost": 0.0
+  },
+  {
+   "order": 4011462,
+   "date": "2026-09-03",
+   "desc": "Weighbridge Scale Annual Inspection",
+   "status": "REL GMPS NMAT SETC",
+   "cost": 6000.0
+  }
+ ],
+ "compressor": [
+  {
+   "order": 2000552,
+   "date": "2022-02-19",
+   "desc": "SCHEDULE MAINTENANCE OF AIR COM-01",
+   "status": "CRTD MSPT",
+   "cost": 0.0
+  },
+  {
+   "order": 2000557,
+   "date": "2022-03-22",
+   "desc": "SCHEDULE MAINTENANCE OF AIR COM-02",
+   "status": "CRTD MSPT",
+   "cost": 0.0
+  },
+  {
+   "order": 2000553,
+   "date": "2022-08-18",
+   "desc": "SCHEDULE MAINTENANCE OF AIR COM-01",
+   "status": "CRTD MSPT",
+   "cost": 0.0
+  },
+  {
+   "order": 2000558,
+   "date": "2022-09-18",
+   "desc": "SCHEDULE MAINTENANCE OF AIR COM-02",
+   "status": "CRTD MSPT",
+   "cost": 0.0
+  },
+  {
+   "order": 2000695,
+   "date": "2023-02-14",
+   "desc": "SCHEDULE MAINTENANCE OF AIR COM-01",
+   "status": "CRTD MSPT",
+   "cost": 0.0
+  },
+  {
+   "order": 2000696,
+   "date": "2023-03-17",
+   "desc": "SCHEDULE MAINTENANCE OF AIR COM-02",
+   "status": "CRTD MSPT",
+   "cost": 0.0
+  },
+  {
+   "order": 2000815,
+   "date": "2023-08-13",
+   "desc": "SCHEDULE MAINTENANCE OF AIR COM-01",
+   "status": "CRTD MSPT",
+   "cost": 0.0
+  },
+  {
+   "order": 4006829,
+   "date": "2023-09-02",
+   "desc": "Air Compressor 01 maintenance",
+   "status": "CRTD MSPT RELR SETC",
+   "cost": 0.0
+  },
+  {
+   "order": 2000817,
+   "date": "2023-09-13",
+   "desc": "SCHEDULE MAINTENANCE OF AIR COM-02",
+   "status": "CRTD MSPT",
+   "cost": 0.0
+  },
+  {
+   "order": 2000816,
+   "date": "2024-02-09",
+   "desc": "SCHEDULE MAINTENANCE OF AIR COM-01",
+   "status": "CRTD MSPT",
+   "cost": 0.0
+  },
+  {
+   "order": 4007500,
+   "date": "2024-02-16",
+   "desc": "Air Compressor 01 maintenance",
+   "status": "CRTD MSPT RELR SETC",
+   "cost": 0.0
+  },
+  {
+   "order": 4009964,
+   "date": "2025-06-26",
+   "desc": "Air Compressor Head Assy (New) of CM-DhA",
+   "status": "REL GMPS NMAT SETC",
+   "cost": 8665.0
+  },
+  {
+   "order": 4010580,
+   "date": "2026-02-01",
+   "desc": "Air compressor -1 maintenance.",
+   "status": "CRTD MSPT RELR SETC",
+   "cost": 0.0
+  },
+  {
+   "order": 4010792,
+   "date": "2026-03-30",
+   "desc": "Air Compressor 02 external naintenance",
+   "status": "REL GMPS NMAT SETC",
+   "cost": 260000.0
+  }
+ ],
+ "fire_ext_gaps_m": [
+  8.6,
+  31.0,
+  6.0
+ ],
+ "gas_mon_months": 54.5,
+ "ren_overdue": 38,
+ "ren_soon": 4,
+ "plant_lic_last": "2023-11-10",
+ "plant_lic_n": 15,
+ "fc": {
+  "method": "এ পর্যন্ত গড়",
+  "level": 605349.6154,
+  "lo": 66664.5967,
+  "hi": 1144034.634,
+  "rmse": 388167.9745,
+  "mape": 123.5251,
+  "train": "জুন ২০২৫ – জুন ২০২৬",
+  "test": "জানুয়ারি – জুন ২০২৬",
+  "recorded_jul_oct": 123200.0,
+  "expected_jul_oct": 2421398.4615,
+  "unbooked_jul_oct": 2298198.4615,
+  "unbooked_lo": 1220828.4242,
+  "unbooked_hi": 3375568.4989,
+  "resid_sd": 420322.268,
+  "monthly_mean": 605349.6154,
+  "monthly_sd": 362120.2974,
+  "cv": 59.82
+ },
+ "clsA": {
+  "n": 180,
+  "pos": 106,
+  "best": "ভিত্তিরেখা: যানবাহনের আগের হার",
+  "best_auc": 0.665
+ },
+ "clsB": {
+  "n": 120,
+  "pos": 22,
+  "best": "নিউরাল নেটওয়ার্ক (MLP, ১০টির গড়)",
+  "auc": 0.7551,
+  "lo": 0.6604,
+  "hi": 0.8458,
+  "base_auc": 0.6303,
+  "p_better": 0.935,
+  "test": "2026-01 – 2026-04"
+ },
+ "risk": {
+  "n": 30,
+  "seen_n": 2,
+  "seen_in_top10": 1,
+  "mean_p": 19.1328
+ },
+ "imp_base_auc": 0.8089,
+ "n_cost_jobs": 339,
+ "cost_job_median": 16526.0,
+ "cost_job_mean": 27597.3306,
+ "anom_n": 17,
+ "clusters": {
+  "k": 14,
+  "silhouette": 0.2641,
+  "ari_vs_rules": 0.2212
+ },
+ "plant_cost": 1006574.23,
+ "plant_n": 67,
+ "groups": {
+  "যানবাহন বহর": 389,
+  "নবায়ন ও লাইসেন্স": 96,
+  "ইউটিলিটি (কম্প্রেসর, পাম্প, বিদ্যুৎ)": 25,
+  "ফিলিং ও হ্যান্ডলিং": 20,
+  "ভবন, অফিস ও সাইট": 9,
+  "অগ্নি ও নিরাপত্তা": 8,
+  "ওজন-যন্ত্র (ওয়েব্রিজ)": 3,
+  "সাগর ও জেটি": 2
+ },
+ "fleet_n": 384,
+ "vehicles_n": 35
+}

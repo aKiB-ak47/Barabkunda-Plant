@@ -1,0 +1,106 @@
+{
+ "update_date": "2026-11-05",
+ "data_through": "2026-11-05",
+ "previous_through": "2026-10-25",
+ "new_rounds": [
+  {
+   "round": "02 Nov 26",
+   "cylinders": 24,
+   "mean_g": 77.083,
+   "sd_g": 90.385,
+   "mean_out": true,
+   "sd_out": true
+  },
+  {
+   "round": "04 Nov 26",
+   "cylinders": 22,
+   "mean_g": 68.182,
+   "sd_g": 106.71,
+   "mean_out": true,
+   "sd_out": true
+  },
+  {
+   "round": "05 Nov 26",
+   "cylinders": 24,
+   "mean_g": 32.083,
+   "sd_g": 162.212,
+   "mean_out": false,
+   "sd_out": true
+  }
+ ],
+ "y2026": {
+  "n": 826,
+  "mean": 48.41525423728814,
+  "sd": 118.76407255842382,
+  "within100": 67.19128329297821,
+  "within150": 83.29297820823246,
+  "over150": 13.68038740920097,
+  "under150": 3.026634382566586,
+  "cpk": 0.2851163756130573
+ },
+ "latest": {
+  "n": 24,
+  "mean": 32.083333333333336,
+  "sd": 162.2123987827089,
+  "within100": 70.83333333333334,
+  "within150": 79.16666666666666,
+  "over150": 16.666666666666664,
+  "under150": 4.166666666666666,
+  "cpk": 0.24230919368997916
+ },
+ "latest_without_unusual": {
+  "n": 23,
+  "mean": 61.73913043478261,
+  "sd": 73.77189498798698,
+  "within100": 73.91304347826086,
+  "within150": 82.6086956521739,
+  "over150": 17.391304347826086,
+  "under150": 0.0,
+  "cpk": 0.39880078802182406
+ },
+ "hot_heads": [
+  5,
+  13,
+  21,
+  6,
+  11,
+  14
+ ],
+ "previous_hot_heads": [
+  5,
+  14,
+  13,
+  6,
+  21
+ ],
+ "forecast": {
+  "method": "EWMA α 0.5, readings capped at ±300 g",
+  "n_methods": 7,
+  "first_test": "2026-10-19",
+  "last_test": "2026-11-05",
+  "n_test": 189,
+  "mean": 60.5071612308296,
+  "mean_lo": 36.05394134965409,
+  "mean_hi": 94.4108097854376,
+  "fail_heads": 6.497354497354497,
+  "q10": -83.98904787803622,
+  "q90": 93.56078244489626
+ },
+ "previous_forecast_score": {
+  "round": "02 Nov 26",
+  "date": "2026-11-02",
+  "heads": 24,
+  "mae_g": 62.28033333333334,
+  "in_range": 18,
+  "naive_mae": 55.416666666666664,
+  "mean_fc": 79.133,
+  "mean_lo": 77.231,
+  "mean_hi": 120.837,
+  "mean_act": 77.08333333333333,
+  "fail_fc": 7.869,
+  "fail_act": 4,
+  "method": "LSTM (recurrent neural net)"
+ },
+ "excluded_rows": 14,
+ "changed_rounds": []
+}
