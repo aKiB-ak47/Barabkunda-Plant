@@ -1,114 +1,114 @@
 """TPM programme content for Barabkunda LPG plant (Bangla). Numbers are filled in by build_maint.py from tpm.json."""
 
 PILLARS = {
- "jh": dict(jp="Jishu Hozen", goal="অপারেটর ও চালক নিজের যন্ত্রের মালিক: পরিষ্কার, পরিদর্শন, তেল-গ্রিজ ও টাইট রাখা দৈনিক অভ্যাস।",
-            focus="ক্যারোসেলের ফিলিং হেড, পাম্প ও কম্প্রেসর, ভালভ-ম্যানিফোল্ড, এলপিজিবাহী প্রতিটি গাড়ি (চালকের দৈনিক চেক)।",
-            act=["প্রতিটি যন্ত্রের জন্য এক পাতার CLIT চেকলিস্ট (নিচে) চালু ও শিফটে সই", "পরীক্ষামূলক এলাকা: ক্যারোসেল ও পাম্প হাউসে প্রাথমিক পরিষ্কার ও ত্রুটি-ট্যাগ অভিযান", "চালকদের দৈনিক ১০-মিনিটের গাড়ি-চেক কার্ড (টায়ার, ব্রেক, তেল, ব্যাটারি, লিক)"],
-            kpi="দৈনিক চেকলিস্ট পালনের হার; প্রতি মাসে খোলা ও বন্ধ ত্রুটি-ট্যাগ", owner="উৎপাদন ব্যবস্থাপক ও পরিবহন প্রধান"),
- "pm": dict(jp="Keikaku Hozen", goal="ভাঙার আগে রক্ষণাবেক্ষণ: সময় বা অবস্থাভিত্তিক সূচি, SAP-এ পুনরাবৃত্ত প্ল্যান, যন্ত্রাংশ আগে থেকে মজুত।",
-            focus="সব গাড়ির নির্দিষ্ট সার্ভিস-ব্যবধান, এয়ার কম্প্রেসরের ১৫টি পড়ে থাকা প্ল্যান-অর্ডার, পাম্প-কম্প্রেসরের অবস্থা-পর্যবেক্ষণ (কম্পন, তাপ)।",
-            act=["SAP-এ প্রতিটি যন্ত্র ও গাড়ির জন্য ZPM3 রক্ষণাবেক্ষণ প্ল্যান (নিচের সূচি অনুযায়ী)", "গাড়ির সার্ভিস নির্দিষ্ট দিন বা কিলোমিটারে (বর্তমান মধ্যমা ব্যবধান ধরে শুরু)", "সাপ্তাহিক পরিকল্পনা সভা: আগামী সপ্তাহের কাজ, যন্ত্রাংশ ও লোক নিশ্চিত"],
-            kpi="পরিকল্পিত কাজের হার, প্ল্যান-পালনের হার, MTBF", owner="রক্ষণাবেক্ষণ প্রধান"),
- "kk": dict(jp="Kobetsu Kaizen", goal="বড় ক্ষতিগুলো একটি একটি করে মূল-কারণ বিশ্লেষণে দূর করা (why-why, ফিশবোন, PDCA)।",
-            focus="সবচেয়ে ব্যয়বহুল গাড়ি, ৯০ দিনের মধ্যে পুনরাবৃত্ত মেরামত, সিলিন্ডারের অতিরিক্ত ভরাট।",
-            act=["নিচের কাইজেন-বোর্ডের তিনটি প্রকল্প দিয়ে শুরু, প্রতিটিতে একজন দলনেতা", "প্রতিটি পুনরাবৃত্ত মেরামতের জন্য এক পাতার why-why বিশ্লেষণ", "মাসিক কাইজেন-পর্যালোচনা ও সাশ্রয় লিপিবদ্ধ"],
-            kpi="পুনরাবৃত্ত মেরামতের হার, প্রকল্পপ্রতি সাশ্রয় (টাকা)", owner="প্ল্যান্ট ম্যানেজার"),
- "qm": dict(jp="Hinshitsu Hozen", goal="শূন্য ত্রুটির জন্য যন্ত্রের অবস্থা নিয়ন্ত্রণ: কোন অবস্থায় ভুল ওজন বা লিক হয় তা জেনে সেই অবস্থাই নিয়মিত যাচাই।",
-            focus="ফিলিং হেডের ওজন-নির্ভুলতা (Cpk), চেক-স্কেল, লিক-পরীক্ষা, সিলিন্ডার ভালভ।",
-            act=["নিচের মান-রক্ষণাবেক্ষণ ম্যাট্রিক্স অনুযায়ী প্রতিটি হেডের অবস্থা-মান নির্ধারণ", "চিহ্নিত হেডগুলোর লোড সেল ও ফিলিং ভালভ আগে ক্যালিব্রেশন", "প্রতিটি ওজন-পরীক্ষার পর X-bar/S চার্ট হালনাগাদ"],
-            kpi="Cpk (লক্ষ্য ≥১.৩৩), ±১৫০ গ্রামের ভেতরে %", owner="মান নিয়ন্ত্রণ ও রক্ষণাবেক্ষণ"),
- "ot": dict(jp="Office TPM", goal="রক্ষণাবেক্ষণের কাগজ ও তথ্য-প্রবাহ নির্ভুল ও সময়মতো: অর্ডার আগে, কনফার্মেশন ও TECO কাজের পরেই।",
-            focus="SAP PM অর্ডার: কাজের আগে খোলা, কনফার্মেশন, TECO, ক্যাটালগ কোড, ইকুইপমেন্ট নম্বর, গাড়ির নম্বর এক রকম।",
-            act=["নিয়ম: কাজ শুরুর আগে অর্ডার; শেষ হলে ৪৮ ঘণ্টায় কনফার্মেশন ও TECO", "ক্ষতির কারণ ও কাজের ধরনের ক্যাটালগ কোড চালু", "সাপ্তাহিক SAP-স্বাস্থ্য রিপোর্ট: খোলা, পিছিয়ে লেখা ও ইকুইপমেন্ট-ছাড়া অর্ডার"],
-            kpi="কনফার্মেশন %, TECO %, সময়মতো অর্ডার %", owner="রক্ষণাবেক্ষণ পরিকল্পনাকারী ও এসএপি দল"),
- "she": dict(jp="Anzen Eisei Kankyo", goal="শূন্য দুর্ঘটনা: নিরাপত্তা-সংক্রান্ত যন্ত্র কখনো মেয়াদোত্তীর্ণ নয়; প্রতিটি কাজ পারমিট ও ঝুঁকি-মূল্যায়নসহ।",
-            focus="গ্যাস ডিটেক্টর, অগ্নিনির্বাপক, ডিলুজ ও ফায়ার পাম্প, PSV, ESD, লাইসেন্স।",
-            act=["সব নিরাপত্তা-যন্ত্রের তালিকা ও শেষ পরীক্ষার তারিখ যাচাই (এই রিপোর্টের S1–S6)", "পারমিট-টু-ওয়ার্ক, লক-আউট/ট্যাগ-আউট ও গ্যাস-পরীক্ষা বাধ্যতামূলক", "নিকট-দুর্ঘটনা রিপোর্টিং চালু ও মাসিক পর্যালোচনা"],
-            kpi="মেয়াদোত্তীর্ণ নিরাপত্তা-যন্ত্র (লক্ষ্য শূন্য), নিকট-দুর্ঘটনা রিপোর্ট", owner="এইচএসই ব্যবস্থাপক"),
- "et": dict(jp="Kyoiku Kunren", goal="প্রতিটি কাজের জন্য প্রশিক্ষিত লোক: দক্ষতা-ম্যাট্রিক্স, এক-পাতার পাঠ (OPL) ও যোগ্যতা-সনদ।",
-            focus="এলপিজি নিরাপত্তা, ভালভ ও PSV, পাম্প-সিল, লোড সেল ক্যালিব্রেশন, SAP PM ব্যবহার।",
-            act=["নিচের দক্ষতা-ম্যাট্রিক্সে প্রত্যেকের ভিত্তি-মূল্যায়ন", "প্রতি মাসে অন্তত চারটি এক-পাতার পাঠ (OPL)", "গুরুত্বপূর্ণ কাজে দুজন প্রশিক্ষিত লোক (একক-নির্ভরতা দূর)"],
-            kpi="দক্ষতা-ম্যাট্রিক্সের পূরণ %, প্রশিক্ষণ-ঘণ্টা", owner="মানবসম্পদ ও বিভাগীয় প্রধান"),
- "eem": dict(jp="Shoki Kanri", goal="নতুন যন্ত্র কেনা ও বসানোর সময়েই রক্ষণাবেক্ষণ-সহজ নকশা ও যন্ত্রাংশ নিশ্চিত।",
-            focus="নতুন গাড়ি, পাম্প, ফিলিং হেড, ভালভ: অতীতের ব্যর্থতার তথ্য দিয়ে নির্দিষ্টকরণ।",
-            act=["ক্রয়ের আগে চেকলিস্ট: যন্ত্রাংশের প্রাপ্যতা, সার্ভিস-সুবিধা, জীবনচক্র-খরচ", "SAP-এর খরচের ইতিহাস থেকে সবচেয়ে ব্যয়বহুল অংশগুলো নির্দিষ্টকরণে", "বসানোর পর প্রথম ৯০ দিনের প্রাথমিক-পর্যবেক্ষণ"],
-            kpi="নতুন যন্ত্রের প্রথম বছরের ভাঙন", owner="প্রকৌশল ও ক্রয়"),
+ "jh": dict(jp="Jishu Hozen", goal="Operators and drivers own their equipment: cleaning, inspecting, lubricating and tightening become a daily habit.",
+            focus="Carousel filling heads, pumps and compressors, valve manifolds, every LPG-carrying vehicle (driver's daily check).",
+            act=["Introduce a one-page CLIT checklist for each piece of equipment (below), signed every shift", "Pilot area: initial cleaning and defect-tag drive in the carousel and pump house", "A 10-minute daily vehicle check card for drivers (tyres, brakes, oil, battery, leaks)"],
+            kpi="Daily checklist compliance; defect tags opened and closed each month", owner="Production Manager and Head of Transport"),
+ "pm": dict(jp="Keikaku Hozen", goal="Maintenance before breakdown: time- or condition-based schedules, recurring plans in SAP, spares stocked in advance.",
+            focus="A fixed service interval for every vehicle, the 15 idle air-compressor plan orders, condition monitoring of pumps and compressors (vibration, temperature).",
+            act=["A ZPM3 maintenance plan in SAP for every piece of equipment and vehicle (per the schedule below)", "Vehicle service at fixed days or kilometres (start from the current median interval)", "Weekly planning meeting: confirm next week's jobs, parts and people"],
+            kpi="Planned-work share, plan compliance, MTBF", owner="Head of Maintenance"),
+ "kk": dict(jp="Kobetsu Kaizen", goal="Remove the major losses one by one with root-cause analysis (why-why, fishbone, PDCA).",
+            focus="The most expensive vehicles, repeat repairs within 90 days, cylinder overfilling.",
+            act=["Start with three projects from the kaizen board below, each with a team leader", "A one-page why-why analysis for every repeat repair", "Monthly kaizen review with savings recorded"],
+            kpi="Repeat-repair rate, savings per project (Tk)", owner="Plant Manager"),
+ "qm": dict(jp="Hinshitsu Hozen", goal="Control equipment conditions for zero defects: know which conditions cause wrong weight or leaks, and check exactly those conditions regularly.",
+            focus="Filling-head weight accuracy (Cpk), check-scale, leak test, cylinder valves.",
+            act=["Set the condition standard for each head per the quality-maintenance matrix below", "Calibrate the load cells and filling valves of the flagged heads first", "Update the X-bar/S chart after every weight check"],
+            kpi="Cpk (target ≥ 1.33), % within ±150 g", owner="Quality control and maintenance"),
+ "ot": dict(jp="Office TPM", goal="Accurate, timely maintenance paperwork and data flow: order first, confirmation and TECO right after the job.",
+            focus="SAP PM orders: opened before the work, confirmation, TECO, catalogue codes, equipment numbers, one consistent vehicle number.",
+            act=["Rule: order before the work starts; confirmation and TECO within 48 hours of completion", "Introduce catalogue codes for damage cause and job type", "Weekly SAP health report: open, back-dated and equipment-less orders"],
+            kpi="Confirmation %, TECO %, orders on time %", owner="Maintenance planner and SAP team"),
+ "she": dict(jp="Anzen Eisei Kankyo", goal="Zero accidents: safety equipment is never out of date; every job has a permit and a risk assessment.",
+            focus="Gas detectors, fire extinguishers, deluge and fire pumps, PSVs, ESD, licences.",
+            act=["Check the list of all safety equipment and its last test date (S1–S6 in this report)", "Permit-to-work, lock-out/tag-out and gas testing made mandatory", "Start near-miss reporting with a monthly review"],
+            kpi="Out-of-date safety equipment (target zero), near-miss reports", owner="HSE Manager"),
+ "et": dict(jp="Kyoiku Kunren", goal="Trained people for every task: skills matrix, one-point lessons (OPL) and competence certificates.",
+            focus="LPG safety, valves and PSVs, pump seals, load-cell calibration, using SAP PM.",
+            act=["Baseline assessment of everyone in the skills matrix below", "At least four one-point lessons (OPL) every month", "Two trained people for every critical task (no single point of dependence)"],
+            kpi="Skills-matrix completion %, training hours", owner="HR and heads of department"),
+ "eem": dict(jp="Shoki Kanri", goal="Make sure new equipment has an easy-to-maintain design and spares at the time it is bought and installed.",
+            focus="New vehicles, pumps, filling heads, valves: specifications informed by past failure data.",
+            act=["Pre-purchase checklist: spares availability, service support, life-cycle cost", "Use SAP cost history to put the most expensive parts into the specifications", "Early monitoring for the first 90 days after installation"],
+            kpi="First-year breakdowns of new equipment", owner="Engineering and procurement"),
 }
 
 # Nakajima's 16 major losses adapted to an LPG bottling plant. src: 'data' = measured in this site, 'gap' = not yet measured
 LOSSES = [
- ("যন্ত্র", "ভাঙন (ব্রেকডাউন)", "ভাঙার পর মেরামত: বহরের কাজের {reactive}", "data"),
- ("যন্ত্র", "সেটআপ ও সমন্বয়", "সিলিন্ডারের আকার বদল (১২/৩৫/৪৫ কেজি), হেডের সেট-ওজন সমন্বয়", "gap"),
- ("যন্ত্র", "যন্ত্রাংশ/টুল বদল", "ফিলিং হেডের সিল, পাম্পের ভেন, টায়ার, ব্রেক-কিট", "data"),
- ("যন্ত্র", "চালুর ক্ষতি", "শিফট শুরুতে হেডের প্রথম সিলিন্ডারগুলোর ওজন ভুল", "gap"),
- ("যন্ত্র", "ছোট থামা ও অলস থাকা", "কনভেয়রে সিলিন্ডার আটকানো, হেড বসতে দেরি", "gap"),
- ("যন্ত্র", "গতি কম", "পাম্পের ভেন ক্ষয়ে ফিলিং ধীর; ক্যারোসেলের নির্ধারিত গতির নিচে চলা", "gap"),
- ("যন্ত্র", "ত্রুটি ও পুনঃকাজ", "ওজনের বাইরে বা লিকের কারণে বাতিল সিলিন্ডার: ±১৫০ গ্রামের বাইরে {out150}", "data"),
- ("যন্ত্র", "পরিকল্পিত বন্ধ", "শাটডাউন ও বার্ষিক রক্ষণাবেক্ষণ", "gap"),
- ("মানুষ", "ব্যবস্থাপনার ক্ষতি", "যন্ত্রাংশ বা অনুমোদনের অপেক্ষা; পিছিয়ে খোলা অর্ডার {backdated}", "data"),
- ("মানুষ", "গতিবিধির ক্ষতি", "যন্ত্রাংশ ও টুল খুঁজতে হাঁটা: ৫এস দিয়ে কমে", "gap"),
- ("মানুষ", "লাইন-বিন্যাসের ক্ষতি", "শিফটে লোকের অসম বণ্টন", "gap"),
- ("মানুষ", "পরিবহন ও লজিস্টিক", "গাড়ি ওয়ার্কশপে আটকে থাকা: সর্বোচ্চ খরচের ৩ গাড়ি {top3}", "data"),
- ("মানুষ", "পরিমাপ ও সমন্বয়", "ওজন-যন্ত্রের ক্যালিব্রেশন সরে যাওয়া; বারবার হেড সমন্বয়", "data"),
- ("উপকরণ ও শক্তি", "ফলন-ক্ষতি (অতিরিক্ত ভরাট)", "মার্চ–অক্টোবর ২০২৬-এ আনুমানিক {give} এলপিজি বিনামূল্যে গেছে", "data"),
- ("উপকরণ ও শক্তি", "শক্তি-ক্ষতি", "বাতাসের লিকে কম্প্রেসর বেশি চলে; পাম্প অদক্ষ", "gap"),
- ("উপকরণ ও শক্তি", "টুল ও ডাই", "টায়ার ও ব্যাটারির অকাল বদল", "data"),
+ ("Equipment", "Breakdowns", "Repair after breakdown: {reactive} of fleet jobs", "data"),
+ ("Equipment", "Set-up and adjustment", "Changing cylinder size (12/35/45 kg), adjusting the head set-weight", "gap"),
+ ("Equipment", "Part/tool changes", "Filling-head seals, pump vanes, tyres, brake kits", "data"),
+ ("Equipment", "Start-up losses", "The first cylinders of each head weigh wrong at the start of a shift", "gap"),
+ ("Equipment", "Minor stops and idling", "Cylinders jamming on the conveyor, heads slow to seat", "gap"),
+ ("Equipment", "Reduced speed", "Worn pump vanes slow the filling; carousel running below rated speed", "gap"),
+ ("Equipment", "Defects and rework", "Cylinders rejected for weight or leaks: {out150} outside ±150 g", "data"),
+ ("Equipment", "Planned shutdowns", "Shutdowns and annual maintenance", "gap"),
+ ("People", "Management losses", "Waiting for parts or approval; back-dated orders {backdated}", "data"),
+ ("People", "Motion losses", "Walking to find parts and tools: reduced by 5S", "gap"),
+ ("People", "Line-organisation losses", "Uneven staffing across shifts", "gap"),
+ ("People", "Transport and logistics", "Vehicles stuck in the workshop: the 3 highest-cost vehicles {top3}", "data"),
+ ("People", "Measurement and adjustment", "Weighing-equipment calibration drift; repeated head adjustment", "data"),
+ ("Materials and energy", "Yield loss (overfilling)", "An estimated {give} of LPG given away free in Mar–Oct 2026", "data"),
+ ("Materials and energy", "Energy losses", "Air leaks make the compressor run longer; inefficient pumps", "gap"),
+ ("Materials and energy", "Tools and dies", "Early replacement of tyres and batteries", "data"),
 ]
 
 AM_STEPS = [
- ("প্রাথমিক পরিষ্কার", "পরিষ্কার করাই পরিদর্শন: ময়লার নিচে লিক, ফাটল, ঢিলা বোল্ট খুঁজে ত্রুটি-ট্যাগ লাগানো।", "ক্যারোসেল ও পাম্প হাউস দিয়ে শুরু; সব ট্যাগ তালিকায়।"),
- ("দূষণের উৎস ও দুর্গম জায়গা দূর", "যেখান থেকে তেল, ধুলা বা গ্যাস চুইয়ে আসে তা বন্ধ; পরিষ্কার ও পরিদর্শন সহজ করা।", "প্রতিটি উৎসের সমাধান ও পরিষ্কারের সময় অর্ধেক।"),
- ("পরিষ্কার, তেল ও পরিদর্শনের অস্থায়ী মান", "কী, কীভাবে, কত দিন পরপর, কে: এক পাতার CLIT মান।", "প্রতিটি যন্ত্রে CLIT কার্ড ঝোলানো।"),
- ("সাধারণ পরিদর্শন", "অপারেটরকে যন্ত্রের অংশ ও কাজ শেখানো (বোল্ট, তেল, বাতাস, বিদ্যুৎ, চাপ), তারপর পরিদর্শন।", "প্রতিটি বিষয়ে এক-পাতার পাঠ ও পরীক্ষা।"),
- ("স্বয়ংক্রিয় পরিদর্শন", "অপারেটর নিজে চেকলিস্ট চালান; রক্ষণাবেক্ষণ দলের চেকলিস্টের সঙ্গে মিলিয়ে দায়িত্ব ভাগ।", "চেকলিস্ট পালন ≥৯৫%।"),
- ("মানকরণ", "কর্মস্থল ব্যবস্থাপনা: যন্ত্রাংশ, টুল, তথ্যের জায়গা নির্দিষ্ট; দৃশ্যমান নিয়ন্ত্রণ (রং, চিহ্ন)।", "৫এস নিরীক্ষায় ≥৮০%।"),
- ("স্বয়ংক্রিয় ব্যবস্থাপনা", "অপারেটর দল নিজেরাই লক্ষ্য ঠিক করে, ক্ষতি মেপে, ছোট কাইজেন করে।", "দলভিত্তিক মাসিক কাইজেন।"),
+ ("Initial cleaning", "Cleaning is inspection: find leaks, cracks and loose bolts under the dirt and attach defect tags.", "Start with the carousel and pump house; every tag on the list."),
+ ("Remove sources of contamination and hard-to-reach places", "Stop oil, dust or gas from seeping out; make cleaning and inspection easy.", "Every source fixed and cleaning time halved."),
+ ("Provisional standards for cleaning, lubrication and inspection", "What, how, how often, who: a one-page CLIT standard.", "A CLIT card hung on every piece of equipment."),
+ ("General inspection", "Teach operators the parts and functions of the equipment (bolts, oil, air, electricity, pressure), then inspect.", "A one-point lesson and test for each topic."),
+ ("Autonomous inspection", "Operators run their own checklists; duties split against the maintenance team's checklist.", "Checklist compliance ≥ 95%."),
+ ("Standardisation", "Workplace management: fixed places for parts, tools and information; visual controls (colours, markings).", "≥ 80% in the 5S audit."),
+ ("Autonomous management", "Operator teams set their own targets, measure losses and run small kaizens.", "Monthly team kaizen."),
 ]
 
 # extra planned-maintenance items not drawn in the equipment guide
 EXTRA_PM = [
- ("এলপিজিবাহী গাড়ি", "fleet", [("চালকের দৈনিক চেক: টায়ার, ব্রেক, তেল, পানি, ব্যাটারি, আলো, লিক, অগ্নিনির্বাপক", "দৈনিক", "O", "CLIT"), ("নির্ধারিত সার্ভিস: ইঞ্জিন তেল, ফিল্টার, গ্রিজ, ব্রেক", "নির্দিষ্ট কিলোমিটার বা দিন", "T", "L"),
-                                     ("টায়ারের চাপ ও খাঁজ, চাকার নাট", "সাপ্তাহিক", "T", "IT"), ("এক্সপ্লোসিভ লাইসেন্স, ফিটনেস ও রুট পারমিট নবায়ন", "মেয়াদের আগে", "H", "I")]),
- ("এয়ার কম্প্রেসর ও ড্রায়ার", "plant", [("তেলের স্তর, ড্রেন, চাপ, তাপ", "দৈনিক", "O", "LI"), ("এয়ার ফিল্টার পরিষ্কার", "সাপ্তাহিক", "T", "C"), ("তেল ও সেপারেটর বদল", "চলার ঘণ্টা অনুযায়ী", "T", "L"),
-                                        ("রিসিভারের সেফটি ভালভ ও চাপ-পাত্র পরিদর্শন", "বার্ষিক", "E", "I")]),
- ("ডিজেল জেনারেটর", "plant", [("তেল, কুল্যান্ট, ব্যাটারি, জ্বালানি", "সাপ্তাহিক", "O", "LI"), ("লোডে চালিয়ে দেখা", "মাসিক", "T", "I"), ("তেল ও ফিল্টার বদল", "চলার ঘণ্টা অনুযায়ী", "T", "L")]),
- ("বৈদ্যুতিক প্যানেল ও আর্থিং", "plant", [("ফ্লেমপ্রুফ বক্সের ঢাকনা ও গ্ল্যান্ড", "মাসিক", "T", "IT"), ("থার্মাল ইমেজিং", "ষাণ্মাসিক", "E", "I"), ("আর্থিং ও বন্ডিং প্রতিরোধ পরিমাপ", "বার্ষিক", "E", "I")]),
+ ("LPG-carrying vehicles", "fleet", [("Driver's daily check: tyres, brakes, oil, water, battery, lights, leaks, fire extinguisher", "Daily", "O", "CLIT"), ("Scheduled service: engine oil, filters, grease, brakes", "Fixed kilometres or days", "T", "L"),
+                                     ("Tyre pressure and tread, wheel nuts", "Weekly", "T", "IT"), ("Renew explosives licence, fitness and route permit", "Before expiry", "H", "I")]),
+ ("Air compressors and dryer", "plant", [("Oil level, drain, pressure, temperature", "Daily", "O", "LI"), ("Clean the air filter", "Weekly", "T", "C"), ("Change oil and separator", "By running hours", "T", "L"),
+                                        ("Receiver safety valve and pressure-vessel inspection", "Yearly", "E", "I")]),
+ ("Diesel generator", "plant", [("Oil, coolant, battery, fuel", "Weekly", "O", "LI"), ("Run on load", "Monthly", "T", "I"), ("Change oil and filters", "By running hours", "T", "L")]),
+ ("Electrical panels and earthing", "plant", [("Flameproof box covers and glands", "Monthly", "T", "IT"), ("Thermal imaging", "Half-yearly", "E", "I"), ("Earthing and bonding resistance measurement", "Yearly", "E", "I")]),
 
- ("ওয়েব্রিজ", "plant", [("শূন্য ও পরিষ্কার", "দৈনিক", "O", "C"), ("বিএসটিআই যাচাই", "বার্ষিক", "V", "I")]),
+ ("Weighbridge", "plant", [("Zero and clean", "Daily", "O", "C"), ("BSTI verification", "Yearly", "V", "I")]),
 ]
 
 ROADMAP = [  # (step, phase, start month offset, duration months)
- ("১. শীর্ষ ব্যবস্থাপনার ঘোষণা", "প্রস্তুতি", 0, 1), ("২. প্রশিক্ষণ ও প্রচার", "প্রস্তুতি", 0, 3), ("৩. TPM কমিটি ও প্রোমোশন অফিস", "প্রস্তুতি", 1, 1),
- ("৪. নীতি ও লক্ষ্য (এই রিপোর্টের KPI)", "প্রস্তুতি", 1, 2), ("৫. মাস্টার প্ল্যান", "প্রস্তুতি", 2, 1), ("৬. আনুষ্ঠানিক সূচনা", "সূচনা", 3, 1),
- ("৭. পরীক্ষামূলক এলাকা: ক্যারোসেল ও পাম্প হাউস", "বাস্তবায়ন", 3, 9), ("৮. স্বয়ংক্রিয় রক্ষণাবেক্ষণ (ধাপ ১–৪)", "বাস্তবায়ন", 4, 14), ("৯. পরিকল্পিত রক্ষণাবেক্ষণ ও SAP প্ল্যান", "বাস্তবায়ন", 3, 12),
- ("১০. মান রক্ষণাবেক্ষণ (ওজন-নির্ভুলতা)", "বাস্তবায়ন", 4, 12), ("১১. দক্ষতা-উন্নয়ন ও OPL", "বাস্তবায়ন", 3, 18), ("১২. নতুন যন্ত্রের ব্যবস্থাপনা ও অফিস TPM", "বাস্তবায়ন", 6, 12),
- ("১৩. পূর্ণ বাস্তবায়ন ও উচ্চতর লক্ষ্য", "সংহতকরণ", 18, 18),
+ ("1. Top-management announcement", "Preparation", 0, 1), ("2. Training and awareness", "Preparation", 0, 3), ("3. TPM committee and promotion office", "Preparation", 1, 1),
+ ("4. Policy and targets (this report's KPIs)", "Preparation", 1, 2), ("5. Master plan", "Preparation", 2, 1), ("6. Formal kick-off", "Kick-off", 3, 1),
+ ("7. Pilot area: carousel and pump house", "Implementation", 3, 9), ("8. Autonomous maintenance (steps 1–4)", "Implementation", 4, 14), ("9. Planned maintenance and SAP plans", "Implementation", 3, 12),
+ ("10. Quality maintenance (weight accuracy)", "Implementation", 4, 12), ("11. Skills development and OPL", "Implementation", 3, 18), ("12. Early equipment management and office TPM", "Implementation", 6, 12),
+ ("13. Full roll-out and higher targets", "Consolidation", 18, 18),
 ]
 
 GOV = [
- ("TPM স্টিয়ারিং কমিটি", "প্ল্যান্ট ম্যানেজার (সভাপতি), বিভাগীয় প্রধানরা", "মাসিক", "লক্ষ্য, সম্পদ, অগ্রগতি পর্যালোচনা"),
- ("TPM প্রোমোশন অফিস", "একজন সমন্বয়ক (পূর্ণকালীন বা অর্ধকালীন)", "সাপ্তাহিক", "পিলার দলের সমন্বয়, KPI হালনাগাদ, অডিট"),
- ("পিলার দল (৮টি)", "প্রতিটিতে দলনেতা ও ৪–৬ সদস্য", "সাপ্তাহিক", "পিলারের কাজের পরিকল্পনা ও বাস্তবায়ন"),
- ("ছোট দল (অপারেটর/চালক)", "প্রতিটি শিফট বা গাড়ি-দল", "দৈনিক ১৫ মিনিট", "চেকলিস্ট, ত্রুটি-ট্যাগ, ছোট কাইজেন"),
+ ("TPM steering committee", "Plant Manager (chair), heads of department", "Monthly", "Targets, resources, progress review"),
+ ("TPM promotion office", "One coordinator (full- or part-time)", "Weekly", "Coordinates pillar teams, updates KPIs, audits"),
+ ("Pillar teams (8)", "A team leader and 4–6 members each", "Weekly", "Plan and carry out the pillar's work"),
+ ("Small groups (operators/drivers)", "Each shift or vehicle team", "15 minutes daily", "Checklists, defect tags, small kaizens"),
 ]
 
 RACI = [  # activity, Plant Mgr, Maintenance, Production, HSE, Transport, Admin/SAP
- ("দৈনিক CLIT চেকলিস্ট", "I", "C", "A/R", "I", "R", "—"), ("SAP রক্ষণাবেক্ষণ প্ল্যান ও সূচি", "A", "R", "C", "C", "C", "C"),
- ("অর্ডার খোলা, কনফার্মেশন, TECO", "I", "A/R", "C", "—", "R", "C"), ("নিরাপত্তা-যন্ত্রের পরীক্ষা", "A", "R", "C", "R", "—", "—"),
- ("ওজন-নির্ভুলতা ও ক্যালিব্রেশন", "A", "R", "R", "—", "—", "—"), ("লাইসেন্স নবায়ন", "A", "—", "—", "C", "R", "R"),
- ("কাইজেন প্রকল্প", "A", "R", "R", "C", "R", "C"), ("দক্ষতা-ম্যাট্রিক্স ও প্রশিক্ষণ", "A", "R", "R", "R", "R", "C"),
+ ("Daily CLIT checklist", "I", "C", "A/R", "I", "R", "—"), ("SAP maintenance plans and schedules", "A", "R", "C", "C", "C", "C"),
+ ("Opening orders, confirmation, TECO", "I", "A/R", "C", "—", "R", "C"), ("Testing safety equipment", "A", "R", "C", "R", "—", "—"),
+ ("Weight accuracy and calibration", "A", "R", "R", "—", "—", "—"), ("Licence renewals", "A", "—", "—", "C", "R", "R"),
+ ("Kaizen projects", "A", "R", "R", "C", "R", "C"), ("Skills matrix and training", "A", "R", "R", "R", "R", "C"),
 ]
 
 S5 = [
- ("সর্ট (বাছাই)", ["অপ্রয়োজনীয় যন্ত্রাংশ ও টুল সরানো হয়েছে", "পুরোনো ভালভ, হোস, সিলিন্ডার আলাদা চিহ্নিত", "লাল-ট্যাগ এলাকা আছে ও নিয়মিত খালি হয়"]),
- ("সেট ইন অর্ডার (সাজানো)", ["প্রতিটি টুল ও যন্ত্রাংশের নির্দিষ্ট জায়গা ও লেবেল", "অগ্নিনির্বাপক ও ESD বোতাম স্পষ্ট চিহ্নিত ও বাধাহীন", "পাইপ ও ভালভে প্রবাহের দিক ও রং-চিহ্ন"]),
- ("শাইন (পরিষ্কার)", ["যন্ত্রে তেল, ধুলা বা গ্যাসের দাগ নেই", "পরিষ্কারের সময় ত্রুটি খোঁজা হয় ও ট্যাগ লাগে", "মেঝেতে তেল বা পানি নেই"]),
- ("স্ট্যান্ডার্ডাইজ (মানকরণ)", ["CLIT কার্ড প্রতিটি যন্ত্রে", "গেজে স্বাভাবিক সীমা সবুজ-লাল দাগে", "এক-পাতার পাঠ কর্মস্থলে টাঙানো"]),
- ("সাসটেইন (ধরে রাখা)", ["মাসিক ৫এস নিরীক্ষা হয় ও ফল টাঙানো হয়", "আগের নিরীক্ষার ত্রুটিগুলো বন্ধ", "সবাই নিয়ম জানেন ও মানেন"]),
+ ("Sort", ["Unneeded parts and tools have been removed", "Old valves, hoses and cylinders separately marked", "A red-tag area exists and is emptied regularly"]),
+ ("Set in order", ["Every tool and part has a fixed, labelled place", "Fire extinguishers and ESD buttons clearly marked and unobstructed", "Flow direction and colour codes on pipes and valves"]),
+ ("Shine", ["No oil, dust or gas stains on equipment", "Defects are looked for and tagged during cleaning", "No oil or water on the floor"]),
+ ("Standardise", ["A CLIT card on every piece of equipment", "Normal ranges marked green/red on gauges", "One-point lessons posted at the workplace"]),
+ ("Sustain", ["A monthly 5S audit is done and the results posted", "Defects from the previous audit closed", "Everyone knows and follows the rules"]),
 ]
 
-SKILLS = ["এলপিজি নিরাপত্তা ও পারমিট", "ভালভ ও PSV", "পাম্প ও সিল", "কম্প্রেসর", "ফিলিং হেড ও লোড সেল", "গ্যাস ডিটেক্টর ও ESD", "অগ্নিনির্বাপণ", "গাড়ির রক্ষণাবেক্ষণ", "SAP PM"]
-ROLES = ["ফিলিং অপারেটর", "পাম্প/কম্প্রেসর অপারেটর", "রক্ষণাবেক্ষণ টেকনিশিয়ান", "বৈদ্যুতিক টেকনিশিয়ান", "চালক", "শিফট সুপারভাইজার", "রক্ষণাবেক্ষণ পরিকল্পনাকারী"]
+SKILLS = ["LPG safety and permits", "Valves and PSVs", "Pumps and seals", "Compressors", "Filling heads and load cells", "Gas detectors and ESD", "Fire fighting", "Vehicle maintenance", "SAP PM"]
+ROLES = ["Filling operator", "Pump/compressor operator", "Maintenance technician", "Electrical technician", "Driver", "Shift supervisor", "Maintenance planner"]
 # required level 0-4 per role x skill
 REQ = [
  [3, 1, 1, 0, 3, 2, 2, 0, 1], [3, 2, 3, 3, 1, 2, 2, 0, 1], [3, 4, 4, 3, 3, 2, 2, 1, 2], [3, 1, 1, 1, 2, 4, 2, 1, 1],
@@ -116,15 +116,15 @@ REQ = [
 ]
 
 QM = [  # quality characteristic -> condition, standard, check, frequency
- ("নেট ওজন ১২ কেজি (±১৫০ গ্রাম)", "লোড সেলের শূন্য ও স্প্যান", "টেস্ট-ওজনে বিচ্যুতি ≤ ২০ গ্রাম", "প্রমাণিত ওজন", "প্রতি শিফট"),
- ("নেট ওজন ১২ কেজি (±১৫০ গ্রাম)", "ফিলিং ভালভের বন্ধ হওয়ার সময়", "ইনফ্লাইট-সমন্বয় হালনাগাদ", "সিলিন্ডার ওজন বনাম সেট-ওজন", "দৈনিক"),
- ("নেট ওজন ১২ কেজি (±১৫০ গ্রাম)", "ট্যারা-ওজন সঠিক", "সিলিন্ডারে লেখা ট্যারা পড়া যায়", "চোখে দেখা", "প্রতি সিলিন্ডার"),
- ("নেট ওজন ১২ কেজি (±১৫০ গ্রাম)", "এলপিজির তাপমাত্রা ও ঘনত্ব", "পরিবর্তন লিপিবদ্ধ", "থার্মোমিটার/ঘনত্ব", "প্রতি শিফট"),
- ("লিক নেই", "ফিলিং হেডের সিল", "দৃশ্যমান ক্ষয় নেই", "চোখে দেখা ও লিক-ডিটেক্টর", "সাপ্তাহিক"),
- ("লিক নেই", "সিলিন্ডার ভালভের ও-রিং", "লিক-পরীক্ষায় বুদবুদ নেই", "পানি-বাথ/ইলেকট্রনিক", "প্রতি সিলিন্ডার"),
- ("চেক-স্কেলের যথার্থতা", "চেক-স্কেলের ক্যালিব্রেশন", "বিএসটিআই সনদ বৈধ; টেস্ট-ওজনে সঠিক", "প্রমাণিত ওজন", "প্রতি শিফট / বার্ষিক"),
+ ("Net weight 12 kg (±150 g)", "Load-cell zero and span", "Deviation on test weight ≤ 20 g", "Certified weight", "Every shift"),
+ ("Net weight 12 kg (±150 g)", "Filling-valve closing time", "In-flight compensation updated", "Cylinder weight vs set-weight", "Daily"),
+ ("Net weight 12 kg (±150 g)", "Correct tare weight", "Tare stamped on the cylinder is legible", "Visual", "Every cylinder"),
+ ("Net weight 12 kg (±150 g)", "LPG temperature and density", "Changes recorded", "Thermometer/density", "Every shift"),
+ ("No leaks", "Filling-head seals", "No visible wear", "Visual and leak detector", "Weekly"),
+ ("No leaks", "Cylinder-valve O-rings", "No bubbles in the leak test", "Water bath/electronic", "Every cylinder"),
+ ("Check-scale accuracy", "Check-scale calibration", "BSTI certificate valid; correct on test weight", "Certified weight", "Every shift / yearly"),
 ]
 
-FTAG = [("নীল ট্যাগ", "অপারেটর নিজে ঠিক করতে পারেন (পরিষ্কার, ঢিলা বোল্ট, লেবেল)", "#4c9bff"),
-        ("লাল ট্যাগ", "রক্ষণাবেক্ষণ দল দরকার (লিক, ফাটল, কম্পন, ভাঙা গেজ)", "#ff5a5f"),
-        ("হলুদ ট্যাগ", "নিরাপত্তা-ঝুঁকি: তাৎক্ষণিক জানাতে হবে (গ্যাসের গন্ধ, অকেজো নির্বাপক)", "#ffc46b")]
+FTAG = [("Blue tag", "Operator can fix it (cleaning, loose bolt, label)", "#4c9bff"),
+        ("Red tag", "Maintenance team needed (leak, crack, vibration, broken gauge)", "#ff5a5f"),
+        ("Yellow tag", "Safety risk: report immediately (gas smell, unusable extinguisher)", "#ffc46b")]

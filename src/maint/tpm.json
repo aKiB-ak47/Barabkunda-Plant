@@ -193,27 +193,27 @@
  "repeat_base": 196,
  "funnel": [
   {
-   "stage": "তৈরি (CRTD)",
+   "stage": "Created (CRTD)",
    "n": 552,
    "pct": 100.0
   },
   {
-   "stage": "রিলিজ (REL)",
+   "stage": "Released (REL)",
    "n": 534,
    "pct": 96.7391
   },
   {
-   "stage": "খরচ পোস্ট (GMPS)",
+   "stage": "Cost posted (GMPS)",
    "n": 381,
    "pct": 69.0217
   },
   {
-   "stage": "কনফার্ম (CNF)",
+   "stage": "Confirmed (CNF)",
    "n": 5,
    "pct": 0.9058
   },
   {
-   "stage": "টেকনিক্যালি বন্ধ (TECO)",
+   "stage": "Technically closed (TECO)",
    "n": 0,
    "pct": 0.0
   }
@@ -225,7 +225,7 @@
   "cpk26": 0.285,
   "cpk24": 0.846,
   "mean26": 48.415,
-  "period26": "২০২৬",
+  "period26": "2026",
   "checks26": 826,
   "last": "2026-11-05",
   "giveaway_mt": 42.541,
@@ -235,157 +235,157 @@
  "kpis": [
   {
    "k": "planned",
-   "name": "পরিকল্পিত (প্রতিরোধমূলক) কাজের হার",
+   "name": "Planned (preventive) work share",
    "v": 42.623,
    "unit": "%",
    "target": 70,
    "world": 85,
    "better": "up",
-   "basis": "বহরের কাজ, জুন ২০২৫ – জুন ২০২৬",
+   "basis": "Fleet jobs, Jun 2025 – Jun 2026",
    "measurable": true,
    "progress": 50.1447
   },
   {
    "k": "reactive",
-   "name": "শুধু ভাঙার পর মেরামত",
+   "name": "Repair only after breakdown",
    "v": 57.377,
    "unit": "%",
    "target": 30,
    "world": 15,
    "better": "down",
-   "basis": "বহরের কাজ, জুন ২০২৫ – জুন ২০২৬",
+   "basis": "Fleet jobs, Jun 2025 – Jun 2026",
    "measurable": true,
    "progress": 50.1447
   },
   {
    "k": "repeat",
-   "name": "৯০ দিনের মধ্যে একই মেরামত আবার",
+   "name": "Same repair again within 90 days",
    "v": 19.3878,
    "unit": "%",
    "target": 8,
    "world": 5,
    "better": "down",
-   "basis": "196টি মেরামতের মধ্যে 38টি",
+   "basis": "38 of 196 repairs",
    "measurable": true,
    "progress": 84.855
   },
   {
    "k": "mtbe",
-   "name": "দুই রক্ষণাবেক্ষণের গড় ব্যবধান (প্রতি গাড়ি)",
+   "name": "Average interval between two maintenance jobs (per vehicle)",
    "v": 34.1231,
-   "unit": "দিন",
+   "unit": "days",
    "target": 60,
    "world": 90,
    "better": "up",
-   "basis": "Weibull গড়, ২৭৫টি বিরতি",
+   "basis": "Weibull mean, 275 intervals",
    "measurable": true,
    "progress": 37.9146
   },
   {
    "k": "plan",
-   "name": "প্ল্যান-অর্ডার রিলিজ ও পালন (ZPM3)",
+   "name": "Plan-order release and compliance (ZPM3)",
    "v": 0.0,
    "unit": "%",
    "target": 90,
    "world": 95,
    "better": "up",
-   "basis": "15টি প্ল্যান-অর্ডার",
+   "basis": "15 plan orders",
    "measurable": true,
    "progress": 0.0
   },
   {
    "k": "cnf",
-   "name": "কাজ শেষে কনফার্মেশন",
+   "name": "Confirmation after the job",
    "v": 0.9058,
    "unit": "%",
    "target": 90,
    "world": 98,
    "better": "up",
-   "basis": "552টি অর্ডার",
+   "basis": "552 orders",
    "measurable": true,
    "progress": 0.9243
   },
   {
    "k": "teco",
-   "name": "টেকনিক্যালি বন্ধ (TECO)",
+   "name": "Technically closed (TECO)",
    "v": 0.0,
    "unit": "%",
    "target": 90,
    "world": 98,
    "better": "up",
-   "basis": "552টি অর্ডার",
+   "basis": "552 orders",
    "measurable": true,
    "progress": 0.0
   },
   {
    "k": "timely",
-   "name": "সময়মতো খোলা অর্ডার (৩০ দিনের বেশি পিছিয়ে নয়)",
+   "name": "Orders opened on time (not more than 30 days late)",
    "v": 59.2391,
    "unit": "%",
    "target": 90,
    "world": 98,
    "better": "up",
-   "basis": "552টি অর্ডার; মধ্যমা দেরি 25 দিন",
+   "basis": "552 orders; median delay 25 days",
    "measurable": true,
    "progress": 60.4481
   },
   {
    "k": "equip",
-   "name": "ইকুইপমেন্ট নম্বরসহ অর্ডার",
+   "name": "Orders with an equipment number",
    "v": 93.8406,
    "unit": "%",
    "target": 98,
    "world": 100,
    "better": "up",
-   "basis": "552টি অর্ডার",
+   "basis": "552 orders",
    "measurable": true,
    "progress": 93.8406
   },
   {
    "k": "quality",
-   "name": "ফিলিং-মান: ±১৫০ গ্রামের ভেতরে সিলিন্ডার",
+   "name": "Filling quality: cylinders within ±150 g",
    "v": 83.293,
    "unit": "%",
    "target": 95,
    "world": 99.7,
    "better": "up",
-   "basis": "২০২৬-এর 826টি ওজন-পরীক্ষা",
+   "basis": "826 weight checks in 2026",
    "measurable": true,
    "progress": 83.5436
   },
   {
    "k": "cpk",
-   "name": "ফিলিং প্রক্রিয়া-সক্ষমতা Cpk",
+   "name": "Filling process capability Cpk",
    "v": 0.285,
    "unit": "",
    "target": 1.0,
    "world": 1.33,
    "better": "up",
-   "basis": "২০২৬-এর 826টি ওজন-পরীক্ষা",
+   "basis": "826 weight checks in 2026",
    "measurable": true,
    "progress": 21.4286
   },
   {
    "k": "mttr",
-   "name": "মেরামতের গড় সময় (MTTR)",
+   "name": "Mean time to repair (MTTR)",
    "v": null,
-   "unit": "ঘণ্টা",
+   "unit": "hours",
    "target": null,
    "world": null,
    "better": "down",
-   "basis": "মাত্র ৫টি অর্ডারে প্রকৃত শুরু–শেষ তারিখ আছে",
+   "basis": "Only 5 orders have actual start–finish dates",
    "measurable": false,
    "progress": null
   },
   {
    "k": "oee",
-   "name": "ফিলিং ক্যারোসেলের OEE",
+   "name": "Filling carousel OEE",
    "v": null,
    "unit": "%",
    "target": 65,
    "world": 85,
    "better": "up",
-   "basis": "ডাউনটাইম ও গতি লিপিবদ্ধ হয় না; মান-অংশ ওজন-পরীক্ষা থেকে",
+   "basis": "Downtime and speed are not recorded; quality factor from the weight checks",
    "measurable": false,
    "progress": null
   }
@@ -415,51 +415,51 @@
  "pillars": [
   {
    "k": "jh",
-   "name": "স্বয়ংক্রিয় রক্ষণাবেক্ষণ (জিশু হোজেন)",
+   "name": "Autonomous maintenance (Jishu Hozen)",
    "score": null,
-   "evidence": "অপারেটর/চালকের দৈনিক পরিদর্শনের কোনো রেকর্ড SAP-এ নেই; মূল্যায়ন মাঠে করতে হবে।"
+   "evidence": "SAP has no record of daily operator or driver inspections; assess on the floor."
   },
   {
    "k": "pm",
-   "name": "পরিকল্পিত রক্ষণাবেক্ষণ",
+   "name": "Planned maintenance",
    "score": 2,
-   "evidence": "পরিকল্পিত কাজ 42.6%; 15টি প্ল্যান-অর্ডারের 0টি রিলিজ; সার্ভিস-ব্যবধান অনির্দিষ্ট (মধ্যমা 70 দিন)।"
+   "evidence": "Planned work 42.6%; 0 of 15 plan orders released; service interval not fixed (median 70 days)."
   },
   {
    "k": "kk",
-   "name": "লক্ষ্যভিত্তিক উন্নয়ন (কাইজেন)",
+   "name": "Focused improvement (Kaizen)",
    "score": 2,
-   "evidence": "৯০ দিনে পুনরাবৃত্ত মেরামত 19.4%; খরচের ৮০% মাত্র 17টি গাড়িতে, তবু কোনো মূল-কারণ বিশ্লেষণের রেকর্ড নেই।"
+   "evidence": "Repeat repairs within 90 days 19.4%; 80% of cost sits in only 17 vehicles, yet there is no root-cause analysis on record."
   },
   {
    "k": "qm",
-   "name": "মান রক্ষণাবেক্ষণ",
+   "name": "Quality maintenance",
    "score": 1,
-   "evidence": "২০২৬-এ Cpk 0.28 (২০২৪: 0.85); ±১৫০ গ্রামের ভেতরে 83.3%।"
+   "evidence": "Cpk 0.28 in 2026 (2024: 0.85); 83.3% within ±150 g."
   },
   {
    "k": "ot",
-   "name": "অফিস TPM (SAP শৃঙ্খলা)",
+   "name": "Office TPM (SAP discipline)",
    "score": 1,
-   "evidence": "কনফার্মেশন 0.9%, TECO 0%, সময়মতো অর্ডার 59%।"
+   "evidence": "Confirmation 0.9%, TECO 0%, orders on time 59%."
   },
   {
    "k": "she",
-   "name": "নিরাপত্তা, স্বাস্থ্য ও পরিবেশ",
+   "name": "Safety, health and environment",
    "score": 1,
-   "evidence": "6টি নিরাপত্তা-সংক্রান্ত রক্ষণাবেক্ষণ খোলা: গ্যাস ডিটেক্টরের শেষ অর্ডার 54.5 মাস আগে, অগ্নিনির্বাপকে ৩১ মাসের ফাঁক।"
+   "evidence": "6 safety-related maintenance items open: last gas-detector order 54.5 months ago, a 31-month gap in fire-extinguisher orders."
   },
   {
    "k": "et",
-   "name": "শিক্ষা ও প্রশিক্ষণ",
+   "name": "Education and training",
    "score": null,
-   "evidence": "দক্ষতা-ম্যাট্রিক্স বা প্রশিক্ষণের রেকর্ড পাওয়া যায়নি; নিচের ছকে ভিত্তি-মূল্যায়ন করতে হবে।"
+   "evidence": "No skills matrix or training record found; a baseline assessment is needed using the table below."
   },
   {
    "k": "eem",
-   "name": "নতুন যন্ত্রের প্রাথমিক ব্যবস্থাপনা",
+   "name": "Early equipment management",
    "score": null,
-   "evidence": "নতুন যন্ত্র কেনা/বসানোর সময় রক্ষণাবেক্ষণযোগ্যতা যাচাইয়ের রেকর্ড নেই।"
+   "evidence": "No record of maintainability checks when new equipment is bought or installed."
   }
  ],
  "maturity": {
@@ -470,66 +470,66 @@
  "sig": [
   {
    "k": "cost_h",
-   "q": "জানু–জুন ২০২৬-এ বহরের মাসিক খরচ কি আগের ছয় মাসের চেয়ে আলাদা?",
-   "test": "ম্যান–হুইটনি U (ওয়েলচ t সহ)",
+   "q": "Was the fleet's monthly cost in Jan–Jun 2026 different from the previous six months?",
+   "test": "Mann–Whitney U (with Welch t)",
    "stat": "U = 18",
    "p": 1.0,
-   "effect": "পরিবর্তন +2.7% (৯৫% পরিসর -48% থেকে +100%)",
-   "verdict": "পার্থক্য পরিসংখ্যানগতভাবে তাৎপর্যপূর্ণ নয়"
+   "effect": "Change +2.7% (95% range -48% to +100%)",
+   "verdict": "The difference is not statistically significant"
   },
   {
    "k": "pm_h",
-   "q": "পরিকল্পিত কাজের হার কি সত্যিই বেড়েছে (দ্বিতীয়ার্ধ ২০২৫ → প্রথমার্ধ ২০২৬)?",
-   "test": "দুই-অনুপাতের z-পরীক্ষা",
+   "q": "Has the planned-work share really risen (H2 2025 → H1 2026)?",
+   "test": "Two-proportion z-test",
    "stat": "z = 1.40",
    "p": 0.1625,
-   "effect": "39.2% → 47.3% (পার্থক্য +8.1 পয়েন্ট, ৯৫% পরিসর -3.2 থেকে +19.4)",
-   "verdict": "দিক ঠিক আছে, কিন্তু এখনো তাৎপর্যপূর্ণ নয়"
+   "effect": "39.2% → 47.3% (difference +8.1 points, 95% range -3.2 to +19.4)",
+   "verdict": "Right direction, but not yet significant"
   },
   {
    "k": "cost_type",
-   "q": "কাজের ধরন (শুধু সার্ভিস, সার্ভিস+মেরামত, শুধু মেরামত) অনুযায়ী কাজপ্রতি খরচ কি আলাদা?",
-   "test": "ক্রুসকাল–ওয়ালিস",
+   "q": "Does cost per job differ by job type (service only, service + repair, repair only)?",
+   "test": "Kruskal–Wallis",
    "stat": "H = 28.7",
    "p": 0.0,
-   "effect": "মধ্যমা: শুধু সার্ভিস 19,350, সার্ভিস+মেরামত 22,820, শুধু মেরামত 9,665 টাকা",
-   "verdict": "তাৎপর্যপূর্ণ পার্থক্য"
+   "effect": "Median: service only Tk 19,350, service + repair Tk 22,820, repair only Tk 9,665",
+   "verdict": "Significant difference"
   },
   {
    "k": "trend",
-   "q": "জুন ২০২৫ – জুন ২০২৬-এ মাসিক খরচে কি ঊর্ধ্বমুখী বা নিম্নমুখী প্রবণতা আছে?",
-   "test": "ম্যান–কেন্ডাল (কেন্ডাল τ), থাইল–সেন ঢাল",
+   "q": "Is there an upward or downward trend in monthly cost, Jun 2025 – Jun 2026?",
+   "test": "Mann–Kendall (Kendall τ), Theil–Sen slope",
    "stat": "τ = 0.00",
    "p": 1.0,
-   "effect": "ঢাল মাসে -0.01 লাখ টাকা (৯৫% পরিসর -0.70 থেকে +0.72)",
-   "verdict": "কোনো নির্ভরযোগ্য প্রবণতা নেই"
+   "effect": "Slope Tk -0.01 lakh per month (95% range -0.70 to +0.72)",
+   "verdict": "No reliable trend"
   },
   {
    "k": "series",
-   "q": "গাড়ির সিরিজ অনুযায়ী মাসিক খরচ কি আলাদা?",
-   "test": "ক্রুসকাল–ওয়ালিস",
+   "q": "Does monthly cost differ by vehicle series?",
+   "test": "Kruskal–Wallis",
    "stat": "H = 11.9",
    "p": 0.0076,
-   "effect": "DHA-61: মধ্যমা 22.7 হাজার/মাস (14টি); 3475–3478: মধ্যমা 14.1 হাজার/মাস (4টি); 0101–0103: মধ্যমা 18.0 হাজার/মাস (3টি); 0137–0141: মধ্যমা 7.6 হাজার/মাস (5টি)",
-   "verdict": "তাৎপর্যপূর্ণ পার্থক্য"
+   "effect": "DHA-61: median Tk 22.7k/month (14); 3475–3478: median Tk 14.1k/month (4); 0101–0103: median Tk 18.0k/month (3); 0137–0141: median Tk 7.6k/month (5)",
+   "verdict": "Significant difference"
   },
   {
    "k": "weibull",
-   "q": "সময়ের সঙ্গে কাজের সম্ভাবনা কি বাড়ে (ক্ষয়-জনিত, β > ১)?",
-   "test": "Weibull আকৃতির বুটস্ট্র্যাপ পরিসর",
+   "q": "Does the chance of a job rise with time (wear-out, β > 1)?",
+   "test": "Bootstrap range of the Weibull shape",
    "stat": "β = 1.15",
    "p": 0.0,
-   "effect": "৯০% পরিসর 1.08–1.23, ১-এর ওপরে",
-   "verdict": "হালকা কিন্তু তাৎপর্যপূর্ণ ক্ষয়-জনিত প্রবণতা"
+   "effect": "90% range 1.08–1.23, above 1",
+   "verdict": "Mild but significant wear-out pattern"
   },
   {
    "k": "model",
-   "q": "বড় মেরামতের নিউরাল নেটওয়ার্ক কি সরল নিয়মের চেয়ে ভালো?",
-   "test": "বুটস্ট্র্যাপ AUC তুলনা (২,০০০ বার)",
-   "stat": "AUC 0.76 বনাম 0.63",
+   "q": "Is the neural network for major repairs better than a simple rule?",
+   "test": "Bootstrap AUC comparison (2,000 resamples)",
+   "stat": "AUC 0.76 vs 0.63",
    "p": 0.065,
-   "effect": "93.5% পুনর্নমুনায় নিউরাল নেটওয়ার্ক এগিয়ে",
-   "verdict": "সম্ভবত ভালো (একতরফা p ≈ 0.06)"
+   "effect": "Neural network ahead in 93.5% of resamples",
+   "verdict": "Probably better (one-sided p ≈ 0.06)"
   }
  ],
  "cost_change": {
@@ -580,31 +580,31 @@
   "end": 3843340.0,
   "steps": [
    {
-    "c": "বৈদ্যুতিক (ব্যাটারি, লাইট, ওয়্যারিং)",
+    "c": "Electrical (battery, lights, wiring)",
     "d": 446809.6
    },
    {
-    "c": "হাইড্রলিক ও ববটেইল পাম্প",
+    "c": "Hydraulics and bobtail pump",
     "d": -307931.0
    },
    {
-    "c": "চেসিস, স্প্রিং ও সাসপেনশন",
+    "c": "Chassis, springs and suspension",
     "d": 273069.0
    },
    {
-    "c": "বডি, কেবিন ও রং",
+    "c": "Body, cabin and paint",
     "d": -238249.0
    },
    {
-    "c": "জ্বালানি ব্যবস্থা",
+    "c": "Fuel system",
     "d": -237178.0
    },
    {
-    "c": "কুলিং (রেডিয়েটর, পানি, ফ্যান)",
+    "c": "Cooling (radiator, water, fan)",
     "d": 155504.0
    },
    {
-    "c": "অন্যান্য",
+    "c": "Other",
     "d": 7360.4
    }
   ]
@@ -814,9 +814,9 @@
   "k": 22
  },
  "reactive_cost": {
-  "নির্ধারিত সার্ভিস": 1180136.0,
-  "সার্ভিস + মেরামত": 1848285.0,
-  "মেরামত": 4841124.0
+  "Scheduled service": 1180136.0,
+  "Service + repair": 1848285.0,
+  "Repair": 4841124.0
  },
  "repeat_cost": 805002.0
 }

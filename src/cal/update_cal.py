@@ -9,7 +9,7 @@ What it does, in order:
  3. rebuilds every dashboard dataset with the original definitions (2024 control limits, ±150 g tolerance,
     bootstrap intervals, Sep-onward 'recent' period), scores the last published forecast against what happened,
     and picks the next-check forecast method by a one-round-ahead rolling backtest;
- 4. writes the Bangla 'সর্বশেষ আপডেট' view, the dated dashboard text, the hub figures and an update-log entry.
+ 4. writes the 'Latest update' view, the dated dashboard text, the hub figures and an update-log entry.
 The 25 Oct slides, written report, giveaway estimate, driver weights and anomaly scores are not recomputed here."""
 import argparse, datetime as dt, html, json, math, os, re, sys
 import numpy as np, pandas as pd
@@ -25,9 +25,9 @@ BASELINE = f"{HERE}/baseline.json"
 TOL, FLAG, CPK_REF = 150, 60, 1.33
 
 # ---------------------------------------------------------------- Bangla formatting
-BN = str.maketrans("0123456789", "০১২৩৪৫৬৭৮৯")
-MON = ["জানুয়ারি", "ফেব্রুয়ারি", "মার্চ", "এপ্রিল", "মে", "জুন", "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"]
-MONS = ["জানু", "ফেব্রু", "মার্চ", "এপ্রি", "মে", "জুন", "জুলা", "আগ", "সেপ্টে", "অক্টো", "নভে", "ডিসে"]
+BN = str.maketrans("0123456789", "0123456789")
+MON = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+MONS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 def bn(x): return str(x).translate(BN)
 def num(v, dp=1, sign=False):
     if v is None or (isinstance(v, float) and math.isnan(v)): return "—"
@@ -46,7 +46,7 @@ def bround(label, iso):
     return bdate(iso, short=True, year=False) + (bn(f" ({m.group(1)})") if m else "")
 def blist(xs):
     xs = [bn(x) for x in xs]
-    return xs[0] if len(xs) == 1 else "، ".join(xs[:-1]) + " ও " + xs[-1] if xs else ""
+    return xs[0] if len(xs) == 1 else ", ".join(xs[:-1]) + " and " + xs[-1] if xs else ""
 esc = lambda s: html.escape(str(s), quote=False)
 
 # ---------------------------------------------------------------- statistics
@@ -78,9 +78,9 @@ METHODS = {
     "Naive (head's last check)": lambda hist: hist.ffill().iloc[-1],
 }
 METHOD_BN = {
-    "EWMA of head (α 0.3)": "প্রতিটি হেডের EWMA (α ০.৩)", "EWMA of head (α 0.5)": "প্রতিটি হেডের EWMA (α ০.৫)",
-    "EWMA α 0.3, readings capped at ±300 g": "EWMA (α ০.৩), রিডিং ±৩০০ গ্রামে সীমিত", "EWMA α 0.5, readings capped at ±300 g": "EWMA (α ০.৫), রিডিং ±৩০০ গ্রামে সীমিত",
-    "Last round average": "আগের রাউন্ডের গড়", "Head average to date": "হেডের এ পর্যন্ত গড়", "Naive (head's last check)": "নাইভ: হেডের আগের রিডিং",
+    "EWMA of head (α 0.3)": "EWMA per head (α 0.3)", "EWMA of head (α 0.5)": "EWMA per head (α 0.5)",
+    "EWMA α 0.3, readings capped at ±300 g": "EWMA (α 0.3), readings capped at ±300 g", "EWMA α 0.5, readings capped at ±300 g": "EWMA (α 0.5), readings capped at ±300 g",
+    "Last round average": "Previous round mean", "Head average to date": "Head mean to date", "Naive (head's last check)": "Naive: head's previous reading",
 }
 
 # ---------------------------------------------------------------- read inputs
@@ -292,13 +292,13 @@ def chart_rounds(R):
     lo = min(R["LCL"] - 30, rs.mean_g.min() - 15); hi = max(R["UCL"] + 30, rs.mean_g.max() + 25)
     y = lambda v: t + (hi - v) / (hi - lo) * (Hh - t - b)
     x = lambda i: l + i * (W - l - r) / max(1, len(rs) - 1)
-    o = [f'<svg viewBox="0 0 {W} {Hh}" role="img" aria-label="সাম্প্রতিক রাউন্ডের গড় ত্রুটি ও নিয়ন্ত্রণ-সীমা">']
+    o = [f'<svg viewBox="0 0 {W} {Hh}" role="img" aria-label="Mean error of recent rounds and control limits">']
     o.append(f'<rect x="{l}" y="{y(R["UCL"]):.1f}" width="{W - l - r}" height="{y(R["LCL"]) - y(R["UCL"]):.1f}" fill="var(--color-ok)" fill-opacity=".08"/>')
     step = 50 if hi - lo > 150 else 25
     for v in range(int(math.ceil(lo / step) * step), int(hi) + 1, step):
         o.append(f'<line x1="{l}" x2="{W - r}" y1="{y(v):.1f}" y2="{y(v):.1f}" stroke="{"var(--cds-chart-axis)" if v == 0 else "var(--cds-chart-grid)"}"/>'
                  f'<text x="{l - 6}" y="{y(v) + 4:.1f}" text-anchor="end">{num(v, 0, True)}</text>')
-    for v, lab in [(R["UCL"], "উচ্চ সীমা"), (R["LCL"], "নিম্ন সীমা")]:
+    for v, lab in [(R["UCL"], "Upper limit"), (R["LCL"], "Lower limit")]:
         o.append(f'<line x1="{l}" x2="{W - r}" y1="{y(v):.1f}" y2="{y(v):.1f}" stroke="var(--cds-chart-reference)" stroke-dasharray="5 4" stroke-width="1.5"/>'
                  f'<text x="{W - r + 6}" y="{y(v) + 4:.1f}">{lab} {num(v, 0, True)}</text>')
     pts = " ".join(f"{x(i):.1f},{y(v):.1f}" for i, v in enumerate(rs.mean_g))
@@ -310,7 +310,7 @@ def chart_rounds(R):
         if isnew: o.append(f'<text class="strong" x="{x(i):.1f}" y="{y(rr.mean_g) - 11:.1f}" text-anchor="middle">{num(rr.mean_g, 0, True)}</text>')
         if isnew or i % 3 == 0:
             o.append(f'<text x="{x(i):.1f}" y="{Hh - b + 18}" text-anchor="middle"{" class=strong" if isnew else ""}>{bround(rr["round"], rr.date)}</text>')
-    o.append(f'<text x="{l}" y="{Hh - 6}">ধূসর: আগের রাউন্ড · কমলা: নতুন রাউন্ড · সবুজ পটি: ২০২৪-এর নিয়ন্ত্রণ-সীমার ভেতরে</text></svg>')
+    o.append(f'<text x="{l}" y="{Hh - 6}">Grey: earlier rounds · Orange: new rounds · Green band: inside the 2024 control limits</text></svg>')
     return "".join(o)
 
 def tile(k, v, d, cls=""):
@@ -326,75 +326,75 @@ def render(R, a, updates):
     pl, ld = R["prev_last"], R["last_day"]; NR, newc = R["new_rounds"], R["newc"]; fc, sc = R["fc"], R["score"]
     pk, s6, sb, sl, slx = R["pk"], R["s6"], R["sb"], R["sl"], R["slx"]
     o = ['<div class="up">']
-    o.append('<h2>সিলিন্ডার ওজন-নির্ভুলতা: সর্বশেষ আপডেট</h2>')
-    o.append(f'<p class="meta">হালনাগাদ {bdate(a.date)} · তথ্য {bdate(R["rounds"].date.min())} – {bdate(ld)} · উৎস: প্ল্যান্টের ওজন-পরীক্ষার রেকর্ড '
-             f'({bn(R["n_sheets"])}টি শিট; নতুন: <span class="lat">{esc(", ".join(R["new_sheets"])) or "—"}</span>) · প্রস্তুত করেছেন: <b>Akib Fateh</b>, বাড়বকুণ্ড এলপিজি প্ল্যান্ট (সিটিজি)</p>')
+    o.append('<h2>Cylinder weight accuracy: latest update</h2>')
+    o.append(f'<p class="meta">Updated {bdate(a.date)} · Data {bdate(R["rounds"].date.min())} – {bdate(ld)} · Source: plant weight-check records '
+             f'({bn(R["n_sheets"])} sheets; new: <span class="lat">{esc(", ".join(R["new_sheets"])) or "—"}</span>) · Prepared by: <b>Akib Fateh</b>, Barabkunda LPG Plant (CTG)</p>')
     if len(NR) == 0:
-        o.append(f'<div class="card"><p>{bdate(pl)}-এর পর কোনো নতুন ১২ কেজি রাউন্ড পাওয়া যায়নি; সংখ্যাগুলো আগের মতোই।</p></div>')
+        o.append(f'<div class="card"><p>No new 12 kg round was found after {bdate(pl)}; the figures are unchanged.</p></div>')
     n_sd_out, n_mean_out = int(NR.sd_out.sum()), int(NR.mean_out.sum())
     dates = blist([bdate(d, year=False) for d in NR.date])
-    lead = (f'{bdate(pl, year=False)}-এর পর {bn(len(NR))}টি নতুন রাউন্ডে ({dates}) মোট {bn(len(newc))}টি ১২ কেজি সিলিন্ডার ওজন করা হয়েছে। '
-            f'{bn(len(NR))}টির {bn(n_sd_out)}টিতে ছড়ানো (<span class="lat">SD</span>) আর {bn(n_mean_out)}টিতে গড় ২০২৪-এর নিয়ন্ত্রণ-সীমার বাইরে। '
-            f'২০২৬-এর গড় অতিরিক্ত ভরাট {num(pk["Average error (g)"]["y2026"], 1, True)} থেকে {num(s6["mean"], 1, True)} গ্রাম হয়েছে; সক্ষমতা <span class="lat">Cpk</span> {num(s6["cpk"], 2)} '
-            f'(মানদণ্ড {num(CPK_REF, 2)}, ২০২৪-এ ছিল {num(sb["cpk"], 2)})।')
-    if R["rep_heads"]: lead += f' হেড {blist(R["rep_heads"])} প্রতিটি নতুন রাউন্ডেই +১৫০ গ্রামের বেশি ভরেছে।'
+    lead = (f'After {bdate(pl, year=False)}, {bn(len(NR))} new rounds ({dates}) weighed {bn(len(newc))} 12 kg cylinders in all. '
+            f'In {bn(n_sd_out)} of the {bn(len(NR))} rounds the spread (<span class="lat">SD</span>), and in {bn(n_mean_out)} the mean, is outside the 2024 control limits. '
+            f'The 2026 average overfill moved from {num(pk["Average error (g)"]["y2026"], 1, True)} to {num(s6["mean"], 1, True)} g; capability <span class="lat">Cpk</span> is {num(s6["cpk"], 2)} '
+            f'(benchmark {num(CPK_REF, 2)}, {num(sb["cpk"], 2)} in 2024).')
+    if R["rep_heads"]: lead += f' Heads {blist(R["rep_heads"])} overfilled by more than +150 g in every new round.'
     o.append(f'<p style="font-size:17px;margin:0 0 16px">{lead}</p>')
 
     # 1 safety
     big = R["newbig"]; e = R["e"]
-    o.append('<div class="card safe"><h3>১. নিরাপত্তা আগে · যোগ্য প্রকৌশলীর পর্যালোচনার জন্য <span class="lat" style="font-weight:500">(For review by a qualified engineer)</span></h3><ul>')
+    o.append('<div class="card safe"><h3>1. Safety first · For review by a qualified engineer</h3><ul>')
     over_new = newc[newc.error_g > TOL]
     if len(newc):
         top = newc.loc[newc.error_g.idxmax()]
-        o.append(f'<li><b>নতুন রাউন্ডে +১৫০ গ্রামের বেশি ভরা ১২ কেজি সিলিন্ডার: {bn(len(over_new))}টি</b> ({bn(len(newc))}টির {num(len(over_new) / len(newc) * 100, 0)}%); '
-                 f'সর্বোচ্চ {num(top.error_g, 0, True)} গ্রাম (হেড {bn(int(top["head"]))}, {bdate(top.date, year=False)})। পুরো রেকর্ডে সর্বোচ্চ {num(e.max(), 0, True)} গ্রাম; '
-                 f'৫০০ গ্রামের বেশি {bn(int((e > 500).sum()))}টি, ৩০০ গ্রামের বেশি {bn(int((e > 300).sum()))}টি।</li>')
+        o.append(f'<li><b>12 kg cylinders more than +150 g over in the new rounds: {bn(len(over_new))}</b> ({num(len(over_new) / len(newc) * 100, 0)}% of {bn(len(newc))}); '
+                 f'highest {num(top.error_g, 0, True)} g (head {bn(int(top["head"]))}, {bdate(top.date, year=False)}). Highest in the whole record {num(e.max(), 0, True)} g; '
+                 f'{bn(int((e > 500).sum()))} above 500 g, {bn(int((e > 300).sum()))} above 300 g.</li>')
     for n, g in big.groupby("nominal"):
         g2 = g[g.error_g > TOL]; top = g.loc[g.error_g.idxmax()]
-        o.append(f'<li><b>{bn(int(n))} কেজি, {bdate(g.date.max(), year=False)}: {bn(len(g))}টির {bn(len(g2))}টি +১৫০ গ্রামের বেশি</b>; সর্বোচ্চ {num(top.error_g, 0, True)} গ্রাম '
-                 f'(হেড {bn(int(top["head"]))}, নামমাত্র ওজনের {num(top.error_g / (n * 10), 1)}%)। রিডিং: {", ".join(num(v, 0, True) for v in g.error_g)} গ্রাম।</li>')
-    o.append('<li>সিলিন্ডারের পানিধারণ ক্ষমতা (<span class="lat">water capacity</span>) রেকর্ডে নেই, তাই ভরাট-অনুপাত (<span class="lat">filling ratio</span>) যাচাই করা যায়নি। চেক-ওয়েয়ারে বাতিলের (রিজেক্ট) কোনো রেকর্ড নেই।</li>')
-    o.append('</ul><p class="note">সূত্র: <span class="lat">NFPA 58</span> (কন্টেইনার ভরাটের সীমা); <span class="lat">ISO 10691</span> (ভরাটের আগে, সময়ে ও পরে পরীক্ষা); বাংলাদেশ এলপিজি বিধিমালা ২০০৪। এটি সিদ্ধান্ত-সহায়তা, প্রকৌশল-নির্দেশনা নয়।</p></div>')
+        o.append(f'<li><b>{bn(int(n))} kg, {bdate(g.date.max(), year=False)}: {bn(len(g2))} of {bn(len(g))} more than +150 g over</b>; highest {num(top.error_g, 0, True)} g '
+                 f'(head {bn(int(top["head"]))}, {num(top.error_g / (n * 10), 1)}% of nominal weight). Readings: {", ".join(num(v, 0, True) for v in g.error_g)} g.</li>')
+    o.append('<li>Cylinder water capacity is not in the records, so the filling ratio could not be checked. There is no record of check-weigher rejects.</li>')
+    o.append('</ul><p class="note">References: <span class="lat">NFPA 58</span> (container filling limits); <span class="lat">ISO 10691</span> (checks before, during and after filling); Bangladesh LPG Rules 2004. This is decision support, not engineering instruction.</p></div>')
 
     # 2 data quality
-    o.append('<div class="card dq"><h3>২. তথ্যের মান: নতুন শিটে যা পাওয়া গেছে ও যা করা হয়েছে</h3><ul>')
+    o.append('<div class="card dq"><h3>2. Data quality: what was found in the new sheets and what was done</h3><ul>')
     ex = R["excl_new"]
     if len(ex):
         for d, g in ex.groupby("date"):
             nleft = int(((R["raw"].date == d) & (R["raw"].nominal == 12) & R["raw"].valid).sum())
-            o.append(f'<li><b>{bdate(d, year=False)}, হেড {blist(g["head"].astype(int).tolist())}: বাদ দেওয়া হয়েছে।</b> খালি সিলিন্ডারের ওজন ট্যারের চেয়ে ৩০০ গ্রামের বেশি কম '
-                     f'({", ".join(num(v, 0, True) for v in g.leftover_g)} গ্রাম), অর্থাৎ ট্যার ভুল পড়া বা লেখা। ওই রাউন্ডে {bn(nleft)}টি সিলিন্ডার হিসাবে আছে।</li>')
+            o.append(f'<li><b>{bdate(d, year=False)}, heads {blist(g["head"].astype(int).tolist())}: excluded.</b> Empty-cylinder weight more than 300 g below tare '
+                     f'({", ".join(num(v, 0, True) for v in g.leftover_g)} g), meaning the tare was misread or miswritten. {bn(nleft)} cylinders of that round are counted.</li>')
     for _, r in R["unusual"].iterrows():
         h = int(r["head"]); hist = R["c"][R["c"]["head"] == h].sort_values("round_no").error_g.tail(4).tolist()
-        o.append(f'<li><b>{bdate(r.date, year=False)}, হেড {bn(h)}: {num(r.error_g, 0, True)} গ্রাম।</b> এই হেডের শেষ চারটি রিডিং {", ".join(num(v, 0, True) for v in hist)} গ্রাম; '
-                 f'হয় রিডিংটি ভুল, নয়তো হেডটি কম ভরতে শুরু করেছে। মূল কাগজের রেকর্ড মিলিয়ে দেখা দরকার। নিয়ম অনুযায়ী বৈধ বলে হিসাবে রাখা হয়েছে; পূর্বাভাসে প্রতিটি রিডিং ±৩০০ গ্রামে সীমিত।'
-                 + (f' এই একটি রিডিং {bdate(ld, year=False)}-এর রাউন্ডের গড় {num(slx["mean"], 1, True)} থেকে {num(sl["mean"], 1, True)} গ্রামে আর <span class="lat">SD</span> {num(slx["sd"], 1)} থেকে {num(sl["sd"], 1)} গ্রামে নিয়ে গেছে।' if r.date == ld else "") + '</li>')
+        o.append(f'<li><b>{bdate(r.date, year=False)}, head {bn(h)}: {num(r.error_g, 0, True)} g.</b> This head\'s last four readings were {", ".join(num(v, 0, True) for v in hist)} g; '
+                 f'either the reading is wrong or the head has started underfilling. Check the original paper record. Kept as valid under the rules; in the forecast every reading is capped at ±300 g.'
+                 + (f' This one reading moved the {bdate(ld, year=False)} round mean from {num(slx["mean"], 1, True)} to {num(sl["mean"], 1, True)} g and the <span class="lat">SD</span> from {num(slx["sd"], 1)} to {num(sl["sd"], 1)} g.' if r.date == ld else "") + '</li>')
     for sn in R["four_digit"]:
-        o.append(f'<li>শিটের নাম <span class="lat">{esc(sn)}</span> চার অঙ্কের বছরে লেখা, অন্যগুলো দুই অঙ্কে। তারিখ ঠিকভাবে পড়া হয়েছে; একই ধরনে নাম রাখলে ভুলের ঝুঁকি কমে।</li>')
+        o.append(f'<li>Sheet name <span class="lat">{esc(sn)}</span> uses a four-digit year, the others two digits. The date was read correctly; consistent naming lowers the risk of errors.</li>')
     mism = [x for x in R["new_issue_sheets"] if x[0].startswith("date cell")]
-    o.append(f'<li>নতুন শিটে তারিখের ঘর আর শিটের নামের অমিল: {bn(len(mism)) if mism else "নেই"}।'
-             + (f' খালি টেমপ্লেট শিট (হিসাবে নেই): <span class="lat">{esc(", ".join(R["empty_sheets"]))}</span>।' if R["empty_sheets"] else "") + '</li>')
+    o.append(f'<li>Mismatches between the date cell and the sheet name in new sheets: {bn(len(mism)) if mism else "none"}.'
+             + (f' Empty template sheets (not counted): <span class="lat">{esc(", ".join(R["empty_sheets"]))}</span>.' if R["empty_sheets"] else "") + '</li>')
     if R["changed_rounds"]:
-        o.append(f'<li class="bad"><b>আগের {bn(len(R["changed_rounds"]))}টি রাউন্ডের সংখ্যা ওয়ার্কবুকে বদলেছে</b> ({esc(", ".join(x["round"] for x in R["changed_rounds"]))}); নতুন মান ব্যবহার করা হয়েছে।</li>')
+        o.append(f'<li class="bad"><b>Figures for {bn(len(R["changed_rounds"]))} earlier rounds have changed in the workbook</b> ({esc(", ".join(x["round"] for x in R["changed_rounds"]))}); the new values are used.</li>')
     else:
-        o.append(f'<li>আগের {bn(len(R["prev"]["rounds"]))}টি রাউন্ডের প্রতিটি সংখ্যা আগের প্রকাশিত হিসাবের সঙ্গে হুবহু মিলেছে।</li>')
-    o.append(f'<li>মোট বাদ দেওয়া অসম্ভব সারি: {bn(R["n_excl"])}টি (আগে {bn(int(R["prev_excl"])) if R["prev_excl"] is not None else "—"}টি)।</li></ul></div>')
+        o.append(f'<li>Every figure of the {bn(len(R["prev"]["rounds"]))} earlier rounds matches the previously published calculation exactly.</li>')
+    o.append(f'<li>Impossible rows excluded in all: {bn(R["n_excl"])} (previously {bn(int(R["prev_excl"])) if R["prev_excl"] is not None else "—"}).</li></ul></div>')
 
     # 3 tiles
     p26 = R["prev_r26"]; prev_in = int((~p26.mean_out & ~p26.sd_out).sum()); r26 = R["r26"]; now_in = int((~r26.mean_out & ~r26.sd_out).sum())
     pl_k = pk["Average error (g)"]["latest"]
-    o.append(f'<h3 style="margin:22px 0 10px">৩. আগের প্রকাশের ({bdate(pl, year=False)} পর্যন্ত) সঙ্গে তুলনা</h3><div class="tiles">')
-    o.append(tile("২০২৬-এর গড় ত্রুটি", num(s6["mean"], 1, True) + " গ্রাম", f'আগে {num(pk["Average error (g)"]["y2026"], 1, True)} · ২০২৪: {num(sb["mean"], 1, True)}', worse(s6["mean"], pk["Average error (g)"]["y2026"], "down_abs")))
-    o.append(tile("ছড়ানো (<span class=lat>SD</span>), ২০২৬", num(s6["sd"], 1) + " গ্রাম", f'আগে {num(pk["Spread, standard deviation (g)"]["y2026"], 1)} · ২০২৪: {num(sb["sd"], 1)}', worse(s6["sd"], pk["Spread, standard deviation (g)"]["y2026"], "down")))
-    o.append(tile("±১৫০ গ্রামের মধ্যে, ২০২৬", num(s6["within150"], 1) + "%", f'আগে {num(pk["Within ±150 g (%)"]["y2026"], 1)}% · ২০২৪: {num(sb["within150"], 1)}%', worse(s6["within150"], pk["Within ±150 g (%)"]["y2026"], "up")))
-    o.append(tile("সক্ষমতা <span class=lat>Cpk</span>, ২০২৬", num(s6["cpk"], 3), f'আগে {num(pk["Cpk (±150 g)"]["y2026"], 3)} · মানদণ্ড {num(CPK_REF, 2)} · ২০২৪: {num(sb["cpk"], 2)}', worse(s6["cpk"], pk["Cpk (±150 g)"]["y2026"], "up")))
-    o.append(tile(f"সর্বশেষ রাউন্ড ({bdate(ld, True, False)})", num(sl["mean"], 1, True) + " গ্রাম",
-                  (f'অস্বাভাবিক রিডিং বাদে {num(slx["mean"], 1, True)} · ' if slx["n"] != sl["n"] else "") + f'আগের সর্বশেষ ({bdate(pl, True, False)}): {num(pl_k, 1, True)}', ""))
-    o.append(tile("২০২৬-এর রাউন্ড, দুই সীমার ভেতরে", f"{bn(len(r26))}টির {bn(now_in)}টি", f"আগে {bn(len(p26))}টির {bn(prev_in)}টি", "bad" if now_in / max(1, len(r26)) < prev_in / max(1, len(p26)) else ""))
+    o.append(f'<h3 style="margin:22px 0 10px">3. Compared with the previous release (to {bdate(pl, year=False)})</h3><div class="tiles">')
+    o.append(tile("Mean error, 2026", num(s6["mean"], 1, True) + " g", f'Previously {num(pk["Average error (g)"]["y2026"], 1, True)} · 2024: {num(sb["mean"], 1, True)}', worse(s6["mean"], pk["Average error (g)"]["y2026"], "down_abs")))
+    o.append(tile("Spread (<span class=lat>SD</span>), 2026", num(s6["sd"], 1) + " g", f'Previously {num(pk["Spread, standard deviation (g)"]["y2026"], 1)} · 2024: {num(sb["sd"], 1)}', worse(s6["sd"], pk["Spread, standard deviation (g)"]["y2026"], "down")))
+    o.append(tile("Within ±150 g, 2026", num(s6["within150"], 1) + "%", f'Previously {num(pk["Within ±150 g (%)"]["y2026"], 1)}% · 2024: {num(sb["within150"], 1)}%', worse(s6["within150"], pk["Within ±150 g (%)"]["y2026"], "up")))
+    o.append(tile("Capability <span class=lat>Cpk</span>, 2026", num(s6["cpk"], 3), f'Previously {num(pk["Cpk (±150 g)"]["y2026"], 3)} · benchmark {num(CPK_REF, 2)} · 2024: {num(sb["cpk"], 2)}', worse(s6["cpk"], pk["Cpk (±150 g)"]["y2026"], "up")))
+    o.append(tile(f"Latest round ({bdate(ld, True, False)})", num(sl["mean"], 1, True) + " g",
+                  (f'Without the unusual reading {num(slx["mean"], 1, True)} · ' if slx["n"] != sl["n"] else "") + f'Previous latest ({bdate(pl, True, False)}): {num(pl_k, 1, True)}', ""))
+    o.append(tile("2026 rounds inside both limits", f"{bn(now_in)} of {bn(len(r26))}", f"previously {bn(prev_in)} of {bn(len(p26))}", "bad" if now_in / max(1, len(r26)) < prev_in / max(1, len(p26)) else ""))
     o.append('</div>')
     pp = R["prev_periods"][-1]; cp = R["periods"][-1]
-    o.append('<div class="card"><div class="tw"><table><tr><th class="l">সময়কাল</th><th>পরীক্ষা</th><th>গড় (গ্রাম)</th><th><span class="lat">SD</span> (গ্রাম)</th><th>±১৫০-এর মধ্যে %</th><th>+১৫০-এর বেশি %</th><th><span class="lat">Cpk</span></th></tr>')
-    PB = {"Jun": "জুন", "Jan–Mar": "জানু–মার্চ", "May–Aug": "মে–আগ", "Sep–Oct": "সেপ্টে–অক্টো"}
+    o.append('<div class="card"><div class="tw"><table><tr><th class="l">Period</th><th>Checks</th><th>Mean (g)</th><th><span class="lat">SD</span> (g)</th><th>% within ±150</th><th>% over +150</th><th><span class="lat">Cpk</span></th></tr>')
+    PB = {"Jun": "June", "Jan–Mar": "Jan–Mar", "May–Aug": "May–Aug", "Sep–Oct": "Sep–Oct"}
     def pbn(p):
         out = p
         for k2, v2 in PB.items(): out = out.replace(k2, v2)
@@ -402,92 +402,92 @@ def render(R, a, updates):
         return bn(out)
     for p in R["periods"][:-1]:
         o.append(f'<tr><td>{pbn(p["period"])}</td><td>{num(p["checks"], 0)}</td><td>{num(p["mean_g"], 1, True)}</td><td>{num(p["sd_g"], 1)}</td><td>{num(p["within150_pct"], 1)}</td><td>{num(p["over150_pct"], 1)}</td><td>{num(p["cpk150"], 2)}</td></tr>')
-    o.append(f'<tr class="note"><td>{pbn(pp["period"])} (আগের প্রকাশ)</td><td>{num(pp["checks"], 0)}</td><td>{num(pp["mean_g"], 1, True)}</td><td>{num(pp["sd_g"], 1)}</td><td>{num(pp["within150_pct"], 1)}</td><td>{num(pp["over150_pct"], 1)}</td><td>{num(pp["cpk150"], 2)}</td></tr>')
-    o.append(f'<tr class="sel"><td>{pbn(cp["period"])} (এখন)</td><td>{num(cp["checks"], 0)}</td><td>{num(cp["mean_g"], 1, True)}</td><td>{num(cp["sd_g"], 1)}</td><td>{num(cp["within150_pct"], 1)}</td><td>{num(cp["over150_pct"], 1)}</td><td>{num(cp["cpk150"], 2)}</td></tr></table></div>'
-             f'<p class="note">কোনো প্ল্যান্ট-লক্ষ্যমাত্রা দেওয়া হয়নি; তুলনা ২০২৪-এর ভিত্তি আর শিল্প-মানদণ্ড <span class="lat">Cpk</span> ≥ {num(CPK_REF, 2)}-এর সঙ্গে।</p></div>')
+    o.append(f'<tr class="note"><td>{pbn(pp["period"])} (previous release)</td><td>{num(pp["checks"], 0)}</td><td>{num(pp["mean_g"], 1, True)}</td><td>{num(pp["sd_g"], 1)}</td><td>{num(pp["within150_pct"], 1)}</td><td>{num(pp["over150_pct"], 1)}</td><td>{num(pp["cpk150"], 2)}</td></tr>')
+    o.append(f'<tr class="sel"><td>{pbn(cp["period"])} (now)</td><td>{num(cp["checks"], 0)}</td><td>{num(cp["mean_g"], 1, True)}</td><td>{num(cp["sd_g"], 1)}</td><td>{num(cp["within150_pct"], 1)}</td><td>{num(cp["over150_pct"], 1)}</td><td>{num(cp["cpk150"], 2)}</td></tr></table></div>'
+             f'<p class="note">No plant target has been set; comparison is with the 2024 baseline and the industry benchmark <span class="lat">Cpk</span> ≥ {num(CPK_REF, 2)}.</p></div>')
 
     # 4 new rounds
     if len(NR):
-        o.append('<div class="card"><h3>৪. নতুন রাউন্ড, ২০২৪-এর নিয়ন্ত্রণ-সীমার বিপরীতে</h3>')
-        o.append(f'<div class="fig">{chart_rounds(R)}</div><div class="tw"><table><tr><th class="l">রাউন্ড</th><th>সিলিন্ডার</th><th>গড় (গ্রাম)</th><th><span class="lat">SD</span> (গ্রাম)</th><th>±১৫০-এর মধ্যে %</th><th>+১৫০-এর বেশি %</th><th>গড় সীমার ভেতরে?</th><th><span class="lat">SD</span> সীমার ভেতরে?</th></tr>')
+        o.append('<div class="card"><h3>4. New rounds against the 2024 control limits</h3>')
+        o.append(f'<div class="fig">{chart_rounds(R)}</div><div class="tw"><table><tr><th class="l">Round</th><th>Cylinders</th><th>Mean (g)</th><th><span class="lat">SD</span> (g)</th><th>% within ±150</th><th>% over +150</th><th>Mean within limits?</th><th><span class="lat">SD</span> within limit?</th></tr>')
         for _, r in NR.iterrows():
-            yn = lambda out: '<span class="bad">না</span>' if out else '<span class="ok">হ্যাঁ</span>'
+            yn = lambda out: '<span class="bad">No</span>' if out else '<span class="ok">Yes</span>'
             o.append(f'<tr><td>{bdate(r.date)}</td><td>{bn(int(r.cylinders))}</td><td>{num(r.mean_g, 1, True)}</td><td>{num(r.sd_g, 1)}</td><td>{num(r.within150_pct, 1)}</td><td>{num(r.over150_pct, 1)}</td><td>{yn(r.mean_out)}</td><td>{yn(r.sd_out)}</td></tr>')
-        o.append(f'</table></div><p class="note">নিয়ন্ত্রণ-সীমা জুন ২০২৪-এর ৯টি রাউন্ড থেকে: গড় {num(R["LCL"], 1, True)} থেকে {num(R["UCL"], 1, True)} গ্রাম, <span class="lat">SD</span> সর্বোচ্চ {num(R["SD_UCL"], 1)} গ্রাম (প্রতি রাউন্ডে ২৪টি সিলিন্ডার)।</p></div>')
+        o.append(f'</table></div><p class="note">Control limits from the 9 rounds of June 2024: mean {num(R["LCL"], 1, True)} to {num(R["UCL"], 1, True)} g, <span class="lat">SD</span> at most {num(R["SD_UCL"], 1)} g (24 cylinders per round).</p></div>')
 
     # 5 heads
     hd = R["heads"].copy(); hd = hd.sort_values(["fail_chance_pct", "head"], ascending=[False, True])
     hot = R["heads"][R["heads"].hot].sort_values("mean_g", ascending=False)["head"].astype(int).tolist()
     added = [h for h in hot if h not in R["prev_hot"]]; dropped = [h for h in R["prev_hot"] if h not in hot]
-    o.append('<div class="card"><h3>৫. হেডভিত্তিক: নতুন রিডিং, গড় ও পরের পরীক্ষার পূর্বাভাস</h3>')
-    o.append(f'<p><b>চিহ্নিত হেড</b> (সামগ্রিক গড় +{bn(FLAG)} গ্রামের বেশি এবং ৯৫% আস্থা-সীমার নিম্নপ্রান্ত শূন্যের ওপরে): <b>{bn(len(hot))}টি, হেড {blist(hot)}</b>। '
-             f'আগে ছিল {bn(len(R["prev_hot"]))}টি: {blist(R["prev_hot"])}।' + (f' নতুন যোগ: হেড {blist(added)}।' if added else "") + (f' বাদ পড়েছে: হেড {blist(dropped)}।' if dropped else "") + '</p>')
+    o.append('<div class="card"><h3>5. By head: new readings, means and the next-check forecast</h3>')
+    o.append(f'<p><b>Flagged heads</b> (overall mean above +{bn(FLAG)} g and lower end of the 95% confidence interval above zero): <b>{bn(len(hot))}, heads {blist(hot)}</b>. '
+             f'Previously {bn(len(R["prev_hot"]))}: {blist(R["prev_hot"])}.' + (f' Newly added: heads {blist(added)}.' if added else "") + (f' Dropped: heads {blist(dropped)}.' if dropped else "") + '</p>')
     cols = list(NR["round"])
-    o.append('<div class="tw"><table><tr><th class="l">হেড</th>' + "".join(f'<th>{bround(r, d)}</th>' for r, d in zip(NR["round"], NR.date)) +
-             f'<th>{esc(pbn(R["recent_label"]))} গড়</th><th>সামগ্রিক গড়</th><th>৯৫% নিম্নপ্রান্ত</th><th>পূর্বাভাস</th><th>৮০% পরিসর</th><th>±১৫০-এর বাইরে যাওয়ার সম্ভাবনা</th></tr>')
+    o.append('<div class="tw"><table><tr><th class="l">Head</th>' + "".join(f'<th>{bround(r, d)}</th>' for r, d in zip(NR["round"], NR.date)) +
+             f'<th>{esc(pbn(R["recent_label"]))} mean</th><th>Overall mean</th><th>95% lower end</th><th>Forecast</th><th>80% range</th><th>Chance of leaving ±150</th></tr>')
     for _, h in hd.iterrows():
         hh = int(h["head"]); ph = R["per_head"].get(hh, {}); isHot = bool(h.hot); ch = h.fail_chance_pct
-        o.append(f'<tr><td><b>{"● " if isHot else ""}হেড {bn(hh)}</b></td>' + "".join(heat(ph.get(r)) for r in cols) +
+        o.append(f'<tr><td><b>{"● " if isHot else ""}Head {bn(hh)}</b></td>' + "".join(heat(ph.get(r)) for r in cols) +
                  f'<td>{num(h.recent_g, 0, True)}</td><td{" class=bad" if isHot else ""}>{num(h.mean_g, 1, True)}</td><td>{num(h.ci_low_g, 1, True)}</td>'
-                 f'<td>{num(h.forecast_g, 0, True)}</td><td class="note">{num(h.forecast_low_g, 0, True)} থেকে {num(h.forecast_high_g, 0, True)}</td>'
+                 f'<td>{num(h.forecast_g, 0, True)}</td><td class="note">{num(h.forecast_low_g, 0, True)} to {num(h.forecast_high_g, 0, True)}</td>'
                  f'<td{" class=bad" if ch >= 50 else ""}><b>{num(ch, 0)}%</b></td></tr>')
-    o.append('</table></div><p class="note">সারি সাজানো ±১৫০ গ্রামের বাইরে যাওয়ার সম্ভাবনা অনুযায়ী। ● = চিহ্নিত হেড। নীল = বেশি ভরা, কমলা = কম ভরা; রং যত গাঢ়, ত্রুটি তত বড় (৩০০ গ্রামে পূর্ণ রং)।</p></div>')
+    o.append('</table></div><p class="note">Rows sorted by the chance of leaving ±150 g. ● = flagged head. Blue = overfill, orange = underfill; the darker the colour, the larger the error (full colour at 300 g).</p></div>')
 
     # 6 how the previous forecast did
     if sc:
-        o.append(f'<div class="card"><h3>৬. আগের পূর্বাভাস কেমন মিলেছে ({bdate(pl, year=False)}-এ করা, {bdate(sc["date"], year=False)}-এর রাউন্ডে যাচাই)</h3>')
+        o.append(f'<div class="card"><h3>6. How the previous forecast did (made on {bdate(pl, year=False)}, checked on the {bdate(sc["date"], year=False)} round)</h3>')
         inr = sc["mean_lo"] <= sc["mean_act"] <= sc["mean_hi"]
-        o.append('<div class="tw"><table><tr><th class="l">বিষয়</th><th>পূর্বাভাস</th><th>প্রকৃত</th><th class="l">মন্তব্য</th></tr>')
-        o.append(f'<tr><td>রাউন্ডের গড় ত্রুটি</td><td>{num(sc["mean_fc"], 1, True)} গ্রাম<br><span class="note">৮০%: {num(sc["mean_lo"], 1, True)} থেকে {num(sc["mean_hi"], 1, True)}</span></td><td>{num(sc["mean_act"], 1, True)} গ্রাম</td>'
-                 f'<td class="l">{num(abs(sc["mean_act"] - sc["mean_fc"]), 1)} গ্রাম পার্থক্য; ' + ("৮০% পরিসরের ভেতরে" if inr else ("পরিসরের ঠিক নিচে" if sc["mean_act"] < sc["mean_lo"] else "পরিসরের ওপরে")) + '</td></tr>')
-        o.append(f'<tr><td>±১৫০ গ্রামের বাইরে হেড</td><td>প্রায় {num(sc["fail_fc"], 1)}টি</td><td>{bn(sc["fail_act"])}টি</td><td class="l">{"প্রত্যাশার চেয়ে কম" if sc["fail_act"] < sc["fail_fc"] else "প্রত্যাশার চেয়ে বেশি"}</td></tr>')
-        o.append(f'<tr><td>হেডভিত্তিক গড় পরম ত্রুটি (<span class="lat">MAE</span>)</td><td>{num(sc["mae_g"], 1)} গ্রাম</td><td>—</td><td class="l">সরল নাইভ পদ্ধতিতে (আগের রিডিংই থাকবে) {num(sc["naive_mae"], 1)} গ্রাম</td></tr>')
-        o.append(f'<tr><td>৮০% পরিসরের ভেতরে পড়া হেড</td><td>প্রত্যাশা ৮০%</td><td>{bn(sc["heads"])}টির {bn(sc["in_range"])}টি ({num(sc["in_range"] / sc["heads"] * 100, 0)}%)</td><td class="l"></td></tr></table></div>')
-        verdict = ("রাউন্ডের গড় ভালোভাবে ধরা গেছে, কিন্তু আলাদা আলাদা হেডের ক্ষেত্রে মডেলটি সরল নাইভ পদ্ধতির চেয়ে ভালো করেনি। তাই এবার পূর্বাভাসের পদ্ধতি আবার যাচাই করে বেছে নেওয়া হয়েছে (নিচে)।"
-                   if sc["mae_g"] > sc["naive_mae"] else "রাউন্ডের গড় ও হেডভিত্তিক পূর্বাভাস দুটোই সরল নাইভ পদ্ধতির চেয়ে ভালো ছিল।")
-        o.append(f'<p>আগের পদ্ধতি: <span class="lat">{esc(sc["method"])}</span>। {verdict}</p></div>')
+        o.append('<div class="tw"><table><tr><th class="l">Item</th><th>Forecast</th><th>Actual</th><th class="l">Comment</th></tr>')
+        o.append(f'<tr><td>Round mean error</td><td>{num(sc["mean_fc"], 1, True)} g<br><span class="note">80%: {num(sc["mean_lo"], 1, True)} to {num(sc["mean_hi"], 1, True)}</span></td><td>{num(sc["mean_act"], 1, True)} g</td>'
+                 f'<td class="l">{num(abs(sc["mean_act"] - sc["mean_fc"]), 1)} g difference; ' + ("inside the 80% range" if inr else ("just below the range" if sc["mean_act"] < sc["mean_lo"] else "above the range")) + '</td></tr>')
+        o.append(f'<tr><td>Heads outside ±150 g</td><td>about {num(sc["fail_fc"], 1)}</td><td>{bn(sc["fail_act"])}</td><td class="l">{"fewer than expected" if sc["fail_act"] < sc["fail_fc"] else "more than expected"}</td></tr>')
+        o.append(f'<tr><td>Mean absolute error by head (<span class="lat">MAE</span>)</td><td>{num(sc["mae_g"], 1)} g</td><td>—</td><td class="l">Simple naive method (previous reading stays) {num(sc["naive_mae"], 1)} g</td></tr>')
+        o.append(f'<tr><td>Heads inside the 80% range</td><td>expected 80%</td><td>{bn(sc["in_range"])} of {bn(sc["heads"])} ({num(sc["in_range"] / sc["heads"] * 100, 0)}%)</td><td class="l"></td></tr></table></div>')
+        verdict = ("The round mean was caught well, but for individual heads the model did no better than the simple naive method. So the forecast method was re-tested and re-selected this time (below)."
+                   if sc["mae_g"] > sc["naive_mae"] else "Both the round mean and the head forecasts beat the simple naive method.")
+        o.append(f'<p>Previous method: <span class="lat">{esc(sc["method"])}</span>. {verdict}</p></div>')
 
     # 7 new forecast
     M = R["models"]; sel = M[M.selected].iloc[0]
-    o.append('<div class="card"><h3>৭. পরের পরীক্ষার পূর্বাভাস</h3>')
-    acc_d = "<span class=lat>MAPE</span> " + num(sel.mape_net_pct, 2) + "% (নিট ওজনে) · দিক ঠিক " + num(sel.direction_hit_pct, 1) + "%"
-    rng80 = "৮০% পরিসর " + num(fc["mean_lo"], 1, True) + " থেকে " + num(fc["mean_hi"], 1, True)
-    o.append(f'<div class="tiles" style="margin-bottom:10px">{tile("পরের রাউন্ডের গড় ত্রুটি", num(fc["mean"], 1, True) + " গ্রাম", rng80)}'
-             f'{tile("±১৫০ গ্রামের বাইরে প্রত্যাশিত হেড", "২৪টির " + num(fc["fail_heads"], 1) + "টি", "প্রতিটি হেডের সম্ভাবনার যোগফল")}'
-             f'{tile("পদ্ধতির ত্রুটি (<span class=lat>RMSE</span>)", num(sel.rmse_g, 1) + " গ্রাম", acc_d)}</div>')
-    o.append(f'<p><b>পদ্ধতি:</b> {METHOD_BN.get(fc["method"], esc(fc["method"]))}। সূত্র: <span class="lat">S<sub>t</sub> = α·x<sub>t</sub> + (1 − α)·S<sub>t−1</sub></span>; প্রতিটি হেডের নিজের রিডিংয়ের ওপর, '
-             'নতুন রিডিং বেশি গুরুত্ব পায়। ±৩০০ গ্রামের সীমা একটি ভুল রিডিংকে পূর্বাভাস টেনে নিতে দেয় না।</p>')
-    o.append(f'<p><b>প্রশিক্ষণ:</b> {bdate(R["rounds"].date.min())} – {bdate(ld)} ({num(len(R["c"]), 0)}টি পরীক্ষা, {bn(len(R["rounds"]))}টি রাউন্ড)। '
-             f'<b>যাচাই:</b> শেষ ৮টি রাউন্ডে ({bdate(fc["first_test"], year=False)} – {bdate(fc["last_test"], year=False)}) প্রতিবার শুধু আগের তথ্য দিয়ে এক রাউন্ড আগের পূর্বাভাস, '
-             f'মোট {bn(fc["n_test"])}টি হেড-পরীক্ষা; {bn(fc["n_methods"])}টি পদ্ধতির মধ্যে সবচেয়ে কম <span class="lat">RMSE</span>। পরিসর এসেছে যাচাইয়ের ভুলের ১০ম ও ৯০তম শতাংশক থেকে '
-             f'({num(fc["q10"], 0, True)} ও {num(fc["q90"], 0, True)} গ্রাম)।</p>')
-    o.append('<div class="tw"><table><tr><th class="l">পদ্ধতি</th><th><span class="lat">RMSE</span> (গ্রাম)</th><th><span class="lat">MAE</span> (গ্রাম)</th><th><span class="lat">MAPE</span> %</th><th>দিক ঠিক %</th><th>নাইভের চেয়ে ভালো %</th></tr>')
+    o.append('<div class="card"><h3>7. Forecast for the next check</h3>')
+    acc_d = "<span class=lat>MAPE</span> " + num(sel.mape_net_pct, 2) + "% (of net weight) · direction right " + num(sel.direction_hit_pct, 1) + "%"
+    rng80 = "80% range " + num(fc["mean_lo"], 1, True) + " to " + num(fc["mean_hi"], 1, True)
+    o.append(f'<div class="tiles" style="margin-bottom:10px">{tile("Next round mean error", num(fc["mean"], 1, True) + " g", rng80)}'
+             f'{tile("Heads expected outside ±150 g", num(fc["fail_heads"], 1) + " of 24", "sum of each head\'s probability")}'
+             f'{tile("Method error (<span class=lat>RMSE</span>)", num(sel.rmse_g, 1) + " g", acc_d)}</div>')
+    o.append(f'<p><b>Method:</b> {METHOD_BN.get(fc["method"], esc(fc["method"]))}. Formula: <span class="lat">S<sub>t</sub> = α·x<sub>t</sub> + (1 − α)·S<sub>t−1</sub></span>, on each head\'s own readings, '
+             'so newer readings weigh more. The ±300 g cap stops a single wrong reading from dragging the forecast.</p>')
+    o.append(f'<p><b>Training:</b> {bdate(R["rounds"].date.min())} – {bdate(ld)} ({num(len(R["c"]), 0)} checks, {bn(len(R["rounds"]))} rounds). '
+             f'<b>Validation:</b> over the last 8 rounds ({bdate(fc["first_test"], year=False)} – {bdate(fc["last_test"], year=False)}), each a one-round-ahead forecast from earlier data only, '
+             f'{bn(fc["n_test"])} head checks in all; lowest <span class="lat">RMSE</span> of {bn(fc["n_methods"])} methods. The range comes from the 10th and 90th percentiles of the validation errors '
+             f'({num(fc["q10"], 0, True)} and {num(fc["q90"], 0, True)} g).</p>')
+    o.append('<div class="tw"><table><tr><th class="l">Method</th><th><span class="lat">RMSE</span> (g)</th><th><span class="lat">MAE</span> (g)</th><th><span class="lat">MAPE</span> %</th><th>Direction right %</th><th>Better than naive %</th></tr>')
     for _, m in M.sort_values("rmse_g").iterrows():
         o.append(f'<tr{" class=sel" if m.selected else ""}><td>{METHOD_BN.get(m.model, esc(m.model))}{" ✓" if m.selected else ""}</td><td>{num(m.rmse_g, 1)}</td><td>{num(m.mae_g, 1)}</td><td>{num(m.mape_net_pct, 2)}</td><td>{num(m.direction_hit_pct, 1)}</td><td>{num(m.skill_vs_naive_pct, 1, True)}</td></tr>')
-    o.append(f'</table></div><p class="note">সতর্কতা: সেরা পদ্ধতিও নাইভের চেয়ে মাত্র {num(sel.skill_vs_naive_pct, 1)}% ভালো; হেডভিত্তিক পূর্বাভাসকে অগ্রাধিকার ঠিক করার নির্দেশক হিসেবে দেখুন, নিশ্চিত ফল হিসেবে নয়। '
-             '২৫ অক্টোবরের নিউরাল নেটওয়ার্ক (<span class="lat">LSTM</span>) এই হালনাগাদে নতুন করে প্রশিক্ষিত হয়নি; তার ফল স্লাইড ও লিখিত রিপোর্টে আছে।</p></div>')
+    o.append(f'</table></div><p class="note">Caution: even the best method is only {num(sel.skill_vs_naive_pct, 1)}% better than naive; treat the head forecasts as a guide to priority, not a certain result. '
+             'The 25 October neural network (<span class="lat">LSTM</span>) was not retrained in this update; its results are in the slides and written report.</p></div>')
 
     # 8 actions
     first = hd[hd.fail_chance_pct >= 50]
-    o.append('<div class="card"><h3>৮. করণীয় (সুপারিশ)</h3><ol style="margin:0;padding-left:1.3em">')
+    o.append('<div class="card"><h3>8. Actions (recommendations)</h3><ol style="margin:0;padding-left:1.3em">')
     over_first = first[first.forecast_g > 0]["head"].astype(int).tolist(); under_first = first[first.forecast_g < 0]["head"].astype(int).tolist()
-    if over_first: o.append(f'<li>হেড {blist(over_first)} আগে ক্যালিব্রেট করুন: পরের পরীক্ষায় +১৫০ গ্রাম পেরোনোর সম্ভাবনা ৫০%-এর বেশি।</li>')
-    for _, r in R["unusual"].iterrows(): o.append(f'<li>হেড {bn(int(r["head"]))}: {bdate(r.date, year=False)}-এর কাগজের রেকর্ড মিলিয়ে দেখুন; রিডিং সঠিক হলে কম ভরার কারণ খুঁজুন।</li>')
-    if under_first and not len(R["unusual"]): o.append(f'<li>হেড {blist(under_first)}: কম ভরার ঝুঁকি; পরের রাউন্ডে আলাদা করে দেখুন।</li>')
+    if over_first: o.append(f'<li>Calibrate heads {blist(over_first)} first: each has a more than 50% chance of exceeding +150 g at the next check.</li>')
+    for _, r in R["unusual"].iterrows(): o.append(f'<li>Head {bn(int(r["head"]))}: check the paper record of {bdate(r.date, year=False)}; if the reading is right, find the cause of the underfill.</li>')
+    if under_first and not len(R["unusual"]): o.append(f'<li>Heads {blist(under_first)}: risk of underfilling; watch them separately in the next round.</li>')
     for n, g in big.groupby("nominal"):
-        if g.error_g.max() > 300: o.append(f'<li>{bn(int(n))} কেজির {num(g.error_g.max(), 0, True)} গ্রাম অতিরিক্ত ভরাট যোগ্য প্রকৌশলী দিয়ে পর্যালোচনা করুন।</li>')
-    o.append('<li>চেক-ওয়েয়ারে প্রতিটি বাতিল (রিজেক্ট) সিলিন্ডারের লগ রাখুন, যাতে নমুনার বাইরের সিলিন্ডারও ধরা পড়ে।</li></ol></div>')
+        if g.error_g.max() > 300: o.append(f'<li>Have a qualified engineer review the {num(g.error_g.max(), 0, True)} g overfill on {bn(int(n))} kg.</li>')
+    o.append('<li>Log every cylinder rejected at the check-weigher, so cylinders outside the sample are caught too.</li></ol></div>')
 
     # 9 what is unchanged
     gv = next((s for s in R["summary"] if s["item"].startswith("LPG over-delivered")), None)
-    o.append('<div class="card"><h3>৯. যা এই হালনাগাদে বদলায়নি</h3><ul>')
-    if gv: o.append(f'<li>অতিরিক্ত ভরাটে বিনামূল্যে যাওয়া এলপিজি: <b>{num(gv["value"], 1)} <span class="lat">MT</span></b> (৯৫% পরিসর {num(gv["low"], 1)}–{num(gv["high"], 1)}), ১ মার্চ – ২৫ অক্টোবর ২০২৬। '
-                    'এর পরের উৎপাদনের তথ্য পাওয়া যায়নি, তাই হিসাব বাড়ানো হয়নি; নতুন উৎপাদন রিপোর্ট পেলে হালনাগাদ হবে।</li>')
-    o.append('<li>স্লাইড ও লিখিত রিপোর্ট ২৫ অক্টোবর পর্যন্ত। ড্যাশবোর্ডের সব চার্ট ও টেবিল নতুন তথ্যে হালনাগাদ; শুধু নিউরাল নেটওয়ার্কের কারণ-বিশ্লেষণ ও <span class="lat">autoencoder/Isolation Forest</span> অংশ ২৫ অক্টোবর পর্যন্ত।</li></ul></div>')
+    o.append('<div class="card"><h3>9. What did not change in this update</h3><ul>')
+    if gv: o.append(f'<li>LPG given away through overfilling: <b>{num(gv["value"], 1)} <span class="lat">MT</span></b> (95% range {num(gv["low"], 1)}–{num(gv["high"], 1)}), 1 March – 25 October 2026. '
+                    'Production data after that is not available, so the estimate has not been extended; it will be updated when a new production report arrives.</li>')
+    o.append('<li>Slides and written report run to 25 October. All dashboard charts and tables are updated with the new data; only the neural network driver analysis and the <span class="lat">autoencoder/Isolation Forest</span> section run to 25 October.</li></ul></div>')
 
     if updates:
-        o.append('<details class="card"><summary>হালনাগাদের ইতিহাস</summary><ul>' + "".join(f'<li>{bdate(u["date"])}: {esc(u["text"]).translate(BN)}</li>' for u in reversed(updates)) + '</ul></details>')
-    o.append('<p class="note">প্রতিটি সংখ্যা ওজন-পরীক্ষার কাঁচা ওজন থেকে নতুন করে হিসাব করা: ত্রুটি = (ভরাটের পরের ওজন − ট্যার − ১২ কেজি) × ১০০০। কোনো সংখ্যা অনুমান করে বসানো হয়নি।</p>')
+        o.append('<details class="card"><summary>Update history</summary><ul>' + "".join(f'<li>{bdate(u["date"])}: {esc(u["text"]).translate(BN)}</li>' for u in reversed(updates)) + '</ul></details>')
+    o.append('<p class="note">Every figure is recalculated from the raw weights in the weight checks: error = (weight after filling − tare − 12 kg) × 1000. No figure is estimated or filled in.</p>')
     o.append('</div>')
     return "\n".join(o)
 
@@ -500,11 +500,11 @@ def setu(page, key, val):
 def write_all(page, R, a):
     D = R["datasets"]; ld = R["last_day"]; fc = R["fc"]; L = pd.Timestamp(ld)
     hub = json.load(open(HUBDATA, encoding="utf8"))
-    updates = hub.setdefault("updates", [{"date": "2026-11-03", "text": "ওয়েবসাইট প্রকাশ: ছয়টি রিপোর্ট, তথ্য 25 অক্টোবর 2026 পর্যন্ত"}])
+    updates = hub.setdefault("updates", [{"date": "2026-11-03", "text": "Website published: six reports, data to 25 October 2026"}])
     hot = R["heads"][R["heads"].hot].sort_values("mean_g", ascending=False)["head"].astype(int).tolist()
     NR = R["new_rounds"]
-    text = (f"ওজন-পরীক্ষার {len(NR)}টি নতুন রাউন্ড ({', '.join(ldate(d) for d in NR.date)}; {len(R['newc'])}টি সিলিন্ডার)। "
-            f"2026-এর গড় অতিরিক্ত ভরাট {R['s6']['mean']:+.0f} গ্রাম; চিহ্নিত হেড {len(hot)}টি; পরের রাউন্ডের পূর্বাভাস {fc['mean']:+.0f} গ্রাম।") if len(NR) else "নতুন রাউন্ড নেই; হিসাব পুনর্যাচাই।"
+    text = (f"{len(NR)} new weight-check rounds ({', '.join(ldate(d) for d in NR.date)}; {len(R['newc'])} cylinders). "
+            f"2026 average overfill {R['s6']['mean']:+.0f} g; {len(hot)} flagged heads; next-round forecast {fc['mean']:+.0f} g.") if len(NR) else "No new rounds; figures re-checked."
     entry = {"date": a.date, "text": text, "through": ld, "key": "cal-" + ld, "open": "cal", "view": "update"}
     updates[:] = [u for u in updates if u.get("key") != entry["key"] and not (u.get("through") == ld and "key" not in u)] + [entry]
     updates.sort(key=lambda u: (u["date"], u.get("key", "")))
@@ -524,18 +524,17 @@ def write_all(page, R, a):
     open(CAL, "w", encoding="utf8").write(page)
 
     # hub figures
-    PBN = {"2024 Jun": "২০২৪ জুন", "2026 Jan–Mar": "২০২৬ জানু–মার্চ", "2026 May–Aug": "২০২৬ মে–আগ"}
+    PBN = {"2024 Jun": "Jun 2024", "2026 Jan–Mar": "Jan–Mar 2026", "2026 May–Aug": "May–Aug 2026"}
     def pb(p):
         if p in PBN: return PBN[p]
-        out = p
-        for i2, m2 in enumerate(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]): out = out.replace(m2, MONS[i2])
-        return bn(out)
+        m3 = re.match(r"(\d{4}) (.+)$", p)
+        return f"{m3.group(2)} {m3.group(1)}" if m3 else p
     hub["cal"] = [{"p": p["period"], "pb": pb(p["period"]), "m": round(p["mean_g"]), "cpk": round(p["cpk150"], 2)} for p in R["periods"]]
     hub["heads"] = [{"h": int(h["head"]), "m": round(h.mean_g, 1), "lo": round(h.ci_low_g, 3), "hot": bool(h.hot)} for _, h in R["heads"].sort_values("head").iterrows()]
     sel = R["models"][R["models"].selected].iloc[0]
     short = "EWMA" if fc["method"].startswith("EWMA") else fc["method"].split(" (")[0]
     hub.setdefault("tokens", {}).update({
-        "asof": f"তথ্য 25 অক্টোবর 2026 পর্যন্ত · ওজন-পরীক্ষা {ldate(ld)} {L.year} পর্যন্ত",
+        "asof": f"Data to 25 October 2026 · weight checks to {ldate(ld)} {L.year}",
         "updated": f"{ldate(a.date)} {pd.Timestamp(a.date).year}",
         "cal_mean26": f"{R['s6']['mean']:+.0f}", "cal_last": ldate(ld), "cal_max": f"{R['e'].max():+.0f}", "cal_n": f"{len(R['c']):,}",
         "cal_cpk": f"{R['sb']['cpk']:.2f} → {R['s6']['cpk']:.2f}", "cal_hot_n": str(len(hot)), "cal_hot_list": ", ".join(map(str, hot)),

@@ -1,19 +1,19 @@
-# হালনাগাদের নিয়ম
+# How to update
 
-প্রস্তুত করেছেন: Akib Fateh। নতুন তথ্য এলে নিচের ধাপে রিপোর্ট ও সাইট হালনাগাদ হয়; শেষে `index.html` নতুন করে তৈরি হয়।
+Prepared by: Akib Fateh. When new data arrives, the reports and site are refreshed with the steps below; at the end `index.html` is rebuilt.
 
-## ১. সিলিন্ডার ওজন-পরীক্ষা
+## 1. Cylinder weight checks
 
 ```
-python3 -I src/cal/update_cal.py <ওজন-পরীক্ষার ওয়ার্কবুক.xlsx> --date YYYY-MM-DD
+python3 -I src/cal/update_cal.py <weight-check workbook.xlsx> --date YYYY-MM-DD
 python3 -I src/build_site.py
 ```
 
-নতুন রাউন্ড যোগ করে: নিরাপত্তা, তথ্যের মান, আগের প্রকাশের সঙ্গে তুলনা, হেডভিত্তিক টেবিল, পূর্বাভাস ও তার যাচাই, "গভীর বিশ্লেষণ" ট্যাব (তাৎপর্য, ত্রুটির উৎস, খরচ, অগ্রগতি), আর কেন্দ্রের সংখ্যা ও হালনাগাদ-তালিকা।
+Adds the new rounds: safety, data quality, comparison with the previous release, head-by-head table, forecast and its validation, the "Deep analysis" tab (significance, error sources, cost, progress), and the landing-page figures and update list.
 
-## ২. রক্ষণাবেক্ষণ (SAP PM অর্ডার)
+## 2. Maintenance (SAP PM orders)
 
-নতুন অর্ডার `src/maint/orders_raw.py`-এর `ROWS` তালিকায় (একই ক্রম: order, type, তারিখ, equipment, description, status, cost, actual start, actual finish)। SAP থেকে Excel এক্সপোর্ট (IW38/IW39) সবচেয়ে ভালো।
+New orders go in the `ROWS` list of `src/maint/orders_raw.py` (same order: order, type, date, equipment, description, status, cost, actual start, actual finish). An Excel export from SAP (IW38/IW39) is best.
 
 ```
 python3 -I src/maint/prep.py
@@ -23,23 +23,24 @@ UPDATE_DATE=YYYY-MM-DD python3 -I src/maint/build_maint.py
 python3 -I src/build_site.py
 ```
 
-`AS_OF` = রেকর্ড যে তারিখ পর্যন্ত ধরা হবে (সাধারণত আজ)। শেষ অর্ডারের পর থেকে `AS_OF` পর্যন্ত নীরব সময়কে "কাজ হয়নি" ধরা হয় না: ২০২৬-এর অর্ডারের হার আর SAP-এ দেরিতে লেখার ধরন থেকে আনুমানিক না-লেখা কাজ ও খরচ হিসাব হয়।
+`AS_OF` = the date the record is taken to run to (normally today). The silent period from the last order to `AS_OF` is not treated as "no work": unbooked work and cost are estimated from the 2026 order rate and the usual delay in entering orders into SAP.
 
-## নিয়ম
+## Rules
 
-- প্রতিটি সংখ্যা তথ্য থেকে হিসাব; অনুমান থাকলে তা লেখা থাকে।
-- নিরাপত্তা-বিষয় সবার আগে, "যোগ্য প্রকৌশলীর পর্যালোচনার জন্য" (NFPA 10, 25, 58; এলপিজি বিধিমালা ২০০৪)।
-- তথ্যের মানের সমস্যা আগে; আগের সময়কাল ও লক্ষ্যের সঙ্গে তুলনা।
-- পূর্বাভাসে পদ্ধতি, প্রশিক্ষণের সময়কাল, নির্ভুলতা (MAPE/RMSE) ও পরিসর।
+- Every number is calculated from the data; any assumption is written down.
+- Safety items first, "For review by a qualified engineer" (NFPA 10, 25, 58; LPG Rules 2004).
+- Data-quality issues first; comparison with the previous period and with targets.
+- Forecasts state the method, training period, accuracy (MAPE/RMSE) and range.
+- All text on the site is in English.
 
-## ফোল্ডার
+## Folders
 
-| পথ | কী আছে |
+| Path | Contents |
 |---|---|
-| `index.html` | প্রকাশিত সাইট (তৈরি করা ফাইল; সরাসরি সম্পাদনা নয়) |
-| `assets/` | প্ল্যান্টের ছবি ও BM LP GAS লোগো (কেন্দ্র ও দুই রিপোর্টের পটভূমি, হেডার, ফুটার) |
-| `src/build_site.py` | কেন্দ্র + দুই রিপোর্ট থেকে `index.html` তৈরি করে |
-| `src/hub/` | কেন্দ্র-পাতার টেমপ্লেট, সংখ্যা ও হালনাগাদ-তালিকা |
-| `src/reports/` | দুটি রিপোর্ট-পাতা |
-| `src/cal/` | ওজন-পরীক্ষার হালনাগাদ ও গভীর বিশ্লেষণ |
-| `src/maint/` | রক্ষণাবেক্ষণ: অর্ডার, বিশ্লেষণ, TPM, যন্ত্রপাতির নির্দেশিকা, পাতা-নির্মাতা |
+| `index.html` | The published site (generated file; do not edit by hand) |
+| `assets/` | Plant photo and BM LP GAS logo (background, header and footer of the landing page and both reports) |
+| `src/build_site.py` | Builds `index.html` from the landing page and the two reports |
+| `src/hub/` | Landing-page template, figures and update list |
+| `src/reports/` | The two report pages |
+| `src/cal/` | Weight-check update and deep analysis |
+| `src/maint/` | Maintenance: orders, analysis, TPM, equipment guide, page builder |

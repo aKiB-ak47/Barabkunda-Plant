@@ -148,9 +148,9 @@
   "sched_share": 39.1892,
   "vehicles": 30,
   "top_cat": {
-   "ক্লাচ, গিয়ারবক্স ও ড্রাইভ": 660918.0,
-   "ইঞ্জিন ওভারহল ও ব্লক": 590459.0,
-   "নির্ধারিত সার্ভিস (বিস্তারিত নেই)": 541247.0
+   "Clutch, gearbox and drive": 660918.0,
+   "Engine overhaul and block": 590459.0,
+   "Scheduled service (no detail)": 541247.0
   }
  },
  "h1_2026": {
@@ -162,9 +162,9 @@
   "sched_share": 47.2603,
   "vehicles": 28,
   "top_cat": {
-   "ইঞ্জিন ওভারহল ও ব্লক": 741809.0,
-   "ক্লাচ, গিয়ারবক্স ও ড্রাইভ": 670928.0,
-   "বৈদ্যুতিক (ব্যাটারি, লাইট, ওয়্যারিং)": 579994.0
+   "Engine overhaul and block": 741809.0,
+   "Clutch, gearbox and drive": 670928.0,
+   "Electrical (battery, lights, wiring)": 579994.0
   }
  },
  "jun25_jun26": {
@@ -176,9 +176,9 @@
   "sched_share": 42.5806,
   "vehicles": 30,
   "top_cat": {
-   "ক্লাচ, গিয়ারবক্স ও ড্রাইভ": 1403815.0,
-   "ইঞ্জিন ওভারহল ও ব্লক": 1332268.0,
-   "নির্ধারিত সার্ভিস (বিস্তারিত নেই)": 940792.0
+   "Clutch, gearbox and drive": 1403815.0,
+   "Engine overhaul and block": 1332268.0,
+   "Scheduled service (no detail)": 940792.0
   }
  },
  "mar24": {
@@ -190,20 +190,20 @@
   "sched_share": 27.2727,
   "vehicles": 18,
   "top_cat": {
-   "বৈদ্যুতিক (ব্যাটারি, লাইট, ওয়্যারিং)": 153520.0,
-   "ক্লাচ, গিয়ারবক্স ও ড্রাইভ": 136398.0,
-   "জ্বালানি ব্যবস্থা": 72622.0
+   "Electrical (battery, lights, wiring)": 153520.0,
+   "Clutch, gearbox and drive": 136398.0,
+   "Fuel system": 72622.0
   }
  },
  "group_cost": {
-  "যানবাহন বহর": 9611495.09,
-  "ভবন, অফিস ও সাইট": 347460.0,
-  "ইউটিলিটি (কম্প্রেসর, পাম্প, বিদ্যুৎ)": 314270.0,
-  "নবায়ন ও লাইসেন্স": 192477.0,
-  "ফিলিং ও হ্যান্ডলিং": 187864.23,
-  "অগ্নি ও নিরাপত্তা": 150980.0,
-  "ওজন-যন্ত্র (ওয়েব্রিজ)": 6000.0,
-  "সাগর ও জেটি": 0.0
+  "Vehicle fleet": 9611495.09,
+  "Buildings, office and site": 347460.0,
+  "Utilities (compressor, pump, power)": 314270.0,
+  "Renewals and licences": 192477.0,
+  "Filling and handling": 187864.23,
+  "Fire and safety": 150980.0,
+  "Weighing (weighbridge)": 6000.0,
+  "Marine and jetty": 0.0
  },
  "top_orders": [
   {
@@ -211,7 +211,7 @@
    "date": "2026-06-08",
    "desc": "CM-DhA-61-0225 Engine Major Overhauling",
    "vehicle": "CM-DHA-61-0225",
-   "group": "যানবাহন বহর",
+   "group": "Vehicle fleet",
    "cost": 481080.0
   },
   {
@@ -219,7 +219,7 @@
    "date": "2025-07-31",
    "desc": "CM-DhA-61-0246Engine Overhauling & Maint",
    "vehicle": "CM-DHA-61-0246",
-   "group": "যানবাহন বহর",
+   "group": "Vehicle fleet",
    "cost": 446448.0
   },
   {
@@ -227,7 +227,7 @@
    "date": "2025-04-29",
    "desc": "Front Main Leaf Spring of CM-DhA-61-0226",
    "vehicle": "CM-DHA-61-0226",
-   "group": "যানবাহন বহর",
+   "group": "Vehicle fleet",
    "cost": 265993.0
   },
   {
@@ -235,7 +235,7 @@
    "date": "2026-02-09",
    "desc": "CM-DhA-61-0279 Engine Block Assy Ser.",
    "vehicle": "CM-DHA-61-0279",
-   "group": "যানবাহন বহর",
+   "group": "Vehicle fleet",
    "cost": 260729.0
   },
   {
@@ -243,7 +243,7 @@
    "date": "2026-03-30",
    "desc": "Air Compressor 02 external naintenance",
    "vehicle": null,
-   "group": "ইউটিলিটি (কম্প্রেসর, পাম্প, বিদ্যুৎ)",
+   "group": "Utilities (compressor, pump, power)",
    "cost": 260000.0
   },
   {
@@ -251,7 +251,7 @@
    "date": "2025-10-20",
    "desc": "Bobtail C.M Sha 11-0102, 103, 1264,101 &",
    "vehicle": null,
-   "group": "যানবাহন বহর",
+   "group": "Vehicle fleet",
    "cost": 256000.0
   },
   {
@@ -259,7 +259,7 @@
    "date": "2023-09-24",
    "desc": "Denting  Charge of CM-Sha-11-1264",
    "vehicle": "CM-SHA-11-1264",
-   "group": "যানবাহন বহর",
+   "group": "Vehicle fleet",
    "cost": 209476.0
   },
   {
@@ -267,7 +267,7 @@
    "date": "2023-07-13",
    "desc": "pinion (Differential Axle) of CM-DhA-61-",
    "vehicle": "CM-DHA-61-0286",
-   "group": "যানবাহন বহর",
+   "group": "Vehicle fleet",
    "cost": 147868.0
   },
   {
@@ -275,7 +275,7 @@
    "date": "2025-07-06",
    "desc": "CM-DhA-61-0225 Engine & Denting work",
    "vehicle": "CM-DHA-61-0225",
-   "group": "যানবাহন বহর",
+   "group": "Vehicle fleet",
    "cost": 144011.0
   },
   {
@@ -283,7 +283,7 @@
    "date": "2025-10-25",
    "desc": "Barabkunda Plant Mounded Tank Area Soil",
    "vehicle": null,
-   "group": "ভবন, অফিস ও সাইট",
+   "group": "Buildings, office and site",
    "cost": 140000.0
   },
   {
@@ -291,7 +291,7 @@
    "date": "2025-12-10",
    "desc": "CM-SHA-11-3477 Brake&Clutch plate maint.",
    "vehicle": "CM-SHA-11-3477",
-   "group": "যানবাহন বহর",
+   "group": "Vehicle fleet",
    "cost": 132454.0
   },
   {
@@ -299,7 +299,7 @@
    "date": "2025-12-22",
    "desc": "CM-DhA-61-0286 Cabin Main Leave Servic.",
    "vehicle": "CM-DHA-61-0286",
-   "group": "যানবাহন বহর",
+   "group": "Vehicle fleet",
    "cost": 129445.0
   },
   {
@@ -307,7 +307,7 @@
    "date": "2025-10-18",
    "desc": "CM-DhA-11-0103 Schedule & Denting-Painti",
    "vehicle": "CM-DHA-11-0103",
-   "group": "যানবাহন বহর",
+   "group": "Vehicle fleet",
    "cost": 112175.0
   },
   {
@@ -315,7 +315,7 @@
    "date": "2023-09-29",
    "desc": "Prassure Plate Assy of CM-DhA-61-0286",
    "vehicle": "CM-DHA-61-0286",
-   "group": "যানবাহন বহর",
+   "group": "Vehicle fleet",
    "cost": 102783.0
   },
   {
@@ -323,7 +323,7 @@
    "date": "2025-11-03",
    "desc": "Administrative building Interior Work",
    "vehicle": null,
-   "group": "ভবন, অফিস ও সাইট",
+   "group": "Buildings, office and site",
    "cost": 100000.0
   }
  ],
@@ -680,14 +680,14 @@
  "plant_lic_last": "2023-11-10",
  "plant_lic_n": 15,
  "fc": {
-  "method": "এ পর্যন্ত গড়",
+  "method": "Average to date",
   "level": 605349.6154,
   "lo": 66664.5967,
   "hi": 1144034.634,
   "rmse": 388167.9745,
   "mape": 123.5251,
-  "train": "জুন ২০২৫ – জুন ২০২৬",
-  "test": "জানুয়ারি – জুন ২০২৬",
+  "train": "Jun 2025 – Jun 2026",
+  "test": "Jan – Jun 2026",
   "recorded_jul_oct": 123200.0,
   "expected_jul_oct": 2545491.1554,
   "elapsed_months": 4.205,
@@ -702,13 +702,13 @@
  "clsA": {
   "n": 180,
   "pos": 106,
-  "best": "ভিত্তিরেখা: যানবাহনের আগের হার",
+  "best": "Baseline: vehicle's past rate",
   "best_auc": 0.665
  },
  "clsB": {
   "n": 120,
   "pos": 22,
-  "best": "নিউরাল নেটওয়ার্ক (MLP, ১০টির গড়)",
+  "best": "Neural network (MLP, mean of 10)",
   "auc": 0.7551,
   "lo": 0.6604,
   "hi": 0.8458,
@@ -735,14 +735,14 @@
  "plant_cost": 1006574.23,
  "plant_n": 67,
  "groups": {
-  "যানবাহন বহর": 389,
-  "নবায়ন ও লাইসেন্স": 96,
-  "ইউটিলিটি (কম্প্রেসর, পাম্প, বিদ্যুৎ)": 25,
-  "ফিলিং ও হ্যান্ডলিং": 20,
-  "ভবন, অফিস ও সাইট": 9,
-  "অগ্নি ও নিরাপত্তা": 8,
-  "ওজন-যন্ত্র (ওয়েব্রিজ)": 3,
-  "সাগর ও জেটি": 2
+  "Vehicle fleet": 389,
+  "Renewals and licences": 96,
+  "Utilities (compressor, pump, power)": 25,
+  "Filling and handling": 20,
+  "Buildings, office and site": 9,
+  "Fire and safety": 8,
+  "Weighing (weighbridge)": 3,
+  "Marine and jetty": 2
  },
  "fleet_n": 384,
  "vehicles_n": 35

@@ -2,25 +2,25 @@
  "cal": [
   {
    "p": "2024 Jun",
-   "pb": "২০২৪ জুন",
+   "pb": "Jun 2024",
    "m": 26,
    "cpk": 0.85
   },
   {
    "p": "2026 Jan–Mar",
-   "pb": "২০২৬ জানু–মার্চ",
+   "pb": "Jan–Mar 2026",
    "m": 64,
    "cpk": 0.22
   },
   {
    "p": "2026 May–Aug",
-   "pb": "২০২৬ মে–আগ",
+   "pb": "May–Aug 2026",
    "m": 4,
    "cpk": 0.49
   },
   {
    "p": "2026 Sep–Nov",
-   "pb": "২০২৬ সেপ্টে–নভে",
+   "pb": "Sep–Nov 2026",
    "m": 70,
    "cpk": 0.25
   }
@@ -28,12 +28,12 @@
  "updates": [
   {
    "date": "2026-11-03",
-   "text": "ওয়েবসাইট প্রকাশ (তথ্য 25 অক্টোবর 2026 পর্যন্ত)",
+   "text": "Website published (data to 25 October 2026)",
    "key": "site-2026-11-03"
   },
   {
    "date": "2026-11-05",
-   "text": "ওজন-পরীক্ষার 3টি নতুন রাউন্ড (2 নভেম্বর, 4 নভেম্বর, 5 নভেম্বর; 70টি সিলিন্ডার)। 2026-এর গড় অতিরিক্ত ভরাট +48 গ্রাম; চিহ্নিত হেড 6টি; পরের রাউন্ডের পূর্বাভাস +61 গ্রাম।",
+   "text": "3 new weight-check rounds (2 November, 4 November, 5 November; 70 cylinders). 2026 average overfill +48 g; 6 flagged heads; next-round forecast +61 g.",
    "through": "2026-11-05",
    "key": "cal-2026-11-05",
    "open": "cal",
@@ -41,7 +41,7 @@
   },
   {
    "date": "2026-11-05",
-   "text": "রক্ষণাবেক্ষণ রিপোর্ট: SAP-এর 552টি অর্ডার, মোট খরচ 1.08 কোটি টাকা; বড় মেরামতের ঝুঁকি-মডেল (নিউরাল নেটওয়ার্ক, AUC 0.76); পরিসংখ্যানিক তাৎপর্য ও অগ্রগতি।",
+   "text": "Maintenance report: 552 SAP orders, total cost Tk 1.08 crore; major-repair risk model (neural network, AUC 0.76); statistical significance and progress.",
    "through": "2026-10-14",
    "key": "maint-2026-10-14",
    "open": "maint",
@@ -49,7 +49,7 @@
   },
   {
    "date": "2026-11-05",
-   "text": "নতুন: বিশ্বমানের TPM কর্মসূচি (৮ স্তম্ভ, পরিপক্বতা 1.4/৫, সূচক বনাম বিশ্বমান, ৩৬ মাসের রোডম্যাপ) ও 20টি যন্ত্রের ছবিসহ নির্দেশিকা (NRV, বাটারফ্লাই ভালভ, সেফটি ভালভ, পাম্প, ফিলিং হেড…)।",
+   "text": "New: a world-class TPM programme (8 pillars, maturity 1.4/5, KPIs against world class, a 36-month roadmap) and an illustrated guide to 20 pieces of equipment (NRV, butterfly valve, safety valve, pump, filling head…).",
    "through": "2026-10-14",
    "key": "tpm-2026-11-05",
    "open": "maint",
@@ -57,7 +57,7 @@
   },
   {
    "date": "2026-11-06",
-   "text": "রক্ষণাবেক্ষণ রেকর্ড 6 নভেম্বর 2026 পর্যন্ত ধরে সব হিসাব নতুন করে: শেষ অর্ডারের পর 23 দিন কোনো অর্ডার নেই, আনুমানিক 24 লাখ টাকার কাজ SAP-এ ওঠেনি; গোলাকার স্টোরেজ স্ফিয়ারসহ 21টি যন্ত্রের নির্দেশিকা।",
+   "text": "All figures recalculated with the maintenance record running to 6 November 2026: no order in the 23 days since the last one, an estimated Tk 24 lakh of work not yet in SAP; the equipment guide now covers 21 items, including the spherical storage tanks.",
    "through": "2026-11-06",
    "key": "maint-asof-2026-11-06",
    "open": "maint",
@@ -65,15 +65,20 @@
   },
   {
    "date": "2026-11-06",
-   "text": "নতুন রূপে ওয়েবসাইট: বাড়বকুণ্ড প্ল্যান্টের ছবি ও BM LP GAS লোগো, চারটি স্টোরেজ স্ফিয়ারসহ প্ল্যান্টের ইন্টারঅ্যাকটিভ মানচিত্র (প্রতিটি এলাকার অবস্থা), চলমান সংখ্যা ও চার্ট, দ্রুত খোঁজার বাক্স (Ctrl K)।",
+   "text": "Website redesigned: Barabkunda plant photo and BM LP GAS logo, an interactive plant map with the four storage spheres (status of every area), animated figures and charts, and quick search (Ctrl K).",
    "key": "site-2026-11-06"
+  },
+  {
+   "date": "2026-11-06",
+   "text": "Whole website now in English: landing page, weight-accuracy report, maintenance report, TPM programme and equipment guide.",
+   "key": "site-en-2026-11-06"
   }
  ],
  "tokens": {
-  "asof": "ওজন-পরীক্ষা 5 নভেম্বর 2026 পর্যন্ত · রক্ষণাবেক্ষণ অর্ডার 14 অক্টোবর 2026 পর্যন্ত",
-  "updated": "5 নভেম্বর 2026",
+  "asof": "Data to 25 October 2026 · weight checks to 5 November 2026",
+  "updated": "5 November 2026",
   "cal_mean26": "+48",
-  "cal_last": "5 নভেম্বর",
+  "cal_last": "5 November",
   "cal_max": "+600",
   "cal_n": "1,042",
   "cal_cpk": "0.85 → 0.29",
@@ -87,36 +92,36 @@
   "maint_p80": "17/30",
   "maint_auc": "0.76",
   "maint_pm": "43",
-  "maint_from": "ফেব্রুয়ারি 2022",
-  "maint_to": "নভেম্বর 2026",
+  "maint_from": "February 2022",
+  "maint_to": "November 2026",
   "maint_gas_m": "54",
   "maint_ext_gap": "31",
   "maint_lic": "15",
   "maint_unbooked": "24",
-  "maint_asof": "6 নভেম্বর 2026",
-  "maint_last": "14 অক্টোবর 2026",
+  "maint_asof": "6 November 2026",
+  "maint_last": "14 October 2026",
   "maint_silent": "23"
  },
  "maint": {
   "labels": [
-   "জুন ২৫",
-   "জুলা ২৫",
-   "আগ ২৫",
-   "সেপ্টে ২৫",
-   "অক্টো ২৫",
-   "নভে ২৫",
-   "ডিসে ২৫",
-   "জানু ২৬",
-   "ফেব্রু ২৬",
-   "মার্চ ২৬",
-   "এপ্রি ২৬",
-   "মে ২৬",
-   "জুন ২৬",
-   "জুলা ২৬",
-   "আগ ২৬",
-   "সেপ্টে ২৬",
-   "অক্টো ২৬",
-   "নভে ২৬"
+   "Jun 25",
+   "Jul 25",
+   "Aug 25",
+   "Sep 25",
+   "Oct 25",
+   "Nov 25",
+   "Dec 25",
+   "Jan 26",
+   "Feb 26",
+   "Mar 26",
+   "Apr 26",
+   "May 26",
+   "Jun 26",
+   "Jul 26",
+   "Aug 26",
+   "Sep 26",
+   "Oct 26",
+   "Nov 26"
   ],
   "vals": [
    2.8,
@@ -158,5 +163,151 @@
    true,
    true
   ]
- }
+ },
+ "heads": [
+  {
+   "h": 1,
+   "m": 32.0,
+   "lo": 1.111,
+   "hot": false
+  },
+  {
+   "h": 2,
+   "m": 11.1,
+   "lo": -45.227,
+   "hot": false
+  },
+  {
+   "h": 3,
+   "m": 50.2,
+   "lo": 16.217,
+   "hot": false
+  },
+  {
+   "h": 4,
+   "m": 46.9,
+   "lo": 30.952,
+   "hot": false
+  },
+  {
+   "h": 5,
+   "m": 107.0,
+   "lo": 72.5,
+   "hot": true
+  },
+  {
+   "h": 6,
+   "m": 77.9,
+   "lo": 53.721,
+   "hot": true
+  },
+  {
+   "h": 7,
+   "m": 41.1,
+   "lo": 18.182,
+   "hot": false
+  },
+  {
+   "h": 8,
+   "m": 54.3,
+   "lo": 31.591,
+   "hot": false
+  },
+  {
+   "h": 9,
+   "m": -17.7,
+   "lo": -52.326,
+   "hot": false
+  },
+  {
+   "h": 10,
+   "m": 28.8,
+   "lo": -0.952,
+   "hot": false
+  },
+  {
+   "h": 11,
+   "m": 67.0,
+   "lo": 36.136,
+   "hot": true
+  },
+  {
+   "h": 12,
+   "m": 30.0,
+   "lo": 13.571,
+   "hot": false
+  },
+  {
+   "h": 13,
+   "m": 92.3,
+   "lo": 63.864,
+   "hot": true
+  },
+  {
+   "h": 14,
+   "m": 66.4,
+   "lo": 17.851,
+   "hot": true
+  },
+  {
+   "h": 15,
+   "m": 35.7,
+   "lo": 16.364,
+   "hot": false
+  },
+  {
+   "h": 16,
+   "m": 47.4,
+   "lo": 16.512,
+   "hot": false
+  },
+  {
+   "h": 17,
+   "m": 50.0,
+   "lo": 25.676,
+   "hot": false
+  },
+  {
+   "h": 18,
+   "m": 3.3,
+   "lo": -23.488,
+   "hot": false
+  },
+  {
+   "h": 19,
+   "m": 57.7,
+   "lo": 35.227,
+   "hot": false
+  },
+  {
+   "h": 20,
+   "m": 26.8,
+   "lo": 13.205,
+   "hot": false
+  },
+  {
+   "h": 21,
+   "m": 78.8,
+   "lo": 48.089,
+   "hot": true
+  },
+  {
+   "h": 22,
+   "m": 49.4,
+   "lo": 15.116,
+   "hot": false
+  },
+  {
+   "h": 23,
+   "m": 10.7,
+   "lo": -42.343,
+   "hot": false
+  },
+  {
+   "h": 24,
+   "m": 3.4,
+   "lo": -22.5,
+   "hot": false
+  }
+ ]
 }

@@ -24,8 +24,8 @@ df["m"] = df.date.dt.to_period("M")
 pairs = df[df.dup_of.notna()][["order", "dup_of"]].astype(int).values.tolist()
 cost_of = df.set_index("order").cost
 TWINS = sorted({o for pr in pairs for o in pr if cost_of[o] == 0})
-fleet = df[(df.group == "যানবাহন বহর") & (df.type == "ZPM1") & (df.cat != "nonmaint") & ~df.order.isin(TWINS)].copy()
-plant = df[df.group.isin(["ইউটিলিটি (কম্প্রেসর, পাম্প, বিদ্যুৎ)", "ফিলিং ও হ্যান্ডলিং", "ভবন, অফিস ও সাইট", "অগ্নি ও নিরাপত্তা", "ওজন-যন্ত্র (ওয়েব্রিজ)", "সাগর ও জেটি"])].copy()
+fleet = df[(df.group == "Vehicle fleet") & (df.type == "ZPM1") & (df.cat != "nonmaint") & ~df.order.isin(TWINS)].copy()
+plant = df[df.group.isin(["Utilities (compressor, pump, power)", "Filling and handling", "Buildings, office and site", "Fire and safety", "Weighing (weighbridge)", "Marine and jetty"])].copy()
 r1 = lambda x: None if x is None or (isinstance(x, float) and math.isnan(x)) else round(float(x), 1)
 
 # ======================= 1. profile and data quality
@@ -45,10 +45,10 @@ gap = [str(p) for p in pd.period_range("2024-07", "2025-05", freq="M") if mc.get
 F["gap_months"] = gap; F["gap_orders"] = int(zpm1[(zpm1.m >= pd.Period("2024-07")) & (zpm1.m <= pd.Period("2025-05"))].shape[0])
 F["zero_cost_zpm1_2022_23"] = [int(((zpm1.year <= 2023) & (zpm1.cost == 0)).sum()), int((zpm1.year <= 2023).sum())]
 recent = zpm1[(zpm1.date >= pd.Timestamp("2026-07-01")) & (zpm1.date <= TODAY)]
-F["recent_jul_oct"] = {"orders": int(len(recent)), "fleet_orders": int((recent.group == "যানবাহন বহর").sum()), "cost": float(recent.cost.sum())}
+F["recent_jul_oct"] = {"orders": int(len(recent)), "fleet_orders": int((recent.group == "Vehicle fleet").sum()), "cost": float(recent.cost.sum())}
 # silent period: no order dated after the last one, although the record runs to TODAY
 _last = df.date.max(); _d26 = df[(df.date >= pd.Timestamp("2026-01-01")) & (df.date <= pd.Timestamp("2026-09-30"))]
-_rate = len(_d26) / 273.0; _days = int((TODAY - _last).days); _f26 = _d26[(_d26.group == "যানবাহন বহর") & (_d26.type == "ZPM1")]
+_rate = len(_d26) / 273.0; _days = int((TODAY - _last).days); _f26 = _d26[(_d26.group == "Vehicle fleet") & (_d26.type == "ZPM1")]
 _dts = np.sort(df[(df.date >= pd.Timestamp("2026-01-01")) & (df.date <= _last)].date.unique()); _gaps = np.diff(_dts).astype("timedelta64[D]").astype(int)
 F["silent"] = {"last": str(_last.date()), "days": _days, "rate_month": _rate * 30.44, "expected": _rate * _days, "p0": float(np.exp(-_rate * _days)),
                "fleet_expected": len(_f26) / 273.0 * _days, "max_gap_2026": int(_gaps.max()) if len(_gaps) else 0, "late_median": float(df[df.backdated].late_days.median()) if "late_days" in df else None}
@@ -78,15 +78,15 @@ D["monthly"] = []
 for p in pd.period_range(df.m.min(), TODAY.to_period("M"), freq="M"):
     s = df[df.m == p]
     D["monthly"].append({"m": str(p), "n": int(len(s)), "cost": float(s.cost.sum()),
-                         "fleet": float(s[s.group == "যানবাহন বহর"].cost.sum()), "plant": float(s[s.group.isin(plant.group.unique())].cost.sum()),
-                         "renew": float(s[s.group == "নবায়ন ও লাইসেন্স"].cost.sum()), "fleet_n": int(((s.group == "যানবাহন বহর") & (s.type == "ZPM1")).sum())})
+                         "fleet": float(s[s.group == "Vehicle fleet"].cost.sum()), "plant": float(s[s.group.isin(plant.group.unique())].cost.sum()),
+                         "renew": float(s[s.group == "Renewals and licences"].cost.sum()), "fleet_n": int(((s.group == "Vehicle fleet") & (s.type == "ZPM1")).sum())})
 yr = df.groupby("year").agg(n=("order", "size"), cost=("cost", "sum")).reset_index()
 D["yearly"] = yr.to_dict("records")
 def per(a, b):
-    s = df[(df.date >= a) & (df.date <= b)]; f = s[(s.group == "যানবাহন বহর") & (s.type == "ZPM1")]
+    s = df[(df.date >= a) & (df.date <= b)]; f = s[(s.group == "Vehicle fleet") & (s.type == "ZPM1")]
     fc = f[f.cost > 0]
     return {"cost": float(s.cost.sum()), "fleet_cost": float(f.cost.sum()), "plant_cost": float(s[s.group.isin(plant.group.unique())].cost.sum()), "fleet_jobs": int(len(f)),
-            "cost_per_job": float(fc.cost.mean()) if len(fc) else None, "sched_share": float(f.pm.isin(["নির্ধারিত সার্ভিস", "সার্ভিস + মেরামত"]).mean() * 100) if len(f) else None,
+            "cost_per_job": float(fc.cost.mean()) if len(fc) else None, "sched_share": float(f.pm.isin(["Scheduled service", "Service + repair"]).mean() * 100) if len(f) else None,
             "vehicles": int(f.vehicle.nunique()), "top_cat": f.groupby("cat_bn").cost.sum().sort_values(ascending=False).head(3).round(0).to_dict()}
 F["h2_2025"] = per("2025-07-01", "2025-12-31"); F["h1_2026"] = per("2026-01-01", "2026-06-30")
 F["jun25_jun26"] = per("2025-06-01", "2026-06-30"); F["mar24"] = per("2024-03-01", "2024-03-31")
@@ -100,9 +100,9 @@ V = []
 for v, g in fleet[fleet.vehicle.notna()].groupby("vehicle"):
     gw = fw[fw.vehicle == v]
     days = sorted(gw.date.dt.normalize().unique()); iv = np.diff(days).astype("timedelta64[D]").astype(int) if len(days) > 1 else np.array([])
-    ren = df[(df.vehicle == v) & (df.group == "নবায়ন ও লাইসেন্স")]
+    ren = df[(df.vehicle == v) & (df.group == "Renewals and licences")]
     V.append({"v": v, "series": g.series.iloc[0], "jobs": int(len(g)), "jobs_w": int(len(gw)), "cost": float(g.cost.sum()), "cost_w": float(gw.cost.sum()),
-              "corr_w": int((gw.pm == "মেরামত").sum()), "sched_w": int(gw.pm.isin(["নির্ধারিত সার্ভিস", "সার্ভিস + মেরামত"]).sum()),
+              "corr_w": int((gw.pm == "Repair").sum()), "sched_w": int(gw.pm.isin(["Scheduled service", "Service + repair"]).sum()),
               "mtbe": r1(iv.mean()) if len(iv) else None, "last": str(g.date.max().date()), "top": gw.groupby("cat_bn").cost.sum().idxmax() if len(gw) and gw.cost.sum() > 0 else None,
               "max_job": float(g.cost.max()), "renew_last": str(ren.date.max().date()) if len(ren) else None})
 V = sorted(V, key=lambda x: -x["cost_w"]); D["vehicles"] = V
@@ -148,14 +148,14 @@ D["weibull"] = {"hist": np.histogram(ivs, bins=np.arange(0, ivs.max() + 15, 15))
 q = fleet[fleet.date >= pd.Timestamp("2024-01-01")].copy(); q["q"] = q.date.dt.to_period("Q").astype(str)
 pmq = q.groupby(["q", "pm"]).size().unstack(fill_value=0)
 D["pm_q"] = [{"q": i, **{k: int(v) for k, v in r.items()}} for i, r in pmq.iterrows()]
-F["pm_share_w"] = float(fw.pm.isin(["নির্ধারিত সার্ভিস", "সার্ভিস + মেরামত"]).mean() * 100); F["pm_only_share_w"] = float((fw.pm == "নির্ধারিত সার্ভিস").mean() * 100)
-F["pm_cost_share_w"] = float(fw[fw.pm.isin(["নির্ধারিত সার্ভিস", "সার্ভিস + মেরামত"])].cost.sum() / fw.cost.sum() * 100)
+F["pm_share_w"] = float(fw.pm.isin(["Scheduled service", "Service + repair"]).mean() * 100); F["pm_only_share_w"] = float((fw.pm == "Scheduled service").mean() * 100)
+F["pm_cost_share_w"] = float(fw[fw.pm.isin(["Scheduled service", "Service + repair"])].cost.sum() / fw.cost.sum() * 100)
 plan = df[(df.type == "ZPM3") | df.status.str.contains("MSPT")]
 F["plan_orders"] = int(len(plan)); F["plan_released"] = int((~plan.status.str.startswith("CRTD")).sum())
 F["plan_list"] = plan[["order", "type", "date", "desc", "status"]].assign(date=lambda x: x.date.dt.strftime("%Y-%m-%d")).to_dict("records")
 # observed interval between scheduled services per vehicle (median), to propose a plan interval
 sint = []
-for v, g in fw[fw.pm.isin(["নির্ধারিত সার্ভিস", "সার্ভিস + মেরামত"])].groupby("vehicle"):
+for v, g in fw[fw.pm.isin(["Scheduled service", "Service + repair"])].groupby("vehicle"):
     dd = sorted(g.date.unique())
     if len(dd) >= 2: sint += list(np.diff(dd).astype("timedelta64[D]").astype(int))
 sint = np.array([x for x in sint if x > 0])
@@ -171,25 +171,25 @@ ext_d = pd.to_datetime([x["date"] for x in F["fire_ext"]]); F["fire_ext_gaps_m"]
 F["gas_mon_months"] = round((TODAY - pd.Timestamp(F["gas_mon"][-1]["date"])).days / 30.44, 1)
 
 # ======================= 6. renewals calendar
-ren = df[df.group == "নবায়ন ও লাইসেন্স"].copy()
+ren = df[df.group == "Renewals and licences"].copy()
 def doc(d):
     dl = d.lower()
-    for k, lab in [("explosive", "এক্সপ্লোসিভ লাইসেন্স"), ("insurance", "বিমা"), ("tax token", "ট্যাক্স টোকেন"), ("fitness", "ফিটনেস"), ("fire license", "ফায়ার লাইসেন্স"),
-                   ("factory", "কারখানা লাইসেন্স"), ("trade", "ট্রেড লাইসেন্স"), ("environmental clearance", "পরিবেশ ছাড়পত্র"), ("jetty environment", "জেটি পরিবেশ লাইসেন্স"),
-                   ("erc", "ইআরসি লাইসেন্স"), ("bsti", "বিএসটিআই"), ("import registration", "আমদানি নিবন্ধন"), ("bpc", "বিপিসি নবায়ন ফি"), ("biwta", "বিআইডব্লিউটিএ এনওসি"),
-                   ("ministry", "জ্বালানি মন্ত্রণালয়ের অনুমতি"), ("isps", "আইএসপিএস কোড সনদ"), ("chamber", "চেম্বার সদস্যপদ"), ("holding tax", "হোল্ডিং ট্যাক্স")]:
+    for k, lab in [("explosive", "Explosives licence"), ("insurance", "Insurance"), ("tax token", "Tax token"), ("fitness", "Fitness"), ("fire license", "Fire licence"),
+                   ("factory", "Factory licence"), ("trade", "Trade licence"), ("environmental clearance", "Environmental clearance"), ("jetty environment", "Jetty environmental licence"),
+                   ("erc", "ERC licence"), ("bsti", "BSTI"), ("import registration", "Import registration"), ("bpc", "BPC renewal fee"), ("biwta", "BIWTA NOC"),
+                   ("ministry", "Energy Ministry permission"), ("isps", "ISPS Code certificate"), ("chamber", "Chamber membership"), ("holding tax", "Holding tax")]:
         if k in dl: return lab
-    return "যানবাহনের কাগজপত্র"
-ren["doc"] = ren.desc.map(doc); ren["subject"] = ren.vehicle.fillna("প্ল্যান্ট ১২০১")
+    return "Vehicle papers"
+ren["doc"] = ren.desc.map(doc); ren["subject"] = ren.vehicle.fillna("Plant 1201")
 # insurance / tax token / fitness orders carry the vehicle only in the equipment number
 ren.loc[ren.vehicle.isna() & ren.equip_vehicle.notna(), "subject"] = ren.equip_vehicle
 cal = []
 for (s, d), g in ren.groupby(["subject", "doc"]):
     lastd = g.date.max(); nxt = lastd + pd.DateOffset(years=1)
-    status = "মেয়াদ পেরিয়েছে — SAP-এ নতুন অর্ডার নেই" if nxt < TODAY else ("১২০ দিনের মধ্যে" if nxt <= TODAY + pd.Timedelta(days=120) else "পরে")
-    cal.append({"subject": s, "doc": d, "orders": int(len(g)), "last": str(lastd.date()), "next": str(nxt.date()), "status": status, "plant": s == "প্ল্যান্ট ১২০১"})
+    status = "Expired — no new order in SAP" if nxt < TODAY else ("Within 120 days" if nxt <= TODAY + pd.Timedelta(days=120) else "Later")
+    cal.append({"subject": s, "doc": d, "orders": int(len(g)), "last": str(lastd.date()), "next": str(nxt.date()), "status": status, "plant": s == "Plant 1201"})
 cal = sorted(cal, key=lambda x: x["next"]); D["renewals"] = cal
-F["ren_overdue"] = sum(1 for x in cal if x["status"].startswith("মেয়াদ")); F["ren_soon"] = sum(1 for x in cal if x["status"].startswith("১২০"))
+F["ren_overdue"] = sum(1 for x in cal if x["status"].startswith("Expired")); F["ren_soon"] = sum(1 for x in cal if x["status"].startswith("Within"))
 F["plant_lic_last"] = max(x["last"] for x in cal if x["plant"]); F["plant_lic_n"] = sum(1 for x in cal if x["plant"])
 
 # ======================= 7. forecasting: fleet monthly cost
@@ -210,8 +210,8 @@ def f_mlp(h):
     X = np.array([h[i - 3:i] for i in range(3, len(h))]); Y = h[3:]
     sc = h.mean(); m = MLPRegressor(hidden_layer_sizes=(6,), alpha=1.0, max_iter=5000, random_state=0).fit(X / sc, Y / sc)
     return float(m.predict((h[-3:] / sc).reshape(1, -1))[0] * sc)
-METH = {"আগের মাসের সমান (নাইভ)": f_naive, "এ পর্যন্ত গড়": f_mean, "৩ মাসের চলমান গড়": f_ma3, "EWMA α ০.৩": f_ewma(0.3), "EWMA α ০.৫": f_ewma(0.5),
-        "রৈখিক প্রবণতা (রিগ্রেশন)": f_trend, "নিউরাল নেটওয়ার্ক (MLP, ৩টি ল্যাগ)": f_mlp}
+METH = {"Same as last month (naive)": f_naive, "Average to date": f_mean, "3-month moving average": f_ma3, "EWMA α 0.3": f_ewma(0.3), "EWMA α 0.5": f_ewma(0.5),
+        "Linear trend (regression)": f_trend, "Neural network (MLP, 3 lags)": f_mlp}
 bt = []; res = {}; pts = {}
 for name, fn in METH.items():
     e = []
@@ -220,10 +220,10 @@ for name, fn in METH.items():
     e = np.array(e); err = e[:, 0] - e[:, 1]; res[name] = err; pts[name] = e
     bt.append({"model": name, "rmse": float(np.sqrt((err ** 2).mean())), "mae": float(np.abs(err).mean()), "mape": float((np.abs(err) / e[:, 0]).mean() * 100)})
 bt = sorted(bt, key=lambda x: x["rmse"]); best = bt[0]["model"]
-naive_rmse = next(b["rmse"] for b in bt if b["model"].startswith("আগের"))
+naive_rmse = next(b["rmse"] for b in bt if b["model"].startswith("Same as last month"))
 for b in bt: b["skill"] = (1 - b["rmse"] / naive_rmse) * 100; b["sel"] = b["model"] == best
 D["fc_bt"] = bt
-D["fc_pts"] = [{"m": str(months[k]), "y": float(pts[best][i, 0]), "p": float(pts[best][i, 1]), "naive": float(pts["আগের মাসের সমান (নাইভ)"][i, 1])} for i, k in enumerate(range(7, len(y)))]
+D["fc_pts"] = [{"m": str(months[k]), "y": float(pts[best][i, 0]), "p": float(pts[best][i, 1]), "naive": float(pts["Same as last month (naive)"][i, 1])} for i, k in enumerate(range(7, len(y)))]
 lvl = METH[best](y); sd = float(np.std(res[best], ddof=1))
 fc_months = pd.period_range("2026-07", "2027-04", freq="M")
 D["fc"] = {"hist": [{"m": str(p), "v": float(v)} for p, v in zip(months, y)],
@@ -231,7 +231,7 @@ D["fc"] = {"hist": [{"m": str(p), "v": float(v)} for p, v in zip(months, y)],
            "fwd": [{"m": str(p), "v": float(lvl), "lo": float(max(0, lvl - 1.2816 * sd)), "hi": float(lvl + 1.2816 * sd)} for p in fc_months]}
 rec_jul_oct = sum(x["v"] for x in D["fc"]["recorded_after"]); el = (TODAY - pd.Timestamp("2026-07-01")).days / 30.44   # months elapsed since 1 July
 F["fc"] = {"method": best, "level": float(lvl), "lo": float(max(0, lvl - 1.2816 * sd)), "hi": float(lvl + 1.2816 * sd), "rmse": bt[0]["rmse"], "mape": bt[0]["mape"],
-           "train": "জুন ২০২৫ – জুন ২০২৬", "test": "জানুয়ারি – জুন ২০২৬", "recorded_jul_oct": rec_jul_oct, "expected_jul_oct": float(lvl * el), "elapsed_months": float(el),
+           "train": "Jun 2025 – Jun 2026", "test": "Jan – Jun 2026", "recorded_jul_oct": rec_jul_oct, "expected_jul_oct": float(lvl * el), "elapsed_months": float(el),
            "unbooked_jul_oct": float(lvl * el - rec_jul_oct), "unbooked_lo": float(max(0, lvl * el - 1.2816 * sd * np.sqrt(el) - rec_jul_oct)), "unbooked_hi": float(lvl * el + 1.2816 * sd * np.sqrt(el) - rec_jul_oct), "resid_sd": sd, "monthly_mean": float(y.mean()), "monthly_sd": float(y.std(ddof=1)), "cv": float(y.std(ddof=1) / y.mean() * 100)}
 
 # ======================= 8. vehicle-month panel: predictive models
@@ -249,23 +249,23 @@ def panel(th, h):
                          "big6": int(((g.m < p) & (g.m >= p - 6) & (g.cost >= 50000)).sum()), "s61": int("-61-" in v)})
     return pd.DataFrame(rows)
 FE = ["rate", "crate", "jobs3", "cost3", "since", "big6", "s61"]
-NAMES = {"rate": "মাসে গড় কাজের হার (জুন ২০২৫ থেকে)", "crate": "মাসে গড় খরচ", "jobs3": "শেষ ৩ মাসে কাজের সংখ্যা", "cost3": "শেষ ৩ মাসের খরচ",
-         "since": "শেষ কাজের পর কত মাস", "big6": "৬ মাসে বড় মেরামত (≥৫০ হাজার)", "s61": "ঢ-৬১ সিরিজের গাড়ি কি না"}
+NAMES = {"rate": "Average monthly job rate (since Jun 2025)", "crate": "Average monthly cost", "jobs3": "Jobs in last 3 months", "cost3": "Cost in last 3 months",
+         "since": "Months since last job", "big6": "Major repair in 6 months (≥ Tk 50k)", "s61": "Dha-61 series vehicle or not"}
 class MLPEns:
     def __init__(self, n=10): self.n = n
     def fit(self, X, y):
         self.m = [make_pipeline(StandardScaler(), MLPClassifier(hidden_layer_sizes=(8,), alpha=1.0, max_iter=5000, random_state=s)).fit(X, y) for s in range(self.n)]; return self
     def predict_proba(self, X):
         p = np.mean([m.predict_proba(X)[:, 1] for m in self.m], axis=0); return np.c_[1 - p, p]
-MODELS = {"লজিস্টিক রিগ্রেশন": lambda: make_pipeline(StandardScaler(), LogisticRegression(C=0.3, max_iter=3000)),
-          "র‍্যান্ডম ফরেস্ট": lambda: RandomForestClassifier(n_estimators=300, max_depth=3, min_samples_leaf=8, random_state=0),
-          "গ্রেডিয়েন্ট বুস্টিং": lambda: GradientBoostingClassifier(n_estimators=100, max_depth=2, learning_rate=0.05, random_state=0),
-          "নিউরাল নেটওয়ার্ক (MLP, ১০টির গড়)": lambda: MLPEns(10)}
+MODELS = {"Logistic regression": lambda: make_pipeline(StandardScaler(), LogisticRegression(C=0.3, max_iter=3000)),
+          "Random forest": lambda: RandomForestClassifier(n_estimators=300, max_depth=3, min_samples_leaf=8, random_state=0),
+          "Gradient boosting": lambda: GradientBoostingClassifier(n_estimators=100, max_depth=2, learning_rate=0.05, random_state=0),
+          "Neural network (MLP, mean of 10)": lambda: MLPEns(10)}
 EV = {}
 def evaluate(P, h):
     test = [t for t in pd.period_range("2026-01", "2026-06", freq="M") if t + h - 1 <= pd.Period("2026-06")]
     out, preds = [], {}
-    for name, mk in {**MODELS, "ভিত্তিরেখা: যানবাহনের আগের হার": None}.items():
+    for name, mk in {**MODELS, "Baseline: vehicle's past rate": None}.items():
         ys, ps, top = [], [], []
         for t in test:
             tr = P[(P.m >= pd.Period("2025-09")) & (P.m + h - 1 < t)]; te = P[P.m == t]
@@ -287,7 +287,7 @@ Pa = panel(0, 1); clsA, nA, posA, _, _ = evaluate(Pa, 1)
 D["clsA"] = clsA; F["clsA"] = {"n": nA, "pos": posA, "best": clsA[0]["model"], "best_auc": clsA[0]["auc"]}
 # (b) a major repair (>= 50,000 BDT) within the next 3 months
 Pb = panel(50000, 3); clsB, nB, posB, testB, AB = evaluate(Pb, 3)
-best_c = clsB[0]["model"]; base_n = "ভিত্তিরেখা: যানবাহনের আগের হার"
+best_c = clsB[0]["model"]; base_n = "Baseline: vehicle's past rate"
 F["clsB"] = {"n": nB, "pos": posB, "best": best_c, "auc": clsB[0]["auc"], "lo": clsB[0]["lo"], "hi": clsB[0]["hi"],
              "base_auc": next(c["auc"] for c in clsB if c["model"] == base_n), "p_better": float(np.mean(np.array(AB[best_c]) > np.array(AB[base_n]))),
              "test": f"{testB[0]} – {testB[-1]}"}
@@ -321,18 +321,18 @@ if mI is not None:
 cj = fleet[(fleet.cost > 0) & fleet.vehicle.notna()].copy()
 X = pd.get_dummies(cj[["cat_bn", "series", "pm"]], dtype=float); X["year"] = cj.year - 2024
 yl = np.log(cj.cost.values)
-REG = {"রিজ রিগ্রেশন (লগ-খরচ)": lambda: Ridge(alpha=1.0), "গ্রেডিয়েন্ট বুস্টিং": lambda: GradientBoostingRegressor(n_estimators=200, max_depth=2, learning_rate=0.05, random_state=0),
-       "নিউরাল নেটওয়ার্ক (MLP ১৬)": lambda: make_pipeline(StandardScaler(), MLPRegressor(hidden_layer_sizes=(16,), alpha=1.0, max_iter=5000, random_state=0))}
+REG = {"Ridge regression (log cost)": lambda: Ridge(alpha=1.0), "Gradient boosting": lambda: GradientBoostingRegressor(n_estimators=200, max_depth=2, learning_rate=0.05, random_state=0),
+       "Neural network (MLP 16)": lambda: make_pipeline(StandardScaler(), MLPRegressor(hidden_layer_sizes=(16,), alpha=1.0, max_iter=5000, random_state=0))}
 reg = []
 kf = KFold(5, shuffle=True, random_state=0)
-for name, mk in {**REG, "ভিত্তিরেখা: সামগ্রিক মধ্যমা": None}.items():
+for name, mk in {**REG, "Baseline: overall median": None}.items():
     pr = np.zeros(len(yl))
     for a, b in kf.split(X):
         pr[b] = np.median(yl[a]) if mk is None else mk().fit(X.values[a], yl[a]).predict(X.values[b])
     reg.append({"model": name, "r2": float(r2_score(yl, pr)), "mae_bdt": float(np.median(np.abs(np.exp(pr) - cj.cost.values))), "within2x": float((np.abs(pr - yl) <= math.log(2)).mean() * 100)})
 reg = sorted(reg, key=lambda x: -x["r2"]); D["reg"] = reg
 rr = Ridge(alpha=1.0).fit(X.values, yl); coefs = dict(zip(X.columns, rr.coef_))
-base_cat = "cat_bn_নির্ধারিত সার্ভিস (বিস্তারিত নেই)"
+base_cat = "cat_bn_Scheduled service (no detail)"
 D["cat_effect"] = sorted([{"c": k.replace("cat_bn_", ""), "x": float(math.exp(v - coefs.get(base_cat, 0)))} for k, v in coefs.items() if k.startswith("cat_bn_")], key=lambda x: -x["x"])
 F["n_cost_jobs"] = int(len(cj)); F["cost_job_median"] = float(cj.cost.median()); F["cost_job_mean"] = float(cj.cost.mean())
 

@@ -26,9 +26,9 @@ def canon(n):
     if n == "6797": return "CM-CHA-11-6797"
     if n in {"0957", "0958", "0959", "0960", "0961", "0732"}: return f"CM-U-11-{n}"
     return None
-SERIES = lambda v: (None if not isinstance(v, str) else "ঢ-৬১ সিরিজ (DHA-61)" if "-61-" in v else "ববটেইল ঢ-১১ (0101–0103)" if v[-4:] in ("0101", "0102", "0103")
-                    else "ঢ-১১ সিরিজ (0137–0141)" if "DHA-11" in v else "ববটেইল শ-১১ (1263–1264)" if v[-4:] in ("1263", "1264")
-                    else "শ-১১ সিরিজ (3475–3478)" if "SHA-11" in v else "অফিস কার" if "6797" in v else "ইউ-১১ সিরিজ")
+SERIES = lambda v: (None if not isinstance(v, str) else "Dha-61 series (DHA-61)" if "-61-" in v else "Bobtail Dha-11 (0101–0103)" if v[-4:] in ("0101", "0102", "0103")
+                    else "Dha-11 series (0137–0141)" if "DHA-11" in v else "Bobtail Sha-11 (1263–1264)" if v[-4:] in ("1263", "1264")
+                    else "Sha-11 series (3475–3478)" if "SHA-11" in v else "Office car" if "6797" in v else "U-11 series")
 KNOWN = set(EQ.values())
 def desc_vehicles(d):
     hits = re.findall(r"(?<!\d)(?:61|11)\s*-\s*(\d{4})(?!\d)", d) + re.findall(r"(?<!\d)(6797|1264|0102|0101)(?!\d)", d)
@@ -42,14 +42,14 @@ rows = []
 for r in df.itertuples():
     dv = desc_vehicles(r.desc); ev = EQ.get(int(r.equip)) if pd.notna(r.equip) else None
     multi = len(dv) > 1
-    if multi: veh, src = None, "একাধিক যানবাহন"
-    elif dv: veh, src = dv[0], "বিবরণ"
-    elif ev: veh, src = ev, "ইকুইপমেন্ট নম্বর"
-    elif re.search(r"office car", r.desc, re.I): veh, src = "6797", "বিবরণ"
+    if multi: veh, src = None, "Several vehicles"
+    elif dv: veh, src = dv[0], "description"
+    elif ev: veh, src = ev, "equipment number"
+    elif re.search(r"office car", r.desc, re.I): veh, src = "6797", "description"
     else: veh, src = None, ""
     mismatch = bool(dv and ev and not multi and dv[0] != ev)
     # 'CM-Sha-11-0247' : no such Sha-11 vehicle; the equipment (0247) is the vehicle and the text is a typo
-    if r.order == 4010264: veh, mismatch, src = "0247", False, "ইকুইপমেন্ট নম্বর (বিবরণে টাইপো)"
+    if r.order == 4010264: veh, mismatch, src = "0247", False, "equipment number (typo in description)"
     rows.append(dict(vehicle=canon(veh) if veh else None, veh_src=src, equip_vehicle=canon(ev) if ev else None, mismatch=mismatch, multi_vehicle=multi,
                      desc_regs=re.findall(r"C\.?\s?M[\s\.\-]*(?:DhA|DHA|DA|Sha|SHA|SH|Cha|CHA|U)?[\s\-\.]*\d{2}\s*-\s*\d{2,4}|(?<![\w-])\d{2}-\d{4}", r.desc)))
 df = pd.concat([df, pd.DataFrame(rows)], axis=1)
@@ -58,51 +58,51 @@ df["series"] = df.vehicle.map(SERIES)
 # ---------------- asset group and work category
 def group(r):
     d = r.desc.lower()
-    if r.type == "ZPMD" or "renewal" in d or "license" in d or "licence" in d: return "নবায়ন ও লাইসেন্স"
-    if isinstance(r.vehicle, str) or r.multi_vehicle or "bobtail" in d or "office car" in d: return "যানবাহন বহর"
-    if re.search(r"fire|extingu|extengu|gas monitor|walkie", d): return "অগ্নি ও নিরাপত্তা"
-    if re.search(r"filling|carousel|pusher|conveyor|sealing|steam machine|fm 3|pv valve|tanker point|chain", d): return "ফিলিং ও হ্যান্ডলিং"
-    if re.search(r"air com|compressor|submersible|pump|generat|diesel gen|dynamo|radiator cooling|solar|wash machine|of lp", d): return "ইউটিলিটি (কম্প্রেসর, পাম্প, বিদ্যুৎ)"
-    if re.search(r"weigh|bridge scale|bsti", d): return "ওজন-যন্ত্র (ওয়েব্রিজ)"
-    if re.search(r"buoy|offshore|boat|jetty", d): return "সাগর ও জেটি"
-    return "ভবন, অফিস ও সাইট"
+    if r.type == "ZPMD" or "renewal" in d or "license" in d or "licence" in d: return "Renewals and licences"
+    if isinstance(r.vehicle, str) or r.multi_vehicle or "bobtail" in d or "office car" in d: return "Vehicle fleet"
+    if re.search(r"fire|extingu|extengu|gas monitor|walkie", d): return "Fire and safety"
+    if re.search(r"filling|carousel|pusher|conveyor|sealing|steam machine|fm 3|pv valve|tanker point|chain", d): return "Filling and handling"
+    if re.search(r"air com|compressor|submersible|pump|generat|diesel gen|dynamo|radiator cooling|solar|wash machine|of lp", d): return "Utilities (compressor, pump, power)"
+    if re.search(r"weigh|bridge scale|bsti", d): return "Weighing (weighbridge)"
+    if re.search(r"buoy|offshore|boat|jetty", d): return "Marine and jetty"
+    return "Buildings, office and site"
 df["group"] = df.apply(group, axis=1)
 
 CATS = [  # (key, Bangla label, pattern) in priority order; first match is the main system
-    ("tyre", "টায়ার", r"\btyres?\b|\btire\b"),
-    ("overhaul", "ইঞ্জিন ওভারহল ও ব্লক", r"overhaul|engine block|engine & denting"),
-    ("clutch", "ক্লাচ, গিয়ারবক্স ও ড্রাইভ", r"clutch|clautch|claustch|pressure\s*plate|prassure|fly ?wheel|gear|syncron|cutting shaft|cross|differential|pinion|center bearing|padel|knuckel"),
-    ("brake", "ব্রেক", r"brake|break|booster|boster|hub drum"),
-    ("susp", "চেসিস, স্প্রিং ও সাসপেনশন", r"spring|chassis|chessis|hanger|shock|absorver|u bolt|base plate|bace plate|tie ?rod|leaf|bush|tension rod|plainsheet|steel ma[jz]on"),
-    ("steer", "স্টিয়ারিং ও সার্ভো", r"steering|servo"),
-    ("fuel", "জ্বালানি ব্যবস্থা", r"fuel|diesel tank|dizzel|nozzle|nozzel|accelerator|stainer|water separator|turbo"),
-    ("cool", "কুলিং (রেডিয়েটর, পানি, ফ্যান)", r"radiator|water pump|cooling water|fan|belt tensoner|ac pump"),
-    ("elec", "বৈদ্যুতিক (ব্যাটারি, লাইট, ওয়্যারিং)", r"battery|alternator|self assy|light|led\b|bulb|wir|electric|switch|horn|wiper|weiper|meter board|sensor|flasher|magnet|signal|self contact"),
-    ("air", "এয়ার সিস্টেম ও ডায়াফ্রাম", r"air cylinder|air compressor head|diaphragm|diaphogram|air pipe|valve crane|hose"),
-    ("body", "বডি, কেবিন ও রং", r"dent|paint|door|glass|seat|cabin|bonat|lock|welding|silencer"),
-    ("hyd", "হাইড্রলিক ও ববটেইল পাম্প", r"hydraulic|hyd\.|jack|bobtail|pump maintenance|motor rewin|ex pulsar"),
-    ("service", "তেল, ফিল্টার ও রুটিন সার্ভিস", r"oil|filter|mobil|grease|measuring|general maint|servic"),
+    ("tyre", "Tyres", r"\btyres?\b|\btire\b"),
+    ("overhaul", "Engine overhaul and block", r"overhaul|engine block|engine & denting"),
+    ("clutch", "Clutch, gearbox and drive", r"clutch|clautch|claustch|pressure\s*plate|prassure|fly ?wheel|gear|syncron|cutting shaft|cross|differential|pinion|center bearing|padel|knuckel"),
+    ("brake", "Brakes", r"brake|break|booster|boster|hub drum"),
+    ("susp", "Chassis, springs and suspension", r"spring|chassis|chessis|hanger|shock|absorver|u bolt|base plate|bace plate|tie ?rod|leaf|bush|tension rod|plainsheet|steel ma[jz]on"),
+    ("steer", "Steering and servo", r"steering|servo"),
+    ("fuel", "Fuel system", r"fuel|diesel tank|dizzel|nozzle|nozzel|accelerator|stainer|water separator|turbo"),
+    ("cool", "Cooling (radiator, water, fan)", r"radiator|water pump|cooling water|fan|belt tensoner|ac pump"),
+    ("elec", "Electrical (battery, lights, wiring)", r"battery|alternator|self assy|light|led\b|bulb|wir|electric|switch|horn|wiper|weiper|meter board|sensor|flasher|magnet|signal|self contact"),
+    ("air", "Air system and diaphragm", r"air cylinder|air compressor head|diaphragm|diaphogram|air pipe|valve crane|hose"),
+    ("body", "Body, cabin and paint", r"dent|paint|door|glass|seat|cabin|bonat|lock|welding|silencer"),
+    ("hyd", "Hydraulics and bobtail pump", r"hydraulic|hyd\.|jack|bobtail|pump maintenance|motor rewin|ex pulsar"),
+    ("service", "Oil, filters and routine service", r"oil|filter|mobil|grease|measuring|general maint|servic"),
 ]
 SCHED = r"sched|schd|shedule|schudule|sche\.|\bsch\.|schedual|scheduled|schedule"
 def cat(r):
     d = r.desc.lower()
-    if r.group != "যানবাহন বহর":
+    if r.group != "Vehicle fleet":
         return ("plant", r.group)
     for k, lab, pat in CATS:
         if re.search(pat, d): return (k, lab)
-    if "trip rent" in d: return ("nonmaint", "রক্ষণাবেক্ষণ নয় (ভাড়া)")
-    if re.search(SCHED, d) or "maint" in d: return ("sched", "নির্ধারিত সার্ভিস (বিস্তারিত নেই)")
-    return ("other", "অন্যান্য")
+    if "trip rent" in d: return ("nonmaint", "Not maintenance (hire)")
+    if re.search(SCHED, d) or "maint" in d: return ("sched", "Scheduled service (no detail)")
+    return ("other", "Other")
 cc = df.apply(cat, axis=1, result_type="expand"); df["cat"], df["cat_bn"] = cc[0], cc[1]
 def pmclass(r):
     d = r.desc.lower()
-    if r.type == "ZPMD" or "renewal" in d: return "নবায়ন"
-    if r.type == "ZPM3" or "MSPT" in r.status: return "পরিকল্পিত প্রতিরোধমূলক (প্ল্যান)"
+    if r.type == "ZPMD" or "renewal" in d: return "Renewal"
+    if r.type == "ZPM3" or "MSPT" in r.status: return "Planned preventive (plan)"
     s = bool(re.search(SCHED, d)); svc = bool(re.search(r"oil|filter|grease|mobil", d)) and not re.search(r"pump|plate|clutch|radiator|seal", d)
     corr = r["cat"] not in ("sched", "service", "plant") or bool(re.search(r"repai|replace|new|change|rewin|making|denting|overhaul", d))
-    if (s or svc) and not corr: return "নির্ধারিত সার্ভিস"
-    if (s or svc) and corr: return "সার্ভিস + মেরামত"
-    return "মেরামত"
+    if (s or svc) and not corr: return "Scheduled service"
+    if (s or svc) and corr: return "Service + repair"
+    return "Repair"
 df["pm"] = df.apply(pmclass, axis=1)
 
 # ---------------- data-quality flags
@@ -131,7 +131,7 @@ out["date"] = out.date.dt.strftime("%Y-%m-%d")
 out["equip"] = out.equip.astype(object).where(out.equip.notna(), None)
 json.dump(out.to_dict("records"), open("orders.json", "w"), ensure_ascii=False, default=lambda x: None if pd.isna(x) else (int(x) if isinstance(x, (np.integer,)) else float(x) if isinstance(x, np.floating) else bool(x) if isinstance(x, np.bool_) else str(x)))
 print(len(out), "orders")
-print(out.group.value_counts().to_string()); print(out[out.group == "যানবাহন বহর"].cat_bn.value_counts().to_string()); print(out.pm.value_counts().to_string())
+print(out.group.value_counts().to_string()); print(out[out.group == "Vehicle fleet"].cat_bn.value_counts().to_string()); print(out.pm.value_counts().to_string())
 print("mismatch", out[out.mismatch][["order", "desc", "equip_vehicle", "vehicle"]].to_string())
 print("dups", out[out.dup_of.notna()][["order", "dup_of", "desc", "cost"]].to_string())
 print("backdated", int(out.backdated.sum()), "trunc", int(out.trunc.sum()))

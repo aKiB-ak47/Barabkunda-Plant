@@ -1,14 +1,14 @@
-# বাড়বকুণ্ড এলপিজি প্ল্যান্ট · গুণমান ও রক্ষণাবেক্ষণ রিপোর্ট
+# Barabkunda LPG Plant · Quality and Maintenance Reports
 
-বিএম এনার্জি (বিডি) লিমিটেড, বাড়বকুণ্ড এলপিজি প্ল্যান্ট (প্ল্যান্ট 1201), সীতাকুণ্ড, চট্টগ্রাম।
+BM Energy (BD) Limited, Barabkunda LPG Plant (Plant 1201), Sitakunda, Chattogram.
 
-প্রস্তুত করেছেন: **Akib Fateh**
+Prepared by: **Akib Fateh**
 
-দুটি ইন্টারঅ্যাক্টিভ রিপোর্ট, একটি পাতায় (`index.html`):
+Two interactive reports on one page (`index.html`):
 
-- **সিলিন্ডারের ওজন-নির্ভুলতা**: সর্বশেষ আপডেট, গভীর বিশ্লেষণ (তাৎপর্য, ত্রুটির উৎস, খরচ, অগ্রগতি), স্লাইড, পূর্ণ রিপোর্ট, ড্যাশবোর্ড
-- **রক্ষণাবেক্ষণ, TPM ও যন্ত্রপাতি**: SAP PM অর্ডারের বিশ্লেষণ, পূর্বাভাস ও ঝুঁকি-মডেল, বিশ্বমানের TPM কর্মসূচি, এলপিজি বিতরণ ব্যবস্থার ২০টি যন্ত্রের ছবিসহ নির্দেশিকা
+- **Cylinder weight accuracy**: latest update, deep analysis (significance, error sources, cost, progress), slides, full report, dashboard
+- **Maintenance, TPM and equipment**: analysis of SAP PM orders, forecasts and a risk model, a world-class TPM programme, and an illustrated guide to 21 pieces of LPG distribution equipment, including the four storage spheres
 
-ওজন-পরীক্ষা ৫ নভেম্বর ২০২৬ পর্যন্ত; রক্ষণাবেক্ষণ অর্ডার ১৪ অক্টোবর ২০২৬ পর্যন্ত। সিদ্ধান্ত-সহায়তার জন্য, নিয়ন্ত্রণের জন্য নয়; নিরাপত্তা-সংক্রান্ত হিসাব যোগ্য প্রকৌশলীর পর্যালোচনার জন্য (NFPA 58; এলপিজি বিধিমালা ২০০৪)।
+Weight checks to 5 November 2026; maintenance record to 6 November 2026 (last SAP order 14 October 2026). For decision support, not control; safety-related calculations are for review by a qualified engineer (NFPA 58; LPG Rules 2004).
 
-হালনাগাদের নিয়ম: [UPDATE.md](UPDATE.md)।
+How to update: [UPDATE.md](UPDATE.md).

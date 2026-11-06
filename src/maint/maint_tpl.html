@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>রক্ষণাবেক্ষণ ও TPM · বাড়বকুণ্ড · Akib Fateh</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Maintenance and TPM · Barabkunda · Akib Fateh</title>
 <meta name="author" content="Akib Fateh">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Dancing+Script:wght@600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Dancing+Script:wght@600;700&display=swap">
 <style>
 :root {
   --ink0: #060a12; --ink1: #0c1320; --ink2: #121c2e; --line: #1f2c43; --line2: #2b3b58;
@@ -10,8 +10,8 @@
   --flame: #ff8a2a; --flame2: #ffc46b; --ember: #ff5a3c;
   --fleet: #4c9bff; --plant: #2fd1ae; --renew: #b48cff; --bad: #ff5a5f; --ok: #3ddc97; --warn: #ffc46b;
   --c1: #4c9bff; --c2: #2fd1ae; --c3: #ff8a2a; --c4: #b48cff; --c5: #ff5a5f; --c6: #ffc46b; --c7: #7fd3ff; --c8: #f0a6ca;
-  --f-display: "Baloo Da 2", "Hind Siliguri", "Noto Sans Bengali", sans-serif;
-  --f-body: "Hind Siliguri", "Noto Sans Bengali", "Segoe UI", system-ui, sans-serif;
+  --f-display: "Plus Jakarta Sans", "Inter", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
   --f-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
   --r: 14px; color-scheme: dark;
 }
@@ -115,37 +115,37 @@ footer { padding-block: 30px 50px; color: var(--muted); font-size: 13.5px; borde
 <div class="glow" aria-hidden="true"></div>
 <div class="wm" aria-hidden="true"></div>
 <header class="top"><div class="wrap topbar">
-  <a class="brand" href="#top"><span class="logob"><img src="assets/logo.png" alt="BM LP GAS" width="37" height="28"></span>রক্ষণাবেক্ষণ ও TPM</a>
-  <div class="vt" role="tablist" aria-label="রিপোর্টের অংশ"><button role="tab" data-v="ana" aria-selected="true">বিশ্লেষণ</button><button role="tab" data-v="tpm" aria-selected="false">TPM কর্মসূচি</button><button role="tab" data-v="atlas" aria-selected="false">যন্ত্রপাতি</button></div>
+  <a class="brand" href="#top"><span class="logob"><img src="assets/logo.png" alt="BM LP GAS" width="37" height="28"></span>Maintenance &amp; TPM</a>
+  <div class="vt" role="tablist" aria-label="Report sections"><button role="tab" data-v="ana" aria-selected="true">Analysis</button><button role="tab" data-v="tpm" aria-selected="false">TPM programme</button><button role="tab" data-v="atlas" aria-selected="false">Equipment</button></div>
   <span class="by">Akib Fateh</span>
 </div><div class="wrap subnav">
-  <nav class="links" data-for="ana" aria-label="বিশ্লেষণের অংশ">
-    <a href="#safety">নিরাপত্তা</a><a href="#summary">সারসংক্ষেপ</a><a href="#dq">তথ্যের মান</a><a href="#cost">খরচ</a><a href="#fleet">বহর</a>
-    <a href="#work">কাজের ধরন</a><a href="#pm">প্রতিরোধমূলক</a><a href="#predict">পূর্বাভাস ও মডেল</a><a href="#deep">তাৎপর্য ও অগ্রগতি</a><a href="#renew">নবায়ন</a><a href="#plant">প্ল্যান্ট</a>
-    <a href="#rec">সুপারিশ</a><a href="#all">সব অর্ডার</a><a href="#methods">অনুমান</a>
+  <nav class="links" data-for="ana" aria-label="Analysis sections">
+    <a href="#safety">Safety</a><a href="#summary">Summary</a><a href="#dq">Data quality</a><a href="#cost">Cost</a><a href="#fleet">Fleet</a>
+    <a href="#work">Job types</a><a href="#pm">Preventive</a><a href="#predict">Forecasts &amp; models</a><a href="#deep">Significance &amp; progress</a><a href="#renew">Renewals</a><a href="#plant">Plant</a>
+    <a href="#rec">Recommendations</a><a href="#all">All orders</a><a href="#methods">Assumptions</a>
   </nav>
-  <nav class="links" data-for="tpm" aria-label="TPM-এর অংশ" hidden>
-    <a href="#tpm-top">সারাংশ</a><a href="#tpm-house">আট স্তম্ভ</a><a href="#tpm-kpi">সূচক ও অগ্রগতি</a><a href="#tpm-loss">১৬ ক্ষতি ও OEE</a><a href="#tpm-sap">অফিস TPM</a><a href="#tpm-am">স্বয়ংক্রিয় ও ৫এস</a>
-    <a href="#tpm-pm">রক্ষণাবেক্ষণ-সূচি</a><a href="#tpm-qm">মান রক্ষণাবেক্ষণ</a><a href="#tpm-kaizen">কাইজেন</a><a href="#tpm-skill">দক্ষতা</a><a href="#tpm-road">রোডম্যাপ</a>
+  <nav class="links" data-for="tpm" aria-label="TPM sections" hidden>
+    <a href="#tpm-top">Overview</a><a href="#tpm-house">Eight pillars</a><a href="#tpm-kpi">KPIs &amp; progress</a><a href="#tpm-loss">16 losses &amp; OEE</a><a href="#tpm-sap">Office TPM</a><a href="#tpm-am">Autonomous &amp; 5S</a>
+    <a href="#tpm-pm">Maintenance schedule</a><a href="#tpm-qm">Quality maintenance</a><a href="#tpm-kaizen">Kaizen</a><a href="#tpm-skill">Skills</a><a href="#tpm-road">Roadmap</a>
   </nav>
-  <nav class="links" data-for="atlas" aria-label="যন্ত্রপাতির অংশ" hidden>
-    <a href="#atlas-top">সারাংশ</a><a href="#atlas-flow">প্রবাহ-চিত্র</a><a href="#atlas-list">যন্ত্র-নির্দেশিকা</a><a href="#eq-nrv_swing">NRV</a><a href="#eq-butterfly">বাটারফ্লাই</a><a href="#eq-ball">বল ভালভ</a><a href="#eq-psv">সেফটি ভালভ</a><a href="#eq-pump">পাম্প</a><a href="#eq-filler">ফিলিং হেড</a><a href="#eq-detector">গ্যাস ডিটেক্টর</a>
+  <nav class="links" data-for="atlas" aria-label="Equipment sections" hidden>
+    <a href="#atlas-top">Overview</a><a href="#atlas-flow">Flow diagram</a><a href="#atlas-list">Equipment guide</a><a href="#eq-sphere">Spheres</a><a href="#eq-nrv_swing">NRV</a><a href="#eq-butterfly">Butterfly</a><a href="#eq-ball">Ball valve</a><a href="#eq-psv">Safety valve</a><a href="#eq-pump">Pump</a><a href="#eq-filler">Filling head</a><a href="#eq-detector">Gas detector</a>
   </nav>
 </div></header>
 <main id="top">
 <div class="view" id="v-ana">
 <div class="wrap hero">
   <span class="eyebrow">{{EYEBROW}}</span>
-  <h1>রক্ষণাবেক্ষণের <em>{{N_ORDERS}}টি</em> অর্ডার: খরচ কোথায় যায়, আর কোন গাড়ি আগে ভাঙবে</h1>
+  <h1><em>{{N_ORDERS}}</em> maintenance orders: where the money goes, and which vehicle will break down next</h1>
   <p class="lede">{{LEDE}}</p>
   <p class="prep">{{PREP}}</p>
   <div class="kpis">
-    <div class="kpi blue"><span class="v">{{KPI_COST}}</span><span class="l">মোট লিপিবদ্ধ খরচ (টাকা), ২০২২–২০২৬</span></div>
-    <div class="kpi"><span class="v">{{KPI_FLEETW}}</span><span class="l">বহরের খরচ, জুন ২০২৫ – জুন ২০২৬ (টাকা)</span></div>
-    <div class="kpi warn"><span class="v">{{KPI_PM}}</span><span class="l">বহরের কাজে নির্ধারিত সার্ভিস আছে</span></div>
-    <div class="kpi bad"><span class="v">{{KPI_TECO}}</span><span class="l">টেকনিক্যালি বন্ধ অর্ডার (TECO)</span></div>
-    <div class="kpi warn"><span class="v">{{KPI_UNBOOKED}}</span><span class="l">জুলাই ২০২৬ থেকে আজ পর্যন্ত আনুমানিক না-লেখা খরচ (টাকা)</span></div>
-    <div class="kpi ok"><span class="v">{{KPI_AUC}}</span><span class="l">বড় মেরামতের ঝুঁকি-মডেলের AUC (নিউরাল নেটওয়ার্ক)</span></div>
+    <div class="kpi blue"><span class="v">{{KPI_COST}}</span><span class="l">Total recorded cost (Tk), 2022–2026</span></div>
+    <div class="kpi"><span class="v">{{KPI_FLEETW}}</span><span class="l">Fleet cost, Jun 2025 – Jun 2026 (Tk)</span></div>
+    <div class="kpi warn"><span class="v">{{KPI_PM}}</span><span class="l">Fleet jobs that include a scheduled service</span></div>
+    <div class="kpi bad"><span class="v">{{KPI_TECO}}</span><span class="l">Technically closed orders (TECO)</span></div>
+    <div class="kpi warn"><span class="v">{{KPI_UNBOOKED}}</span><span class="l">Estimated unbooked cost, July 2026 to today (Tk)</span></div>
+    <div class="kpi ok"><span class="v">{{KPI_AUC}}</span><span class="l">AUC of the major-repair risk model (neural network)</span></div>
   </div>
 </div>
 
@@ -153,126 +153,126 @@ footer { padding-block: 30px 50px; color: var(--muted); font-size: 13.5px; borde
 <section class="blk" id="safety" aria-labelledby="safetyH">
   <div class="safety">
     <div class="head"><span class="siren" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 8v5"/><path d="M12 16.5v.5"/><path d="M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></span>
-      <div><h2 id="safetyH" style="font-size:clamp(22px,3vw,30px)">নিরাপত্তা আগে: যোগ্য প্রকৌশলীর পর্যালোচনার জন্য</h2>
-      <p class="t small" style="margin-top:4px">For review by a qualified engineer. এগুলো SAP-এ যা <b>লেখা নেই</b> তার তালিকা; কাজ হয়েছে কিন্তু SAP-এ ওঠেনি, এমনও হতে পারে। সিদ্ধান্ত-সহায়তা, নিয়ন্ত্রণ নয়।</p></div></div>
+      <div><h2 id="safetyH" style="font-size:clamp(22px,3vw,30px)">Safety first: for review by a qualified engineer</h2>
+      <p class="t small" style="margin-top:4px">These are things that are <b>not recorded</b> in SAP; the work may have been done without reaching SAP. Decision support, not control.</p></div></div>
     <div class="sgrid">{{SAFE}}</div>
   </div>
 </section>
 
 <section class="blk" id="summary">
-  <div class="sh"><span class="kick">কার্যনির্বাহী সারসংক্ষেপ</span><h2>পাঁচটি কথা</h2></div>
+  <div class="sh"><span class="kick">Executive summary</span><h2>Five points</h2></div>
   <div class="grid2">
     <div class="card"><ul class="exec">{{EXEC}}</ul></div>
-    <div class="card"><h3>মূল সূচক: আগের ছয় মাসের সঙ্গে তুলনা</h3>
-      <div class="tw"><table><thead><tr><th>সূচক</th><th class="num">জুলাই–ডিসে ২০২৫</th><th class="num">জানু–জুন ২০২৬</th><th class="num">পরিবর্তন</th><th>মন্তব্য</th></tr></thead><tbody>{{KM}}</tbody></table></div>
-      <p class="small" style="margin:10px 0 0">কোনো প্ল্যান্ট-লক্ষ্যমাত্রা দেওয়া হয়নি; তুলনা আগের সময়কাল ও শিল্প-মানদণ্ডের সঙ্গে।</p></div>
+    <div class="card"><h3>Key metrics: compared with the previous six months</h3>
+      <div class="tw"><table><thead><tr><th>Metric</th><th class="num">Jul–Dec 2025</th><th class="num">Jan–Jun 2026</th><th class="num">Change</th><th>Comment</th></tr></thead><tbody>{{KM}}</tbody></table></div>
+      <p class="small" style="margin:10px 0 0">No plant targets have been set; comparison is with the previous period and industry benchmarks.</p></div>
   </div>
 </section>
 
 <section class="blk" id="dq">
-  <div class="sh"><span class="kick">বিশ্লেষণের আগে</span><h2>তথ্যের মান: কী পাওয়া গেছে, কী করা হয়েছে</h2>
-  <p>প্রতিটি সমস্যা গুনে দেখা হয়েছে। এগুলো জানা না থাকলে নিচের সংখ্যা ভুল পড়া হবে।</p></div>
+  <div class="sh"><span class="kick">Before the analysis</span><h2>Data quality: what was found and what was done</h2>
+  <p>Every issue was counted. Without knowing them, the figures below would be misread.</p></div>
   <div class="dqgrid">{{DQ}}</div>
   <div class="grid2" style="margin-top:16px">
-    <div class="card"><h3>একই গাড়ি, ভিন্ন লেখা</h3><p class="small" style="margin:0 0 8px">বিবরণে গাড়ির নম্বর যতভাবে লেখা হয়েছে (সবচেয়ে বেশি রকম যেগুলোর)।</p><div class="tw" style="max-height:340px"><table id="regTbl"></table></div></div>
-    <div class="card"><h3>একই শব্দ, ভিন্ন বানান</h3><p class="small" style="margin:0 0 8px">১২টি সাধারণ শব্দের বানান ও কতবার এসেছে।</p><div class="tw" style="max-height:340px"><table id="spellTbl"></table></div></div>
+    <div class="card"><h3>Same vehicle, different spellings</h3><p class="small" style="margin:0 0 8px">How vehicle numbers are written in the descriptions (those with the most variants).</p><div class="tw" style="max-height:340px"><table id="regTbl"></table></div></div>
+    <div class="card"><h3>Same word, different spellings</h3><p class="small" style="margin:0 0 8px">Spellings of 12 common words and how often each appears.</p><div class="tw" style="max-height:340px"><table id="spellTbl"></table></div></div>
   </div>
 </section>
 
 <section class="blk" id="cost">
-  <div class="sh"><span class="kick">খরচের ইতিহাস</span><h2>মাসে মাসে খরচ ও অর্ডার</h2>
-  <p>ধূসর পটি: জুলাই ২০২৪ – মে ২০২৫-এর ফাঁক। কমলা পটি: জুলাই ২০২৬ থেকে আজ পর্যন্ত, অনেক কাজ এখনো SAP-এ ওঠেনি। একটি মাসে ক্লিক করলে সেই মাসের অর্ডারগুলো নিচে আসবে।</p></div>
+  <div class="sh"><span class="kick">Cost history</span><h2>Cost and orders, month by month</h2>
+  <p>Grey band: the gap of July 2024 – May 2025. Orange band: July 2026 to today, when much of the work is not yet in SAP. Click a month to list its orders below.</p></div>
   <div class="card">
-    <div class="vbar"><div class="btns" id="mMode"><button class="btn on" data-k="cost">খরচ</button><button class="btn" data-k="n">অর্ডারের সংখ্যা</button></div>
-      <div class="legend"><span><i style="background:var(--fleet)"></i>যানবাহন বহর</span><span><i style="background:var(--plant)"></i>প্ল্যান্ট ও ভবন</span><span><i style="background:var(--renew)"></i>নবায়ন ও লাইসেন্স</span></div></div>
+    <div class="vbar"><div class="btns" id="mMode"><button class="btn on" data-k="cost">Cost</button><button class="btn" data-k="n">Number of orders</button></div>
+      <div class="legend"><span><i style="background:var(--fleet)"></i>Vehicle fleet</span><span><i style="background:var(--plant)"></i>Plant and buildings</span><span><i style="background:var(--renew)"></i>Renewals and licences</span></div></div>
     <div class="chart" id="cMonthly"></div>
     <div id="monthList" class="more"></div>
   </div>
   <div class="grid2" style="margin-top:16px">
-    <div class="card"><div class="cap"><b>বছরভিত্তিক খরচ</b><span>২০২৬ = জানুয়ারি–অক্টোবর</span></div><div class="chart" id="cYearly"></div></div>
-    <div class="card"><div class="cap"><b>সবচেয়ে ব্যয়বহুল ১৫টি অর্ডার</b></div><div class="tw" style="max-height:330px"><table id="topTbl"></table></div></div>
+    <div class="card"><div class="cap"><b>Cost by year</b><span>2026 = January–October</span></div><div class="chart" id="cYearly"></div></div>
+    <div class="card"><div class="cap"><b>The 15 most expensive orders</b></div><div class="tw" style="max-height:330px"><table id="topTbl"></table></div></div>
   </div>
 </section>
 
 <section class="blk" id="fleet">
-  <div class="sh"><span class="kick">যানবাহন বহর</span><h2>কোন গাড়িতে কত খরচ</h2><p>{{T_FLEET}}</p></div>
-  <div class="card"><div class="cap"><b>গাড়িপ্রতি খরচ (বার) ও ক্রমযোজিত ভাগ (রেখা), জুন ২০২৫ – জুন ২০২৬</b><span>লাল ড্যাশ = ৮০%</span></div><div class="chart" id="cPareto"></div></div>
+  <div class="sh"><span class="kick">Vehicle fleet</span><h2>What each vehicle costs</h2><p>{{T_FLEET}}</p></div>
+  <div class="card"><div class="cap"><b>Cost per vehicle (bars) and cumulative share (line), Jun 2025 – Jun 2026</b><span>Red dash = 80%</span></div><div class="chart" id="cPareto"></div></div>
   <div class="card" style="margin-top:16px">
-    <div class="vbar"><b>গাড়ির সময়রেখা</b><select id="vSel" aria-label="গাড়ি বেছে নিন"></select><span class="small" id="vSum"></span></div>
-    <div class="legend" style="margin-bottom:6px"><span><i style="background:var(--c1)"></i>মেরামত</span><span><i style="background:var(--c2)"></i>নির্ধারিত সার্ভিস</span><span><i style="background:var(--c6)"></i>সার্ভিস + মেরামত</span><span>বৃত্তের আকার = খরচ</span></div>
+    <div class="vbar"><b>Vehicle timeline</b><select id="vSel" aria-label="Choose a vehicle"></select><span class="small" id="vSum"></span></div>
+    <div class="legend" style="margin-bottom:6px"><span><i style="background:var(--c1)"></i>Repair</span><span><i style="background:var(--c2)"></i>Scheduled service</span><span><i style="background:var(--c6)"></i>Service + repair</span><span>Circle size = cost</span></div>
     <div class="chart" id="cVeh"></div>
     <div class="tw" style="max-height:300px;margin-top:10px"><table id="vTbl"></table></div>
   </div>
   <div class="grid2" style="margin-top:16px">
-    <div class="card"><div class="cap"><b>সিরিজভিত্তিক: গাড়িপ্রতি মাসে খরচ</b><span>জুন ২০২৫ – জুন ২০২৬</span></div><div class="chart" id="cSeries"></div></div>
-    <div class="card"><div class="cap"><b>৯০ দিনের মধ্যে একই অংশে আবার মেরামত</b><span id="repSum"></span></div><div class="tw" style="max-height:330px"><table id="repTbl"></table></div></div>
+    <div class="card"><div class="cap"><b>By series: cost per vehicle per month</b><span>Jun 2025 – Jun 2026</span></div><div class="chart" id="cSeries"></div></div>
+    <div class="card"><div class="cap"><b>Same part repaired again within 90 days</b><span id="repSum"></span></div><div class="tw" style="max-height:330px"><table id="repTbl"></table></div></div>
   </div>
 </section>
 
 <section class="blk" id="work">
-  <div class="sh"><span class="kick">কাজের ধরন</span><h2>কোন যন্ত্রাংশে টাকা যায়</h2><p>বহরের প্রতিটি অর্ডারকে বিবরণের শব্দ দিয়ে ১৪টি শ্রেণিতে ভাগ করা হয়েছে; একাধিক অংশ থাকলে প্রথম গুরুত্বপূর্ণটি ধরা হয়েছে।</p></div>
+  <div class="sh"><span class="kick">Job types</span><h2>Which parts the money goes on</h2><p>Every fleet order is put into one of 14 categories from the words in its description; when several parts are named, the first important one is used.</p></div>
   <div class="grid2">
-    <div class="card"><div class="vbar"><b>শ্রেণিভিত্তিক, জুন ২০২৫ – জুন ২০২৬</b><div class="btns" id="catMode"><button class="btn on" data-k="cost">খরচ</button><button class="btn" data-k="jobs">অর্ডার</button><button class="btn" data-k="med">মধ্যমা খরচ</button></div></div><div class="chart" id="cCats"></div></div>
-    <div class="card"><h3>কাজের ধরন খরচ কতটা ঠিক করে (রিগ্রেশন)</h3><p class="t small" style="margin-bottom:8px">{{T_REG}}</p><div class="chart" id="cEffect"></div><div class="tw" style="margin-top:10px"><table id="regTbl2"></table></div></div>
+    <div class="card"><div class="vbar"><b>By category, Jun 2025 – Jun 2026</b><div class="btns" id="catMode"><button class="btn on" data-k="cost">Cost</button><button class="btn" data-k="jobs">Orders</button><button class="btn" data-k="med">Median cost</button></div></div><div class="chart" id="cCats"></div></div>
+    <div class="card"><h3>How much job type decides cost (regression)</h3><p class="t small" style="margin-bottom:8px">{{T_REG}}</p><div class="chart" id="cEffect"></div><div class="tw" style="margin-top:10px"><table id="regTbl2"></table></div></div>
   </div>
-  <div class="card" style="margin-top:16px"><h3>লেখা থেকে নিজে থেকে দল (আনসুপারভাইজড লার্নিং)</h3><p class="t small" style="margin-bottom:10px">{{T_CLUSTERS}}</p><div class="clgrid" id="clusters"></div></div>
+  <div class="card" style="margin-top:16px"><h3>Groups found automatically in the text (unsupervised learning)</h3><p class="t small" style="margin-bottom:10px">{{T_CLUSTERS}}</p><div class="clgrid" id="clusters"></div></div>
 </section>
 
 <section class="blk" id="pm">
-  <div class="sh"><span class="kick">প্রতিরোধমূলক বনাম প্রতিক্রিয়াশীল</span><h2>কাজ কি পরিকল্পনায় হয়, না ভাঙলে?</h2><p>{{T_PM}}</p></div>
+  <div class="sh"><span class="kick">Preventive vs reactive</span><h2>Is work planned, or done after a breakdown?</h2><p>{{T_PM}}</p></div>
   <div class="grid2">
-    <div class="card"><div class="cap"><b>প্রতি ত্রৈমাসিকে বহরের কাজ, ধরন অনুযায়ী</b></div><div class="legend" id="pmLegend" style="margin-bottom:6px"></div><div class="chart" id="cPmq"></div></div>
-    <div class="card"><div class="cap"><b>দুই রক্ষণাবেক্ষণের মাঝে কত দিন: Weibull বণ্টন</b></div><div class="chart" id="cWeib"></div><p class="t small" style="margin-top:8px">{{T_WEIBULL}}</p></div>
+    <div class="card"><div class="cap"><b>Fleet jobs by type, per quarter</b></div><div class="legend" id="pmLegend" style="margin-bottom:6px"></div><div class="chart" id="cPmq"></div></div>
+    <div class="card"><div class="cap"><b>Days between two maintenance jobs: Weibull distribution</b></div><div class="chart" id="cWeib"></div><p class="t small" style="margin-top:8px">{{T_WEIBULL}}</p></div>
   </div>
-  <div class="card" style="margin-top:16px"><h3>SAP-এর প্রতিরোধমূলক প্ল্যান-অর্ডার: একটিও রিলিজ হয়নি</h3><div class="tw" style="max-height:320px"><table id="planTbl"></table></div></div>
+  <div class="card" style="margin-top:16px"><h3>SAP preventive plan orders: not one released</h3><div class="tw" style="max-height:320px"><table id="planTbl"></table></div></div>
 </section>
 
 <section class="blk" id="predict">
-  <div class="sh"><span class="kick">পূর্বাভাস ও মডেল</span><h2>সামনে কী আসছে</h2><p>প্রতিটি মডেলের পদ্ধতি, প্রশিক্ষণের সময়, নির্ভুলতা ও পরিসর দেওয়া আছে। ভিত্তিরেখার চেয়ে ভালো না হলে সেটাও বলা হয়েছে।</p></div>
-  <div class="card"><h3>১. বহরের মাসিক খরচের পূর্বাভাস</h3><p class="t small" style="margin-bottom:8px">{{T_FC}}</p>
-    <div class="legend" style="margin-bottom:6px"><span><i style="background:var(--fleet)"></i>লিপিবদ্ধ (জুন ২০২৫ – জুন ২০২৬)</span><span><i style="background:var(--flame)"></i>পূর্বাভাস ও ৮০% পরিসর</span><span><i style="background:var(--dim)"></i>পরে এখন পর্যন্ত লিপিবদ্ধ (অসম্পূর্ণ)</span></div>
+  <div class="sh"><span class="kick">Forecasts and models</span><h2>What is coming</h2><p>Every model shows its method, training period, accuracy and range. Where a model does not beat the baseline, that is said too.</p></div>
+  <div class="card"><h3>1. Forecast of the fleet's monthly cost</h3><p class="t small" style="margin-bottom:8px">{{T_FC}}</p>
+    <div class="legend" style="margin-bottom:6px"><span><i style="background:var(--fleet)"></i>Recorded (Jun 2025 – Jun 2026)</span><span><i style="background:var(--flame)"></i>Forecast and 80% range</span><span><i style="background:var(--dim)"></i>Recorded since (incomplete)</span></div>
     <div class="chart" id="cFc"></div><div class="tw" style="margin-top:10px"><table id="fcTbl"></table></div></div>
   <div class="grid2" style="margin-top:16px">
-    <div class="card"><h3>২. কোন গাড়িতে আগামী ৩ মাসে বড় মেরামত (≥৫০ হাজার টাকা)</h3><p class="t small" style="margin-bottom:8px">{{T_RISK}}</p><div class="tw"><table id="clsBTbl"></table></div>
-      <h3 style="margin-top:16px;font-size:17px">কোন তথ্য সবচেয়ে কাজে লাগে (পারমুটেশন গুরুত্ব)</h3><div class="chart" id="cImp"></div></div>
-    <div class="card"><h3>ঝুঁকি-তালিকা: জুলাই–সেপ্টেম্বর ২০২৬</h3><p class="t small" style="margin-bottom:8px">{{T_RISKB}}</p><div class="chart" id="cRisk"></div></div>
+    <div class="card"><h3>2. Which vehicles need a major repair (≥ Tk 50,000) in the next 3 months</h3><p class="t small" style="margin-bottom:8px">{{T_RISK}}</p><div class="tw"><table id="clsBTbl"></table></div>
+      <h3 style="margin-top:16px;font-size:17px">Which inputs help most (permutation importance)</h3><div class="chart" id="cImp"></div></div>
+    <div class="card"><h3>Risk list: July–September 2026</h3><p class="t small" style="margin-bottom:8px">{{T_RISKB}}</p><div class="chart" id="cRisk"></div></div>
   </div>
   <div class="grid2" style="margin-top:16px">
-    <div class="card"><h3>৩. আগামী মাসে কোনো কাজ লাগবে কি না</h3><p class="t small" style="margin-bottom:8px">{{T_CLSA}}</p><div class="tw"><table id="clsATbl"></table></div></div>
-    <div class="card"><h3>৪. অস্বাভাবিক খরচ (অ্যানোমালি ডিটেকশন)</h3><p class="t small" style="margin-bottom:8px">{{T_ANOM}}</p><div class="tw" style="max-height:360px"><table id="anomTbl"></table></div></div>
+    <div class="card"><h3>3. Will any job be needed next month?</h3><p class="t small" style="margin-bottom:8px">{{T_CLSA}}</p><div class="tw"><table id="clsATbl"></table></div></div>
+    <div class="card"><h3>4. Unusual costs (anomaly detection)</h3><p class="t small" style="margin-bottom:8px">{{T_ANOM}}</p><div class="tw" style="max-height:360px"><table id="anomTbl"></table></div></div>
   </div>
 </section>
 
 {{DEEP}}
 
 <section class="blk" id="renew">
-  <div class="sh"><span class="kick">নবায়ন ক্যালেন্ডার</span><h2>লাইসেন্স ও কাগজপত্র: কোনটা কবে</h2><p>{{T_RENEW}}</p></div>
-  <div class="card"><div class="vbar"><div class="btns" id="renMode"><button class="btn on" data-k="all">সব</button><button class="btn" data-k="over">১২ মাসে অর্ডার নেই</button><button class="btn" data-k="soon">১২০ দিনের মধ্যে</button><button class="btn" data-k="plant">শুধু প্ল্যান্ট</button><button class="btn" data-k="veh">শুধু গাড়ি</button></div><span class="small" id="renCount"></span></div>
+  <div class="sh"><span class="kick">Renewal calendar</span><h2>Licences and papers: what is due when</h2><p>{{T_RENEW}}</p></div>
+  <div class="card"><div class="vbar"><div class="btns" id="renMode"><button class="btn on" data-k="all">All</button><button class="btn" data-k="over">No order in 12 months</button><button class="btn" data-k="soon">Within 120 days</button><button class="btn" data-k="plant">Plant only</button><button class="btn" data-k="veh">Vehicles only</button></div><span class="small" id="renCount"></span></div>
     <div class="tw" style="max-height:440px"><table id="renTbl"></table></div></div>
 </section>
 
 <section class="blk" id="plant">
-  <div class="sh"><span class="kick">প্ল্যান্টের যন্ত্রপাতি ও ভবন</span><h2>বহরের বাইরের রক্ষণাবেক্ষণ</h2><p>{{T_PLANT}}</p></div>
-  <div class="card"><div class="cap"><b>প্রতিটি অর্ডার, দল অনুযায়ী</b><span>বৃত্তের আকার = খরচ; ফাঁপা = খরচ শূন্য</span></div><div class="chart" id="cPlant"></div>
+  <div class="sh"><span class="kick">Plant equipment and buildings</span><h2>Maintenance outside the fleet</h2><p>{{T_PLANT}}</p></div>
+  <div class="card"><div class="cap"><b>Every order, by group</b><span>Circle size = cost; hollow = zero cost</span></div><div class="chart" id="cPlant"></div>
     <div class="tw" style="max-height:340px;margin-top:10px"><table id="plantTbl"></table></div></div>
 </section>
 
 <section class="blk" id="rec">
-  <div class="sh"><span class="kick">সুপারিশ</span><h2>কী করতে হবে, কে করবে</h2></div>
-  <div class="card"><div class="tw"><table><thead><tr><th>অগ্রাধিকার</th><th>দায়িত্ব</th><th>কাজ</th></tr></thead><tbody>{{REC}}</tbody></table></div></div>
+  <div class="sh"><span class="kick">Recommendations</span><h2>What must be done, and by whom</h2></div>
+  <div class="card"><div class="tw"><table><thead><tr><th>Priority</th><th>Owner</th><th>Action</th></tr></thead><tbody>{{REC}}</tbody></table></div></div>
 </section>
 
 <section class="blk" id="all">
-  <div class="sh"><span class="kick">সব অর্ডার</span><h2>খুঁজুন, ছাঁকুন, সাজান</h2><p>অর্ডার নম্বর, গাড়ি বা বিবরণের যেকোনো শব্দ লিখুন। কলামের শিরোনামে ক্লিক করলে সাজানো বদলাবে।</p></div>
-  <div class="card"><div class="vbar"><input type="search" id="q" placeholder="যেমন 0225, tyre, fire" aria-label="খুঁজুন" style="flex:1;min-width:180px">
-    <select id="fGroup" aria-label="দল"></select><select id="fYear" aria-label="বছর"></select><select id="fFlag" aria-label="চিহ্ন"><option value="">সব অর্ডার</option><option value="cost">খরচ আছে</option><option value="flag">চিহ্নিত (দ্বৈত/ভুল গাড়ি/যাচাই বাকি)</option><option value="late">কাজের পরে লেখা</option></select>
+  <div class="sh"><span class="kick">All orders</span><h2>Search, filter, sort</h2><p>Type an order number, vehicle or any word of the description. Click a column heading to change the sort.</p></div>
+  <div class="card"><div class="vbar"><input type="search" id="q" placeholder="e.g. 0225, tyre, fire" aria-label="Search" style="flex:1;min-width:180px">
+    <select id="fGroup" aria-label="Group"></select><select id="fYear" aria-label="Year"></select><select id="fFlag" aria-label="Flag"><option value="">All orders</option><option value="cost">With a cost</option><option value="flag">Flagged (duplicate/wrong vehicle/to verify)</option><option value="late">Written after the work</option></select>
     <span class="small" id="allCount"></span></div>
     <div class="tw" style="max-height:620px"><table id="allTbl"></table></div>
-    <div class="more"><button class="btn" id="allMore">আরও দেখান</button></div></div>
+    <div class="more"><button class="btn" id="allMore">Show more</button></div></div>
 </section>
 
 <section class="blk" id="methods">
-  <div class="sh"><span class="kick">পরিশিষ্ট</span><h2>অনুমান ও সীমাবদ্ধতা</h2></div>
+  <div class="sh"><span class="kick">Appendix</span><h2>Assumptions and limitations</h2></div>
   <div class="card">{{METH}}</div>
 </section>
 </div>
@@ -280,19 +280,19 @@ footer { padding-block: 30px 50px; color: var(--muted); font-size: 13.5px; borde
 <div class="view" id="v-tpm" hidden><div class="wrap">{{TPM}}</div></div>
 <div class="view" id="v-atlas" hidden><div class="wrap">{{ATLAS}}</div></div>
 </main>
-<footer><div class="wrap foot"><span class="logob big"><img src="assets/logo.png" alt="BM LP GAS" width="74" height="56"></span><div class="ft"><b>রক্ষণাবেক্ষণ ও TPM রিপোর্ট</b> · বিএম এনার্জি (বিডি) লিমিটেড, বাড়বকুণ্ড এলপিজি প্ল্যান্ট (১২০১), সীতাকুণ্ড, চট্টগ্রাম<br>প্রস্তুত করেছেন: <b>Akib Fateh</b> · তথ্য: SAP PM অর্ডার, {{DATA_TO}} পর্যন্ত · সিদ্ধান্ত-সহায়তার জন্য, নিয়ন্ত্রণের জন্য নয়</div><div class="sig">Akib Fateh</div></div></footer>
+<footer><div class="wrap foot"><span class="logob big"><img src="assets/logo.png" alt="BM LP GAS" width="74" height="56"></span><div class="ft"><b>Maintenance and TPM Report</b> · BM Energy (BD) Limited, Barabkunda LPG Plant (1201), Sitakunda, Chattogram<br>Prepared by: <b>Akib Fateh</b> · Data: SAP PM orders to {{DATA_TO}} · For decision support, not control</div><div class="sig">Akib Fateh</div></div></footer>
 <div class="tip" id="tip"></div>
 <script>{{D3}}</script>
 <script id="mdata" type="application/json">{{DATA}}</script>
 <script>
 (() => {
 const D = JSON.parse(document.getElementById('mdata').textContent);
-const BN = '০১২৩৪৫৬৭৮৯', bn = (s) => String(s).replace(/[0-9]/g, (d) => BN[d]);
-const MON = ['জানু', 'ফেব্রু', 'মার্চ', 'এপ্রি', 'মে', 'জুন', 'জুলা', 'আগ', 'সেপ্টে', 'অক্টো', 'নভে', 'ডিসে'];
-const MONF = ['জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই', 'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর'];
+const bn = (s) => String(s);
+const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const MONF = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const f0 = (v) => bn(d3.format(',.0f')(v)), f1 = (v) => bn(d3.format(',.1f')(v)), f2 = (v) => bn(d3.format('.2f')(v));
-const lakh = (v) => v >= 1e7 ? bn((v / 1e7).toFixed(2)) + ' কোটি' : v >= 1e5 ? bn((v / 1e5).toFixed(1)) + ' লাখ' : f0(v);
-const tk = (v) => lakh(v) + ' টাকা';
+const lakh = (v) => v >= 1e7 ? (v / 1e7).toFixed(2) + ' crore' : v >= 1e5 ? (v / 1e5).toFixed(1) + ' lakh' : f0(v);
+const tk = (v) => 'Tk ' + lakh(v);
 const mlab = (m) => { const [y, mm] = m.split('-'); return MON[+mm - 1] + ' ' + bn(y.slice(2)); };
 const dlab = (s) => { if (!s) return ''; const [y, m, d] = s.split('-'); return bn(+d) + ' ' + MON[+m - 1] + ' ' + bn(y); };
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -303,8 +303,8 @@ const draws = [];
 const svgIn = (id, h) => { const el = document.getElementById(id); el.replaceChildren(); const w = Math.max(300, el.clientWidth || 600); const s = d3.select(el).append('svg').attr('viewBox', `0 0 ${w} ${h}`).attr('role', 'img'); return { s, w, h, el }; };
 const reg = (fn) => { draws.push(fn); fn(); };
 let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => draws.forEach((f) => f()), 150); });
-const GCOL = { 'যানবাহন বহর': 'var(--fleet)', 'নবায়ন ও লাইসেন্স': 'var(--renew)' };
-const PMCOL = { 'মেরামত': 'var(--c1)', 'নির্ধারিত সার্ভিস': 'var(--c2)', 'সার্ভিস + মেরামত': 'var(--c6)', 'নবায়ন': 'var(--c4)', 'পরিকল্পিত প্রতিরোধমূলক (প্ল্যান)': 'var(--c5)' };
+const GCOL = { 'Vehicle fleet': 'var(--fleet)', 'Renewals and licences': 'var(--renew)' };
+const PMCOL = { 'Repair': 'var(--c1)', 'Scheduled service': 'var(--c2)', 'Service + repair': 'var(--c6)', 'Renewal': 'var(--c4)', 'Planned preventive (plan)': 'var(--c5)' };
 const yAxis = (g, y, x0, x1, fmt, n) => { y.ticks(n || 5).forEach((t) => { g.append('line').attr('x1', x0).attr('x2', x1).attr('y1', y(t)).attr('y2', y(t)).attr('stroke', 'var(--line)'); g.append('text').attr('x', x0 - 6).attr('y', y(t) + 4).attr('text-anchor', 'end').text(fmt(t)); }); };
 const table = (id, head, rows, opts = {}) => {
   const t = document.getElementById(id); if (!t) return;
@@ -312,8 +312,8 @@ const table = (id, head, rows, opts = {}) => {
 };
 
 // ---------- data quality tables
-table('regTbl', [['গাড়ি'], ['যতভাবে লেখা'], ['লেখার ধরন (কতবার)']], D.reg_variants.slice(0, 14).map((r) => ({ c: [`<span class=lat>${r.v}</span>`, bn(r.forms.length), r.forms.map((f) => `<span class=lat>${esc(f[0])}</span> (${bn(f[1])})`).join(', ')] })));
-table('spellTbl', [['শব্দ'], ['বানান'], ['লেখার ধরন (কতবার)']], D.spell.map((r) => ({ c: [`<span class=lat>${r.word}</span>`, bn(r.forms.length), r.forms.map((f) => `<span class=lat>${esc(f[0])}</span> (${bn(f[1])})`).join(', ')] })));
+table('regTbl', [['Vehicle'], ['Variants'], ['Spellings (count)']], D.reg_variants.slice(0, 14).map((r) => ({ c: [`<span class=lat>${r.v}</span>`, bn(r.forms.length), r.forms.map((f) => `<span class=lat>${esc(f[0])}</span> (${bn(f[1])})`).join(', ')] })));
+table('spellTbl', [['Word'], ['Spellings'], ['Spellings (count)']], D.spell.map((r) => ({ c: [`<span class=lat>${r.word}</span>`, bn(r.forms.length), r.forms.map((f) => `<span class=lat>${esc(f[0])}</span> (${bn(f[1])})`).join(', ')] })));
 
 // ---------- monthly cost
 let mMode = 'cost';
@@ -322,8 +322,8 @@ const ordersByMonth = d3.group(D.orders, (o) => o.date.slice(0, 7));
 function monthList(m) {
   const os = (ordersByMonth.get(m) || []).slice().sort((a, b) => b.cost - a.cost);
   const el = document.getElementById('monthList');
-  el.innerHTML = `<div class="cap"><b>${MONF[+m.slice(5) - 1]} ${bn(m.slice(0, 4))}: ${bn(os.length)}টি অর্ডার, ${tk(d3.sum(os, (o) => o.cost))}</b><button class="btn" id="mlClose">বন্ধ করুন</button></div><div class="tw" style="max-height:300px"><table id="mlTbl"></table></div>`;
-  table('mlTbl', [['অর্ডার'], ['তারিখ'], ['গাড়ি/দল'], ['বিবরণ'], ['স্ট্যাটাস'], ['খরচ (টাকা)', 'num']], os.map((o) => ({ c: [`<span class=lat>${o.order}</span>`, dlab(o.date), o.vehicle ? `<span class=lat>${o.vehicle}</span>` : o.group, `<span class=lat>${esc(o.desc)}</span>`, `<span class=lat>${o.status}</span>`, f0(o.cost)] })));
+  el.innerHTML = `<div class="cap"><b>${MONF[+m.slice(5) - 1]} ${bn(m.slice(0, 4))}: ${bn(os.length)} orders, ${tk(d3.sum(os, (o) => o.cost))}</b><button class="btn" id="mlClose">Close</button></div><div class="tw" style="max-height:300px"><table id="mlTbl"></table></div>`;
+  table('mlTbl', [['Order'], ['Date'], ['Vehicle/group'], ['Description'], ['Status'], ['Cost (Tk)', 'num']], os.map((o) => ({ c: [`<span class=lat>${o.order}</span>`, dlab(o.date), o.vehicle ? `<span class=lat>${o.vehicle}</span>` : o.group, `<span class=lat>${esc(o.desc)}</span>`, `<span class=lat>${o.status}</span>`, f0(o.cost)] })));
   document.getElementById('mlClose').onclick = () => { el.replaceChildren(); };
 }
 function drawMonthly() {
@@ -332,14 +332,14 @@ function drawMonthly() {
   const val = (d) => mMode === 'cost' ? d.cost : d.n;
   const y = d3.scaleLinear([0, d3.max(data, val) * 1.08], [300 - m.b, m.t]).nice();
   const shade = (a, b, col, lab) => { const x0 = x(a), x1 = x(b) + x.bandwidth(); s.append('rect').attr('x', x0).attr('y', m.t).attr('width', x1 - x0).attr('height', 300 - m.b - m.t).attr('fill', col).attr('opacity', 0.12); s.append('text').attr('x', (x0 + x1) / 2).attr('y', m.t + 12).attr('text-anchor', 'middle').attr('font-size', 11).text(lab); };
-  shade('2024-07', '2025-05', 'var(--muted)', 'ফাঁক'); shade('2026-07', '2026-10', 'var(--flame)', 'অসম্পূর্ণ');
+  shade('2024-07', '2025-05', 'var(--muted)', 'Gap'); shade('2026-07', '2026-10', 'var(--flame)', 'Incomplete');
   yAxis(s.append('g'), y, m.l, w - m.r, (v) => mMode === 'cost' ? lakh(v) : bn(v), 5);
   data.forEach((d) => {
     const g = s.append('g').style('cursor', 'pointer');
     if (mMode === 'cost') { let y0 = 0; [['fleet', 'var(--fleet)'], ['plant', 'var(--plant)'], ['renew', 'var(--renew)']].forEach(([k, c]) => { const v = d[k]; if (v > 0) g.append('rect').attr('x', x(d.m)).attr('width', x.bandwidth()).attr('y', y(y0 + v)).attr('height', Math.max(0.5, y(y0) - y(y0 + v))).attr('fill', c); y0 += v; }); }
     else g.append('rect').attr('x', x(d.m)).attr('width', x.bandwidth()).attr('y', y(d.n)).attr('height', y(0) - y(d.n)).attr('fill', 'var(--fleet)');
     g.append('rect').attr('x', x(d.m) - 1).attr('width', x.bandwidth() + 2).attr('y', m.t).attr('height', 300 - m.b - m.t).attr('fill', 'transparent')
-      .on('mousemove', (ev) => showTip(ev, `<b>${MONF[+d.m.slice(5) - 1]} ${bn(d.m.slice(0, 4))}</b><br>মোট ${tk(d.cost)}<br><span class=m>বহর ${tk(d.fleet)} · প্ল্যান্ট ${tk(d.plant)} · নবায়ন ${tk(d.renew)}</span><br>${bn(d.n)}টি অর্ডার`)).on('mouseleave', hideTip)
+      .on('mousemove', (ev) => showTip(ev, `<b>${MONF[+d.m.slice(5) - 1]} ${bn(d.m.slice(0, 4))}</b><br>Total ${tk(d.cost)}<br><span class=m>Fleet ${tk(d.fleet)} · Plant ${tk(d.plant)} · Renewals ${tk(d.renew)}</span><br>${bn(d.n)} orders`)).on('mouseleave', hideTip)
       .on('click', () => monthList(d.m));
   });
   data.forEach((d, i) => { if (d.m.endsWith('-01') || i === 0) s.append('text').attr('x', x(d.m)).attr('y', 300 - m.b + 16).text(bn(d.m.slice(0, 4))); });
@@ -349,16 +349,16 @@ reg(() => {
   const { s, w } = svgIn('cYearly', 230); const m = { l: 56, r: 10, t: 16, b: 28 }, data = D.yearly;
   const x = d3.scaleBand(data.map((d) => d.year), [m.l, w - m.r]).padding(0.35), y = d3.scaleLinear([0, d3.max(data, (d) => d.cost) * 1.15], [230 - m.b, m.t]).nice();
   yAxis(s.append('g'), y, m.l, w - m.r, lakh, 4);
-  data.forEach((d) => { s.append('rect').attr('x', x(d.year)).attr('width', x.bandwidth()).attr('y', y(d.cost)).attr('height', y(0) - y(d.cost)).attr('rx', 4).attr('fill', 'var(--fleet)').on('mousemove', (ev) => showTip(ev, `<b>${bn(d.year)}</b><br>${tk(d.cost)}<br>${bn(d.n)}টি অর্ডার`)).on('mouseleave', hideTip);
+  data.forEach((d) => { s.append('rect').attr('x', x(d.year)).attr('width', x.bandwidth()).attr('y', y(d.cost)).attr('height', y(0) - y(d.cost)).attr('rx', 4).attr('fill', 'var(--fleet)').on('mousemove', (ev) => showTip(ev, `<b>${bn(d.year)}</b><br>${tk(d.cost)}<br>${bn(d.n)} orders`)).on('mouseleave', hideTip);
     s.append('text').attr('x', x(d.year) + x.bandwidth() / 2).attr('y', y(d.cost) - 5).attr('text-anchor', 'middle').attr('class', 'strong').text(lakh(d.cost));
     s.append('text').attr('x', x(d.year) + x.bandwidth() / 2).attr('y', 230 - 8).attr('text-anchor', 'middle').text(bn(d.year)); });
 });
-table('topTbl', [['অর্ডার'], ['তারিখ'], ['বিবরণ'], ['খরচ (টাকা)', 'num']], D.orders.slice().sort((a, b) => b.cost - a.cost).slice(0, 15).map((o) => ({ c: [`<span class=lat>${o.order}</span>`, dlab(o.date), `<span class=lat>${esc(o.desc)}</span>`, f0(o.cost)] })));
+table('topTbl', [['Order'], ['Date'], ['Description'], ['Cost (Tk)', 'num']], D.orders.slice().sort((a, b) => b.cost - a.cost).slice(0, 15).map((o) => ({ c: [`<span class=lat>${o.order}</span>`, dlab(o.date), `<span class=lat>${esc(o.desc)}</span>`, f0(o.cost)] })));
 
 // ---------- fleet
 const V = D.vehicles.filter((v) => v.jobs_w > 0);
 const vSel = document.getElementById('vSel');
-D.vehicles.forEach((v) => { const o = document.createElement('option'); o.value = v.v; o.textContent = v.v + ' · ' + bn(v.jobs) + 'টি কাজ'; vSel.appendChild(o); });
+D.vehicles.forEach((v) => { const o = document.createElement('option'); o.value = v.v; o.textContent = v.v + ' · ' + bn(v.jobs) + ' jobs'; vSel.appendChild(o); });
 vSel.value = D.vehicles[0].v;
 function drawPareto() {
   const { s, w } = svgIn('cPareto', 300); const m = { l: 56, r: 40, t: 12, b: 70 };
@@ -367,7 +367,7 @@ function drawPareto() {
   s.append('line').attr('x1', m.l).attr('x2', w - m.r).attr('y1', y2(80)).attr('y2', y2(80)).attr('stroke', 'var(--bad)').attr('stroke-dasharray', '5 4');
   [0, 50, 100].forEach((t) => s.append('text').attr('x', w - m.r + 6).attr('y', y2(t) + 4).text(bn(t) + '%'));
   V.forEach((d) => { s.append('rect').attr('x', x(d.v)).attr('width', x.bandwidth()).attr('y', y(d.cost_w)).attr('height', y(0) - y(d.cost_w)).attr('rx', 3).attr('fill', d.v === vSel.value ? 'var(--flame)' : 'var(--fleet)').style('cursor', 'pointer')
-    .on('mousemove', (ev) => showTip(ev, `<b class=lat>${d.v}</b><br>${tk(d.cost_w)} · ${bn(d.jobs_w)}টি কাজ<br><span class=m>${d.series}</span><br>ক্রমযোজিত ${bn(d.cum.toFixed(0))}%`)).on('mouseleave', hideTip)
+    .on('mousemove', (ev) => showTip(ev, `<b class=lat>${d.v}</b><br>${tk(d.cost_w)} · ${bn(d.jobs_w)} jobs<br><span class=m>${d.series}</span><br>Cumulative ${bn(d.cum.toFixed(0))}%`)).on('mouseleave', hideTip)
     .on('click', () => { vSel.value = d.v; drawVeh(); drawPareto(); document.getElementById('cVeh').scrollIntoView({ behavior: 'smooth', block: 'center' }); });
     s.append('text').attr('transform', `translate(${x(d.v) + x.bandwidth() / 2},${300 - m.b + 8}) rotate(-60)`).attr('text-anchor', 'end').attr('font-size', 10.5).text(d.v.slice(-7)); });
   s.append('path').datum(V).attr('d', d3.line().x((d) => x(d.v) + x.bandwidth() / 2).y((d) => y2(d.cum))).attr('fill', 'none').attr('stroke', 'var(--flame2)').attr('stroke-width', 2);
@@ -376,7 +376,7 @@ reg(drawPareto);
 vSel.addEventListener('change', () => { drawVeh(); drawPareto(); });
 function drawVeh() {
   const v = vSel.value, jobs = D.fleet_jobs.filter((j) => j.vehicle === v), info = D.vehicles.find((x) => x.v === v);
-  document.getElementById('vSum').innerHTML = `${esc(info.series)} · মোট ${tk(info.cost)} · ${bn(info.jobs)}টি কাজ` + (info.mtbe ? ` · গড় বিরতি ${f1(info.mtbe)} দিন` : '') + (info.renew_last ? ` · শেষ নবায়ন-অর্ডার ${dlab(info.renew_last)}` : '');
+  document.getElementById('vSum').innerHTML = `${esc(info.series)} · total ${tk(info.cost)} · ${bn(info.jobs)} jobs` + (info.mtbe ? ` · mean interval ${f1(info.mtbe)} days` : '') + (info.renew_last ? ` · last renewal order ${dlab(info.renew_last)}` : '');
   const { s, w } = svgIn('cVeh', 230); const m = { l: 56, r: 14, t: 14, b: 28 };
   const x = d3.scaleTime([new Date('2022-01-01'), new Date('2026-11-01')], [m.l, w - m.r]);
   const y = d3.scaleSymlog([0, Math.max(500000, d3.max(jobs, (j) => j.cost) || 1)], [230 - m.b, m.t]).constant(2000);
@@ -384,8 +384,8 @@ function drawVeh() {
   [2022, 2023, 2024, 2025, 2026].forEach((yy) => s.append('text').attr('x', x(new Date(yy + '-01-01'))).attr('y', 230 - 8).text(bn(yy)));
   const r = d3.scaleSqrt([0, 500000], [3, 18]);
   jobs.forEach((j) => s.append('circle').attr('cx', x(new Date(j.date))).attr('cy', y(j.cost)).attr('r', r(j.cost)).attr('fill', PMCOL[j.pm] || 'var(--c1)').attr('fill-opacity', 0.75).attr('stroke', 'var(--ink0)')
-    .on('mousemove', (ev) => showTip(ev, `<b class=lat>${j.order}</b> · ${dlab(j.date)}<br><span class=lat>${esc(j.desc)}</span><br>${esc(j.cat_bn)} · ${esc(j.pm)}<br><b>${f0(j.cost)} টাকা</b>`)).on('mouseleave', hideTip));
-  table('vTbl', [['অর্ডার'], ['তারিখ'], ['বিবরণ'], ['ধরন'], ['খরচ (টাকা)', 'num']], jobs.slice().sort((a, b) => b.date.localeCompare(a.date)).map((j) => ({ c: [`<span class=lat>${j.order}</span>`, dlab(j.date), `<span class=lat>${esc(j.desc)}</span>`, esc(j.cat_bn), f0(j.cost)] })));
+    .on('mousemove', (ev) => showTip(ev, `<b class=lat>${j.order}</b> · ${dlab(j.date)}<br><span class=lat>${esc(j.desc)}</span><br>${esc(j.cat_bn)} · ${esc(j.pm)}<br><b>Tk ${f0(j.cost)}</b>`)).on('mouseleave', hideTip));
+  table('vTbl', [['Order'], ['Date'], ['Description'], ['Type'], ['Cost (Tk)', 'num']], jobs.slice().sort((a, b) => b.date.localeCompare(a.date)).map((j) => ({ c: [`<span class=lat>${j.order}</span>`, dlab(j.date), `<span class=lat>${esc(j.desc)}</span>`, esc(j.cat_bn), f0(j.cost)] })));
 }
 reg(drawVeh);
 reg(() => {
@@ -393,11 +393,11 @@ reg(() => {
   const x = d3.scaleLinear([0, d3.max(data, (d) => d.cost_per_vehicle_month) * 1.25], [lw, w - 10]);
   data.forEach((d, i) => { const yy = 10 + i * 34; s.append('text').attr('x', lw - 8).attr('y', yy + 15).attr('text-anchor', 'end').text(d.series);
     s.append('rect').attr('x', lw).attr('y', yy + 4).attr('width', x(d.cost_per_vehicle_month) - lw).attr('height', 16).attr('rx', 3).attr('fill', i === 0 ? 'var(--flame)' : 'var(--fleet)')
-      .on('mousemove', (ev) => showTip(ev, `<b>${d.series}</b><br>${bn(d.vehicles)}টি গাড়ি · ${bn(d.jobs)}টি কাজ<br>মোট ${tk(d.cost)}`)).on('mouseleave', hideTip);
+      .on('mousemove', (ev) => showTip(ev, `<b>${d.series}</b><br>${bn(d.vehicles)} vehicles · ${bn(d.jobs)} jobs<br>Total ${tk(d.cost)}`)).on('mouseleave', hideTip);
     s.append('text').attr('x', x(d.cost_per_vehicle_month) + 6).attr('y', yy + 16).attr('class', 'strong').text(f0(d.cost_per_vehicle_month)); });
 });
-document.getElementById('repSum').textContent = bn(D.repeats.length) + 'বার · ' + tk(d3.sum(D.repeats, (r) => r.cost2));
-table('repTbl', [['গাড়ি'], ['অংশ'], ['প্রথম'], ['আবার'], ['দিন', 'num'], ['দ্বিতীয়বারের খরচ', 'num']], D.repeats.map((r) => ({ c: [`<span class=lat>${r.v}</span>`, esc(r.cat), dlab(r.first), dlab(r.second), bn(r.days), f0(r.cost2)] })));
+document.getElementById('repSum').textContent = bn(D.repeats.length) + ' times · ' + tk(d3.sum(D.repeats, (r) => r.cost2));
+table('repTbl', [['Vehicle'], ['Part'], ['First'], ['Again'], ['Days', 'num'], ['Cost of the repeat', 'num']], D.repeats.map((r) => ({ c: [`<span class=lat>${r.v}</span>`, esc(r.cat), dlab(r.first), dlab(r.second), bn(r.days), f0(r.cost2)] })));
 
 // ---------- work types
 let catMode = 'cost';
@@ -407,7 +407,7 @@ function drawCats() {
   const x = d3.scaleLinear([0, d3.max(data, (d) => d[catMode]) * 1.25], [lw, w - 8]);
   data.forEach((d, i) => { const yy = 6 + i * 26; s.append('text').attr('x', lw - 8).attr('y', yy + 13).attr('text-anchor', 'end').attr('font-size', 12).text(d.cat_bn);
     s.append('rect').attr('x', lw).attr('y', yy + 3).attr('width', Math.max(1, x(d[catMode]) - lw)).attr('height', 14).attr('rx', 3).attr('fill', i < 3 ? 'var(--flame)' : 'var(--fleet)')
-      .on('mousemove', (ev) => showTip(ev, `<b>${esc(d.cat_bn)}</b><br>${bn(d.jobs)}টি অর্ডার · মোট ${tk(d.cost)}<br>মধ্যমা ${f0(d.med)} টাকা · সর্বোচ্চ ${f0(d.mx)} টাকা`)).on('mouseleave', hideTip);
+      .on('mousemove', (ev) => showTip(ev, `<b>${esc(d.cat_bn)}</b><br>${bn(d.jobs)} orders · total ${tk(d.cost)}<br>Median Tk ${f0(d.med)} · highest Tk ${f0(d.mx)}`)).on('mouseleave', hideTip);
     s.append('text').attr('x', x(d[catMode]) + 5).attr('y', yy + 14).attr('class', 'strong').attr('font-size', 12).text(catMode === 'jobs' ? bn(d.jobs) : lakh(d[catMode])); });
 }
 reg(drawCats);
@@ -418,13 +418,13 @@ reg(() => {
   data.forEach((d, i) => { const yy = 4 + i * 22; s.append('text').attr('x', lw - 8).attr('y', yy + 12).attr('text-anchor', 'end').attr('font-size', 11.5).text(d.c);
     s.append('line').attr('x1', x(1)).attr('x2', x(d.x)).attr('y1', yy + 8).attr('y2', yy + 8).attr('stroke', d.x >= 1 ? 'var(--flame)' : 'var(--plant)').attr('stroke-width', 8).attr('stroke-linecap', 'round');
     s.append('text').attr('x', x(Math.max(d.x, 1)) + 8).attr('y', yy + 12).attr('class', 'strong').attr('font-size', 11.5).text('×' + f1(d.x)); });
-  s.append('text').attr('x', x(1)).attr('y', 22 * data.length + 24).attr('text-anchor', 'middle').attr('font-size', 11).text('×১ = নির্ধারিত সার্ভিস');
+  s.append('text').attr('x', x(1)).attr('y', 22 * data.length + 24).attr('text-anchor', 'middle').attr('font-size', 11).text('×1 = scheduled service');
 });
-table('regTbl2', [['মডেল'], ['R²', 'num'], ['মধ্যমা ভুল (টাকা)', 'num'], ['২ গুণের মধ্যে %', 'num']], D.reg.map((r, i) => ({ cls: i === 0 ? 'sel' : '', c: [r.model, f2(r.r2), f0(r.mae_bdt), f1(r.within2x)] })));
-document.getElementById('clusters').innerHTML = D.clusters.map((c) => `<div class="cl"><div class="cap" style="margin:0 0 4px"><b>${c.terms.map(esc).join(' · ')}</b><span>${bn(c.n)}টি</span></div><div class="small">মোট ${tk(c.cost)}</div><div class="ex">${esc(c.example)}</div></div>`).join('');
+table('regTbl2', [['Model'], ['R²', 'num'], ['Median error (Tk)', 'num'], ['% within 2×', 'num']], D.reg.map((r, i) => ({ cls: i === 0 ? 'sel' : '', c: [r.model, f2(r.r2), f0(r.mae_bdt), f1(r.within2x)] })));
+document.getElementById('clusters').innerHTML = D.clusters.map((c) => `<div class="cl"><div class="cap" style="margin:0 0 4px"><b>${c.terms.map(esc).join(' · ')}</b><span>${bn(c.n)}</span></div><div class="small">Total ${tk(c.cost)}</div><div class="ex">${esc(c.example)}</div></div>`).join('');
 
 // ---------- preventive vs corrective
-const PMK = ['মেরামত', 'সার্ভিস + মেরামত', 'নির্ধারিত সার্ভিস'];
+const PMK = ['Repair', 'Service + repair', 'Scheduled service'];
 document.getElementById('pmLegend').innerHTML = PMK.map((k) => `<span><i style="background:${PMCOL[k]}"></i>${k}</span>`).join('');
 reg(() => {
   const data = D.pm_q.filter((d) => PMK.some((k) => d[k])); const { s, w } = svgIn('cPmq', 260); const m = { l: 40, r: 8, t: 10, b: 34 };
@@ -432,20 +432,20 @@ reg(() => {
   yAxis(s.append('g'), y, m.l, w - m.r, bn, 4);
   data.forEach((d) => { let y0 = 0; const tot = d3.sum(PMK, (k) => d[k] || 0);
     PMK.forEach((k) => { const v = d[k] || 0; if (!v) return; s.append('rect').attr('x', x(d.q)).attr('width', x.bandwidth()).attr('y', y(y0 + v)).attr('height', y(y0) - y(y0 + v)).attr('fill', PMCOL[k])
-      .on('mousemove', (ev) => showTip(ev, `<b>${bn(d.q.replace('Q', ' ত্রৈ. '))}</b><br>${k}: ${bn(v)}টি (${bn((v / tot * 100).toFixed(0))}%)`)).on('mouseleave', hideTip); y0 += v; });
-    s.append('text').attr('x', x(d.q) + x.bandwidth() / 2).attr('y', 260 - 14).attr('text-anchor', 'middle').attr('font-size', 11).text(bn(d.q.replace('Q', ' ত্রৈ.'))); });
+      .on('mousemove', (ev) => showTip(ev, `<b>${bn(d.q.replace('Q', ' Q'))}</b><br>${k}: ${bn(v)} (${bn((v / tot * 100).toFixed(0))}%)`)).on('mouseleave', hideTip); y0 += v; });
+    s.append('text').attr('x', x(d.q) + x.bandwidth() / 2).attr('y', 260 - 14).attr('text-anchor', 'middle').attr('font-size', 11).text(bn(d.q.replace('Q', ' Q'))); });
 });
 reg(() => {
   const H = D.weibull; const { s, w } = svgIn('cWeib', 240); const m = { l: 40, r: 10, t: 10, b: 32 };
   const x = d3.scaleLinear([0, H.edges[H.edges.length - 1]], [m.l, w - m.r]), y = d3.scaleLinear([0, d3.max(H.hist) * 1.15], [240 - m.b, m.t]).nice();
   yAxis(s.append('g'), y, m.l, w - m.r, bn, 4);
   H.hist.forEach((c, i) => s.append('rect').attr('x', x(H.edges[i]) + 1).attr('width', Math.max(1, x(H.edges[i + 1]) - x(H.edges[i]) - 2)).attr('y', y(c)).attr('height', y(0) - y(c)).attr('fill', 'var(--fleet)').attr('opacity', 0.75)
-    .on('mousemove', (ev) => showTip(ev, `${bn(H.edges[i])}–${bn(H.edges[i + 1])} দিন: <b>${bn(c)}</b>টি বিরতি`)).on('mouseleave', hideTip));
+    .on('mousemove', (ev) => showTip(ev, `${bn(H.edges[i])}–${bn(H.edges[i + 1])} days: <b>${bn(c)}</b> intervals`)).on('mouseleave', hideTip));
   s.append('path').datum(H.curve).attr('d', d3.line().x((d) => x(d[0])).y((d) => y(d[1]))).attr('fill', 'none').attr('stroke', 'var(--flame)').attr('stroke-width', 2.5);
   x.ticks(6).forEach((t) => s.append('text').attr('x', x(t)).attr('y', 240 - 12).attr('text-anchor', 'middle').text(bn(t)));
-  s.append('text').attr('x', w - m.r).attr('y', 240 - 0).attr('text-anchor', 'end').attr('font-size', 11).text('দিন');
+  s.append('text').attr('x', w - m.r).attr('y', 240 - 0).attr('text-anchor', 'end').attr('font-size', 11).text('days');
 });
-table('planTbl', [['অর্ডার'], ['ধরন'], ['তারিখ'], ['বিবরণ'], ['স্ট্যাটাস']], D.orders.filter((o) => o.type === 'ZPM3' && !/renewal/i.test(o.desc) || /MSPT/.test(o.status)).map((o) => ({ c: [`<span class=lat>${o.order}</span>`, `<span class=lat>${o.type}</span>`, dlab(o.date), `<span class=lat>${esc(o.desc)}</span>`, `<span class="chip bad lat">${o.status}</span>`] })));
+table('planTbl', [['Order'], ['Type'], ['Date'], ['Description'], ['Status']], D.orders.filter((o) => o.type === 'ZPM3' && !/renewal/i.test(o.desc) || /MSPT/.test(o.status)).map((o) => ({ c: [`<span class=lat>${o.order}</span>`, `<span class=lat>${o.type}</span>`, dlab(o.date), `<span class=lat>${esc(o.desc)}</span>`, `<span class="chip bad lat">${o.status}</span>`] })));
 
 // ---------- forecasts and models
 reg(() => {
@@ -455,15 +455,15 @@ reg(() => {
   s.append('path').datum(F.fwd).attr('d', d3.area().x((d) => x(d.m)).y0((d) => y(d.lo)).y1((d) => y(d.hi))).attr('fill', 'var(--flame)').attr('opacity', 0.16);
   s.append('path').datum(F.fwd).attr('d', d3.line().x((d) => x(d.m)).y((d) => y(d.v))).attr('fill', 'none').attr('stroke', 'var(--flame)').attr('stroke-width', 2).attr('stroke-dasharray', '6 4');
   s.append('path').datum(F.hist).attr('d', d3.line().x((d) => x(d.m)).y((d) => y(d.v))).attr('fill', 'none').attr('stroke', 'var(--fleet)').attr('stroke-width', 2.2);
-  F.hist.forEach((d) => s.append('circle').attr('cx', x(d.m)).attr('cy', y(d.v)).attr('r', 4).attr('fill', 'var(--fleet)').on('mousemove', (ev) => showTip(ev, `<b>${mlab(d.m)}</b><br>লিপিবদ্ধ ${tk(d.v)}`)).on('mouseleave', hideTip));
-  F.recorded_after.forEach((d) => s.append('circle').attr('cx', x(d.m)).attr('cy', y(d.v)).attr('r', 4).attr('fill', 'none').attr('stroke', 'var(--muted)').attr('stroke-width', 1.5).on('mousemove', (ev) => showTip(ev, `<b>${mlab(d.m)}</b><br>এখন পর্যন্ত SAP-এ ${tk(d.v)} (অসম্পূর্ণ)`)).on('mouseleave', hideTip));
-  F.fwd.forEach((d) => s.append('circle').attr('cx', x(d.m)).attr('cy', y(d.v)).attr('r', 9).attr('fill', 'transparent').on('mousemove', (ev) => showTip(ev, `<b>${mlab(d.m)}</b><br>পূর্বাভাস ${tk(d.v)}<br><span class=m>৮০% পরিসর ${lakh(d.lo)}–${lakh(d.hi)} টাকা</span>`)).on('mouseleave', hideTip));
+  F.hist.forEach((d) => s.append('circle').attr('cx', x(d.m)).attr('cy', y(d.v)).attr('r', 4).attr('fill', 'var(--fleet)').on('mousemove', (ev) => showTip(ev, `<b>${mlab(d.m)}</b><br>Recorded ${tk(d.v)}`)).on('mouseleave', hideTip));
+  F.recorded_after.forEach((d) => s.append('circle').attr('cx', x(d.m)).attr('cy', y(d.v)).attr('r', 4).attr('fill', 'none').attr('stroke', 'var(--muted)').attr('stroke-width', 1.5).on('mousemove', (ev) => showTip(ev, `<b>${mlab(d.m)}</b><br>In SAP so far ${tk(d.v)} (incomplete)`)).on('mouseleave', hideTip));
+  F.fwd.forEach((d) => s.append('circle').attr('cx', x(d.m)).attr('cy', y(d.v)).attr('r', 9).attr('fill', 'transparent').on('mousemove', (ev) => showTip(ev, `<b>${mlab(d.m)}</b><br>Forecast ${tk(d.v)}<br><span class=m>80% range Tk ${lakh(d.lo)}–${lakh(d.hi)}</span>`)).on('mouseleave', hideTip));
   all.forEach((mm, i) => { if (i % 2 === 0) s.append('text').attr('x', x(mm)).attr('y', 280 - 10).attr('text-anchor', 'middle').attr('font-size', 11).text(mlab(mm)); });
 });
-table('fcTbl', [['পদ্ধতি (জানু–জুন ২০২৬, এক মাস আগে)'], ['RMSE (টাকা)', 'num'], ['MAE (টাকা)', 'num'], ['MAPE %', 'num'], ['নাইভের চেয়ে ভালো %', 'num']], D.fc_bt.map((r) => ({ cls: r.sel ? 'sel' : '', c: [r.model + (r.sel ? ' ✓' : ''), f0(r.rmse), f0(r.mae), f1(r.mape), f1(r.skill)] })));
+table('fcTbl', [['Method (Jan–Jun 2026, one month ahead)'], ['RMSE (Tk)', 'num'], ['MAE (Tk)', 'num'], ['MAPE %', 'num'], ['Better than naive %', 'num']], D.fc_bt.map((r) => ({ cls: r.sel ? 'sel' : '', c: [r.model + (r.sel ? ' ✓' : ''), f0(r.rmse), f0(r.mae), f1(r.mape), f1(r.skill)] })));
 const clsRows = (arr, top) => arr.map((r) => ({ cls: r.sel ? 'sel' : '', c: [r.model + (r.sel ? ' ✓' : ''), f2(r.auc), f2(r.lo) + '–' + f2(r.hi), f2(r.brier), f0(r[top]) + '%'] }));
-table('clsBTbl', [['মডেল'], ['AUC', 'num'], ['৯০% পরিসর', 'num'], ['Brier', 'num'], ['শীর্ষ ৫-এ সঠিক', 'num']], clsRows(D.clsB, 'top5'));
-table('clsATbl', [['মডেল'], ['AUC', 'num'], ['৯০% পরিসর', 'num'], ['Brier', 'num'], ['শীর্ষ ৫-এ সঠিক', 'num']], clsRows(D.clsA, 'top5'));
+table('clsBTbl', [['Model'], ['AUC', 'num'], ['90% range', 'num'], ['Brier', 'num'], ['Correct in top 5', 'num']], clsRows(D.clsB, 'top5'));
+table('clsATbl', [['Model'], ['AUC', 'num'], ['90% range', 'num'], ['Brier', 'num'], ['Correct in top 5', 'num']], clsRows(D.clsA, 'top5'));
 reg(() => {
   const data = D.imp; const { s, w } = svgIn('cImp', 26 * data.length + 10); const lw = Math.min(250, w * 0.55);
   const x = d3.scaleLinear([Math.min(0, d3.min(data, (d) => d.drop)), d3.max(data, (d) => d.drop) * 1.2], [lw, w - 40]);
@@ -477,19 +477,19 @@ reg(() => {
   data.forEach((d, i) => { const yy = 4 + i * 26;
     s.append('text').attr('x', lw - 8).attr('y', yy + 13).attr('text-anchor', 'end').attr('class', i < 4 ? 'strong' : '').attr('font-size', 12).text(d.v.slice(-7));
     s.append('rect').attr('x', lw).attr('y', yy + 3).attr('width', x(d.p) - lw).attr('height', 14).attr('rx', 3).attr('fill', i < 4 ? 'var(--bad)' : 'var(--flame)').attr('opacity', i < 4 ? 1 : 0.75)
-      .on('mousemove', (ev) => showTip(ev, `<b class=lat>${d.v}</b><br>বড় মেরামতের সম্ভাবনা ${bn(d.p.toFixed(0))}%<br><span class=m>মাসে গড় ${f2(d.rate)}টি কাজ · শেষ ৩ মাসে ${bn(d.jobs3)}টি · ৬ মাসে বড় মেরামত ${bn(d.big6)}টি</span>` + (d.seen ? `<br>জুলাই–সেপ্টে ২০২৬-এ SAP-এ উঠেছে: ${f0(d.seen)} টাকা` : ''))).on('mouseleave', hideTip);
+      .on('mousemove', (ev) => showTip(ev, `<b class=lat>${d.v}</b><br>Chance of a major repair ${bn(d.p.toFixed(0))}%<br><span class=m>Mean ${f2(d.rate)} jobs a month · ${bn(d.jobs3)} in the last 3 months · ${bn(d.big6)} major repairs in 6 months</span>` + (d.seen ? `<br>In SAP for Jul–Sep 2026: Tk ${f0(d.seen)}` : ''))).on('mouseleave', hideTip);
     s.append('text').attr('x', x(d.p) + 6).attr('y', yy + 14).attr('font-size', 12).attr('class', 'strong').text(bn(d.p.toFixed(0)) + '%' + (d.seen ? ' ✓' : '')); });
-  s.append('text').attr('x', lw).attr('y', 26 * data.length + 20).attr('font-size', 11).text('✓ = ওই সময়ের বড় কাজ ইতিমধ্যে SAP-এ উঠেছে');
+  s.append('text').attr('x', lw).attr('y', 26 * data.length + 20).attr('font-size', 11).text('✓ = a major job of that period is already in SAP');
 });
-table('anomTbl', [['অর্ডার'], ['বিবরণ'], ['খরচ (টাকা)', 'num'], ['শ্রেণির মধ্যমা', 'num'], ['রোবাস্ট z', 'num']], D.anom.map((a) => ({ c: [`<span class=lat>${a.order}</span>`, `<span class=lat>${esc(a.desc)}</span><br><span class=small>${esc(a.cat_bn)} · ${dlab(a.date)}</span>`, f0(a.cost), f0(a.med), f1(a.rz) + (a.iso ? ' <span class="chip warn">IF</span>' : '')] })));
+table('anomTbl', [['Order'], ['Description'], ['Cost (Tk)', 'num'], ['Category median', 'num'], ['Robust z', 'num']], D.anom.map((a) => ({ c: [`<span class=lat>${a.order}</span>`, `<span class=lat>${esc(a.desc)}</span><br><span class=small>${esc(a.cat_bn)} · ${dlab(a.date)}</span>`, f0(a.cost), f0(a.med), f1(a.rz) + (a.iso ? ' <span class="chip warn">IF</span>' : '')] })));
 
 // ---------- renewals
 let renMode = 'all';
 document.querySelectorAll('#renMode .btn').forEach((b) => b.addEventListener('click', () => { renMode = b.dataset.k; document.querySelectorAll('#renMode .btn').forEach((x) => x.classList.toggle('on', x === b)); drawRen(); }));
 function drawRen() {
-  const rows = D.renewals.filter((r) => renMode === 'all' || (renMode === 'over' && r.status.startsWith('মেয়াদ')) || (renMode === 'soon' && r.status.startsWith('১২০')) || (renMode === 'plant' && r.plant) || (renMode === 'veh' && !r.plant));
-  document.getElementById('renCount').textContent = bn(rows.length) + 'টি';
-  table('renTbl', [['বিষয়'], ['কাগজ'], ['অর্ডার', 'num'], ['শেষ অর্ডার'], ['পরের নবায়ন (অনুমান)'], ['অবস্থা']], rows.map((r) => ({ cls: r.status.startsWith('মেয়াদ') ? 'hl' : '', c: [r.plant ? r.subject : `<span class=lat>${r.subject}</span>`, r.doc, bn(r.orders), dlab(r.last), dlab(r.next), `<span class="chip ${r.status.startsWith('মেয়াদ') ? 'bad' : r.status.startsWith('১২০') ? 'warn' : 'ok'}">${r.status}</span>`] })));
+  const rows = D.renewals.filter((r) => renMode === 'all' || (renMode === 'over' && r.status.startsWith('Expired')) || (renMode === 'soon' && r.status.startsWith('Within')) || (renMode === 'plant' && r.plant) || (renMode === 'veh' && !r.plant));
+  document.getElementById('renCount').textContent = bn(rows.length);
+  table('renTbl', [['Subject'], ['Document'], ['Orders', 'num'], ['Last order'], ['Next renewal (assumed)'], ['Status']], rows.map((r) => ({ cls: r.status.startsWith('Expired') ? 'hl' : '', c: [r.plant ? r.subject : `<span class=lat>${r.subject}</span>`, r.doc, bn(r.orders), dlab(r.last), dlab(r.next), `<span class="chip ${r.status.startsWith('Expired') ? 'bad' : r.status.startsWith('Within') ? 'warn' : 'ok'}">${r.status}</span>`] })));
 }
 drawRen();
 
@@ -501,27 +501,27 @@ reg(() => {
   PG.forEach((g, i) => { const yy = 20 + i * 40; s.append('line').attr('x1', lw).attr('x2', w - 14).attr('y1', yy).attr('y2', yy).attr('stroke', 'var(--line)'); s.append('text').attr('x', lw - 8).attr('y', yy + 4).attr('text-anchor', 'end').attr('font-size', 12).text(g); });
   D.plant.forEach((p) => { const yy = 20 + PG.indexOf(p.group) * 40;
     s.append('circle').attr('cx', x(new Date(p.date))).attr('cy', yy).attr('r', r(p.cost)).attr('fill', p.cost > 0 ? 'var(--plant)' : 'none').attr('fill-opacity', 0.75).attr('stroke', p.cost > 0 ? 'var(--ink0)' : 'var(--muted)')
-      .on('mousemove', (ev) => showTip(ev, `<b class=lat>${p.order}</b> · ${dlab(p.date)}<br><span class=lat>${esc(p.desc)}</span><br><span class=lat>${p.status}</span><br><b>${f0(p.cost)} টাকা</b>`)).on('mouseleave', hideTip); });
+      .on('mousemove', (ev) => showTip(ev, `<b class=lat>${p.order}</b> · ${dlab(p.date)}<br><span class=lat>${esc(p.desc)}</span><br><span class=lat>${p.status}</span><br><b>Tk ${f0(p.cost)}</b>`)).on('mouseleave', hideTip); });
   [2022, 2023, 2024, 2025, 2026].forEach((yy) => s.append('text').attr('x', x(new Date(yy + '-01-01'))).attr('y', 40 * PG.length + 34).text(bn(yy)));
 });
-table('plantTbl', [['অর্ডার'], ['তারিখ'], ['দল'], ['বিবরণ'], ['স্ট্যাটাস'], ['খরচ (টাকা)', 'num']], D.plant.slice().reverse().map((p) => ({ c: [`<span class=lat>${p.order}</span>`, dlab(p.date), esc(p.group), `<span class=lat>${esc(p.desc)}</span>`, `<span class=lat>${p.status}</span>`, f0(p.cost)] })));
+table('plantTbl', [['Order'], ['Date'], ['Group'], ['Description'], ['Status'], ['Cost (Tk)', 'num']], D.plant.slice().reverse().map((p) => ({ c: [`<span class=lat>${p.order}</span>`, dlab(p.date), esc(p.group), `<span class=lat>${esc(p.desc)}</span>`, `<span class=lat>${p.status}</span>`, f0(p.cost)] })));
 
 // ---------- all orders
 const fG = document.getElementById('fGroup'), fY = document.getElementById('fYear'), fF = document.getElementById('fFlag'), q = document.getElementById('q');
-fG.innerHTML = '<option value="">সব দল</option>' + [...new Set(D.orders.map((o) => o.group))].map((g) => `<option>${g}</option>`).join('');
-fY.innerHTML = '<option value="">সব বছর</option>' + [...new Set(D.orders.map((o) => o.date.slice(0, 4)))].sort().map((y) => `<option value="${y}">${bn(y)}</option>`).join('');
+fG.innerHTML = '<option value="">All groups</option>' + [...new Set(D.orders.map((o) => o.group))].map((g) => `<option>${g}</option>`).join('');
+fY.innerHTML = '<option value="">All years</option>' + [...new Set(D.orders.map((o) => o.date.slice(0, 4)))].sort().map((y) => `<option value="${y}">${bn(y)}</option>`).join('');
 let sortK = 'order', sortD = -1, shown = 60;
-const COLS = [['order', 'অর্ডার'], ['type', 'ধরন'], ['date', 'তারিখ'], ['vehicle', 'গাড়ি/দল'], ['desc', 'বিবরণ'], ['status', 'স্ট্যাটাস'], ['cost', 'খরচ (টাকা)']];
+const COLS = [['order', 'Order'], ['type', 'Type'], ['date', 'Date'], ['vehicle', 'Vehicle/group'], ['desc', 'Description'], ['status', 'Status'], ['cost', 'Cost (Tk)']];
 function drawAll() {
   const qq = q.value.trim().toLowerCase();
   let rows = D.orders.filter((o) => (!fG.value || o.group === fG.value) && (!fY.value || o.date.startsWith(fY.value)) &&
     (!fF.value || (fF.value === 'cost' && o.cost > 0) || (fF.value === 'flag' && (o.dup_of || o.mismatch || o.lowconf)) || (fF.value === 'late' && o.backdated)) &&
     (!qq || (o.order + ' ' + (o.vehicle || '') + ' ' + o.desc + ' ' + o.status + ' ' + o.group + ' ' + o.cat_bn).toLowerCase().includes(qq)));
   rows.sort((a, b) => { const x = a[sortK] ?? '', y = b[sortK] ?? ''; return (x < y ? -1 : x > y ? 1 : 0) * sortD; });
-  document.getElementById('allCount').textContent = bn(rows.length) + 'টি অর্ডার · ' + tk(d3.sum(rows, (o) => o.cost));
+  document.getElementById('allCount').textContent = bn(rows.length) + ' orders · ' + tk(d3.sum(rows, (o) => o.cost));
   const t = document.getElementById('allTbl');
   t.innerHTML = '<thead><tr>' + COLS.map(([k, l]) => `<th class="sort ${k === 'cost' ? 'num' : ''}" data-k="${k}">${l}${sortK === k ? (sortD > 0 ? ' ▲' : ' ▼') : ''}</th>`).join('') + '</tr></thead><tbody>' +
-    rows.slice(0, shown).map((o) => { const flags = (o.dup_of ? ' <span class="chip warn">দ্বৈত?</span>' : '') + (o.mismatch ? ' <span class="chip bad">গাড়ি অমিল</span>' : '') + (o.lowconf ? ' <span class="chip warn">খরচ যাচাই বাকি</span>' : '') + (o.backdated ? ' <span class="chip">পরে লেখা</span>' : '') + (o.a_start ? ` <span class="chip ok">${dlab(o.a_start)}–${dlab(o.a_finish)}</span>` : '');
+    rows.slice(0, shown).map((o) => { const flags = (o.dup_of ? ' <span class="chip warn">Duplicate?</span>' : '') + (o.mismatch ? ' <span class="chip bad">Vehicle mismatch</span>' : '') + (o.lowconf ? ' <span class="chip warn">Cost to verify</span>' : '') + (o.backdated ? ' <span class="chip">Written later</span>' : '') + (o.a_start ? ` <span class="chip ok">${dlab(o.a_start)}–${dlab(o.a_finish)}</span>` : '');
       return `<tr><td><span class=lat>${o.order}</span></td><td><span class=lat>${o.type}</span></td><td>${dlab(o.date)}</td><td>${o.vehicle ? '<span class=lat>' + o.vehicle + '</span>' : esc(o.group)}</td><td><span class=lat>${esc(o.desc)}</span>${flags}<br><span class=small>${esc(o.cat_bn)} · ${esc(o.pm)}</span></td><td><span class=lat>${o.status}</span></td><td class=num>${f0(o.cost)}</td></tr>`; }).join('') + '</tbody>';
   t.querySelectorAll('th.sort').forEach((th) => th.addEventListener('click', () => { const k = th.dataset.k; if (sortK === k) sortD = -sortD; else { sortK = k; sortD = k === 'cost' || k === 'date' || k === 'order' ? -1 : 1; } drawAll(); }));
   document.getElementById('allMore').style.display = rows.length > shown ? '' : 'none';
