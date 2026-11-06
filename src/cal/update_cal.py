@@ -9,7 +9,7 @@ What it does, in order:
  3. rebuilds every dashboard dataset with the original definitions (2024 control limits, ±150 g tolerance,
     bootstrap intervals, Sep-onward 'recent' period), scores the last published forecast against what happened,
     and picks the next-check forecast method by a one-round-ahead rolling backtest;
- 4. writes the 'Latest update' view, the dated dashboard text, the hub figures and an update-log entry.
+ 4. writes the 'Latest results' view, the dated dashboard text, the hub figures and an update-log entry.
 The 25 Oct slides, written report, giveaway estimate, driver weights and anomaly scores are not recomputed here."""
 import argparse, datetime as dt, html, json, math, os, re, sys
 import numpy as np, pandas as pd
@@ -288,7 +288,7 @@ def heat(v):
 def chart_rounds(R):
     rs = R["rounds"].sort_values("round_no").tail(16).reset_index(drop=True)
     newset = set(R["new_rounds"]["round"])
-    W, Hh, l, r, t, b = 760, 270, 46, 70, 16, 46
+    W, Hh, l, r, t, b = 980, 300, 46, 112, 16, 46
     lo = min(R["LCL"] - 30, rs.mean_g.min() - 15); hi = max(R["UCL"] + 30, rs.mean_g.max() + 25)
     y = lambda v: t + (hi - v) / (hi - lo) * (Hh - t - b)
     x = lambda i: l + i * (W - l - r) / max(1, len(rs) - 1)
@@ -300,7 +300,7 @@ def chart_rounds(R):
                  f'<text x="{l - 6}" y="{y(v) + 4:.1f}" text-anchor="end">{num(v, 0, True)}</text>')
     for v, lab in [(R["UCL"], "Upper limit"), (R["LCL"], "Lower limit")]:
         o.append(f'<line x1="{l}" x2="{W - r}" y1="{y(v):.1f}" y2="{y(v):.1f}" stroke="var(--cds-chart-reference)" stroke-dasharray="5 4" stroke-width="1.5"/>'
-                 f'<text x="{W - r + 6}" y="{y(v) + 4:.1f}">{lab} {num(v, 0, True)}</text>')
+                 f'<text x="{W - r + 14}" y="{y(v) + 4:.1f}">{lab} {num(v, 0, True)}</text>')
     pts = " ".join(f"{x(i):.1f},{y(v):.1f}" for i, v in enumerate(rs.mean_g))
     o.append(f'<polyline points="{pts}" fill="none" stroke="var(--cds-chart-muted)" stroke-width="1.5"/>')
     for i, rr in rs.iterrows():
@@ -308,7 +308,8 @@ def chart_rounds(R):
         col = "var(--accent)" if isnew else "var(--cds-chart-muted)"
         o.append(f'<circle cx="{x(i):.1f}" cy="{y(rr.mean_g):.1f}" r="{6 if isnew else 4.5}" fill="{col}" stroke="var(--panel)" stroke-width="1.5"><title>{esc(rr["round"])}: {rr.mean_g:+.1f} g</title></circle>')
         if isnew: o.append(f'<text class="strong" x="{x(i):.1f}" y="{y(rr.mean_g) - 11:.1f}" text-anchor="middle">{num(rr.mean_g, 0, True)}</text>')
-        if isnew or i % 3 == 0:
+        newi = [j for j, q in enumerate(rs["round"]) if q in newset]
+        if isnew or (i % 3 == 0 and all(abs(i - j) > 1 for j in newi)):
             o.append(f'<text x="{x(i):.1f}" y="{Hh - b + 18}" text-anchor="middle"{" class=strong" if isnew else ""}>{bround(rr["round"], rr.date)}</text>')
     o.append(f'<text x="{l}" y="{Hh - 6}">Grey: earlier rounds · Orange: new rounds · Green band: inside the 2024 control limits</text></svg>')
     return "".join(o)
@@ -326,9 +327,9 @@ def render(R, a, updates):
     pl, ld = R["prev_last"], R["last_day"]; NR, newc = R["new_rounds"], R["newc"]; fc, sc = R["fc"], R["score"]
     pk, s6, sb, sl, slx = R["pk"], R["s6"], R["sb"], R["sl"], R["slx"]
     o = ['<div class="up">']
-    o.append('<h2>Cylinder weight accuracy: latest update</h2>')
-    o.append(f'<p class="meta">Updated {bdate(a.date)} · Data {bdate(R["rounds"].date.min())} – {bdate(ld)} · Source: plant weight-check records '
-             f'({bn(R["n_sheets"])} sheets; new: <span class="lat">{esc(", ".join(R["new_sheets"])) or "—"}</span>) · Prepared by: <b>Akib Fateh</b>, Barabkunda LPG Plant (CTG)</p>')
+    o.append('<h2>Cylinder weight accuracy: latest results</h2>')
+    o.append(f'<p class="meta">Data {bdate(R["rounds"].date.min())} – {bdate(ld)} · Source: plant weight-check records '
+             f'({bn(R["n_sheets"])} sheets) · Prepared by: <b>Akib Fateh</b>, Barabkunda LPG Plant (CTG)</p>')
     if len(NR) == 0:
         o.append(f'<div class="card"><p>No new 12 kg round was found after {bdate(pl)}; the figures are unchanged.</p></div>')
     n_sd_out, n_mean_out = int(NR.sd_out.sum()), int(NR.mean_out.sum())
@@ -377,13 +378,13 @@ def render(R, a, updates):
     if R["changed_rounds"]:
         o.append(f'<li class="bad"><b>Figures for {bn(len(R["changed_rounds"]))} earlier rounds have changed in the workbook</b> ({esc(", ".join(x["round"] for x in R["changed_rounds"]))}); the new values are used.</li>')
     else:
-        o.append(f'<li>Every figure of the {bn(len(R["prev"]["rounds"]))} earlier rounds matches the previously published calculation exactly.</li>')
+        o.append(f'<li>Every figure of the {bn(len(R["prev"]["rounds"]))} earlier rounds matches the earlier calculation exactly.</li>')
     o.append(f'<li>Impossible rows excluded in all: {bn(R["n_excl"])} (previously {bn(int(R["prev_excl"])) if R["prev_excl"] is not None else "—"}).</li></ul></div>')
 
     # 3 tiles
     p26 = R["prev_r26"]; prev_in = int((~p26.mean_out & ~p26.sd_out).sum()); r26 = R["r26"]; now_in = int((~r26.mean_out & ~r26.sd_out).sum())
     pl_k = pk["Average error (g)"]["latest"]
-    o.append(f'<h3 style="margin:22px 0 10px">3. Compared with the previous release (to {bdate(pl, year=False)})</h3><div class="tiles">')
+    o.append(f'<h3 style="margin:22px 0 10px">3. Compared with the previous period (to {bdate(pl, year=False)})</h3><div class="tiles">')
     o.append(tile("Mean error, 2026", num(s6["mean"], 1, True) + " g", f'Previously {num(pk["Average error (g)"]["y2026"], 1, True)} · 2024: {num(sb["mean"], 1, True)}', worse(s6["mean"], pk["Average error (g)"]["y2026"], "down_abs")))
     o.append(tile("Spread (<span class=lat>SD</span>), 2026", num(s6["sd"], 1) + " g", f'Previously {num(pk["Spread, standard deviation (g)"]["y2026"], 1)} · 2024: {num(sb["sd"], 1)}', worse(s6["sd"], pk["Spread, standard deviation (g)"]["y2026"], "down")))
     o.append(tile("Within ±150 g, 2026", num(s6["within150"], 1) + "%", f'Previously {num(pk["Within ±150 g (%)"]["y2026"], 1)}% · 2024: {num(sb["within150"], 1)}%', worse(s6["within150"], pk["Within ±150 g (%)"]["y2026"], "up")))
@@ -402,7 +403,7 @@ def render(R, a, updates):
         return bn(out)
     for p in R["periods"][:-1]:
         o.append(f'<tr><td>{pbn(p["period"])}</td><td>{num(p["checks"], 0)}</td><td>{num(p["mean_g"], 1, True)}</td><td>{num(p["sd_g"], 1)}</td><td>{num(p["within150_pct"], 1)}</td><td>{num(p["over150_pct"], 1)}</td><td>{num(p["cpk150"], 2)}</td></tr>')
-    o.append(f'<tr class="note"><td>{pbn(pp["period"])} (previous release)</td><td>{num(pp["checks"], 0)}</td><td>{num(pp["mean_g"], 1, True)}</td><td>{num(pp["sd_g"], 1)}</td><td>{num(pp["within150_pct"], 1)}</td><td>{num(pp["over150_pct"], 1)}</td><td>{num(pp["cpk150"], 2)}</td></tr>')
+    o.append(f'<tr class="note"><td>{pbn(pp["period"])} (previous period)</td><td>{num(pp["checks"], 0)}</td><td>{num(pp["mean_g"], 1, True)}</td><td>{num(pp["sd_g"], 1)}</td><td>{num(pp["within150_pct"], 1)}</td><td>{num(pp["over150_pct"], 1)}</td><td>{num(pp["cpk150"], 2)}</td></tr>')
     o.append(f'<tr class="sel"><td>{pbn(cp["period"])} (now)</td><td>{num(cp["checks"], 0)}</td><td>{num(cp["mean_g"], 1, True)}</td><td>{num(cp["sd_g"], 1)}</td><td>{num(cp["within150_pct"], 1)}</td><td>{num(cp["over150_pct"], 1)}</td><td>{num(cp["cpk150"], 2)}</td></tr></table></div>'
              f'<p class="note">No plant target has been set; comparison is with the 2024 baseline and the industry benchmark <span class="lat">Cpk</span> ≥ {num(CPK_REF, 2)}.</p></div>')
 
@@ -421,7 +422,7 @@ def render(R, a, updates):
     added = [h for h in hot if h not in R["prev_hot"]]; dropped = [h for h in R["prev_hot"] if h not in hot]
     o.append('<div class="card"><h3>5. By head: new readings, means and the next-check forecast</h3>')
     o.append(f'<p><b>Flagged heads</b> (overall mean above +{bn(FLAG)} g and lower end of the 95% confidence interval above zero): <b>{bn(len(hot))}, heads {blist(hot)}</b>. '
-             f'Previously {bn(len(R["prev_hot"]))}: {blist(R["prev_hot"])}.' + (f' Newly added: heads {blist(added)}.' if added else "") + (f' Dropped: heads {blist(dropped)}.' if dropped else "") + '</p>')
+             f'Previously {bn(len(R["prev_hot"]))}: {blist(R["prev_hot"])}.' + (f' Newly flagged: head{"s" if len(added) > 1 else ""} {blist(added)}.' if added else "") + (f' No longer flagged: head{"s" if len(dropped) > 1 else ""} {blist(dropped)}.' if dropped else "") + '</p>')
     cols = list(NR["round"])
     o.append('<div class="tw"><table><tr><th class="l">Head</th>' + "".join(f'<th>{bround(r, d)}</th>' for r, d in zip(NR["round"], NR.date)) +
              f'<th>{esc(pbn(R["recent_label"]))} mean</th><th>Overall mean</th><th>95% lower end</th><th>Forecast</th><th>80% range</th><th>Chance of leaving ±150</th></tr>')
@@ -465,7 +466,7 @@ def render(R, a, updates):
     for _, m in M.sort_values("rmse_g").iterrows():
         o.append(f'<tr{" class=sel" if m.selected else ""}><td>{METHOD_BN.get(m.model, esc(m.model))}{" ✓" if m.selected else ""}</td><td>{num(m.rmse_g, 1)}</td><td>{num(m.mae_g, 1)}</td><td>{num(m.mape_net_pct, 2)}</td><td>{num(m.direction_hit_pct, 1)}</td><td>{num(m.skill_vs_naive_pct, 1, True)}</td></tr>')
     o.append(f'</table></div><p class="note">Caution: even the best method is only {num(sel.skill_vs_naive_pct, 1)}% better than naive; treat the head forecasts as a guide to priority, not a certain result. '
-             'The 25 October neural network (<span class="lat">LSTM</span>) was not retrained in this update; its results are in the slides and written report.</p></div>')
+             'The 25 October neural network (<span class="lat">LSTM</span>) was not retrained on the latest rounds; its results are in the slides and written report.</p></div>')
 
     # 8 actions
     first = hd[hd.fail_chance_pct >= 50]
@@ -480,13 +481,12 @@ def render(R, a, updates):
 
     # 9 what is unchanged
     gv = next((s for s in R["summary"] if s["item"].startswith("LPG over-delivered")), None)
-    o.append('<div class="card"><h3>9. What did not change in this update</h3><ul>')
+    o.append('<div class="card"><h3>9. What these figures do not yet include</h3><ul>')
     if gv: o.append(f'<li>LPG given away through overfilling: <b>{num(gv["value"], 1)} <span class="lat">MT</span></b> (95% range {num(gv["low"], 1)}–{num(gv["high"], 1)}), 1 March – 25 October 2026. '
                     'Production data after that is not available, so the estimate has not been extended; it will be updated when a new production report arrives.</li>')
     o.append('<li>Slides and written report run to 25 October. All dashboard charts and tables are updated with the new data; only the neural network driver analysis and the <span class="lat">autoencoder/Isolation Forest</span> section run to 25 October.</li></ul></div>')
 
-    if updates:
-        o.append('<details class="card"><summary>Update history</summary><ul>' + "".join(f'<li>{bdate(u["date"])}: {esc(u["text"]).translate(BN)}</li>' for u in reversed(updates)) + '</ul></details>')
+    # the update history is not shown on the site
     o.append('<p class="note">Every figure is recalculated from the raw weights in the weight checks: error = (weight after filling − tare − 12 kg) × 1000. No figure is estimated or filled in.</p>')
     o.append('</div>')
     return "\n".join(o)
@@ -517,8 +517,8 @@ def write_all(page, R, a):
     page = setu(page, "fc_method", f"{esc(fc['method'])}, best of {fc['n_methods']} methods in the backtest")
     page = setu(page, "fc_when", f"next check after {dl}")
     page = setu(page, "bt_text", f"One round ahead on the last 8 rounds ({edate(fc['first_test'], '%-d %b')} – {edate(fc['last_test'])}), refitted each time; data {edate(R['rounds'].date.min())} – {edate(ld)}. "
-                                 "MAPE is measured on net content. The 25 Oct neural network (LSTM) was not refitted in this update; its results are in the slides and written report.")
-    page = setu(page, "up_tab", bdate(ld, True, False)); page = setu(page, "dash_tab", f"to {ds}")
+                                 "MAPE is measured on net content. The 25 Oct neural network (LSTM) was not refitted on the latest rounds; its results are in the slides and written report.")
+    page = setu(page, "up_tab", "to " + bdate(ld, True, False)); page = setu(page, "dash_tab", f"to {ds}")
     panel = render(R, a, [u for u in updates if u.get("key") != entry["key"] and u.get("open", "cal") == "cal"])
     page = re.sub(r"<!--UPDATE-->.*?<!--/UPDATE-->", lambda m: "<!--UPDATE-->" + panel + "<!--/UPDATE-->", page, count=1, flags=re.S)
     open(CAL, "w", encoding="utf8").write(page)

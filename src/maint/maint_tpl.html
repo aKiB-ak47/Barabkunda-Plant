@@ -115,7 +115,7 @@ footer { padding-block: 30px 50px; color: var(--muted); font-size: 13.5px; borde
 <div class="glow" aria-hidden="true"></div>
 <div class="wm" aria-hidden="true"></div>
 <header class="top"><div class="wrap topbar">
-  <a class="brand" href="#top"><span class="logob"><img src="assets/logo.png" alt="BM LP GAS" width="37" height="28"></span>Maintenance &amp; TPM</a>
+  <a class="brand" href="#top"><span class="logob"><img src="assets/logo.png" alt="BM LP GAS" width="37" height="28"></span>Maintenance &amp; TPM<span class="tmk">BM LP GAS™</span></a>
   <div class="vt" role="tablist" aria-label="Report sections"><button role="tab" data-v="ana" aria-selected="true">Analysis</button><button role="tab" data-v="tpm" aria-selected="false">TPM programme</button><button role="tab" data-v="atlas" aria-selected="false">Equipment</button></div>
   <span class="by">Akib Fateh</span>
 </div><div class="wrap subnav">
@@ -189,7 +189,7 @@ footer { padding-block: 30px 50px; color: var(--muted); font-size: 13.5px; borde
     <div id="monthList" class="more"></div>
   </div>
   <div class="grid2" style="margin-top:16px">
-    <div class="card"><div class="cap"><b>Cost by year</b><span>2026 = January–October</span></div><div class="chart" id="cYearly"></div></div>
+    <div class="card"><div class="cap"><b>Cost by year (Tk lakh)</b><span>2026 = January–October</span></div><div class="chart" id="cYearly"></div></div>
     <div class="card"><div class="cap"><b>The 15 most expensive orders</b></div><div class="tw" style="max-height:330px"><table id="topTbl"></table></div></div>
   </div>
 </section>
@@ -280,7 +280,7 @@ footer { padding-block: 30px 50px; color: var(--muted); font-size: 13.5px; borde
 <div class="view" id="v-tpm" hidden><div class="wrap">{{TPM}}</div></div>
 <div class="view" id="v-atlas" hidden><div class="wrap">{{ATLAS}}</div></div>
 </main>
-<footer><div class="wrap foot"><span class="logob big"><img src="assets/logo.png" alt="BM LP GAS" width="74" height="56"></span><div class="ft"><b>Maintenance and TPM Report</b> · BM Energy (BD) Limited, Barabkunda LPG Plant (1201), Sitakunda, Chattogram<br>Prepared by: <b>Akib Fateh</b> · Data: SAP PM orders to {{DATA_TO}} · For decision support, not control</div><div class="sig">Akib Fateh</div></div></footer>
+<footer><div class="wrap foot"><span class="logob big"><img src="assets/logo.png" alt="BM LP GAS" width="74" height="56"></span><div class="ft"><b>Maintenance and TPM Report</b> · BM Energy (BD) Limited, Barabkunda LPG Plant (1201), Sitakunda, Chattogram<br>Prepared by: <b>Akib Fateh</b> · Data: SAP PM orders to {{DATA_TO}} · For decision support, not control<span class="ftm">BM LP GAS™ and the BM LP GAS logo are trademarks of BM Energy (BD) Limited. © 2026 BM Energy (BD) Limited.</span></div><div class="sig">Akib Fateh</div></div></footer>
 <div class="tip" id="tip"></div>
 <script>{{D3}}</script>
 <script id="mdata" type="application/json">{{DATA}}</script>
@@ -350,7 +350,7 @@ reg(() => {
   const x = d3.scaleBand(data.map((d) => d.year), [m.l, w - m.r]).padding(0.35), y = d3.scaleLinear([0, d3.max(data, (d) => d.cost) * 1.15], [230 - m.b, m.t]).nice();
   yAxis(s.append('g'), y, m.l, w - m.r, lakh, 4);
   data.forEach((d) => { s.append('rect').attr('x', x(d.year)).attr('width', x.bandwidth()).attr('y', y(d.cost)).attr('height', y(0) - y(d.cost)).attr('rx', 4).attr('fill', 'var(--fleet)').on('mousemove', (ev) => showTip(ev, `<b>${bn(d.year)}</b><br>${tk(d.cost)}<br>${bn(d.n)} orders`)).on('mouseleave', hideTip);
-    s.append('text').attr('x', x(d.year) + x.bandwidth() / 2).attr('y', y(d.cost) - 5).attr('text-anchor', 'middle').attr('class', 'strong').text(lakh(d.cost));
+    s.append('text').attr('x', x(d.year) + x.bandwidth() / 2).attr('y', y(d.cost) - 5).attr('text-anchor', 'middle').attr('class', 'strong').attr('font-size', w < 480 ? 10 : 12).text(w < 480 ? (d.cost / 1e5).toFixed(1) : lakh(d.cost));
     s.append('text').attr('x', x(d.year) + x.bandwidth() / 2).attr('y', 230 - 8).attr('text-anchor', 'middle').text(bn(d.year)); });
 });
 table('topTbl', [['Order'], ['Date'], ['Description'], ['Cost (Tk)', 'num']], D.orders.slice().sort((a, b) => b.cost - a.cost).slice(0, 15).map((o) => ({ c: [`<span class=lat>${o.order}</span>`, dlab(o.date), `<span class=lat>${esc(o.desc)}</span>`, f0(o.cost)] })));
@@ -361,15 +361,30 @@ const vSel = document.getElementById('vSel');
 D.vehicles.forEach((v) => { const o = document.createElement('option'); o.value = v.v; o.textContent = v.v + ' · ' + bn(v.jobs) + ' jobs'; vSel.appendChild(o); });
 vSel.value = D.vehicles[0].v;
 function drawPareto() {
-  const { s, w } = svgIn('cPareto', 300); const m = { l: 56, r: 40, t: 12, b: 70 };
-  const x = d3.scaleBand(V.map((d) => d.v), [m.l, w - m.r]).padding(0.18), y = d3.scaleLinear([0, d3.max(V, (d) => d.cost_w) * 1.1], [300 - m.b, m.t]).nice(), y2 = d3.scaleLinear([0, 100], [300 - m.b, m.t]);
+  const el = document.getElementById('cPareto'), cw = el.clientWidth || 600;
+  const pick = (d) => { vSel.value = d.v; drawVeh(); drawPareto(); document.getElementById('cVeh').scrollIntoView({ behavior: 'smooth', block: 'center' }); };
+  const tip = (d) => `<b class=lat>${d.v}</b><br>${tk(d.cost_w)} · ${bn(d.jobs_w)} jobs<br><span class=m>${d.series}</span><br>Cumulative ${bn(d.cum.toFixed(0))}%`;
+  if (cw < 720) {
+    const rowH = 19, m = { l: 66, r: 52, t: 22, b: 8 }, H = m.t + V.length * rowH + m.b, { s, w } = svgIn('cPareto', H);
+    const x = d3.scaleLinear([0, d3.max(V, (d) => d.cost_w) * 1.05], [m.l, w - m.r]);
+    s.append('text').attr('x', m.l).attr('y', 12).attr('font-size', 11).text('Tk lakh');
+    s.append('text').attr('x', w - 4).attr('y', 12).attr('text-anchor', 'end').attr('font-size', 11).text('Cum. %');
+    let crossed = false;
+    V.forEach((d, i) => { const y = m.t + i * rowH;
+      s.append('rect').attr('x', m.l).attr('y', y + 3).attr('width', Math.max(1, x(d.cost_w) - m.l)).attr('height', rowH - 6).attr('rx', 3).attr('fill', d.v === vSel.value ? 'var(--flame)' : 'var(--fleet)').style('cursor', 'pointer').on('mousemove', (ev) => showTip(ev, tip(d))).on('mouseleave', hideTip).on('click', () => pick(d));
+      s.append('text').attr('x', m.l - 6).attr('y', y + rowH - 6).attr('text-anchor', 'end').attr('font-size', 11).text(d.v.slice(-7));
+      s.append('text').attr('x', w - 4).attr('y', y + rowH - 6).attr('text-anchor', 'end').attr('font-size', 11).attr('fill', d.cum <= 80 ? 'var(--fg)' : 'var(--muted)').text(bn(d.cum.toFixed(0)) + '%');
+      if (!crossed && d.cum >= 80) { crossed = true; s.append('line').attr('x1', 4).attr('x2', w - 4).attr('y1', y + rowH + 0.5).attr('y2', y + rowH + 0.5).attr('stroke', 'var(--bad)').attr('stroke-dasharray', '5 4'); } });
+    return;
+  }
+  const H = 300, { s, w } = svgIn('cPareto', H); const m = { l: 56, r: 40, t: 12, b: 64 };
+  const x = d3.scaleBand(V.map((d) => d.v), [m.l, w - m.r]).padding(0.18), y = d3.scaleLinear([0, d3.max(V, (d) => d.cost_w) * 1.1], [H - m.b, m.t]).nice(), y2 = d3.scaleLinear([0, 100], [H - m.b, m.t]);
   yAxis(s.append('g'), y, m.l, w - m.r, lakh, 4);
   s.append('line').attr('x1', m.l).attr('x2', w - m.r).attr('y1', y2(80)).attr('y2', y2(80)).attr('stroke', 'var(--bad)').attr('stroke-dasharray', '5 4');
   [0, 50, 100].forEach((t) => s.append('text').attr('x', w - m.r + 6).attr('y', y2(t) + 4).text(bn(t) + '%'));
   V.forEach((d) => { s.append('rect').attr('x', x(d.v)).attr('width', x.bandwidth()).attr('y', y(d.cost_w)).attr('height', y(0) - y(d.cost_w)).attr('rx', 3).attr('fill', d.v === vSel.value ? 'var(--flame)' : 'var(--fleet)').style('cursor', 'pointer')
-    .on('mousemove', (ev) => showTip(ev, `<b class=lat>${d.v}</b><br>${tk(d.cost_w)} · ${bn(d.jobs_w)} jobs<br><span class=m>${d.series}</span><br>Cumulative ${bn(d.cum.toFixed(0))}%`)).on('mouseleave', hideTip)
-    .on('click', () => { vSel.value = d.v; drawVeh(); drawPareto(); document.getElementById('cVeh').scrollIntoView({ behavior: 'smooth', block: 'center' }); });
-    s.append('text').attr('transform', `translate(${x(d.v) + x.bandwidth() / 2},${300 - m.b + 8}) rotate(-60)`).attr('text-anchor', 'end').attr('font-size', 10.5).text(d.v.slice(-7)); });
+    .on('mousemove', (ev) => showTip(ev, tip(d))).on('mouseleave', hideTip).on('click', () => pick(d));
+    s.append('text').attr('transform', `translate(${x(d.v) + x.bandwidth() / 2 + 4},${H - m.b + 8}) rotate(-90)`).attr('text-anchor', 'end').attr('font-size', 10.5).text(d.v.slice(-7)); });
   s.append('path').datum(V).attr('d', d3.line().x((d) => x(d.v) + x.bandwidth() / 2).y((d) => y2(d.cum))).attr('fill', 'none').attr('stroke', 'var(--flame2)').attr('stroke-width', 2);
 }
 reg(drawPareto);
@@ -433,7 +448,8 @@ reg(() => {
   data.forEach((d) => { let y0 = 0; const tot = d3.sum(PMK, (k) => d[k] || 0);
     PMK.forEach((k) => { const v = d[k] || 0; if (!v) return; s.append('rect').attr('x', x(d.q)).attr('width', x.bandwidth()).attr('y', y(y0 + v)).attr('height', y(y0) - y(y0 + v)).attr('fill', PMCOL[k])
       .on('mousemove', (ev) => showTip(ev, `<b>${bn(d.q.replace('Q', ' Q'))}</b><br>${k}: ${bn(v)} (${bn((v / tot * 100).toFixed(0))}%)`)).on('mouseleave', hideTip); y0 += v; });
-    s.append('text').attr('x', x(d.q) + x.bandwidth() / 2).attr('y', 260 - 14).attr('text-anchor', 'middle').attr('font-size', 11).text(bn(d.q.replace('Q', ' Q'))); });
+    const qi = data.indexOf(d), qstep = Math.ceil(46 / x.step());
+    if (qi % qstep === 0 || qi === data.length - 1 && qstep === 1) s.append('text').attr('x', x(d.q) + x.bandwidth() / 2).attr('y', 260 - 14).attr('text-anchor', 'middle').attr('font-size', 11).text(qstep > 1 ? d.q.slice(2).replace('Q', ' Q') : bn(d.q.replace('Q', ' Q'))); });
 });
 reg(() => {
   const H = D.weibull; const { s, w } = svgIn('cWeib', 240); const m = { l: 40, r: 10, t: 10, b: 32 };
@@ -458,7 +474,7 @@ reg(() => {
   F.hist.forEach((d) => s.append('circle').attr('cx', x(d.m)).attr('cy', y(d.v)).attr('r', 4).attr('fill', 'var(--fleet)').on('mousemove', (ev) => showTip(ev, `<b>${mlab(d.m)}</b><br>Recorded ${tk(d.v)}`)).on('mouseleave', hideTip));
   F.recorded_after.forEach((d) => s.append('circle').attr('cx', x(d.m)).attr('cy', y(d.v)).attr('r', 4).attr('fill', 'none').attr('stroke', 'var(--muted)').attr('stroke-width', 1.5).on('mousemove', (ev) => showTip(ev, `<b>${mlab(d.m)}</b><br>In SAP so far ${tk(d.v)} (incomplete)`)).on('mouseleave', hideTip));
   F.fwd.forEach((d) => s.append('circle').attr('cx', x(d.m)).attr('cy', y(d.v)).attr('r', 9).attr('fill', 'transparent').on('mousemove', (ev) => showTip(ev, `<b>${mlab(d.m)}</b><br>Forecast ${tk(d.v)}<br><span class=m>80% range Tk ${lakh(d.lo)}–${lakh(d.hi)}</span>`)).on('mouseleave', hideTip));
-  all.forEach((mm, i) => { if (i % 2 === 0) s.append('text').attr('x', x(mm)).attr('y', 280 - 10).attr('text-anchor', 'middle').attr('font-size', 11).text(mlab(mm)); });
+  const fst = Math.max(2, Math.ceil(50 / x.step())); all.forEach((mm, i) => { if (i % fst === 0) s.append('text').attr('x', x(mm)).attr('y', 280 - 10).attr('text-anchor', 'middle').attr('font-size', 11).text(mlab(mm)); });
 });
 table('fcTbl', [['Method (Jan–Jun 2026, one month ahead)'], ['RMSE (Tk)', 'num'], ['MAE (Tk)', 'num'], ['MAPE %', 'num'], ['Better than naive %', 'num']], D.fc_bt.map((r) => ({ cls: r.sel ? 'sel' : '', c: [r.model + (r.sel ? ' ✓' : ''), f0(r.rmse), f0(r.mae), f1(r.mape), f1(r.skill)] })));
 const clsRows = (arr, top) => arr.map((r) => ({ cls: r.sel ? 'sel' : '', c: [r.model + (r.sel ? ' ✓' : ''), f2(r.auc), f2(r.lo) + '–' + f2(r.hi), f2(r.brier), f0(r[top]) + '%'] }));

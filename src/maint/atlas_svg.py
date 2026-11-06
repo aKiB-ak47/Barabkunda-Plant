@@ -249,8 +249,8 @@ def esdv():
     cylinder = R(268, 100, 76, 52, "#0e1726", 6) + R(296, 104, 10, 44, "url(#gSteelH)", 2) + L(264, 126, 296, 126, "#c9d4e2", 4)
     sol = R(330, 48, 46, 30, "#2b3646", 5) + R(340, 40, 26, 10, "#4c9bff", 2) + L(353, 78, 353, 100, "#93a2b8", 3)
     lsb = R(208, 50, 54, 32, "url(#gSteel)", 6) + C(235, 46, 8, "#3ddc97") + L(235, 82, 235, 92, "#93a2b8", 3)
-    air = flowp("M470 62 L380 62", False, "#7fd3ff") + T(430, 54, "Instrument air", 10.5, "middle", "#7fd3ff") + R(390, 52, 18, 20, "#5d6d81", 3)
-    esd = R(420, 140, 46, 46, "#2b3646", 8) + C(443, 163, 14, "url(#gRed)") + T(443, 204, "ESD button", 10.5) + f'<path d="M420 163 L380 163 L380 78 L376 78" fill="none" stroke="#ff5a5f" stroke-width="1.4" stroke-dasharray="4 3"/>' + C(150, 182, 6, "#ffc46b") + T(150, 172, "Fusible plug", 10)
+    air = flowp("M470 62 L380 62", False, "#7fd3ff") + T(440, 44, "Instrument air", 10.5, "middle", "#7fd3ff") + R(390, 52, 18, 20, "#5d6d81", 3)
+    esd = R(420, 140, 46, 46, "#2b3646", 8) + C(443, 163, 14, "url(#gRed)") + T(443, 204, "ESD button", 10.5) + f'<path d="M420 163 L380 163 L380 78 L376 78" fill="none" stroke="#ff5a5f" stroke-width="1.4" stroke-dasharray="4 3"/>' + C(150, 182, 6, "#ffc46b") + T(150, 203, "Fusible plug", 10, "middle")
     fl = flow(76, cy, 170, cy) + flow(300, cy, 400, cy)
     txt = T(240, 296, "Air holds it open; ESD, fire or air loss lets the spring close it", 11)
     body_all = b + g(1, body) + bracket + g(2, act) + g(3, spr) + g(4, cylinder) + g(5, sol) + g(6, lsb) + g(7, air) + g(8, esd) + fl + txt

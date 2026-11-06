@@ -64,7 +64,7 @@ KM = [
   ("Plant cost", tk(H2["plant_cost"]), tk(H1["plant_cost"]), chg(H2["plant_cost"], H1["plant_cost"]), "Buildings, filling, utilities, fire safety"),
   ("Fleet work orders", n0(H2["fleet_jobs"]), n0(H1["fleet_jobs"]), chg(H2["fleet_jobs"], H1["fleet_jobs"]), ""),
   ("Average cost per order", n0(H2["cost_per_job"]) + "", n0(H1["cost_per_job"]) + "", chg(H2["cost_per_job"], H1["cost_per_job"]), "Orders with a cost"),
-  ("Jobs including a scheduled service", pct(H2["sched_share"]), pct(H1["sched_share"]), ("+" if H1["sched_share"] > H2["sched_share"] else "−") + bn(f"{abs(H1['sched_share']-H2['sched_share']):.1f}") + " points", "Industry benchmark: about 80% planned work"),
+  ("Jobs including a scheduled service", pct(H2["sched_share"]), pct(H1["sched_share"]), ("+" if H1["sched_share"] > H2["sched_share"] else "−") + bn(f"{abs(H1['sched_share']-H2['sched_share']):.1f}") + " points", "World class: 85% planned work (plant target 70%)"),
 ]
 DQ = [
   ("No order has been closed", f"Of {n0(F['n'])} orders, {bn(F['teco'])} are <span class=lat>TECO/CLSD</span>; only {bn(F['cnf'])} are confirmed (<span class=lat>CNF</span>), and only {bn(F['actual_dates'])} have actual start and finish dates.", "Downtime and time to repair (<span class=lat>MTTR</span>) cannot be measured; intervals are measured from order dates."),

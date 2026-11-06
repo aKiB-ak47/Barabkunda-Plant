@@ -200,5 +200,5 @@ def deep_html(T):
 <div class="cm"><div class="cmc tp"><b>{bn(cm["tp"])}</b><span>Caught</span></div><div class="cmc fp"><b>{bn(cm["fp"])}</b><span>False alarm</span></div><div class="cmc fn"><b>{bn(cm["fn"])}</b><span>Missed</span></div><div class="cmc tn"><b>{bn(cm["tn"])}</b><span>Correctly clear</span></div></div>
 <p class="small" style="margin-top:10px">Precision {pct(prec, 0)}, recall {pct(rec, 0)}; random picking would give a precision of {pct(cm["k"] / (cm["tp"] + cm["fp"] + cm["fn"] + cm["tn"]) * 100, 0)}.</p></div>
 </div>
-<div class="card" style="margin-top:16px"><h3>Progress: key KPIs by quarter</h3><p class="small">Dashed line = proposed plant target. Green dot = moving toward the target, red = moving away (against the previous quarter).</p><div class="spk" id="spk2"></div></div>
+<div class="card" style="margin-top:16px"><h3>Progress: key KPIs by quarter</h3><p class="small">Dashed line = proposed plant target. Green dot = moving towards the target, red = moving away (against the previous quarter).</p><div class="spk" id="spk2"></div></div>
 </section>'''

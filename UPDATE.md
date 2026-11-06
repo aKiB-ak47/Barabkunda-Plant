@@ -9,7 +9,7 @@ python3 -I src/cal/update_cal.py <weight-check workbook.xlsx> --date YYYY-MM-DD
 python3 -I src/build_site.py
 ```
 
-Adds the new rounds: safety, data quality, comparison with the previous release, head-by-head table, forecast and its validation, the "Deep analysis" tab (significance, error sources, cost, progress), and the landing-page figures and update list.
+Adds the new rounds: safety, data quality, comparison with the previous period, head-by-head table, forecast and its validation, the "Deep analysis" tab (significance, error sources, cost, progress), and the landing-page figures. `build_site.py` then recalculates every red flag.
 
 ## 2. Maintenance (SAP PM orders)
 
@@ -31,16 +31,17 @@ python3 -I src/build_site.py
 - Safety items first, "For review by a qualified engineer" (NFPA 10, 25, 58; LPG Rules 2004).
 - Data-quality issues first; comparison with the previous period and with targets.
 - Forecasts state the method, training period, accuracy (MAPE/RMSE) and range.
-- All text on the site is in English.
+- All text on the site is in British English.
+- Red flags (`src/build_site.py`) are recalculated on every build from the report data: each has a severity (red or amber), the current value, its limit, the reason and the report sections where it is shown.
 
 ## Folders
 
 | Path | Contents |
 |---|---|
 | `index.html` | The published site (generated file; do not edit by hand) |
-| `assets/` | Plant photo and BM LP GAS logo (background, header and footer of the landing page and both reports) |
+| `assets/` | Plant image (1280 to 3840 px) and BM LP GAS logo (background, header, watermark and footer of the landing page and both reports) |
 | `src/build_site.py` | Builds `index.html` from the landing page and the two reports |
-| `src/hub/` | Landing-page template, figures and update list |
+| `src/hub/` | Landing-page template and figures |
 | `src/reports/` | The two report pages |
 | `src/cal/` | Weight-check update and deep analysis |
 | `src/maint/` | Maintenance: orders, analysis, TPM, equipment guide, page builder |

@@ -23,18 +23,31 @@ BRAND_CSS = """<style id="brand">
 :root { --wmtile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='560' height='320'%3E%3Cg transform='rotate(-18 280 160)' fill='%23777' font-family='Arial' font-weight='700'%3E%3Ctext x='150' y='150' font-size='38' letter-spacing='3'%3EBM LP GAS%3C/text%3E%3Ctext x='152' y='178' font-size='14' letter-spacing='5'%3EBARABKUNDA LPG PLANT%3C/text%3E%3Ctext x='300' y='268' font-size='13' letter-spacing='3'%3EAKIB FATEH%3C/text%3E%3C/g%3E%3C/svg%3E") }
 .brandwm { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: .045; background-image: var(--wmtile); background-size: 560px 320px }
 body { background: transparent !important }
-.brandbg { position: fixed; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(180deg, rgba(244,243,239,.9), rgba(244,243,239,.96)), url("assets/plant_hero.jpg") center/cover no-repeat }
-@media (prefers-color-scheme: dark) { .brandbg { background: linear-gradient(180deg, rgba(14,20,28,.9), rgba(14,20,28,.96)), url("assets/plant_hero.jpg") center/cover no-repeat } }
-.brandwm { background-image: url("assets/logo-alpha.png"), var(--wmtile) !important; background-size: min(64vw, 560px) auto, 560px 320px !important; background-position: center 58%, 0 0 !important; background-repeat: no-repeat, repeat !important; opacity: .05 !important }
+:root { --bg: #050b16; --panel: #0b1730; --line: #1d3050; --fg: #eaf2fc; --muted: #93a7c2; --accent: #ff8a3d; --accent2: #22d3ee; --stage: #030812;
+  --color-fg: #eaf2fc; --color-fg-muted: #93a7c2; --color-bg: #050b16; --color-panel: #0b1730; --color-border-line: #1d3050; --color-ok: #22d39a; --color-warn: #ffb020; --color-bad: #ff5d6c;
+  --cds-text-primary: #eaf2fc; --cds-text-secondary: #93a7c2; --cds-border: #1d3050; --cds-chart-axis: #7d90aa; --cds-chart-grid: #16263f; --cds-chart-muted: #62758f;
+  --cds-chart-categorical-1: #3b9cff; --cds-chart-reference: #ff8a3d; --cds-chart-status-critical: #ff5d6c; --cds-surface-popover: #0e1d38; --cds-shadow-popover: 0 8px 24px rgba(0,0,0,.6);
+  --font-ui-sans: "Inter", "IBM Plex Sans", "Segoe UI", system-ui, sans-serif; color-scheme: dark }
+html { background: #050b16 !important }
+.brandbg { position: fixed; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(180deg, rgba(5,11,22,.9), rgba(5,11,22,.96)), url("assets/plant_1920.webp") center/cover no-repeat }
+@media (min-width: 1600px) { .brandbg { background-image: linear-gradient(180deg, rgba(5,11,22,.9), rgba(5,11,22,.96)), url("assets/plant_3840.webp") } }
+.up .card, .dp .card, .dp .kp > div { position: relative; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); background: color-mix(in srgb, var(--panel) 86%, transparent) !important }
+.up .card::after, .dp .card::after { content: ""; position: absolute; right: 12px; bottom: 10px; width: 50px; height: 38px; background: url("assets/logo-alpha.webp") center/contain no-repeat; opacity: .07; pointer-events: none }
+.tmk { font: 600 10.5px/1 "JetBrains Mono", ui-monospace, monospace; color: #22d3ee; letter-spacing: .08em; border: 1px solid rgba(34,211,238,.35); border-radius: 6px; padding: 3px 6px; white-space: nowrap }
+.ftm { display: block; margin-top: 6px; font-size: 12px; opacity: .8 }
+@media (max-width: 640px) { .tmk { display: none } }
+.brandwm { background-image: url("assets/logo-alpha.webp"), var(--wmtile) !important; background-size: min(64vw, 560px) auto, 560px 320px !important; background-position: center 58%, 0 0 !important; background-repeat: no-repeat, repeat !important; opacity: .05 !important }
 .tp-bar { background: color-mix(in srgb, var(--panel) 88%, transparent) !important; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px) }
 .tp-bar h1 { display: flex; align-items: center; gap: 10px; font-family: var(--font-ui-sans) !important; font-weight: 600 !important }
+@media (max-width: 640px) { .dp .card, .up .fig { overflow-x: auto } .dp .card svg, .up .fig svg { min-width: 560px } }
 .logob { background: #fff; border-radius: 9px; padding: 2px 6px; display: inline-grid; place-items: center; box-shadow: 0 2px 10px rgba(0,0,0,.14); flex: none }
 .logob img { height: 28px; width: auto; display: block } .brandfoot .logob img { height: 56px } .brandfoot .logob { padding: 6px 10px; border-radius: 12px }
 .tp-bar .byline { font-family: "Dancing Script", cursive; font-size: 20px; color: var(--accent); white-space: nowrap; margin-left: auto; padding-left: 12px }
 .brandfoot { position: relative; z-index: 1; max-width: 1100px; margin: 24px auto 40px; padding: 16px; border-top: 1px solid var(--line); color: var(--muted); font: 14px/1.6 var(--font-ui-sans); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: flex-end }
 .brandfoot .sig { font-family: "Dancing Script", cursive; font-size: 30px; color: var(--accent); line-height: 1 }
 .dp .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr)); gap: 16px }
-.dp table { border-collapse: collapse; width: 100%; font-size: 14px } .dp th, .dp td { text-align: left; padding: 8px 9px; border-bottom: 1px solid var(--line); vertical-align: top; overflow-wrap: anywhere }
+.dp table { border-collapse: collapse; width: 100%; font-size: 14px } .dp th, .dp td { text-align: left; padding: 8px 9px; border-bottom: 1px solid var(--line); vertical-align: top; white-space: normal !important; overflow-wrap: break-word }
+.dp .tw table { min-width: 760px } .dp td:first-child { min-width: 200px } .dp td.num, .dp td:has(.pv) { white-space: nowrap !important }
 .dp th { color: var(--muted); font-weight: 600 } .dp td.num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums }
 .dp .tw { overflow-x: auto } .dp svg { width: 100%; height: auto; display: block } .dp svg text { font-family: var(--font-ui-sans); fill: var(--muted); font-size: 12px }
 .dp .pv { font-size: 12.5px; padding: 2px 8px; border-radius: 99px; white-space: nowrap } .dp .pv.sig { background: color-mix(in srgb, var(--color-ok) 18%, transparent); color: var(--color-ok) }
@@ -45,14 +58,20 @@ body { background: transparent !important }
 .dp .legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; color: var(--muted) } .dp .legend b { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: -1px }
 </style>"""
 
-def chart_line(xs, ys, w=640, h=230, ref=None, band=None, ylab=lambda v: bn(f"{v:g}"), colors=None, xl=None, title=""):
+def nice_step(span, n=5):
+    raw = span / n; mag = 10 ** math.floor(math.log10(raw)) if raw > 0 else 1
+    return next(k * mag for k in (1, 2, 2.5, 5, 10) if k * mag >= raw)
+
+def chart_line(xs, ys, w=640, h=230, ref=None, band=None, ylab=lambda v: bn(f"{v:g}"), colors=None, xl=None, title="", cap=None):
     m = dict(l=52, r=12, t=14, b=30); ymin = min(min(ys), *(r for r, _ in (ref or []))) if ref else min(ys); ymax = max(max(ys), *(r for r, _ in (ref or []))) if ref else max(ys)
     if band: ymin, ymax = min(ymin, band[0]), max(ymax, band[1])
-    pad = (ymax - ymin) * 0.12 or 1; ymin -= pad; ymax += pad
+    pad = (ymax - ymin) * 0.08 or 1; ymin -= pad; ymax += pad
+    if cap: ymax = min(ymax, cap)
+    st = nice_step(ymax - ymin); ticks = [k * st for k in range(math.ceil(ymin / st), math.floor(ymax / st) + 1)]
     X = lambda i: m["l"] + (w - m["l"] - m["r"]) * (i / max(1, len(xs) - 1)); Y = lambda v: h - m["b"] - (h - m["t"] - m["b"]) * (v - ymin) / (ymax - ymin)
     o = [f'<svg viewBox="0 0 {w} {h}" role="img" aria-label="{title}">']
-    for k in range(5):
-        v = ymin + (ymax - ymin) * k / 4; o.append(f'<line x1="{m["l"]}" x2="{w - m["r"]}" y1="{Y(v):.1f}" y2="{Y(v):.1f}" stroke="var(--line)"/><text x="{m["l"] - 6}" y="{Y(v) + 4:.1f}" text-anchor="end">{ylab(v)}</text>')
+    for v in ticks:
+        o.append(f'<line x1="{m["l"]}" x2="{w - m["r"]}" y1="{Y(v):.1f}" y2="{Y(v):.1f}" stroke="var(--line)"/><text x="{m["l"] - 6}" y="{Y(v) + 4:.1f}" text-anchor="end">{ylab(v)}</text>')
     if band: o.append(f'<rect x="{m["l"]}" y="{Y(band[1]):.1f}" width="{w - m["l"] - m["r"]}" height="{Y(band[0]) - Y(band[1]):.1f}" fill="var(--color-ok)" opacity=".10"/>')
     for v, lab in (ref or []):
         o.append(f'<line x1="{m["l"]}" x2="{w - m["r"]}" y1="{Y(v):.1f}" y2="{Y(v):.1f}" stroke="var(--accent)" stroke-dasharray="5 4"/><text x="{w - m["r"]}" y="{Y(v) - 4:.1f}" text-anchor="end" style="fill:var(--accent)">{lab}</text>')
@@ -66,7 +85,7 @@ def chart_line(xs, ys, w=640, h=230, ref=None, band=None, ylab=lambda v: bn(f"{v
     return "".join(o) + "</svg>"
 
 def chart_bars(labels, vals, w=640, h=240, fmt=lambda v: bn(f"{v:,.1f}"), col=lambda v: "var(--accent2)", title=""):
-    m = dict(l=52, r=12, t=18, b=34); vmin = min(0, min(vals)); vmax = max(vals) * 1.15 or 1
+    m = dict(l=52, r=12, t=18, b=50 if min(vals) < 0 else 34); vmin = min(0, min(vals)) * 1.1; vmax = max(vals) * 1.15 or 1
     bw = (w - m["l"] - m["r"]) / len(vals); Y = lambda v: h - m["b"] - (h - m["t"] - m["b"]) * (v - vmin) / (vmax - vmin)
     o = [f'<svg viewBox="0 0 {w} {h}" role="img" aria-label="{title}">', f'<line x1="{m["l"]}" x2="{w - m["r"]}" y1="{Y(0):.1f}" y2="{Y(0):.1f}" stroke="var(--line)"/>']
     for i, (lab, v) in enumerate(zip(labels, vals)):
@@ -147,10 +166,10 @@ def render(C):
 <div class="card"><h3>Progress: process capability (Cpk)</h3><p>Cpk for each period. Green ≥ 1.33 (target), amber 0.67–1.33, red &lt; 0.67. Since 2024 capability has fallen to less than half.</p>
 {chart_bars(plabs, cpk, fmt=lambda v: bn(f"{v:.2f}"), col=lambda v: "var(--color-ok)" if v >= 1.33 else ("var(--color-warn)" if v >= 0.67 else "var(--color-bad)"), title="Cpk")}</div>
 <div class="card"><h3>Progress: share within ±150 g in each round</h3><p>Green ≥ 95% (plant target), amber 80–95%, red &lt; 80%.</p>
-{chart_line(rl, w150, ref=[(95, "target 95%")], ylab=lambda v: bn(f"{v:.0f}") + "%", colors=cols, xl=xi, title="Within ±150 g")}</div>
+{chart_line(rl, w150, ref=[(95, "target 95%")], ylab=lambda v: bn(f"{v:.0f}") + "%", colors=cols, xl=xi, title="Within ±150 g", cap=100)}</div>
 </div>
 <div class="card"><h3>Mean error of each round and the control limits</h3><p>Green band = 2024 control limits ({f(lcl, 0, True)} to {f(ucl, 0, True)} g). Red dots = outside the limits: the process has changed and the cause must be found.</p>
-{chart_line(rl, means, band=(lcl, ucl), ref=[(0, "0")], ylab=lambda v: f(v, 0, True), colors=mcols, xl=xi, title="Round mean error")}</div>
+{chart_line(rl, means, w=1000, h=300, band=(lcl, ucl), ref=[(0, "0 g")], ylab=lambda v: "0" if abs(v) < 1e-9 else f(v, 0, True), colors=mcols, xl=xi, title="Round mean error")}</div>
 <p class="meta">Method: t-tests on round means, so cylinders in the same round are not treated as independent; error sources by sequential sums of squares (round first, then head). Cost = mass of excess LPG × retail price; production from the daily production reports.</p>
 </div>'''
     return html
@@ -170,18 +189,20 @@ def main():
         page = page.replace("family=Hind+Siliguri:wght@400;500;600;700&display=swap", "family=Hind+Siliguri:wght@400;500;600;700&family=Dancing+Script:wght@600;700&display=swap", 1)
         page = re.sub(r'(<header class="tp-bar"><h1>.*?</h1>)', lambda m: m.group(1) + '<span class="byline">Akib Fateh</span>', page, count=1, flags=re.S)
         page = re.sub(r"(<body[^>]*>)", lambda m: m.group(1) + '\n<div class="brandwm" aria-hidden="true"></div>', page, count=1)
-        page = page.replace("</body>", '<footer class="brandfoot"><div><b>Cylinder Weight Accuracy Report</b> · BM Energy (BD) Limited, Barabkunda LPG Plant, Sitakunda, Chattogram<br>Prepared by: <b>Akib Fateh</b> · Decision support; safety-related calculations are for review by a qualified engineer</div><div class="sig">Akib Fateh</div></footer>\n</body>', 1)
+        page = page.replace("</body>", '<footer class="brandfoot"><div><b>Cylinder Weight Accuracy Report</b> · BM Energy (BD) Limited, Barabkunda LPG Plant, Sitakunda, Chattogram<br>Prepared by: <b>Akib Fateh</b> · Decision support; safety-related calculations are for review by a qualified engineer<span class="ftm">BM LP GAS™ and the BM LP GAS logo are trademarks of BM Energy (BD) Limited. © 2026 BM Energy (BD) Limited.</span></div><div class="sig">Akib Fateh</div></footer>\n</body>', 1)
     # keep the tab label, footer and fonts current on every run
     page = re.sub(r'<button class="tp-tab" role="tab" data-k="deep"[^>]*>.*?</button>', '<button class="tp-tab" role="tab" data-k="deep" aria-selected="false">Deep analysis <small>significance · cost · progress</small></button>', page, count=1, flags=re.S)
-    page = re.sub(r'<footer class="brandfoot">.*?</footer>', lambda m: '<footer class="brandfoot"><span class="logob"><img src="assets/logo.png" alt="BM LP GAS" width="74" height="56"></span><div><b>Cylinder Weight Accuracy Report</b> · BM Energy (BD) Limited, Barabkunda LPG Plant, Sitakunda, Chattogram<br>Prepared by: <b>Akib Fateh</b> · Decision support; safety-related calculations are for review by a qualified engineer</div><div class="sig">Akib Fateh</div></footer>', page, count=1, flags=re.S)
+    page = re.sub(r'<footer class="brandfoot">.*?</footer>', lambda m: '<footer class="brandfoot"><span class="logob"><img src="assets/logo.png" alt="BM LP GAS" width="74" height="56"></span><div><b>Cylinder Weight Accuracy Report</b> · BM Energy (BD) Limited, Barabkunda LPG Plant, Sitakunda, Chattogram<br>Prepared by: <b>Akib Fateh</b> · Decision support; safety-related calculations are for review by a qualified engineer<span class="ftm">BM LP GAS™ and the BM LP GAS logo are trademarks of BM Energy (BD) Limited. © 2026 BM Energy (BD) Limited.</span></div><div class="sig">Akib Fateh</div></footer>', page, count=1, flags=re.S)
     page = page.replace('&family=Hind+Siliguri:wght@400;500;600;700', '').replace('"IBM Plex Sans", "Hind Siliguri", ', '"IBM Plex Sans", ').replace('lang="bn"', 'lang="en"')
     page = re.sub(r"[\"']Hind Siliguri[\"'],\s*", "", page)
     # plant image behind the page, logo in the header and footer (idempotent)
     if 'class="brandbg"' not in page:
         page = page.replace('<div class="brandwm" aria-hidden="true"></div>', '<div class="brandbg" aria-hidden="true"></div>\n<div class="brandwm" aria-hidden="true"></div>', 1)
-    page = re.sub(r'<header class="tp-bar"><h1>.*?</h1>', lambda m: '<header class="tp-bar"><h1><span class="logob"><img src="assets/logo.png" alt="BM LP GAS" width="37" height="28"></span>Cylinder weight accuracy and calibration</h1>', page, count=1, flags=re.S)
+    page = re.sub(r'<header class="tp-bar"><h1>.*?</h1>', lambda m: '<header class="tp-bar"><h1><span class="logob"><img src="assets/logo.png" alt="BM LP GAS" width="37" height="28"></span>Cylinder weight accuracy and calibration <span class="tmk">BM LP GAS™</span></h1>', page, count=1, flags=re.S)
     if '<footer class="brandfoot"><span class="logob">' not in page:
         page = page.replace('<footer class="brandfoot"><div>', '<footer class="brandfoot"><span class="logob"><img src="assets/logo.png" alt="BM LP GAS" width="74" height="56"></span><div>', 1)
+    if "family=Inter:" not in page:
+        page = page.replace("family=IBM+Plex+Sans:", "family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=IBM+Plex+Sans:", 1)
     page = re.sub(r"<title>.*?</title>", "<title>Cylinder Weight Accuracy · Barabkunda LPG Plant · Akib Fateh</title>", page, count=1, flags=re.S)
     open(CAL, "w", encoding="utf8").write(page)
     print("cal.html deep tab written")

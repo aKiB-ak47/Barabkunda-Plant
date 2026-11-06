@@ -1,6 +1,6 @@
 /* ---------- views, header, watermark ---------- */
-.wm { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: .06; background-image: url("assets/logo-alpha.png"), url("{{WM}}"); background-size: min(64vw, 600px) auto, 560px 320px; background-position: center 58%, 0 0; background-repeat: no-repeat, repeat }
-.pbg { position: fixed; inset: 0; z-index: 0; pointer-events: none; background: linear-gradient(180deg, rgba(6,10,18,.9), rgba(6,10,18,.95) 50%, rgba(6,10,18,.97)), url("assets/plant_hero.jpg") center/cover no-repeat }
+.wm { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: .06; background-image: url("assets/logo-alpha.webp"), url("{{WM}}"); background-size: min(64vw, 600px) auto, 560px 320px; background-position: center 58%, 0 0; background-repeat: no-repeat, repeat }
+.pbg { position: fixed; inset: 0; z-index: 0; pointer-events: none; background: linear-gradient(180deg, rgba(6,10,18,.9), rgba(6,10,18,.95) 50%, rgba(6,10,18,.97)), url("assets/plant_1920.webp") center/cover no-repeat }
 .logob { background: #fff; border-radius: 9px; padding: 2px 6px; display: inline-grid; place-items: center; box-shadow: 0 2px 12px rgba(0,0,0,.35); flex: none }
 .logob img { height: 28px; width: auto; display: block }
 .logob.big { padding: 6px 10px; border-radius: 12px } .logob.big img { height: 58px }
@@ -8,8 +8,8 @@
 /* banner image behind the first block of each view */
 #v-ana > .wrap.hero, #tpm-top, #atlas-top { position: relative; isolation: isolate }
 #v-ana > .wrap.hero::before, #tpm-top::before, #atlas-top::before { content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: calc(50% - 50vw); right: calc(50% - 50vw); pointer-events: none;
-  background: linear-gradient(180deg, rgba(6,10,18,.35) 0%, rgba(6,10,18,.72) 55%, rgba(6,10,18,1) 100%), linear-gradient(90deg, rgba(6,10,18,.92) 0%, rgba(6,10,18,.55) 55%, rgba(6,10,18,.25) 100%), url("assets/plant_hero.jpg") center 42%/cover no-repeat }
-#tpm-top::before, #atlas-top::before { background: linear-gradient(180deg, rgba(6,10,18,.55) 0%, rgba(6,10,18,.85) 60%, rgba(6,10,18,1) 100%), linear-gradient(90deg, rgba(6,10,18,.94), rgba(6,10,18,.5)), url("assets/plant_hero.jpg") center 42%/cover no-repeat }
+  background: linear-gradient(180deg, rgba(6,10,18,.35) 0%, rgba(6,10,18,.72) 55%, rgba(6,10,18,1) 100%), linear-gradient(90deg, rgba(6,10,18,.92) 0%, rgba(6,10,18,.55) 55%, rgba(6,10,18,.25) 100%), url("assets/plant_1920.webp") center 42%/cover no-repeat }
+#tpm-top::before, #atlas-top::before { background: linear-gradient(180deg, rgba(6,10,18,.55) 0%, rgba(6,10,18,.85) 60%, rgba(6,10,18,1) 100%), linear-gradient(90deg, rgba(6,10,18,.94), rgba(6,10,18,.5)), url("assets/plant_1920.webp") center 42%/cover no-repeat }
 #v-ana > .wrap.hero { padding-top: 64px }
 .topbar { display: flex; align-items: center; gap: 14px; padding-block: 9px; flex-wrap: wrap }
 .vt { display: flex; background: var(--ink1); border: 1px solid var(--line2); border-radius: 99px; padding: 3px; gap: 2px; margin-left: auto }
@@ -120,3 +120,17 @@ details { background: var(--ink1); border: 1px solid var(--line); border-radius:
 .cmc b { display: block; font-family: var(--f-display); font-size: 28px; line-height: 1.2 } .cmc span { font-size: 13px; color: var(--muted) }
 .cmc.tp { background: rgba(61,220,151,.13) } .cmc.tn { background: rgba(76,155,255,.08) } .cmc.fp { background: rgba(255,196,107,.11) } .cmc.fn { background: rgba(255,90,95,.11) }
 @media print { header.top { position: static } .wm, .glow { display: none } }
+/* phone: wide charts scroll sideways instead of shrinking their text */
+@media (max-width: 640px) { #gantt, #spk, #spk2, #funnel, #lateQ { overflow-x: auto } #gantt svg { min-width: 640px } }
+
+/* ---------- 4K imagery on large screens, card watermarks, trademark ---------- */
+@media (min-width: 1600px) {
+  .pbg { background-image: linear-gradient(180deg, rgba(6,10,18,.9), rgba(6,10,18,.95) 50%, rgba(6,10,18,.97)), url("assets/plant_3840.webp") }
+  #v-ana > .wrap.hero::before { background-image: linear-gradient(180deg, rgba(6,10,18,.35) 0%, rgba(6,10,18,.72) 55%, rgba(6,10,18,1) 100%), linear-gradient(90deg, rgba(6,10,18,.92) 0%, rgba(6,10,18,.55) 55%, rgba(6,10,18,.25) 100%), url("assets/plant_3840.webp") }
+  #tpm-top::before, #atlas-top::before { background-image: linear-gradient(180deg, rgba(6,10,18,.55) 0%, rgba(6,10,18,.85) 60%, rgba(6,10,18,1) 100%), linear-gradient(90deg, rgba(6,10,18,.94), rgba(6,10,18,.5)), url("assets/plant_3840.webp") }
+}
+.card, .eq { position: relative }
+.card::after, .eq::after { content: ""; position: absolute; right: 12px; bottom: 10px; width: 50px; height: 38px; background: url("assets/logo-alpha.webp") center/contain no-repeat; opacity: .07; pointer-events: none; z-index: 0 }
+.tmk { font: 600 10.5px/1 var(--f-mono, monospace); color: #22d3ee; letter-spacing: .08em; border: 1px solid rgba(34,211,238,.35); border-radius: 6px; padding: 3px 6px; margin-left: 8px; white-space: nowrap; vertical-align: middle }
+.ftm { display: block; margin-top: 6px; font-size: 12px; color: var(--dim) }
+@media (max-width: 640px) { .tmk { display: none } }

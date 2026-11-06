@@ -112,7 +112,7 @@ INIT.tpm = () => {
     const el = document.getElementById('gantt'); el.replaceChildren(); const R = TP.roadmap, w = Math.max(640, el.clientWidth || 900), rowH = 26, m = { l: Math.min(330, w * 0.4), r: 12, t: 30, b: 10 };
     const h = m.t + R.length * rowH + m.b, s = d3.select(el).append('svg').attr('viewBox', `0 0 ${w} ${h}`).attr('role', 'img').attr('aria-label', 'TPM roadmap');
     const x = d3.scaleLinear([-1, 36], [m.l, w - m.r]); const PC = { 'Preparation': 'var(--renew)', 'Kick-off': 'var(--flame)', 'Implementation': 'var(--fleet)', 'Consolidation': 'var(--ok)' };
-    for (let k = 0; k <= 36; k += 3) { const d = new Date(2026, 11 + k, 1); s.append('line').attr('x1', x(k)).attr('x2', x(k)).attr('y1', m.t - 6).attr('y2', h - m.b).attr('stroke', 'var(--line)');
+    const kStep = (x(3) - x(0)) < 46 ? 6 : 3; for (let k = 0; k <= 36; k += kStep) { const d = new Date(2026, 11 + k, 1); s.append('line').attr('x1', x(k)).attr('x2', x(k)).attr('y1', m.t - 6).attr('y2', h - m.b).attr('stroke', 'var(--line)');
       s.append('text').attr('x', x(k) + 3).attr('y', m.t - 12).attr('font-size', 11).text(MON[d.getMonth()] + ' ' + bn(String(d.getFullYear()).slice(2))); }
     R.forEach(([nm, ph, st, du], i) => { const y = m.t + i * rowH;
       s.append('text').attr('x', m.l - 8).attr('y', y + 17).attr('text-anchor', 'end').attr('font-size', 12.5).attr('fill', 'var(--fg)').text(nm.length > 34 && w < 760 ? nm.slice(0, 32) + '…' : nm);
@@ -143,16 +143,20 @@ INIT.atlas = () => {
 
 // ---------- deeper analytics (analysis view, drawn now)
 reg(() => {
-  const W = TP.waterfall; const { s, w } = svgIn('cWater', 300); const m = { l: 56, r: 10, t: 14, b: 70 };
-  const steps = [{ c: 'H2 2025', a: 0, b: W.start, tot: true }]; let run = W.start;
-  W.steps.forEach((d) => { steps.push({ c: d.c, a: run, b: run + d.d, d: d.d }); run += d.d; }); steps.push({ c: 'H1 2026', a: 0, b: W.end, tot: true });
-  const x = d3.scaleBand(steps.map((d, i) => i), [m.l, w - m.r]).padding(0.25), y = d3.scaleLinear([d3.min(steps, (d) => Math.min(d.a, d.b)) * 0.85, d3.max(steps, (d) => Math.max(d.a, d.b)) * 1.04], [300 - m.b, m.t]);
-  yAxis(s.append('g'), y, m.l, w - m.r, lakh, 4);
-  steps.forEach((d, i) => { const y0 = y(Math.max(d.a, d.b)), y1 = y(d.tot ? y.domain()[0] : Math.min(d.a, d.b));
-    s.append('rect').attr('x', x(i)).attr('width', x.bandwidth()).attr('y', d.tot ? y(d.b) : y0).attr('height', Math.max(1, (d.tot ? y(y.domain()[0]) - y(d.b) : y1 - y0))).attr('rx', 3)
+  const W = TP.waterfall; const steps = [{ c: 'H2 2025 total', a: 0, b: W.start, tot: true }]; let run = W.start;
+  W.steps.forEach((d) => { steps.push({ c: d.c, a: run, b: run + d.d, d: d.d }); run += d.d; }); steps.push({ c: 'H1 2026 total', a: 0, b: W.end, tot: true });
+  const el = document.getElementById('cWater'), cw = el.clientWidth || 600, narrow = cw < 560;
+  const rowH = 24, m = { l: narrow ? 118 : 196, r: 74, t: 8, b: 26 }, H = m.t + steps.length * rowH + m.b, { s, w } = svgIn('cWater', H);
+  const lo = d3.min(steps, (d) => Math.min(d.a, d.b)) * 0.9, hi = d3.max(steps, (d) => Math.max(d.a, d.b)) * 1.03;
+  const x = d3.scaleLinear([lo, hi], [m.l, w - m.r]).nice(3);
+  x.ticks(narrow ? 2 : 4).forEach((t) => { s.append('line').attr('x1', x(t)).attr('x2', x(t)).attr('y1', m.t).attr('y2', H - m.b).attr('stroke', 'var(--line)'); s.append('text').attr('x', x(t)).attr('y', H - 8).attr('text-anchor', 'middle').attr('font-size', 11).text(narrow ? (t / 1e5).toFixed(0) + ' lakh' : lakh(t)); });
+  const maxc = narrow ? 17 : 30;
+  steps.forEach((d, i) => { const y = m.t + i * rowH, a = d.tot ? x.domain()[0] : Math.min(d.a, d.b), b2 = d.tot ? d.b : Math.max(d.a, d.b);
+    if (i > 0 && !d.tot) s.append('line').attr('x1', x(d.a)).attr('x2', x(d.a)).attr('y1', y - 2).attr('y2', y + 4).attr('stroke', 'var(--muted)');
+    s.append('rect').attr('x', x(a)).attr('y', y + 4).attr('width', Math.max(2, x(b2) - x(a))).attr('height', rowH - 8).attr('rx', 3)
       .attr('fill', d.tot ? 'var(--fleet)' : d.d > 0 ? 'var(--bad)' : 'var(--ok)').on('mousemove', (ev) => showTip(ev, `<b>${d.c}</b><br>${d.tot ? tk(d.b) : (d.d > 0 ? '+' : '−') + tk(Math.abs(d.d))}`)).on('mouseleave', hideTip);
-    s.append('text').attr('x', x(i) + x.bandwidth() / 2).attr('y', (d.tot ? y(d.b) : y0) - 4).attr('text-anchor', 'middle').attr('font-size', 10.5).attr('class', 'strong').text(d.tot ? lakh(d.b) : (d.d > 0 ? '+' : '−') + lakh(Math.abs(d.d)));
-    s.append('text').attr('transform', `translate(${x(i) + x.bandwidth() / 2},${300 - m.b + 10}) rotate(35)`).attr('font-size', 10.5).text(d.c.length > 18 ? d.c.slice(0, 17) + '…' : d.c); });
+    s.append('text').attr('x', m.l - 8).attr('y', y + rowH - 8).attr('text-anchor', 'end').attr('font-size', 11.5).attr('font-weight', d.tot ? 700 : 400).attr('fill', 'var(--fg)').text(d.c.length > maxc ? d.c.slice(0, maxc - 1) + '…' : d.c).append('title').text(d.c);
+    s.append('text').attr('x', x(b2) + 6).attr('y', y + rowH - 8).attr('font-size', 11).attr('class', 'strong').text(d.tot ? lakh(d.b) : (d.d > 0 ? '+' : '−') + lakh(Math.abs(d.d))); });
 });
 reg(() => {
   const data = TP.cost_q.filter((d) => d.q >= '2022Q1'); const { s, w } = svgIn('cCostQ', 260); const m = { l: 56, r: 10, t: 12, b: 30 };

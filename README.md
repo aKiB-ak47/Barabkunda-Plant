@@ -4,9 +4,9 @@ BM Energy (BD) Limited, Barabkunda LPG Plant (Plant 1201), Sitakunda, Chattogram
 
 Prepared by: **Akib Fateh**
 
-Two interactive reports on one page (`index.html`):
+One page (`index.html`) with a welcome screen, a red-flag command centre for management (every value beyond its limit, weak procedure and forecast or model warning, each linked to its section), a digital twin of the plant and two interactive reports:
 
-- **Cylinder weight accuracy**: latest update, deep analysis (significance, error sources, cost, progress), slides, full report, dashboard
+- **Cylinder weight accuracy**: latest results, deep analysis (significance, error sources, cost, progress), slides, full report, dashboard
 - **Maintenance, TPM and equipment**: analysis of SAP PM orders, forecasts and a risk model, a world-class TPM programme, and an illustrated guide to 21 pieces of LPG distribution equipment, including the four storage spheres
 
 Weight checks to 5 November 2026; maintenance record to 6 November 2026 (last SAP order 14 October 2026). For decision support, not control; safety-related calculations are for review by a qualified engineer (NFPA 58; LPG Rules 2004).
