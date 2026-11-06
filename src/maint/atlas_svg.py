@@ -444,9 +444,10 @@ def deluge():
     dvalve = R(96, 140, 48, 74, "url(#gSteel)", 8) + R(104, 168, 32, 6, "url(#gBrass)", 2) + C(120, 158, 8, "#2b3646")
     trim = R(150, 160, 30, 20, "#ff5a5f", 4) + L(144, 170, 150, 170, "#93a2b8", 2) + L(180, 170, 200, 170, "#93a2b8", 2) + C(206, 170, 6, "#ffc46b")
     det = f'<path d="M180 160 L180 40 L460 40" fill="none" stroke="#ff5a5f" stroke-width="1.6" stroke-dasharray="5 3"/>' + "".join(C(x, 40, 5, "#ffc46b") for x in (260, 330, 400)) + T(330, 30, "তাপ-সংবেদী ডিটেকশন লাইন", 10.5)
-    riser = L(120, 140, 120, 64, "#4c9bff", 10) + L(120, 64, 460, 64, "#4c9bff", 8)
-    nozz = "".join(R(x - 5, 66, 10, 10, "url(#gBrass)", 2) + f'<path d="M{x} 78 L{x - 26} 120 M{x} 78 L{x} 124 M{x} 78 L{x + 26} 120" stroke="#7fd3ff" stroke-width="1.6" stroke-dasharray="3 3"/>' for x in (240, 300, 360, 420))
-    tank = P("M210 170 Q210 130 250 130 L430 130 Q470 130 470 170 Q470 210 430 210 L250 210 Q210 210 210 170 Z", "url(#gSteel)") + T(340, 176, "এলপিজি বুলেট/ক্যারোসেল", 11, "middle", "#0b1220", 'font-weight="600"')
+    riser = L(120, 140, 120, 64, "#4c9bff", 10) + L(120, 64, 440, 64, "#4c9bff", 8)
+    nozz = "".join(R(x - 5, 66, 10, 10, "url(#gBrass)", 2) + f'<path d="M{x} 78 L{x - 20} 112 M{x} 78 L{x} 114 M{x} 78 L{x + 20} 112" stroke="#7fd3ff" stroke-width="1.6" stroke-dasharray="3 3"/>' for x in (270, 320, 360, 410))
+    tank = ("".join(R(x - 4, 200, 8, 96, "url(#gSteelH)", 1) for x in (290, 320, 360, 390)) + C(340, 168, 52, "url(#gBall)")
+            + '<path d="M288 168 Q340 180 392 168" fill="none" stroke="#e2453c" stroke-width="2"/>' + T(340, 172, "এলপিজি স্ফিয়ার", 11, "middle", "#0b1220", 'font-weight="600"'))
     gong = C(50, 150, 16, "url(#gBrass)") + L(66, 150, 96, 150, "#93a2b8", 2) + T(50, 126, "অ্যালার্ম", 10.5)
     drain = R(60, 220, 30, 14, "url(#gSteel)", 3) + L(90, 227, 104, 214, "#93a2b8", 2) + T(60, 252, "ড্রেন/টেস্ট", 10.5)
     body_all = main + g(5, bfv) + g(1, dvalve) + g(2, R(104, 168, 32, 6, "url(#gBrass)", 2)) + g(3, trim) + g(4, det) + riser + g(6, nozz) + tank + g(7, gong) + g(8, drain)
@@ -469,16 +470,54 @@ def checkscale():
     co = callouts([(1, 316, 210, 330, 196), (2, 172, 230, 150, 270 + 10), (3, 235, 274, 260, 296), (4, 340, 90, 300, 60), (5, 92, 178, 40, 170), (6, 57, 270, 20, 260)])
     return svg(body_all + co, h=310, title="চেক-স্কেল")
 
-ALL = ["nrv_swing", "nrv_dual", "butterfly", "ball", "globe", "gate", "psv", "efv", "esdv", "strainer", "gauge", "pump", "compressor", "breakaway", "filler", "cylvalve", "detector", "extinguisher", "deluge", "checkscale"]
+# ------------------------------------------------------------------ 21. LPG storage sphere (Horton sphere)
+def sphere():
+    cx, cy, r = 220, 138, 92
+    defs = ('<radialGradient id="gSph" cx=".35" cy=".3" r=".75"><stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#d9e1ea"/><stop offset="1" stop-color="#8b9bb0"/></radialGradient>'
+            '<clipPath id="cutQ"><path d="M220 138 L340 138 L340 260 L220 260 Z"/></clipPath><clipPath id="sphC"><circle cx="220" cy="138" r="88"/></clipPath>')
+    ground = L(20, 292, 460, 292, "#56677c", 2)
+    legs, fire, brace = "", "", ""
+    for x in (150, 186, 254, 290):
+        top = cy + math.sqrt(max(0, r * r - (x - cx) ** 2)) * 0.15
+        legs += R(x - 5, cy + 4, 10, 288 - cy - 4, "url(#gSteelH)", 1)
+        fire += R(x - 7, 258, 14, 32, "#9aa3ad", 2) + "".join(L(x - 7, y, x + 7, y, "#7d8692", 0.8) for y in range(264, 290, 7))
+    brace = L(150, 256, 186, 228, "#7a8ca2", 2) + L(150, 228, 186, 256, "#7a8ca2", 2) + L(254, 256, 290, 228, "#7a8ca2", 2) + L(254, 228, 290, 256, "#7a8ca2", 2)
+    shell = C(cx, cy, r, "url(#gSph)") + f'<path d="M{cx - r} {cy} Q{cx} {cy + 18} {cx + r} {cy}" fill="none" stroke="#e2453c" stroke-width="2.4"/>'
+    # cut-away quadrant: interior with liquid level
+    cut = (f'<g clip-path="url(#cutQ)"><circle cx="{cx}" cy="{cy}" r="{r}" fill="url(#hatch)"/><circle cx="{cx}" cy="{cy}" r="{r - 6}" fill="#0e1a2b"/>'
+           f'<g clip-path="url(#sphC)"><rect x="{cx}" y="{cy + 10}" width="{r}" height="{r}" fill="#1c6e8c" opacity=".85"/><path d="M{cx} {cy + 10} q12 -4 24 0 t24 0 t24 0 t24 0" fill="none" stroke="#7fd3ff" stroke-width="1.6"/></g></g>'
+           + L(cx, cy, cx + r, cy, INK, 1.2) + L(cx, cy, cx, cy + r, INK, 1.2))
+    liquid = f'<text x="{cx + 44}" y="{cy + 48}" font-size="11" text-anchor="middle" fill="#e6f7ff">তরল এলপিজি</text><text x="{cx + 46}" y="{cy + 2}" font-size="10" text-anchor="middle" fill="#93a2b8" opacity="0">.</text>'
+    vap = f'<text x="{cx + 52}" y="{cy - 2}" font-size="10" text-anchor="middle" fill="#c9d4e2">বাষ্প</text>'
+    platform = R(cx - 34, cy - r - 10, 68, 6, "#7a8ca2", 2) + "".join(L(x, cy - r - 10, x, cy - r - 24, "#93a2b8", 1.4) for x in (cx - 34, cx - 12, cx + 12, cx + 34)) + L(cx - 34, cy - r - 24, cx + 34, cy - r - 24, "#93a2b8", 1.4)
+    psv = (R(cx - 26, cy - r - 30, 12, 18, "url(#gBrass)", 2) + L(cx - 20, cy - r - 30, cx - 20, cy - r - 52, "#8696a8", 4)
+           + R(cx - 2, cy - r - 30, 12, 18, "url(#gBrass)", 2) + L(cx + 4, cy - r - 30, cx + 4, cy - r - 52, "#8696a8", 4) + R(cx - 22, cy - r - 14, 30, 5, "#5d6d81", 2))
+    level = R(cx + 16, cy - r - 28, 14, 16, "#2b3646", 3) + C(cx + 23, cy - r - 34, 6, "#3ddc97")
+    gauges = L(cx - r + 4, cy - 30, cx - r - 18, cy - 30, "#8696a8", 3) + C(cx - r - 26, cy - 30, 9, "#f2f5f8") + L(cx - r - 26, cy - 30, cx - r - 21, cy - 35, "#b8322a", 1.6)
+    spray = (f'<ellipse cx="{cx}" cy="{cy - 62}" rx="66" ry="12" fill="none" stroke="#4c9bff" stroke-width="4"/>'
+             + "".join(f'<path d="M{cx + 66 * math.cos(math.radians(a)):.1f} {cy - 62 + 12 * math.sin(math.radians(a)):.1f} l{6 * math.cos(math.radians(a)):.1f} 10" stroke="#7fd3ff" stroke-width="1.4" stroke-dasharray="2 2"/>' for a in range(0, 360, 30))
+             + L(cx + 66, cy - 62, 360, cy - 62, "#4c9bff", 4) + L(360, cy - 62, 360, 290, "#4c9bff", 4))
+    outlet = (L(cx, cy + r, cx, 262, "#8696a8", 7) + L(cx, 262, 330, 262, "#8696a8", 7) + R(cx - 9, cy + r - 2, 18, 12, "url(#gBrass)", 2)
+              + f'<path d="M286 254 L302 270 L302 254 L286 270 Z" fill="#0c1320" stroke="#eaf0f7" stroke-width="1.6"/>' + R(286, 236, 16, 10, "#ff5a5f", 2) + L(294, 246, 294, 254, "#eaf0f7", 1.4)
+              + flow(300, 262, 340, 262) + T(380, 266, "পাম্পে", 10.5, "start"))
+    stair = f'<path d="M110 290 L110 250 L140 236 L110 222 L140 208 L110 194 L130 150 L150 110 L184 66 L196 52" fill="none" stroke="#e2453c" stroke-width="2" stroke-dasharray="1 0"/>'
+    earth = L(150, 290, 136, 300, "#3ddc97", 2) + R(124, 296, 16, 6, "#3ddc97", 2)
+    body_all = (f'<defs>{defs}</defs>' + ground + g(3, legs + brace) + g(4, fire) + g(1, shell) + g(2, cut + liquid + vap) + g(10, stair + platform) + g(5, psv) + g(6, level) + g(7, gauges)
+                + g(8, spray) + g(9, outlet) + g(11, earth) + T(400, 40, "বাড়বকুণ্ডে চারটি স্ফিয়ার", 11, "middle", "#2fd1ae") + T(400, 56, "সাদা খোলস, লাল নিরক্ষরেখা", 10.5))
+    co = callouts([(1, cx - 60, cy - 60, 70, 40), (2, cx + 40, cy + 40, 330, 120), (3, 168, 242, 112, 262), (4, 290, 274, 330, 236), (5, cx - 20, cy - r - 46, 150, 20),
+                   (6, cx + 23, cy - r - 34, 290, 22), (7, cx - r - 26, cy - 30, 60, 112), (8, cx + 60, cy - 66, 300, 70), (9, 294, 238, 250, 222), (10, 120, 228, 80, 210), (11, 132, 299, 90, 300 - 6)])
+    return svg(body_all + co, h=310, title="এলপিজি স্টোরেজ স্ফিয়ার")
+
+ALL = ["nrv_swing", "nrv_dual", "butterfly", "ball", "globe", "gate", "psv", "efv", "esdv", "strainer", "gauge", "pump", "compressor", "breakaway", "filler", "cylvalve", "detector", "extinguisher", "deluge", "checkscale", "sphere"]
 
 # ------------------------------------------------------------------ plant flow diagram with clickable equipment symbols
 def pid():
     LQ, VP, FW = "#2fd1ae", "#7fd3ff", "#4c9bff"
     def ln(d, col, w=3, dash=False): return f'<path d="{d}" fill="none" stroke="{col}" stroke-width="{w}" {"stroke-dasharray=\"7 5\"" if dash else ""} stroke-linejoin="round"/>'
-    def hs(eq, x, y, inner, label, ly=None, la="middle"):
-        ly = y + 30 if ly is None else ly
+    def hs(eq, x, y, inner, label, ly=None, la="middle", lx=None):
+        ly = y + 30 if ly is None else ly; lx = x if lx is None else lx
         return (f'<g class="hs" data-eq="{eq}" tabindex="0" role="button" aria-label="{label}"><circle cx="{x}" cy="{y}" r="22" class="halo"/>{inner}'
-                f'<text x="{x}" y="{ly}" font-size="11" text-anchor="{la}" fill="#cfd9e6">{label}</text></g>')
+                f'<text x="{lx}" y="{ly}" font-size="11" text-anchor="{la}" fill="#cfd9e6">{label}</text></g>')
     def bow(x, y, fill="#0c1320", col="#eaf0f7"): return f'<path d="M{x - 12} {y - 8} L{x + 12} {y + 8} L{x + 12} {y - 8} L{x - 12} {y + 8} Z" fill="{fill}" stroke="{col}" stroke-width="1.8"/>'
     def ballv(x, y): return bow(x, y) + f'<circle cx="{x}" cy="{y}" r="4.5" fill="#0c1320" stroke="#eaf0f7" stroke-width="1.6"/>'
     def globev(x, y): return bow(x, y) + f'<circle cx="{x}" cy="{y}" r="4.5" fill="#eaf0f7"/>'
@@ -498,16 +537,19 @@ def pid():
     def nozz(x, y): return f'<path d="M{x - 6} {y} L{x + 6} {y} L{x} {y + 8} Z" fill="#7fd3ff"/><path d="M{x} {y + 8} L{x - 10} {y + 22} M{x} {y + 8} L{x} {y + 24} M{x} {y + 8} L{x + 10} {y + 22}" stroke="#7fd3ff" stroke-width="1.3" stroke-dasharray="2 2"/>'
     o = []
     # stage bands
-    for x, w, t in ((10, 250, "১ · গ্রহণ (ট্যাংকার আনলোড)"), (270, 300, "২ · স্থানান্তর"), (580, 330, "৩ · মজুত"), (920, 270, "৪ · ফিলিং, যাচাই ও বিতরণ")):
+    for x, w, t in ((10, 250, "১ · গ্রহণ (ট্যাংকার আনলোড)"), (270, 300, "২ · স্থানান্তর"), (580, 330, "৩ · মজুত (স্টোরেজ স্ফিয়ার)"), (920, 270, "৪ · ফিলিং, যাচাই ও বিতরণ")):
         o.append(f'<rect x="{x}" y="8" width="{w}" height="22" rx="11" fill="#121c2e" stroke="#1f2c43"/><text x="{x + w / 2}" y="23" font-size="11.5" text-anchor="middle" fill="#ffc46b">{t}</text>')
     o.append('<rect x="10" y="398" width="1180" height="22" rx="11" fill="#121c2e" stroke="#1f2c43"/><text x="600" y="413" font-size="11.5" text-anchor="middle" fill="#7fb6ff">৫ · অগ্নি-নিরাপত্তা (পানি-নেটওয়ার্ক, ডিলুজ, ডিটেক্টর, নির্বাপক)</text>')
     # tanker
     o.append('<rect x="30" y="98" width="170" height="62" rx="31" fill="url(#gSteel)" stroke="#0b1220"/><rect x="24" y="160" width="190" height="10" fill="#2b3646"/>'
              + "".join(f'<circle cx="{x}" cy="176" r="11" fill="#1a2433" stroke="#93a2b8" stroke-width="2"/>' for x in (60, 90, 170)) + '<text x="115" y="134" font-size="12" text-anchor="middle" fill="#0b1220" font-weight="700">বাল্ক ট্যাংকার</text>')
-    # mound with bullets
-    o.append('<path d="M590 196 Q600 80 660 74 L840 74 Q900 80 905 196 Z" fill="#3b4a2f" stroke="#59704a"/>'
-             + "".join(f'<rect x="618" y="{y}" width="262" height="26" rx="13" fill="none" stroke="#c9d4e2" stroke-width="1.4" stroke-dasharray="5 3"/>' for y in (98, 130, 162))
-             + '<text x="748" y="122" font-size="12" text-anchor="middle" fill="#e6efd8" font-weight="600">মাউন্ডেড বুলেট</text>')
+    # storage spheres on legs
+    sph = ""
+    for x in (640, 748, 856):
+        sph += "".join(f'<line x1="{x + dx}" y1="128" x2="{x + dx}" y2="196" stroke="#93a2b8" stroke-width="3"/>' for dx in (-30, -12, 12, 30))
+        sph += f'<path d="M{x - 30} 180 L{x - 12} 150 M{x - 12} 180 L{x - 30} 150 M{x + 12} 180 L{x + 30} 150 M{x + 30} 180 L{x + 12} 150" stroke="#6f8096" stroke-width="1.4"/>'
+        sph += f'<circle cx="{x}" cy="112" r="44" fill="url(#gBall)" stroke="#0b1220"/><path d="M{x - 44} 112 Q{x} 124 {x + 44} 112" fill="none" stroke="#e2453c" stroke-width="2"/>'
+    o.append(sph + '<text x="676" y="210" font-size="12" text-anchor="middle" fill="#e6efd8" font-weight="600">স্টোরেজ স্ফিয়ার ×৪</text>')
     # carousel
     o.append('<circle cx="1010" cy="318" r="56" fill="#121c2e" stroke="#4c9bff" stroke-width="2"/>' + "".join(f'<circle cx="{1010 + 46 * math.cos(math.radians(a)):.1f}" cy="{318 + 46 * math.sin(math.radians(a)):.1f}" r="5" fill="#e2453c"/>' for a in range(0, 360, 15))
              + '<text x="1010" y="322" font-size="11" text-anchor="middle" fill="#cfd9e6">ক্যারোসেল</text>')
@@ -515,10 +557,10 @@ def pid():
     o.append('<rect x="1092" y="352" width="76" height="30" rx="4" fill="#2b3646" stroke="#93a2b8"/>' + "".join(f'<rect x="{1098 + i * 13}" y="356" width="9" height="20" rx="3" fill="#e2453c"/>' for i in range(5)) + '<rect x="1168" y="360" width="20" height="22" rx="3" fill="#4c9bff"/><circle cx="1110" cy="386" r="6" fill="#1a2433" stroke="#93a2b8"/><circle cx="1170" cy="386" r="6" fill="#1a2433" stroke="#93a2b8"/>'
              + '<text x="1130" y="346" font-size="11" text-anchor="middle" fill="#cfd9e6">বিতরণ</text>')
     # process lines
-    o.append(ln("M200 150 L590 150", LQ, 3.4))                       # liquid unloading line
-    o.append(ln("M150 98 L150 60 L640 60 L640 78", VP, 2.4, True))   # vapour return / compressor line
-    o.append(ln("M748 196 L748 300 L960 300", LQ, 3.4))              # bullet outlet to carousel
-    o.append(ln("M902 300 L902 250 L880 250 L880 196", LQ, 2, True))  # recirculation / bypass back to bullets
+    o.append(ln("M200 150 L586 150 L586 186 L748 186", LQ, 3.4))         # liquid unloading line into the spheres' bottom header
+    o.append(ln("M150 98 L150 60 L620 60 L620 72", VP, 2.4, True))   # vapour return / compressor line
+    o.append(ln("M748 186 L748 300 L960 300", LQ, 3.4))              # sphere outlet to carousel
+    o.append(ln("M902 300 L902 250 L856 250 L856 196", LQ, 2, True))  # recirculation / bypass back to the spheres
     o.append(ln("M1066 318 L1100 318 L1100 300", "#93a2b8", 2.4) + ln("M1130 300 L1130 352", "#93a2b8", 2.4))
     o.append(ln("M40 380 L1010 380", FW, 3.2) + ln("M520 380 L520 40 L900 40", FW, 2.4) + ln("M1010 380 L1010 374", FW, 2.4) + ln("M960 380 L960 240 L1060 240", FW, 2.4))
     o.append('<rect x="30" y="342" width="34" height="38" rx="4" fill="#173a6b" stroke="#4c9bff"/><text x="47" y="337" font-size="10.5" text-anchor="middle" fill="#7fb6ff">পানির ট্যাংক</text>')
@@ -526,20 +568,20 @@ def pid():
     H = [
         ("breakaway", 238, 150, brk(238, 150), "ব্রেকঅ্যাওয়ে ও হোস"), ("esdv", 300, 150, esd(300, 150), "ESD ভালভ"), ("strainer", 352, 150, strn(352, 150), "স্ট্রেইনার"),
         ("nrv_swing", 410, 150, chk(410, 150), "NRV (সুইং)"), ("ball", 466, 150, ballv(466, 150), "বল ভালভ"), ("gauge", 522, 136, gaug(522, 136), "চাপমাপক", 180),
-        ("compressor", 400, 60, comp(400, 60), "কম্প্রেসর", 92), ("psv", 712, 68, psvs(712, 70), "PSV", 98), ("efv", 748, 214, efvs(748, 214), "EFV", 244, "start"),
-        ("esdv", 748, 270, esd(748, 274), "ESD", 300 - 2, "start"), ("pump", 800, 300, pumps(800, 300), "ফিলিং পাম্প", 330), ("nrv_dual", 850, 300, chk(850, 300), "NRV (ডুয়াল)", 330),
+        ("compressor", 400, 60, comp(400, 60), "কম্প্রেসর", 92), ("psv", 748, 56, psvs(748, 58), "PSV", 62, "start", 764), ("efv", 748, 238, efvs(748, 238), "EFV", 242, "start", 766),
+        ("esdv", 748, 276, esd(748, 280), "ESD", 300 - 2, "start"), ("pump", 800, 300, pumps(800, 300), "ফিলিং পাম্প", 330), ("nrv_dual", 850, 300, chk(850, 300), "NRV (ডুয়াল)", 330),
         ("globe", 902, 268, globev(902, 268), "বাইপাস", 240 - 2), ("filler", 1010, 272, f'<circle cx="1010" cy="272" r="8" fill="#e2453c" stroke="#eaf0f7"/>', "ফিলিং হেড", 260 - 6),
         ("checkscale", 1115, 300, '<rect x="1102" y="292" width="26" height="14" rx="2" fill="#0c1320" stroke="#eaf0f7" stroke-width="1.6"/><text x="1115" y="302" font-size="8" fill="#3ddc97" text-anchor="middle">kg</text>', "চেক-স্কেল", 286, "middle"),
         ("cylvalve", 1150, 270, '<rect x="1144" y="262" width="12" height="18" rx="4" fill="#e2453c" stroke="#eaf0f7"/><rect x="1147" y="256" width="6" height="6" fill="#e0a33d"/>', "সিলিন্ডার ভালভ", 250),
-        ("deluge", 650, 40, "".join(nozz(x, 42) for x in (650, 740, 830)), "ডিলুজ স্প্রে", 34 - 2),
+        ("deluge", 640, 40, "".join(nozz(x, 42) for x in (640, 856)), "ডিলুজ স্প্রে", 54, "end", 626), ("sphere", 856, 112, '<circle cx="856" cy="112" r="44" fill="transparent"/>', "", 0),
         ("pump", 110, 380, pumps(110, 380, "#7fb6ff"), "ফায়ার পাম্প", 366 - 2), ("nrv_swing", 170, 380, chk(170, 380), "NRV", 368 - 2), ("butterfly", 230, 380, bfly(230, 380), "বাটারফ্লাই", 368 - 2),
         ("gate", 290, 380, gatev(290, 380), "গেট ভালভ", 360 - 2), ("deluge", 520, 300, f'<rect x="510" y="292" width="20" height="18" rx="3" fill="#173a6b" stroke="#7fb6ff" stroke-width="1.6"/>', "ডিলুজ ভালভ", 286, "end"),
-        ("detector", 610, 214, gd(610, 214), "গ্যাস ডিটেক্টর", 240), ("detector", 820, 346, gd(820, 346), "", 0), ("detector", 1070, 380 - 12 - 10, gd(1070, 358), "", 0),
-        ("extinguisher", 930, 346, ext(930, 346), "নির্বাপক", 372 - 2), ("extinguisher", 340, 186, ext(340, 186), "", 0),
+        ("detector", 612, 240, gd(612, 240), "গ্যাস ডিটেক্টর", 266), ("detector", 820, 346, gd(820, 346), "", 0), ("detector", 1070, 380 - 12 - 10, gd(1070, 358), "", 0),
+        ("extinguisher", 930, 346, ext(930, 346), "নির্বাপক", 372 - 2), ("extinguisher", 290, 212, ext(290, 212), "", 0),
     ]
     for h in H:
-        eq, x, y, inner, lab = h[:5]; ly = h[5] if len(h) > 5 else None; la = h[6] if len(h) > 6 else "middle"
-        o.append(hs(eq, x, y, inner, lab, ly, la))
+        eq, x, y, inner, lab = h[:5]; ly = h[5] if len(h) > 5 else None; la = h[6] if len(h) > 6 else "middle"; lx = h[7] if len(h) > 7 else None
+        o.append(hs(eq, x, y, inner, lab, ly, la, lx))
     leg = ('<g font-size="11" fill="#93a2b8"><line x1="20" y1="446" x2="50" y2="446" stroke="#2fd1ae" stroke-width="3.4"/><text x="56" y="450">তরল এলপিজি</text>'
            '<line x1="150" y1="446" x2="180" y2="446" stroke="#7fd3ff" stroke-width="2.4" stroke-dasharray="7 5"/><text x="186" y="450">বাষ্প/বাইপাস</text>'
            '<line x1="290" y1="446" x2="320" y2="446" stroke="#4c9bff" stroke-width="3.2"/><text x="326" y="450">অগ্নি-পানি</text>'

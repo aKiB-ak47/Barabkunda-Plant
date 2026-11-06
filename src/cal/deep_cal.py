@@ -11,13 +11,25 @@ CAL = f"{SRC}/reports/cal.html"
 PRICE_12KG, PRICE_NOTE = 2060.0, "বিইআরসি-নির্ধারিত নভেম্বর ২০২৬-এর খুচরা দাম (১২ কেজি ২,০৬০ টাকা, ভ্যাটসহ)"
 BN = str.maketrans("0123456789", "০১২৩৪৫৬৭৮৯")
 def bn(x): return str(x).translate(BN)
-def f(x, d=1, sign=False): return bn(f"{x:+,.{d}f}" if sign else f"{x:,.{d}f}").replace("-", "−")
+def _r(x, d):   # half away from zero, so a stored 0.285 shows as 0.29 like the unrounded value
+    from decimal import Decimal, ROUND_HALF_UP
+    return float(Decimal(repr(float(x))).quantize(Decimal(1).scaleb(-d), rounding=ROUND_HALF_UP)) if x == x else x
+def f(x, d=1, sign=False): x = _r(x, d); return bn(f"{x:+,.{d}f}" if sign else f"{x:,.{d}f}").replace("-", "−")
 def pfmt(p): return "p < ০.০০১" if p < 0.001 else "p = " + bn(f"{p:.3f}")
 def pcls(p): return "sig" if p < 0.05 else ("mid" if p < 0.10 else "ns")
 def lakh(x): return bn(f"{x / 1e5:,.1f}") + " লাখ টাকা" if abs(x) < 1e7 else bn(f"{x / 1e7:,.2f}") + " কোটি টাকা"
 
 BRAND_CSS = """<style id="brand">
-.brandwm { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: .045; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='560' height='320'%3E%3Cg transform='rotate(-18 280 160)' fill='%23777' font-family='Arial' font-weight='700'%3E%3Ctext x='150' y='150' font-size='38' letter-spacing='3'%3EBM LP GAS%3C/text%3E%3Ctext x='152' y='178' font-size='14' letter-spacing='5'%3EBARABKUNDA LPG PLANT%3C/text%3E%3Ctext x='300' y='268' font-size='13' letter-spacing='3'%3EAKIB FATEH%3C/text%3E%3C/g%3E%3C/svg%3E"); background-size: 560px 320px }
+:root { --wmtile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='560' height='320'%3E%3Cg transform='rotate(-18 280 160)' fill='%23777' font-family='Arial' font-weight='700'%3E%3Ctext x='150' y='150' font-size='38' letter-spacing='3'%3EBM LP GAS%3C/text%3E%3Ctext x='152' y='178' font-size='14' letter-spacing='5'%3EBARABKUNDA LPG PLANT%3C/text%3E%3Ctext x='300' y='268' font-size='13' letter-spacing='3'%3EAKIB FATEH%3C/text%3E%3C/g%3E%3C/svg%3E") }
+.brandwm { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: .045; background-image: var(--wmtile); background-size: 560px 320px }
+body { background: transparent !important }
+.brandbg { position: fixed; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(180deg, rgba(244,243,239,.9), rgba(244,243,239,.96)), url("assets/plant_hero.jpg") center/cover no-repeat }
+@media (prefers-color-scheme: dark) { .brandbg { background: linear-gradient(180deg, rgba(14,20,28,.9), rgba(14,20,28,.96)), url("assets/plant_hero.jpg") center/cover no-repeat } }
+.brandwm { background-image: url("assets/logo-alpha.png"), var(--wmtile) !important; background-size: min(64vw, 560px) auto, 560px 320px !important; background-position: center 58%, 0 0 !important; background-repeat: no-repeat, repeat !important; opacity: .05 !important }
+.tp-bar { background: color-mix(in srgb, var(--panel) 88%, transparent) !important; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px) }
+.tp-bar h1 { display: flex; align-items: center; gap: 10px; font-family: "Hind Siliguri", var(--font-ui-sans) !important; font-weight: 700 !important }
+.logob { background: #fff; border-radius: 9px; padding: 2px 6px; display: inline-grid; place-items: center; box-shadow: 0 2px 10px rgba(0,0,0,.14); flex: none }
+.logob img { height: 28px; width: auto; display: block } .brandfoot .logob img { height: 56px } .brandfoot .logob { padding: 6px 10px; border-radius: 12px }
 .tp-bar .byline { font-family: "Dancing Script", cursive; font-size: 20px; color: var(--accent); white-space: nowrap; margin-left: auto; padding-left: 12px }
 .brandfoot { position: relative; z-index: 1; max-width: 1100px; margin: 24px auto 40px; padding: 16px; border-top: 1px solid var(--line); color: var(--muted); font: 14px/1.6 "Hind Siliguri", var(--font-ui-sans); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: flex-end }
 .brandfoot .sig { font-family: "Dancing Script", cursive; font-size: 30px; color: var(--accent); line-height: 1 }
@@ -157,6 +169,13 @@ def main():
         page = re.sub(r'(<header class="tp-bar"><h1>.*?</h1>)', lambda m: m.group(1) + '<span class="byline">Akib Fateh</span>', page, count=1, flags=re.S)
         page = re.sub(r"(<body[^>]*>)", lambda m: m.group(1) + '\n<div class="brandwm" aria-hidden="true"></div>', page, count=1)
         page = page.replace("</body>", '<footer class="brandfoot"><div><b>সিলিন্ডার ওজন-নির্ভুলতা রিপোর্ট</b> · বিএম এনার্জি (বিডি) লিমিটেড, বাড়বকুণ্ড এলপিজি প্ল্যান্ট, সীতাকুণ্ড, চট্টগ্রাম<br>প্রস্তুত করেছেন: <b>Akib Fateh</b> · সিদ্ধান্ত-সহায়তার জন্য; নিরাপত্তা-সংক্রান্ত হিসাব যোগ্য প্রকৌশলীর পর্যালোচনার জন্য</div><div class="sig">Akib Fateh</div></footer>\n</body>', 1)
+    # plant image behind the page, logo in the header and footer (idempotent)
+    if 'class="brandbg"' not in page:
+        page = page.replace('<div class="brandwm" aria-hidden="true"></div>', '<div class="brandbg" aria-hidden="true"></div>\n<div class="brandwm" aria-hidden="true"></div>', 1)
+    page = re.sub(r'<header class="tp-bar"><h1>.*?</h1>', lambda m: '<header class="tp-bar"><h1><span class="logob"><img src="assets/logo.png" alt="BM LP GAS" width="37" height="28"></span>সিলিন্ডারের ওজন-নির্ভুলতা ও ক্যালিব্রেশন</h1>', page, count=1, flags=re.S)
+    if '<footer class="brandfoot"><span class="logob">' not in page:
+        page = page.replace('<footer class="brandfoot"><div>', '<footer class="brandfoot"><span class="logob"><img src="assets/logo.png" alt="BM LP GAS" width="74" height="56"></span><div>', 1)
+    page = re.sub(r"<title>.*?</title>", "<title>সিলিন্ডারের ওজন-নির্ভুলতা · বাড়বকুণ্ড এলপিজি প্ল্যান্ট · Akib Fateh</title>", page, count=1, flags=re.S)
     open(CAL, "w", encoding="utf8").write(page)
     print("cal.html deep tab written")
 

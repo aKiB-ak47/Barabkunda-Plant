@@ -17,11 +17,13 @@ python3 -I src/build_site.py
 
 ```
 python3 -I src/maint/prep.py
-python3 -I src/maint/analyze.py
+AS_OF=YYYY-MM-DD python3 -I src/maint/analyze.py
 python3 -I src/maint/deep.py
 UPDATE_DATE=YYYY-MM-DD python3 -I src/maint/build_maint.py
 python3 -I src/build_site.py
 ```
+
+`AS_OF` = রেকর্ড যে তারিখ পর্যন্ত ধরা হবে (সাধারণত আজ)। শেষ অর্ডারের পর থেকে `AS_OF` পর্যন্ত নীরব সময়কে "কাজ হয়নি" ধরা হয় না: ২০২৬-এর অর্ডারের হার আর SAP-এ দেরিতে লেখার ধরন থেকে আনুমানিক না-লেখা কাজ ও খরচ হিসাব হয়।
 
 ## নিয়ম
 
@@ -35,6 +37,7 @@ python3 -I src/build_site.py
 | পথ | কী আছে |
 |---|---|
 | `index.html` | প্রকাশিত সাইট (তৈরি করা ফাইল; সরাসরি সম্পাদনা নয়) |
+| `assets/` | প্ল্যান্টের ছবি ও BM LP GAS লোগো (কেন্দ্র ও দুই রিপোর্টের পটভূমি, হেডার, ফুটার) |
 | `src/build_site.py` | কেন্দ্র + দুই রিপোর্ট থেকে `index.html` তৈরি করে |
 | `src/hub/` | কেন্দ্র-পাতার টেমপ্লেট, সংখ্যা ও হালনাগাদ-তালিকা |
 | `src/reports/` | দুটি রিপোর্ট-পাতা |

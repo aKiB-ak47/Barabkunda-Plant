@@ -1,4 +1,6 @@
 // ================= views (analysis / TPM / equipment) =================
+{ const hd = document.querySelector('header.top'); const setH = () => { if (hd) document.documentElement.style.setProperty('--hdr', hd.offsetHeight + 'px'); };
+  setH(); addEventListener('resize', setH); if (window.ResizeObserver && hd) new ResizeObserver(setH).observe(hd); }
 const TP = D.tpm;
 const VIEWS = ['ana', 'tpm', 'atlas'], inited = { ana: true };
 const viewOf = (el) => { const v = el && el.closest && el.closest('.view'); return v ? v.id.slice(2) : null; };

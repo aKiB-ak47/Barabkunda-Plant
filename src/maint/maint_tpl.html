@@ -111,10 +111,11 @@ footer { padding-block: 30px 50px; color: var(--muted); font-size: 13.5px; borde
 </head>
 <body>
 {{ATLAS_DEFS}}
+<div class="pbg" aria-hidden="true"></div>
 <div class="glow" aria-hidden="true"></div>
 <div class="wm" aria-hidden="true"></div>
 <header class="top"><div class="wrap topbar">
-  <a class="brand" href="#top"><i></i>রক্ষণাবেক্ষণ ও TPM</a>
+  <a class="brand" href="#top"><span class="logob"><img src="assets/logo.png" alt="BM LP GAS" width="37" height="28"></span>রক্ষণাবেক্ষণ ও TPM</a>
   <div class="vt" role="tablist" aria-label="রিপোর্টের অংশ"><button role="tab" data-v="ana" aria-selected="true">বিশ্লেষণ</button><button role="tab" data-v="tpm" aria-selected="false">TPM কর্মসূচি</button><button role="tab" data-v="atlas" aria-selected="false">যন্ত্রপাতি</button></div>
   <span class="by">Akib Fateh</span>
 </div><div class="wrap subnav">
@@ -143,7 +144,7 @@ footer { padding-block: 30px 50px; color: var(--muted); font-size: 13.5px; borde
     <div class="kpi"><span class="v">{{KPI_FLEETW}}</span><span class="l">বহরের খরচ, জুন ২০২৫ – জুন ২০২৬ (টাকা)</span></div>
     <div class="kpi warn"><span class="v">{{KPI_PM}}</span><span class="l">বহরের কাজে নির্ধারিত সার্ভিস আছে</span></div>
     <div class="kpi bad"><span class="v">{{KPI_TECO}}</span><span class="l">টেকনিক্যালি বন্ধ অর্ডার (TECO)</span></div>
-    <div class="kpi warn"><span class="v">{{KPI_UNBOOKED}}</span><span class="l">জুলাই–অক্টোবর ২০২৬-এর আনুমানিক না-লেখা খরচ (টাকা)</span></div>
+    <div class="kpi warn"><span class="v">{{KPI_UNBOOKED}}</span><span class="l">জুলাই ২০২৬ থেকে আজ পর্যন্ত আনুমানিক না-লেখা খরচ (টাকা)</span></div>
     <div class="kpi ok"><span class="v">{{KPI_AUC}}</span><span class="l">বড় মেরামতের ঝুঁকি-মডেলের AUC (নিউরাল নেটওয়ার্ক)</span></div>
   </div>
 </div>
@@ -180,7 +181,7 @@ footer { padding-block: 30px 50px; color: var(--muted); font-size: 13.5px; borde
 
 <section class="blk" id="cost">
   <div class="sh"><span class="kick">খরচের ইতিহাস</span><h2>মাসে মাসে খরচ ও অর্ডার</h2>
-  <p>ধূসর পটি: জুলাই ২০২৪ – মে ২০২৫-এর ফাঁক। কমলা পটি: জুলাই–অক্টোবর ২০২৬, তথ্য এখনো অসম্পূর্ণ। একটি মাসে ক্লিক করলে সেই মাসের অর্ডারগুলো নিচে আসবে।</p></div>
+  <p>ধূসর পটি: জুলাই ২০২৪ – মে ২০২৫-এর ফাঁক। কমলা পটি: জুলাই ২০২৬ থেকে আজ পর্যন্ত, অনেক কাজ এখনো SAP-এ ওঠেনি। একটি মাসে ক্লিক করলে সেই মাসের অর্ডারগুলো নিচে আসবে।</p></div>
   <div class="card">
     <div class="vbar"><div class="btns" id="mMode"><button class="btn on" data-k="cost">খরচ</button><button class="btn" data-k="n">অর্ডারের সংখ্যা</button></div>
       <div class="legend"><span><i style="background:var(--fleet)"></i>যানবাহন বহর</span><span><i style="background:var(--plant)"></i>প্ল্যান্ট ও ভবন</span><span><i style="background:var(--renew)"></i>নবায়ন ও লাইসেন্স</span></div></div>
@@ -279,7 +280,7 @@ footer { padding-block: 30px 50px; color: var(--muted); font-size: 13.5px; borde
 <div class="view" id="v-tpm" hidden><div class="wrap">{{TPM}}</div></div>
 <div class="view" id="v-atlas" hidden><div class="wrap">{{ATLAS}}</div></div>
 </main>
-<footer><div class="wrap foot"><div><b>রক্ষণাবেক্ষণ ও TPM রিপোর্ট</b> · বিএম এনার্জি (বিডি) লিমিটেড, বাড়বকুণ্ড এলপিজি প্ল্যান্ট (১২০১), সীতাকুণ্ড, চট্টগ্রাম<br>প্রস্তুত করেছেন: <b>Akib Fateh</b> · তথ্য: SAP PM অর্ডার, {{DATA_TO}} পর্যন্ত · সিদ্ধান্ত-সহায়তার জন্য, নিয়ন্ত্রণের জন্য নয়</div><div class="sig">Akib Fateh</div></div></footer>
+<footer><div class="wrap foot"><span class="logob big"><img src="assets/logo.png" alt="BM LP GAS" width="74" height="56"></span><div class="ft"><b>রক্ষণাবেক্ষণ ও TPM রিপোর্ট</b> · বিএম এনার্জি (বিডি) লিমিটেড, বাড়বকুণ্ড এলপিজি প্ল্যান্ট (১২০১), সীতাকুণ্ড, চট্টগ্রাম<br>প্রস্তুত করেছেন: <b>Akib Fateh</b> · তথ্য: SAP PM অর্ডার, {{DATA_TO}} পর্যন্ত · সিদ্ধান্ত-সহায়তার জন্য, নিয়ন্ত্রণের জন্য নয়</div><div class="sig">Akib Fateh</div></div></footer>
 <div class="tip" id="tip"></div>
 <script>{{D3}}</script>
 <script id="mdata" type="application/json">{{DATA}}</script>

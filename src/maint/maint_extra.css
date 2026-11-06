@@ -1,5 +1,16 @@
 /* ---------- views, header, watermark ---------- */
-.wm { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: .05; background-image: url("{{WM}}"); background-size: 560px 320px }
+.wm { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: .06; background-image: url("assets/logo-alpha.png"), url("{{WM}}"); background-size: min(64vw, 600px) auto, 560px 320px; background-position: center 58%, 0 0; background-repeat: no-repeat, repeat }
+.pbg { position: fixed; inset: 0; z-index: 0; pointer-events: none; background: linear-gradient(180deg, rgba(6,10,18,.9), rgba(6,10,18,.95) 50%, rgba(6,10,18,.97)), url("assets/plant_hero.jpg") center/cover no-repeat }
+.logob { background: #fff; border-radius: 9px; padding: 2px 6px; display: inline-grid; place-items: center; box-shadow: 0 2px 12px rgba(0,0,0,.35); flex: none }
+.logob img { height: 28px; width: auto; display: block }
+.logob.big { padding: 6px 10px; border-radius: 12px } .logob.big img { height: 58px }
+.foot .ft { flex: 1 1 360px; min-width: 0 }
+/* banner image behind the first block of each view */
+#v-ana > .wrap.hero, #tpm-top, #atlas-top { position: relative; isolation: isolate }
+#v-ana > .wrap.hero::before, #tpm-top::before, #atlas-top::before { content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: calc(50% - 50vw); right: calc(50% - 50vw); pointer-events: none;
+  background: linear-gradient(180deg, rgba(6,10,18,.35) 0%, rgba(6,10,18,.72) 55%, rgba(6,10,18,1) 100%), linear-gradient(90deg, rgba(6,10,18,.92) 0%, rgba(6,10,18,.55) 55%, rgba(6,10,18,.25) 100%), url("assets/plant_hero.jpg") center 42%/cover no-repeat }
+#tpm-top::before, #atlas-top::before { background: linear-gradient(180deg, rgba(6,10,18,.55) 0%, rgba(6,10,18,.85) 60%, rgba(6,10,18,1) 100%), linear-gradient(90deg, rgba(6,10,18,.94), rgba(6,10,18,.5)), url("assets/plant_hero.jpg") center 42%/cover no-repeat }
+#v-ana > .wrap.hero { padding-top: 64px }
 .topbar { display: flex; align-items: center; gap: 14px; padding-block: 9px; flex-wrap: wrap }
 .vt { display: flex; background: var(--ink1); border: 1px solid var(--line2); border-radius: 99px; padding: 3px; gap: 2px; margin-left: auto }
 .vt button { appearance: none; border: 0; background: transparent; color: var(--muted); font: 600 13.5px var(--f-body); padding: 6px 14px; border-radius: 99px; cursor: pointer; white-space: nowrap }
@@ -12,8 +23,7 @@ nav.links[hidden] { display: none !important }
 header.top .wrap.topbar { padding-block: 9px 6px }
 .view[hidden] { display: none !important }
 section.blk.first { border-top: 0; padding-top: 44px }
-section.blk { scroll-margin-top: 112px }
-@media (max-width: 640px) { section.blk, .eq { scroll-margin-top: 158px } }
+section.blk, .eq, [id^="eq-"], [id^="tpm-"], [id^="atlas-"] { scroll-margin-top: calc(var(--hdr, 112px) + 12px) !important }
 .foot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: flex-end }
 .sig { font-family: "Dancing Script", cursive; font-size: 30px; color: var(--flame2); line-height: 1 }
 @media (max-width: 640px) { .brand { font-size: 16px } .by { display: none } .vt { margin-left: 0; width: 100% } .vt button { flex: 1; padding: 6px 6px; font-size: 13px } }
@@ -81,7 +91,7 @@ section.blk { scroll-margin-top: 112px }
 .pidwrap { overflow-x: auto; padding: 10px } .pidwrap svg { width: 100%; min-width: 780px; height: auto; display: block } .pidwrap text { font-family: var(--f-body) }
 .hs { cursor: pointer; outline: none } .hs .halo { fill: transparent; stroke: transparent; stroke-width: 2; transition: fill .15s } .hs:hover .halo, .hs:focus-visible .halo { fill: rgba(255,196,107,.16); stroke: var(--flame2) }
 .eqlist { display: grid; gap: 18px }
-.eq { background: linear-gradient(180deg, var(--ink2), var(--ink1)); border: 1px solid var(--line); border-radius: 18px; padding: 18px; scroll-margin-top: 112px; min-width: 0 }
+.eq { background: linear-gradient(180deg, var(--ink2), var(--ink1)); border: 1px solid var(--line); border-radius: 18px; padding: 18px; min-width: 0 }
 .eq.flash { animation: eqflash 1.8s ease-out } @keyframes eqflash { 0% { box-shadow: 0 0 0 3px var(--flame2) } 100% { box-shadow: 0 0 0 0 transparent } }
 .eq > header { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: flex-start; margin-bottom: 12px } .eq h3 { font-size: 23px; margin: 0 }
 .eq .en { color: var(--muted); font-size: 13px; font-family: var(--f-mono) } .eqchips { display: flex; gap: 6px; flex-wrap: wrap }

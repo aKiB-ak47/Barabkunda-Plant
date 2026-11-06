@@ -15,7 +15,7 @@ from sklearn.model_selection import KFold
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.cluster import KMeans
 warnings.filterwarnings("ignore")
-TODAY = pd.Timestamp("2026-11-05")
+TODAY = pd.Timestamp(os.environ.get("AS_OF", "2026-11-06"))   # date the SAP record runs to (not the date of the last order)
 F, D = {}, {}
 df = pd.DataFrame(json.load(open("orders.json")))
 df["date"] = pd.to_datetime(df.date)
@@ -30,7 +30,7 @@ r1 = lambda x: None if x is None or (isinstance(x, float) and math.isnan(x)) els
 
 # ======================= 1. profile and data quality
 F["n"] = int(len(df)); F["types"] = df.type.value_counts().to_dict()
-F["date_min"], F["date_max"] = str(df.date.min().date()), str(df.date.max().date())
+F["date_min"], F["date_max"] = str(df.date.min().date()), str(df.date.max().date()); F["as_of"] = str(TODAY.date())
 F["order_min"], F["order_max"] = int(df.order.min()), int(df.order.max())
 F["cost_total"] = float(df.cost.sum()); F["n_cost"] = int((df.cost > 0).sum())
 F["gmps_n"] = int(df.has_gmps.sum()); F["gmps_with_cost"] = int((df.has_gmps & (df.cost > 0)).sum()); F["cost_without_gmps"] = int(((df.cost > 0) & ~df.has_gmps).sum())
@@ -44,8 +44,14 @@ mc = zpm1.groupby("m").size()
 gap = [str(p) for p in pd.period_range("2024-07", "2025-05", freq="M") if mc.get(p, 0) == 0]
 F["gap_months"] = gap; F["gap_orders"] = int(zpm1[(zpm1.m >= pd.Period("2024-07")) & (zpm1.m <= pd.Period("2025-05"))].shape[0])
 F["zero_cost_zpm1_2022_23"] = [int(((zpm1.year <= 2023) & (zpm1.cost == 0)).sum()), int((zpm1.year <= 2023).sum())]
-recent = zpm1[zpm1.m >= pd.Period("2026-07")]
+recent = zpm1[(zpm1.date >= pd.Timestamp("2026-07-01")) & (zpm1.date <= TODAY)]
 F["recent_jul_oct"] = {"orders": int(len(recent)), "fleet_orders": int((recent.group == "যানবাহন বহর").sum()), "cost": float(recent.cost.sum())}
+# silent period: no order dated after the last one, although the record runs to TODAY
+_last = df.date.max(); _d26 = df[(df.date >= pd.Timestamp("2026-01-01")) & (df.date <= pd.Timestamp("2026-09-30"))]
+_rate = len(_d26) / 273.0; _days = int((TODAY - _last).days); _f26 = _d26[(_d26.group == "যানবাহন বহর") & (_d26.type == "ZPM1")]
+_dts = np.sort(df[(df.date >= pd.Timestamp("2026-01-01")) & (df.date <= _last)].date.unique()); _gaps = np.diff(_dts).astype("timedelta64[D]").astype(int)
+F["silent"] = {"last": str(_last.date()), "days": _days, "rate_month": _rate * 30.44, "expected": _rate * _days, "p0": float(np.exp(-_rate * _days)),
+               "fleet_expected": len(_f26) / 273.0 * _days, "max_gap_2026": int(_gaps.max()) if len(_gaps) else 0, "late_median": float(df[df.backdated].late_days.median()) if "late_days" in df else None}
 F["h1_2026_monthly_orders"] = float(zpm1[(zpm1.m >= pd.Period("2026-01")) & (zpm1.m <= pd.Period("2026-06"))].shape[0] / 6)
 # registration spelling variants per vehicle (written forms in the description)
 var = {}
@@ -69,7 +75,7 @@ D["spell"] = sp; F["spell_forms"] = int(sum(len(s["forms"]) for s in sp))
 
 # ======================= 2. cost history
 D["monthly"] = []
-for p in pd.period_range(df.m.min(), pd.Period("2026-10"), freq="M"):
+for p in pd.period_range(df.m.min(), TODAY.to_period("M"), freq="M"):
     s = df[df.m == p]
     D["monthly"].append({"m": str(p), "n": int(len(s)), "cost": float(s.cost.sum()),
                          "fleet": float(s[s.group == "যানবাহন বহর"].cost.sum()), "plant": float(s[s.group.isin(plant.group.unique())].cost.sum()),
@@ -219,14 +225,14 @@ for b in bt: b["skill"] = (1 - b["rmse"] / naive_rmse) * 100; b["sel"] = b["mode
 D["fc_bt"] = bt
 D["fc_pts"] = [{"m": str(months[k]), "y": float(pts[best][i, 0]), "p": float(pts[best][i, 1]), "naive": float(pts["আগের মাসের সমান (নাইভ)"][i, 1])} for i, k in enumerate(range(7, len(y)))]
 lvl = METH[best](y); sd = float(np.std(res[best], ddof=1))
-fc_months = pd.period_range("2026-07", "2027-01", freq="M")
+fc_months = pd.period_range("2026-07", "2027-04", freq="M")
 D["fc"] = {"hist": [{"m": str(p), "v": float(v)} for p, v in zip(months, y)],
-           "recorded_after": [{"m": str(p), "v": float(fleet[fleet.m == p].cost.sum())} for p in pd.period_range("2026-07", "2026-10", freq="M")],
+           "recorded_after": [{"m": str(p), "v": float(fleet[fleet.m == p].cost.sum())} for p in pd.period_range("2026-07", TODAY.to_period("M"), freq="M")],
            "fwd": [{"m": str(p), "v": float(lvl), "lo": float(max(0, lvl - 1.2816 * sd)), "hi": float(lvl + 1.2816 * sd)} for p in fc_months]}
-rec_jul_oct = sum(x["v"] for x in D["fc"]["recorded_after"])
+rec_jul_oct = sum(x["v"] for x in D["fc"]["recorded_after"]); el = (TODAY - pd.Timestamp("2026-07-01")).days / 30.44   # months elapsed since 1 July
 F["fc"] = {"method": best, "level": float(lvl), "lo": float(max(0, lvl - 1.2816 * sd)), "hi": float(lvl + 1.2816 * sd), "rmse": bt[0]["rmse"], "mape": bt[0]["mape"],
-           "train": "জুন ২০২৫ – জুন ২০২৬", "test": "জানুয়ারি – জুন ২০২৬", "recorded_jul_oct": rec_jul_oct, "expected_jul_oct": float(lvl * 4),
-           "unbooked_jul_oct": float(lvl * 4 - rec_jul_oct), "unbooked_lo": float(max(0, lvl * 4 - 1.2816 * sd * 2 - rec_jul_oct)), "unbooked_hi": float(lvl * 4 + 1.2816 * sd * 2 - rec_jul_oct), "resid_sd": sd, "monthly_mean": float(y.mean()), "monthly_sd": float(y.std(ddof=1)), "cv": float(y.std(ddof=1) / y.mean() * 100)}
+           "train": "জুন ২০২৫ – জুন ২০২৬", "test": "জানুয়ারি – জুন ২০২৬", "recorded_jul_oct": rec_jul_oct, "expected_jul_oct": float(lvl * el), "elapsed_months": float(el),
+           "unbooked_jul_oct": float(lvl * el - rec_jul_oct), "unbooked_lo": float(max(0, lvl * el - 1.2816 * sd * np.sqrt(el) - rec_jul_oct)), "unbooked_hi": float(lvl * el + 1.2816 * sd * np.sqrt(el) - rec_jul_oct), "resid_sd": sd, "monthly_mean": float(y.mean()), "monthly_sd": float(y.std(ddof=1)), "cv": float(y.std(ddof=1) / y.mean() * 100)}
 
 # ======================= 8. vehicle-month panel: predictive models
 vehs = sorted(fw.vehicle.unique())

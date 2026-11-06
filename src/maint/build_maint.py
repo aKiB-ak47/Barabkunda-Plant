@@ -48,13 +48,13 @@ zc = F["zero_cost_zpm1_2022_23"]
 tw = F["twins"]
 
 T = {}  # text blocks with numbers
-T["eyebrow"] = f"বিএম এনার্জি (বিডি) লিমিটেড · প্ল্যান্ট <span class=lat>1201</span> · SAP রক্ষণাবেক্ষণ অর্ডার, {dt(F['date_min'])} – {dt(F['date_max'])}"
+T["eyebrow"] = f"বিএম এনার্জি (বিডি) লিমিটেড · প্ল্যান্ট <span class=lat>1201</span> · SAP রক্ষণাবেক্ষণ রেকর্ড, {dt(F['date_min'])} – {dt(F['as_of'])} (শেষ অর্ডার {dt(F['date_max'])})"
 T["lede"] = (f"SAP PM-এর {n0(F['n'])}টি রক্ষণাবেক্ষণ অর্ডারের পূর্ণ বিশ্লেষণ: খরচ, প্রতিরোধমূলক কাজ, পূর্বাভাস ও ঝুঁকি-মডেল, পরিসংখ্যানিক তাৎপর্য। "
              f"মোট লিপিবদ্ধ খরচ {tk(F['cost_total'])}, যার {pct(fleet_share,0)} গেছে যানবাহন বহরে। ওপরের বোতাম থেকে TPM কর্মসূচি ও যন্ত্রপাতির ছবিসহ নির্দেশিকা।")
 EXEC = [
   f"<b>নিরাপত্তা আগে:</b> SAP-এ গ্যাস ডিটেক্টর সার্ভিসের একমাত্র অর্ডার {dt(F['gas_mon'][0]['date'])}-এর ({n1(F['gas_mon_months'])} মাস আগে); অগ্নিনির্বাপক রিফিলে একবার {n1(ext_gap)} মাসের ফাঁক; প্ল্যান্টের {bn(F['plant_lic_n'])} ধরনের লাইসেন্সের নবায়ন-অর্ডার {dt(F['plant_lic_last'])}-এর পর নেই। যোগ্য প্রকৌশলী দিয়ে যাচাই প্রয়োজন।",
   f"<b>খরচ:</b> জুন ২০২৫ – জুন ২০২৬-এ চিহ্নিত {bn(F['fleet_vehicles_w'])}টি গাড়িতে {tk(F['fleet_w_cost'])}; {bn(F['pareto80'])}টি গাড়িতেই ৮০% খরচ। শীর্ষে <span class=lat>{v1['v']}</span>: {tk(v1['cost_w'])}।",
-  f"<b>প্রক্রিয়া:</b> {n0(F['n'])}টির একটিও অর্ডার টেকনিক্যালি বন্ধ (<span class=lat>TECO</span>) নয়; {bn(F['backdated'])}টি ({pct(F['backdated']/F['n']*100,0)}) কাজের পরে লেখা। জুলাই–অক্টোবর ২০২৬-এ বহরের মাত্র {bn(F['recent_jul_oct']['fleet_orders'])}টি অর্ডার, অর্থাৎ আনুমানিক {tk(FC['unbooked_jul_oct'])} ({lakh(FC['unbooked_lo'])}–{lakh(FC['unbooked_hi'])}) খরচ এখনো SAP-এ ওঠেনি।",
+  f"<b>প্রক্রিয়া:</b> {n0(F['n'])}টির একটিও অর্ডার টেকনিক্যালি বন্ধ (<span class=lat>TECO</span>) নয়; {bn(F['backdated'])}টি ({pct(F['backdated']/F['n']*100,0)}) কাজের পরে লেখা। জুলাই ২০২৬ থেকে আজ পর্যন্ত বহরের মাত্র {bn(F['recent_jul_oct']['fleet_orders'])}টি অর্ডার, আর {dt(F['date_max'])}-এর পর {bn(F['silent']['days'])} দিনে একটিও নয়; অর্থাৎ আনুমানিক {tk(FC['unbooked_jul_oct'])} ({lakh(FC['unbooked_lo'])}–{lakh(FC['unbooked_hi'])}) খরচ এখনো SAP-এ ওঠেনি।",
   f"<b>প্রতিরোধমূলক:</b> বহরের কাজের মাত্র {pct(F['pm_share_w'],0)}-এ নির্ধারিত সার্ভিস আছে; কম্প্রেসরের {bn(F['plan_orders'])}টি প্ল্যান-অর্ডারের একটিও রিলিজ হয়নি। ৯০ দিনের মধ্যে একই অংশে {bn(F['repeats_n'])}বার পুনরায় মেরামত, খরচ {tk(F['repeats_cost'])}।",
   f"<b>পূর্বাভাস:</b> নিউরাল নেটওয়ার্ক মডেল কোন গাড়িতে আগামী ৩ মাসে বড় মেরামত (≥৫০ হাজার টাকা) লাগবে তা <span class=lat>AUC</span> {bn(f'{CB[chr(97)+chr(117)+chr(99)]:.2f}')} (৯০% পরিসর {bn(f'{CB[chr(108)+chr(111)]:.2f}')}–{bn(f'{CB[chr(104)+chr(105)]:.2f}')}) দিয়ে ক্রম করে, শুধু অতীত হারের চেয়ে ভালো ({bn(f'{CB[chr(98)+chr(97)+chr(115)+chr(101)+chr(95)+chr(97)+chr(117)+chr(99)]:.2f}')})। শীর্ষ ঝুঁকি: {', '.join('<span class=lat>'+x+'</span>' for x in top4)}।",
 ]
@@ -70,7 +70,7 @@ DQ = [
   ("কোনো অর্ডার বন্ধ হয়নি", f"{n0(F['n'])}টির মধ্যে <span class=lat>TECO/CLSD</span> {bn(F['teco'])}টি; কনফার্মেশন (<span class=lat>CNF</span>) মাত্র {bn(F['cnf'])}টিতে, প্রকৃত শুরু-শেষের তারিখও {bn(F['actual_dates'])}টিতে।", "ডাউনটাইম ও মেরামতের সময় (<span class=lat>MTTR</span>) মাপা যায়নি; বিরতি মাপা হয়েছে অর্ডারের তারিখ দিয়ে।"),
   ("খরচ শুধু মালামালের", f"খরচ আছে {bn(F['n_cost'])}টিতে, এবং প্রতিটিতেই মালামাল ইস্যু (<span class=lat>GMPS</span>) আছে; মালামাল ছাড়া কোনো খরচ নেই।", "শ্রম ও বাইরের সার্ভিসের খরচ দেখা যায় না; খরচ কম করে দেখানো হতে পারে।"),
   ("৯ মাসের ফাঁক", f"জুলাই ২০২৪ – মে ২০২৫-এ মাত্র {bn(F['gap_orders'])}টি সাধারণ রক্ষণাবেক্ষণ অর্ডার; ২০২২–২৩-এর {bn(zc[1])}টির {bn(zc[0])}টিতে খরচ শূন্য।", "প্রবণতা ও মডেল জুন ২০২৫ – জুন ২০২৬-এর ধারাবাহিক তথ্যে।"),
-  ("সাম্প্রতিক মাস অসম্পূর্ণ", f"জুলাই–অক্টোবর ২০২৬-এ মোট {bn(F['recent_jul_oct']['orders'])}টি অর্ডার, বহরের {bn(F['recent_jul_oct']['fleet_orders'])}টি; প্রথম অর্ধে মাসে গড়ে {n1(F['h1_2026_monthly_orders'])}টি ছিল।", "এই মাসগুলো পূর্বাভাসের প্রশিক্ষণে নেওয়া হয়নি; না-ওঠা খরচ আলাদা করে অনুমান করা হয়েছে।"),
+  (f"শেষ অর্ডারের পর {bn(F['silent']['days'])} দিন নীরব", f"রেকর্ড {dt(F['as_of'])} পর্যন্ত, কিন্তু শেষ অর্ডার {dt(F['date_max'])}-এর। ২০২৬-এর গড় হারে (মাসে {n1(F['silent']['rate_month'])}টি) এই {bn(F['silent']['days'])} দিনে প্রায় {n0(F['silent']['expected'])}টি অর্ডার হওয়ার কথা। ২০২৬-এ আগেও {bn(F['silent']['max_gap_2026'])} দিনের ফাঁক ছিল, যা পরে পিছিয়ে খোলা অর্ডারে ভরে যায় (এমন অর্ডারের মধ্যমা দেরি {n0(F['silent']['late_median'])} দিন)। তাই সম্ভবত কাজ হয়েছে, SAP-এ এখনো ওঠেনি। জুলাই থেকে মোট {bn(F['recent_jul_oct']['orders'])}টি অর্ডার, বহরের {bn(F['recent_jul_oct']['fleet_orders'])}টি; প্রথম অর্ধে মাসে গড়ে {n1(F['h1_2026_monthly_orders'])}টি ছিল।", "অর্ডার না থাকাকে কাজ না হওয়া ধরা হয়নি: এই সময় পূর্বাভাসের প্রশিক্ষণে নেই, না-ওঠা খরচ আলাদা করে অনুমান করা।"),
   ("কাজের পরে লেখা অর্ডার", f"{bn(F['backdated'])}টি অর্ডারের তারিখ আগের নম্বরের অর্ডারের চেয়ে ৩০ দিনেরও বেশি পুরোনো; মধ্যমা দেরি {bn(int(F['late_median']))} দিন।", "অর্ডার পরিকল্পনার জন্য নয়, পরে খরচ বসাতে খোলা হচ্ছে; তারিখকে কাজের দিন ধরা হয়েছে।"),
   ("গাড়ির নম্বরের ৬০ রকম লেখা", f"{bn(F['reg_vehicles'])}টি গাড়ির নম্বর বিবরণে {bn(F['reg_variants_total'])} রকমভাবে লেখা (যেমন <span class=lat>CM DA-61-0225</span>, <span class=lat>61-0226</span>, <span class=lat>C.M.DHA 11-0137</span>); ১২টি সাধারণ শব্দের {bn(F['spell_forms'])}টি বানান।", "শেষ চার অঙ্ক ও ইকুইপমেন্ট নম্বর দিয়ে প্রতিটি গাড়িকে একটি নামে আনা হয়েছে।"),
   ("ভুল গাড়িতে অর্ডার", f"{bn(len(F['mismatch']))}টি অর্ডারে বিবরণের গাড়ি আর ইকুইপমেন্ট নম্বরের গাড়ি আলাদা (যেমন <span class=lat>4010249</span>); ১টিতে নম্বর টাইপো (<span class=lat>CM-Sha-11-0247</span>)।", "কাজের হিসাবে বিবরণের গাড়ি ধরা হয়েছে; তালিকায় চিহ্নিত।"),
@@ -89,7 +89,7 @@ SAFE = [
 REC = [
   ("উচ্চ", "এইচএসই ও প্ল্যান্ট ম্যানেজার", "গ্যাস ডিটেক্টর ক্যালিব্রেশন ও অগ্নিনির্বাপকের রেকর্ড যাচাই; SAP-এ এগুলোর জন্য পুনরাবৃত্ত প্ল্যান (<span class=lat>ZPM3</span>) তৈরি।"),
   ("উচ্চ", "প্রশাসন ও কমপ্লায়েন্স", f"{bn(F['plant_lic_n'])} ধরনের প্ল্যান্ট-লাইসেন্স ও প্রতিটি গাড়ির এক্সপ্লোসিভ লাইসেন্সের মেয়াদ যাচাই; প্রতিটি নবায়নের অর্ডার SAP-এ সময়মতো খোলা ও বন্ধ করা।"),
-  ("উচ্চ", "রক্ষণাবেক্ষণ বিভাগ", f"জুলাই–অক্টোবর ২০২৬-এর বহরের কাজ SAP-এ তোলা (আনুমানিক {tk(FC['unbooked_jul_oct'])}); কাজ শেষে কনফার্মেশন ও <span class=lat>TECO</span>।"),
+  ("উচ্চ", "রক্ষণাবেক্ষণ বিভাগ", f"জুলাই ২০২৬ থেকে আজ পর্যন্ত বহরের সব কাজ SAP-এ তোলা (আনুমানিক {tk(FC['unbooked_jul_oct'])}); কাজ শেষে কনফার্মেশন ও <span class=lat>TECO</span>।"),
   ("মধ্যম", "পরিবহন ও রক্ষণাবেক্ষণ", f"ঝুঁকি-তালিকার শীর্ষ গাড়িগুলোর ({', '.join('<span class=lat>'+x+'</span>' for x in top4)}) আগাম পরিদর্শন; প্রতি গাড়িতে প্রায় {bn(int(F['sched_interval']['median']))} দিন পরপর নির্ধারিত সার্ভিসের প্ল্যান।"),
   ("মধ্যম", "রক্ষণাবেক্ষণ বিভাগ", "দুই এয়ার কম্প্রেসরের প্ল্যান-অর্ডার রিলিজ ও সম্পাদন; তেল, ফিল্টার ও সেফটি ভাল্‌ভের পরীক্ষা লিপিবদ্ধ করা।"),
   ("মধ্যম", "অভ্যন্তরীণ নিরীক্ষা", f"{bn(F['anom_n'])}টি অস্বাভাবিক খরচ, {bn(len(F['dups']))}টি সম্ভাব্য দ্বৈত অর্ডার ও ভুল-গাড়ির {bn(len(F['mismatch']))}টি অর্ডার যাচাই।"),
@@ -115,7 +115,7 @@ T["pm"] = (f"জুন ২০২৫ – জুন ২০২৬-এ বহরে�
 T["fc"] = (f"বহরের মাসিক খরচ খুব ওঠানামা করে: জুন ২০২৫ – জুন ২০২৬-এ মাসে গড় {tk(FC['monthly_mean'])}, আদর্শ বিচ্যুতি {tk(FC['monthly_sd'])} (পরিবর্তনশীলতা {pct(FC['cv'],0)})। "
            f"সাতটি পদ্ধতি জানুয়ারি–জুন ২০২৬-এ প্রতিবার শুধু আগের মাসের তথ্য দিয়ে এক মাস আগে পূর্বাভাস দিয়েছে। সবচেয়ে কম ত্রুটি দিয়েছে <b>{FC['method']}</b>: "
            f"<span class=lat>RMSE</span> {tk(FC['rmse'])}, নাইভের চেয়ে {pct(D['fc_bt'][0]['skill'],0)} ভালো; কিন্তু <span class=lat>MAPE</span> {pct(FC['mape'],0)}, কারণ কয়েকটি মাসে খরচ খুব কম। "
-           f"পরের প্রতি মাসের পূর্বাভাস {tk(FC['level'])}, ৮০% পরিসর {lakh(FC['lo'])} থেকে {lakh(FC['hi'])} টাকা। জুলাই–অক্টোবর ২০২৬-এ SAP-এ উঠেছে মাত্র {tk(FC['recorded_jul_oct'])}; "
+           f"পরের প্রতি মাসের পূর্বাভাস {tk(FC['level'])}, ৮০% পরিসর {lakh(FC['lo'])} থেকে {lakh(FC['hi'])} টাকা। জুলাই ২০২৬ থেকে {dt(F['as_of'])} পর্যন্ত SAP-এ উঠেছে মাত্র {tk(FC['recorded_jul_oct'])}; "
            f"একই হারে কাজ হয়ে থাকলে আনুমানিক {tk(FC['unbooked_jul_oct'])} ({lakh(FC['unbooked_lo'])}–{lakh(FC['unbooked_hi'])} টাকা) এখনো লেখা বাকি।")
 T["risk"] = (f"প্রতিটি গাড়ি ও মাস একটি সারি ({n0(CB['n'])}টি পরীক্ষার সারি, {bn(CB['pos'])}টিতে বড় মেরামত)। লক্ষ্য: আগামী ৩ মাসে ≥৫০,০০০ টাকার কোনো কাজ। প্রতিটি মডেল শুধু আগের মাসগুলো দিয়ে শিখে "
              f"{bn(CB['test'].replace('2026-01','জানু ২০২৬').replace('2026-04','এপ্রি ২০২৬'))}-এর প্রতিটি মাসে পূর্বাভাস দিয়েছে। সেরা <b>{CB['best']}</b>: <span class=lat>AUC</span> {bn(f'{CB[chr(97)+chr(117)+chr(99)]:.2f}')} "
@@ -135,7 +135,7 @@ T["clusters"] = (f"বিবরণের লেখা থেকে (গাড়
                  f"নিয়মভিত্তিক শ্রেণির সঙ্গে মিল কম (<span class=lat>ARI</span> {bn(f'{F[chr(99)+chr(108)+chr(117)+chr(115)+chr(116)+chr(101)+chr(114)+chr(115)][chr(97)+chr(114)+chr(105)+chr(95)+chr(118)+chr(115)+chr(95)+chr(114)+chr(117)+chr(108)+chr(101)+chr(115)]:.2f}')}), কারণ অনেক দল বানানের ধরন দিয়ে তৈরি (যেমন schedule/schedual/shedule)। এটাই প্রমাণ যে SAP-এ ক্যাটালগ কোড দরকার।")
 T["renew"] = (f"নবায়ন-অর্ডার থেকে প্রতিটি বিষয়ের (গাড়ি বা প্ল্যান্ট) প্রতিটি কাগজের শেষ তারিখ, আর ধরে নেওয়া এক বছর মেয়াদে পরের নবায়ন। {bn(F['ren_overdue'])}টির ক্ষেত্রে ১২ মাসের মধ্যে কোনো নতুন অর্ডার নেই, "
               f"{bn(F['ren_soon'])}টির নবায়ন ১২০ দিনের মধ্যে। মনে রাখুন: কোনো অর্ডার বন্ধ হয় না, তাই অর্ডার থাকা মানেই নবায়ন হয়েছে তা নয়।")
-T["plant"] = (f"বহরের বাইরে {n0(F['plant_n'])}টি অর্ডার, খরচ {tk(F['plant_cost'])}। বড় তিনটি: এয়ার কম্প্রেসর-২-এর বাইরের মেরামত {tk(comp260['cost'])}, মাউন্ডেড ট্যাংক এলাকার মাটি ১.৪ লাখ টাকা, প্রশাসনিক ভবনের ভেতরের কাজ ১ লাখ টাকা।".translate(BN))
+T["plant"] = (f"বহরের বাইরে {n0(F['plant_n'])}টি অর্ডার, খরচ {tk(F['plant_cost'])}। বড় তিনটি: এয়ার কম্প্রেসর-২-এর বাইরের মেরামত {tk(comp260['cost'])}, ট্যাংক এলাকার মাটির কাজ ১.৪ লাখ টাকা, প্রশাসনিক ভবনের ভেতরের কাজ ১ লাখ টাকা।".translate(BN))
 T["prep"] = f"প্রস্তুত করেছেন: <b>Akib Fateh</b>, বাড়বকুণ্ড এলপিজি প্ল্যান্ট (সিটিজি)। তারিখ: {dt(os.environ.get('UPDATE_DATE', dt_.date.today().isoformat()))}"
 
 METHODS = [
@@ -162,7 +162,7 @@ rep = {"EYEBROW": T["eyebrow"], "LEDE": T["lede"], "PREP": T["prep"], "EXEC": ex
        "T_ANOM": T["anom"], "T_CLUSTERS": T["clusters"], "T_RENEW": T["renew"], "T_PLANT": T["plant"], "METH": meth_html, "N_ORDERS": n0(F["n"]),
        "KPI_COST": bn(f"{F['cost_total']/1e7:.2f}") + " কোটি", "KPI_FLEETW": lakh(F["fleet_w_cost"]), "KPI_PM": pct(F["pm_share_w"], 0), "KPI_TECO": bn(F["teco"]), "KPI_UNBOOKED": lakh(FC["unbooked_jul_oct"]),
        "KPI_AUC": bn(f"{CB['auc']:.2f}"), "D3": D3, "DATA": data_json, "TPM": tpm_html, "ATLAS": atlas_html, "DEEP": deep_html, "ATLAS_DEFS": atlas_svg.DEFS,
-       "EXTRA_CSS": extra_css, "EXTRA_JS": extra_js, "DATA_TO": dt(F["date_max"])}
+       "EXTRA_CSS": extra_css, "EXTRA_JS": extra_js, "DATA_TO": dt(F["as_of"]) + " (শেষ অর্ডার " + dt(F["date_max"]) + ")"}
 for k, v in rep.items(): tpl = tpl.replace("{{" + k + "}}", v)
 left = re.findall(r"\{\{[A-Z_]+\}\}", tpl); assert not left, left
 open(f"{SRC}/reports/maint.html", "w", encoding="utf8").write(tpl)
@@ -174,17 +174,21 @@ MONS_ = ["জানু", "ফেব্রু", "মার্চ", "এপ্র�
 mm = [m for m in D["monthly"] if m["m"] >= "2025-06"]
 hub["maint"] = {"labels": [MONS_[int(m["m"][5:]) - 1] + " " + bn(m["m"][2:4]) for m in mm], "vals": [round((m["fleet"] + m["plant"]) / 1e5, 1) for m in mm],
                 "inc": [m["m"] >= "2026-07" for m in mm]}
-last = F["date_max"]; L = pd.Timestamp(last)
+last = F["date_max"]; L = pd.Timestamp(F["as_of"]); LA = pd.Timestamp(last)
 hub.setdefault("tokens", {}).update({
     "maint_n": f"{F['n']:,}", "maint_cost": f"{F['cost_total']/1e7:.2f}", "maint_p80": f"{F['pareto80']}/{F['fleet_vehicles_w']}", "maint_auc": f"{F['clsB']['auc']:.2f}",
     "maint_pm": f"{F['pm_share_w']:.0f}", "maint_from": "ফেব্রুয়ারি 2022", "maint_to": f"{MON[L.month-1]} {L.year}", "maint_gas_m": f"{F['gas_mon_months']:.0f}",
-    "maint_ext_gap": f"{max(F['fire_ext_gaps_m']):.0f}", "maint_lic": str(F["plant_lic_n"]), "maint_unbooked": f"{F['fc']['unbooked_jul_oct']/1e5:.0f}"})
+    "maint_ext_gap": f"{max(F['fire_ext_gaps_m']):.0f}", "maint_lic": str(F["plant_lic_n"]), "maint_unbooked": f"{F['fc']['unbooked_jul_oct']/1e5:.0f}",
+    "maint_asof": f"{L.day} {MON[L.month-1]} {L.year}", "maint_last": f"{LA.day} {MON[LA.month-1]} {LA.year}", "maint_silent": str(F["silent"]["days"])})
 today = os.environ.get("UPDATE_DATE", dt_.date.today().isoformat())
 ups = hub.setdefault("updates", [])
 text = f"রক্ষণাবেক্ষণ রিপোর্ট: SAP-এর {F['n']}টি অর্ডার, মোট খরচ {F['cost_total']/1e7:.2f} কোটি টাকা; বড় মেরামতের ঝুঁকি-মডেল (নিউরাল নেটওয়ার্ক, AUC {F['clsB']['auc']:.2f}); পরিসংখ্যানিক তাৎপর্য ও অগ্রগতি।"
 text2 = f"নতুন: বিশ্বমানের TPM কর্মসূচি (৮ স্তম্ভ, পরিপক্বতা {TPM['maturity']['mean']:.1f}/৫, সূচক বনাম বিশ্বমান, ৩৬ মাসের রোডম্যাপ) ও {len(build_tpm.EQ)}টি যন্ত্রের ছবিসহ নির্দেশিকা (NRV, বাটারফ্লাই ভালভ, সেফটি ভালভ, পাম্প, ফিলিং হেড…)।"
-ups[:] = [u for u in ups if u.get("key") not in ("maint-" + last, "tpm-" + today)] + [{"date": today, "text": text, "through": last, "key": "maint-" + last, "open": "maint", "view": "summary"},
-          {"date": today, "text": text2, "through": last, "key": "tpm-" + today, "open": "maint", "view": "tpm"}]
+text3 = (f"রক্ষণাবেক্ষণ রেকর্ড {L.day} {MON[L.month-1]} {L.year} পর্যন্ত ধরে সব হিসাব নতুন করে: শেষ অর্ডারের পর {F['silent']['days']} দিন কোনো অর্ডার নেই, "
+         f"আনুমানিক {F['fc']['unbooked_jul_oct']/1e5:.0f} লাখ টাকার কাজ SAP-এ ওঠেনি; গোলাকার স্টোরেজ স্ফিয়ারসহ {len(build_tpm.EQ)}টি যন্ত্রের নির্দেশিকা।")
+if not any(u.get("key") == "maint-" + last for u in ups):
+    ups.append({"date": today, "text": text, "through": last, "key": "maint-" + last, "open": "maint", "view": "summary"})
+ups[:] = [u for u in ups if u.get("key") != "maint-asof-" + F["as_of"]] + [{"date": today, "text": text3, "through": F["as_of"], "key": "maint-asof-" + F["as_of"], "open": "maint", "view": "dq"}]
 ups.sort(key=lambda u: (u["date"], u.get("key", "")))
 json.dump(hub, open(f"{SRC}/hub/hubdata.json", "w", encoding="utf8"), ensure_ascii=False, indent=1)
 print("hub data updated")
