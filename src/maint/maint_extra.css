@@ -1,5 +1,5 @@
 /* ---------- views, header, watermark ---------- */
-.wm { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: .06; background-image: url("assets/logo-alpha.webp"), url("{{WM}}"); background-size: min(64vw, 600px) auto, 560px 320px; background-position: center 58%, 0 0; background-repeat: no-repeat, repeat }
+.wm { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: .12; background-image: url("assets/logo-alpha.webp"), url("{{WM}}"); background-size: min(64vw, 600px) auto, 560px 320px; background-position: center 58%, 0 0; background-repeat: no-repeat, repeat }
 .pbg { position: fixed; inset: 0; z-index: 0; pointer-events: none; background: linear-gradient(180deg, rgba(6,10,18,.9), rgba(6,10,18,.95) 50%, rgba(6,10,18,.97)), url("assets/plant_1920.webp") center/cover no-repeat }
 .logob { background: #fff; border-radius: 9px; padding: 2px 6px; display: inline-grid; place-items: center; box-shadow: 0 2px 12px rgba(0,0,0,.35); flex: none }
 .logob img { height: 28px; width: auto; display: block }
@@ -130,7 +130,7 @@ details { background: var(--ink1); border: 1px solid var(--line); border-radius:
   #tpm-top::before, #atlas-top::before { background-image: linear-gradient(180deg, rgba(6,10,18,.55) 0%, rgba(6,10,18,.85) 60%, rgba(6,10,18,1) 100%), linear-gradient(90deg, rgba(6,10,18,.94), rgba(6,10,18,.5)), url("assets/plant_3840.webp") }
 }
 .card, .eq { position: relative }
-.card::after, .eq::after { content: ""; position: absolute; right: 12px; bottom: 10px; width: 50px; height: 38px; background: url("assets/logo-alpha.webp") center/contain no-repeat; opacity: .07; pointer-events: none; z-index: 0 }
+.card::after, .eq::after { content: ""; position: absolute; right: 12px; bottom: 10px; width: 60px; height: 45px; background: url("assets/logo-alpha.webp") center/contain no-repeat; opacity: .2; pointer-events: none; z-index: 0 }
 .tmk { font: 600 10.5px/1 var(--f-mono, monospace); color: #22d3ee; letter-spacing: .08em; border: 1px solid rgba(34,211,238,.35); border-radius: 6px; padding: 3px 6px; margin-left: 8px; white-space: nowrap; vertical-align: middle }
 .ftm { display: block; margin-top: 6px; font-size: 12px; color: var(--dim) }
 @media (max-width: 640px) { .tmk { display: none } }

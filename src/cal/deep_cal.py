@@ -20,7 +20,7 @@ def pcls(p): return "sig" if p < 0.05 else ("mid" if p < 0.10 else "ns")
 def lakh(x): return "Tk " + (bn(f"{x / 1e5:,.1f}") + " lakh" if abs(x) < 1e7 else bn(f"{x / 1e7:,.2f}") + " crore")
 
 BRAND_CSS = """<style id="brand">
-:root { --wmtile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='560' height='320'%3E%3Cg transform='rotate(-18 280 160)' fill='%23777' font-family='Arial' font-weight='700'%3E%3Ctext x='150' y='150' font-size='38' letter-spacing='3'%3EBM LP GAS%3C/text%3E%3Ctext x='152' y='178' font-size='14' letter-spacing='5'%3EBARABKUNDA LPG PLANT%3C/text%3E%3Ctext x='300' y='268' font-size='13' letter-spacing='3'%3EAKIB FATEH%3C/text%3E%3C/g%3E%3C/svg%3E") }
+:root { --wmtile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='560' height='320'%3E%3Cg transform='rotate(-18 280 160)' fill='%23cfe6ff' font-family='Arial' font-weight='700'%3E%3Ctext x='150' y='150' font-size='38' letter-spacing='3'%3EBM LP GAS%E2%84%A2%3C/text%3E%3Ctext x='152' y='178' font-size='14' letter-spacing='5'%3EBARABKUNDA LPG PLANT%3C/text%3E%3Ctext x='300' y='268' font-size='13' letter-spacing='3'%3EAKIB FATEH%3C/text%3E%3C/g%3E%3C/svg%3E") }
 .brandwm { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: .045; background-image: var(--wmtile); background-size: 560px 320px }
 body { background: transparent !important }
 :root { --bg: #050b16; --panel: #0b1730; --line: #1d3050; --fg: #eaf2fc; --muted: #93a7c2; --accent: #ff8a3d; --accent2: #22d3ee; --stage: #030812;
@@ -32,11 +32,11 @@ html { background: #050b16 !important }
 .brandbg { position: fixed; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(180deg, rgba(5,11,22,.9), rgba(5,11,22,.96)), url("assets/plant_1920.webp") center/cover no-repeat }
 @media (min-width: 1600px) { .brandbg { background-image: linear-gradient(180deg, rgba(5,11,22,.9), rgba(5,11,22,.96)), url("assets/plant_3840.webp") } }
 .up .card, .dp .card, .dp .kp > div { position: relative; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); background: color-mix(in srgb, var(--panel) 86%, transparent) !important }
-.up .card::after, .dp .card::after { content: ""; position: absolute; right: 12px; bottom: 10px; width: 50px; height: 38px; background: url("assets/logo-alpha.webp") center/contain no-repeat; opacity: .07; pointer-events: none }
+.up .card::after, .dp .card::after { content: ""; position: absolute; right: 12px; bottom: 10px; width: 60px; height: 45px; background: url("assets/logo-alpha.webp") center/contain no-repeat; opacity: .2; pointer-events: none }
 .tmk { font: 600 10.5px/1 "JetBrains Mono", ui-monospace, monospace; color: #22d3ee; letter-spacing: .08em; border: 1px solid rgba(34,211,238,.35); border-radius: 6px; padding: 3px 6px; white-space: nowrap }
 .ftm { display: block; margin-top: 6px; font-size: 12px; opacity: .8 }
 @media (max-width: 640px) { .tmk { display: none } }
-.brandwm { background-image: url("assets/logo-alpha.webp"), var(--wmtile) !important; background-size: min(64vw, 560px) auto, 560px 320px !important; background-position: center 58%, 0 0 !important; background-repeat: no-repeat, repeat !important; opacity: .05 !important }
+.brandwm { background-image: url("assets/logo-alpha.webp"), var(--wmtile) !important; background-size: min(64vw, 560px) auto, 560px 320px !important; background-position: center 58%, 0 0 !important; background-repeat: no-repeat, repeat !important; opacity: .12 !important }
 .tp-bar { background: color-mix(in srgb, var(--panel) 88%, transparent) !important; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px) }
 .tp-bar h1 { display: flex; align-items: center; gap: 10px; font-family: var(--font-ui-sans) !important; font-weight: 600 !important }
 @media (max-width: 640px) { .dp .card, .up .fig { overflow-x: auto } .dp .card svg, .up .fig svg { min-width: 560px } }

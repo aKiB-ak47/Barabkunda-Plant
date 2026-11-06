@@ -151,7 +151,7 @@ D["tpm"] = {**TPM, "pillar_info": tpm_content.PILLARS, "roadmap": tpm_content.RO
 tpm_html = build_tpm.tpm_html(TPM, F, hubtok); atlas_html = build_tpm.atlas_html(D["orders"]); deep_html = build_tpm.deep_html(TPM)
 wm_svg = ('<svg xmlns="http://www.w3.org/2000/svg" width="560" height="320" viewBox="0 0 560 320"><g transform="rotate(-18 280 160)" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-weight="700">'
           '<path d="M120 112c10 18 26 28 26 46a26 26 0 0 1-52 0c0-13 8-21 13-28 3 8 5 13 10 16 0-13 0-23 3-34z"/>'
-          '<text x="160" y="150" font-size="38" letter-spacing="3">BM LP GAS</text><text x="162" y="178" font-size="14" letter-spacing="5">BARABKUNDA LPG PLANT</text>'
+          '<text x="160" y="150" font-size="38" letter-spacing="3">BM LP GAS™</text><text x="162" y="178" font-size="14" letter-spacing="5">BARABKUNDA LPG PLANT</text>'
           '<text x="300" y="268" font-size="13" letter-spacing="3" opacity=".8">AKIB FATEH</text></g></svg>')
 extra_css = open("maint_extra.css", encoding="utf8").read().replace("{{WM}}", "data:image/svg+xml," + quote(wm_svg))
 extra_js = open("maint_extra.js", encoding="utf8").read()

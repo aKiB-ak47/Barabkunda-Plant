@@ -17,7 +17,7 @@
 }
 * { box-sizing: border-box }
 html { background: var(--bg0); scroll-behavior: smooth; scroll-padding-top: 84px }
-body { margin: 0; background: var(--bg0); color: var(--text); font: 16px/1.65 var(--f-body); -webkit-font-smoothing: antialiased; overflow-x: hidden }
+body { margin: 0; background: transparent; color: var(--text); font: 16px/1.65 var(--f-body); -webkit-font-smoothing: antialiased; overflow-x: hidden }
 a { color: var(--cyan) } button { font: inherit; color: inherit } img { max-width: 100%; display: block }
 :focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; border-radius: 10px }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto } *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition: none !important } }
@@ -29,8 +29,8 @@ p { margin: 0 }
 @media (min-width: 1600px) { .pagebg { background-image: linear-gradient(180deg, rgba(3, 8, 18, .9), rgba(3, 8, 18, .96)), url("assets/plant_3840.webp") } }
 .pagegrid { position: fixed; inset: 0; z-index: -2; pointer-events: none; background: radial-gradient(1200px 600px at 85% -10%, rgba(34, 211, 238, .12), transparent 60%), radial-gradient(900px 500px at -10% 40%, rgba(59, 156, 255, .10), transparent 60%),
   linear-gradient(rgba(120, 180, 255, .05) 1px, transparent 1px) 0 0 / 48px 48px, linear-gradient(90deg, rgba(120, 180, 255, .05) 1px, transparent 1px) 0 0 / 48px 48px }
-.pagewm { position: fixed; z-index: -1; left: 50%; top: 55%; width: min(80vw, 760px); aspect-ratio: 4 / 3; transform: translate(-50%, -50%); background: url("assets/logo-alpha.webp") center/contain no-repeat; opacity: .05; pointer-events: none }
-.pagetm { position: fixed; z-index: -1; inset: 0; pointer-events: none; opacity: .035; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='220'%3E%3Ctext x='20' y='110' transform='rotate(-18 210 110)' font-family='Arial' font-weight='700' font-size='22' fill='%23cfe6ff'%3EBM LP GAS%E2%84%A2 %C2%B7 AKIB FATEH%3C/text%3E%3C/svg%3E") }
+.pagewm { position: fixed; z-index: -1; left: 50%; top: 55%; width: min(80vw, 760px); aspect-ratio: 4 / 3; transform: translate(-50%, -50%); background: url("assets/logo-alpha.webp") center/contain no-repeat; opacity: .16; pointer-events: none; filter: drop-shadow(0 0 30px rgba(34, 211, 238, .25)) }
+.pagetm { position: fixed; z-index: -1; inset: 0; pointer-events: none; opacity: .11; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='460' height='240'%3E%3Cg transform='rotate(-18 230 120)' font-family='Arial' font-weight='700' fill='%23cfe6ff'%3E%3Ctext x='40' y='112' font-size='30' letter-spacing='2'%3EBM LP GAS%E2%84%A2%3C/text%3E%3Ctext x='42' y='138' font-size='12' letter-spacing='4'%3EBARABKUNDA LPG PLANT %C2%B7 AKIB FATEH%3C/text%3E%3C/g%3E%3C/svg%3E") }
 /* top bar */
 .progress { position: fixed; top: 0; left: 0; height: 2px; width: 0; z-index: 60; background: linear-gradient(90deg, var(--cyan), var(--flame)); box-shadow: 0 0 12px var(--cyan) }
 .bar { position: fixed; top: 0; left: 0; right: 0; z-index: 50; transition: background .25s, box-shadow .25s }
@@ -65,7 +65,7 @@ p { margin: 0 }
   linear-gradient(var(--cyan), var(--cyan)) top right / 40px 2px no-repeat, linear-gradient(var(--cyan), var(--cyan)) top right / 2px 40px no-repeat,
   linear-gradient(var(--cyan), var(--cyan)) bottom left / 40px 2px no-repeat, linear-gradient(var(--cyan), var(--cyan)) bottom left / 2px 40px no-repeat,
   linear-gradient(var(--cyan), var(--cyan)) bottom right / 40px 2px no-repeat, linear-gradient(var(--cyan), var(--cyan)) bottom right / 2px 40px no-repeat; opacity: .55 }
-.scanline { position: absolute; left: 0; right: 0; height: 120px; top: -120px; z-index: -1; pointer-events: none; background: linear-gradient(180deg, transparent, rgba(34, 211, 238, .10), transparent); animation: scan 7s linear infinite }
+.scanline { position: absolute; left: 0; right: 0; height: 120px; top: -120px; z-index: -1; pointer-events: none; background: linear-gradient(180deg, transparent, rgba(34, 211, 238, .10), transparent); animation: scan 18s linear infinite }
 @keyframes scan { to { transform: translateY(calc(100svh + 240px)) } }
 .hero .inner { width: 100%; flex: 1; display: flex; flex-direction: column; justify-content: center; padding-top: 120px; padding-bottom: 220px }
 .eyebrow { display: inline-block; font: 500 13px/1.6 var(--f-code); letter-spacing: .03em; color: #bfefff; background: rgba(6, 22, 44, .55); border: 1px solid rgba(34, 211, 238, .35); padding: 6px 14px; border-radius: 99px; backdrop-filter: blur(8px); align-self: flex-start; box-shadow: 0 0 24px -10px var(--cyan) }
@@ -91,7 +91,7 @@ p { margin: 0 }
 @media (max-width: 900px) { .hstats { position: static; margin-top: -170px; padding-bottom: 8px } .hstats .grid { grid-template-columns: repeat(2, minmax(0, 1fr)) } .hero .inner { padding-bottom: 190px } .hero::before { background: linear-gradient(180deg, rgba(3, 8, 18, .85) 0%, rgba(3, 8, 18, .72) 45%, var(--bg0) 100%) } .hud { inset: 80px 10px 10px } }
 /* ticker */
 .ticker { position: relative; overflow: hidden; border-block: 1px solid var(--line); background: rgba(4, 12, 26, .7); -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent) }
-.tk-track { display: flex; gap: 34px; width: max-content; padding: 11px 0; animation: tick 80s linear infinite; font: 500 13px/1.3 var(--f-code) }
+.tk-track { display: flex; gap: 34px; width: max-content; padding: 11px 0; animation: tick 300s linear infinite; font: 500 13px/1.3 var(--f-code) }
 .ticker:hover .tk-track, .ticker:focus-within .tk-track { animation-play-state: paused }
 @keyframes tick { to { transform: translateX(-50%) } }
 .tk { display: inline-flex; gap: 8px; align-items: center; white-space: nowrap; color: var(--text); cursor: pointer; background: none; border: 0; padding: 0; font: inherit }
@@ -105,7 +105,7 @@ section.blk { padding-block: 70px 8px; scroll-margin-top: 80px }
 .sh h2 { font-size: clamp(28px, 3.6vw, 44px); font-weight: 700 }
 .sh p { color: var(--muted); font-size: 16px }
 .card { position: relative; background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); padding: 22px; box-shadow: 0 24px 60px -40px rgba(0, 0, 0, .9); min-width: 0; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px) }
-.card::after, .flg::after { content: ""; position: absolute; right: 12px; bottom: 10px; width: 54px; height: 40px; background: url("assets/logo-alpha.webp") center/contain no-repeat; opacity: .08; pointer-events: none }
+.card::after, .flg::after { content: ""; position: absolute; right: 12px; bottom: 10px; width: 64px; height: 48px; background: url("assets/logo-alpha.webp") center/contain no-repeat; opacity: .2; pointer-events: none }
 .rv { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s cubic-bezier(.2, .7, .2, 1) } .rv.in { opacity: 1; transform: none } .noanim .rv { opacity: 1; transform: none }
 /* red-flag command centre */
 .fstats { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 14px; margin-bottom: 16px }
@@ -187,7 +187,7 @@ section.blk { padding-block: 70px 8px; scroll-margin-top: 80px }
 .rep .btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-right: 54px }
 /* footer */
 footer.foot { margin-top: 90px; position: relative; overflow: hidden; border-top: 1px solid var(--line); background: linear-gradient(180deg, rgba(6, 18, 38, .8), #02060e) }
-footer.foot::before { content: ""; position: absolute; inset: 0; background: url("assets/plant_1920.webp") center/cover; opacity: .1 }
+footer.foot::before { content: ""; position: absolute; inset: 0; background: url("assets/logo-alpha.webp") right 6% center / auto 70% no-repeat, url("assets/plant_1920.webp") center/cover; opacity: .14 }
 footer.foot .wrap { position: relative; display: grid; grid-template-columns: auto 1fr auto; gap: 26px; align-items: center; padding-block: 40px 100px }
 @media (max-width: 760px) { footer.foot .wrap { grid-template-columns: 1fr } }
 footer.foot .badge img { height: 76px } footer.foot b { color: #fff } footer.foot .sig { font-family: var(--f-sign); font-size: 44px; color: #ffcf99; line-height: 1 } footer.foot small { display: block; margin-top: 8px; color: var(--dim); font-size: 12.5px }
@@ -232,7 +232,7 @@ footer.foot .badge img { height: 76px } footer.foot b { color: #fff } footer.foo
 /* welcome intro */
 #intro { position: fixed; inset: 0; z-index: 200; background: #02060e; overflow: hidden; display: grid; place-items: center; transition: opacity .45s ease, transform .45s ease, filter .45s }
 #intro.out { opacity: 0; transform: scale(1.04); filter: blur(6px) contrast(1.6) hue-rotate(40deg); pointer-events: none }
-.in-bg { position: absolute; inset: -4%; background: url("assets/plant_1920.webp") center 42%/cover no-repeat; filter: brightness(.42) saturate(1.15); animation: inzoom 3.2s ease-out forwards }
+.in-bg { position: absolute; inset: -4%; background: url("assets/plant_1920.webp") center 42%/cover no-repeat; filter: brightness(.42) saturate(1.15); animation: inzoom 10.2s ease-out forwards }
 @media (min-width: 1600px) { .in-bg { background-image: url("assets/plant_3840.webp") } }
 @keyframes inzoom { from { transform: scale(1.12) } to { transform: scale(1.02) } }
 .in-bg.g1, .in-bg.g2 { opacity: 0; mix-blend-mode: screen }
@@ -246,7 +246,7 @@ footer.foot .badge img { height: 76px } footer.foot b { color: #fff } footer.foo
 .in-stage { position: relative; display: flex; align-items: center; gap: clamp(16px, 4vw, 56px); padding: 24px; flex-wrap: wrap; justify-content: center; text-align: left }
 .in-robot { width: clamp(170px, 24vw, 280px); filter: drop-shadow(0 0 30px rgba(34, 211, 238, .45)); animation: rin .7s cubic-bezier(.2, .9, .2, 1.2) both, hover 2.4s ease-in-out .7s infinite }
 @keyframes hover { 50% { transform: translateY(-10px) } } @keyframes rin { from { opacity: 0; transform: translateY(40px) scale(.9) } }
-.in-robot .arm { transform-box: view-box; transform-origin: 170px 168px; animation: wave .45s ease-in-out .5s 4 alternate } @keyframes wave { to { transform: rotate(-12deg) } }
+.in-robot .arm { transform-box: view-box; transform-origin: 170px 168px; animation: wave .45s ease-in-out .5s 4 alternate, wave .45s ease-in-out 4.5s 4 alternate, wave .45s ease-in-out 8s 4 alternate } @keyframes wave { to { transform: rotate(-12deg) } }
 .in-robot .eye { animation: eyes 3s infinite; transform-box: fill-box; transform-origin: center } @keyframes eyes { 0%, 44%, 50%, 100% { transform: scaleY(1) } 47% { transform: scaleY(.1) } }
 .in-robot .core { animation: blink 1.2s infinite } .in-robot .ant { animation: blink .8s infinite }
 .in-bubble { max-width: 560px; background: rgba(6, 18, 38, .62); border: 1px solid rgba(34, 211, 238, .4); border-radius: 22px; padding: 22px 26px; backdrop-filter: blur(12px); box-shadow: 0 0 60px -20px var(--cyan); animation: rin .7s .15s cubic-bezier(.2, .9, .2, 1.2) both }
@@ -257,11 +257,13 @@ footer.foot .badge img { height: 76px } footer.foot b { color: #fff } footer.foo
 .in-title::before { color: #22d3ee; transform: translate(-3px, 0); mix-blend-mode: screen; animation: tg1 3s steps(1) infinite } .in-title::after { color: #ff4d5e; transform: translate(3px, 0); mix-blend-mode: screen; animation: tg2 3s steps(1) infinite }
 @keyframes tg1 { 0%, 100% { clip-path: inset(0 0 100% 0) } 8% { clip-path: inset(10% 0 60% 0) } 10% { clip-path: inset(70% 0 5% 0) } 12% { clip-path: inset(0 0 100% 0) } 48% { clip-path: inset(30% 0 40% 0) } 50% { clip-path: inset(0 0 100% 0) } 86% { clip-path: inset(50% 0 20% 0) } 89% { clip-path: inset(0 0 100% 0) } }
 @keyframes tg2 { 0%, 100% { clip-path: inset(0 0 100% 0) } 9% { clip-path: inset(55% 0 20% 0) } 11% { clip-path: inset(0 0 100% 0) } 49% { clip-path: inset(5% 0 75% 0) } 51% { clip-path: inset(0 0 100% 0) } 87% { clip-path: inset(20% 0 55% 0) } 90% { clip-path: inset(0 0 100% 0) } }
-.in-sub { margin-top: 10px; font: 500 13px/1.5 var(--f-code); color: var(--muted); letter-spacing: .05em }
+.in-sub { margin-top: 10px; min-height: 1.5em; font: 500 13.5px/1.5 var(--f-code); color: #9fd9ff; letter-spacing: .05em; transition: opacity .35s, transform .35s } .in-sub.swap { opacity: 0; transform: translateY(6px) }
+.in-steps { display: flex; gap: 6px; margin-top: 14px } .in-steps i { width: 26px; height: 3px; border-radius: 2px; background: rgba(120, 180, 255, .25); transition: background .3s, box-shadow .3s } .in-steps i.on { background: var(--cyan); box-shadow: 0 0 8px var(--cyan) }
+.in-count { position: absolute; top: 22px; right: 24px; font: 600 12px/1 var(--f-code); color: var(--muted); letter-spacing: .1em }
 .in-thumbs { position: absolute; inset: 0; pointer-events: none; overflow: hidden }
 .in-thumbs span { position: absolute; bottom: -60px; font-size: var(--s); animation: floatup var(--d) ease-out var(--dl) forwards; opacity: 0; filter: drop-shadow(0 0 10px rgba(255, 207, 153, .7)) }
 @keyframes floatup { 0% { opacity: 0; transform: translate(0, 0) scale(.6) rotate(0) } 15% { opacity: 1 } 100% { opacity: 0; transform: translate(var(--x), -110vh) scale(1.15) rotate(var(--r)) } }
-.in-bar { position: absolute; left: 50%; bottom: 46px; width: min(360px, 70vw); height: 3px; transform: translateX(-50%); background: rgba(120, 180, 255, .18); border-radius: 3px; overflow: hidden } .in-bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--cyan), var(--flame)); box-shadow: 0 0 12px var(--cyan); animation: load 3s linear forwards } @keyframes load { to { width: 100% } }
+.in-bar { position: absolute; left: 50%; bottom: 46px; width: min(360px, 70vw); height: 3px; transform: translateX(-50%); background: rgba(120, 180, 255, .18); border-radius: 3px; overflow: hidden } .in-bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--cyan), var(--flame)); box-shadow: 0 0 12px var(--cyan); animation: load 10s linear forwards } @keyframes load { to { width: 100% } }
 .in-skip, .in-sound { position: absolute; bottom: 30px; appearance: none; border: 1px solid var(--line2); background: rgba(6, 18, 38, .7); color: #dcebfa; border-radius: 99px; padding: 8px 14px; font: 600 13px/1 var(--f-body); cursor: pointer }
 .in-skip { right: 22px } .in-sound { left: 22px } .in-sound.on { border-color: var(--cyan); color: #fff }
 @media (max-width: 620px) { .eyebrow .loc { display: none } .eyebrow { font-size: 12px } }
@@ -298,11 +300,13 @@ footer.foot .badge img { height: 76px } footer.foot b { color: #fff } footer.foo
       <span class="in-logo"><span class="badge"><img src="assets/logo.png" alt="BM LP GAS" width="45" height="34"></span>BM LP GAS™ · BM ENERGY (BD) LIMITED</span>
       <p class="in-hello">Hello, and welcome to</p>
       <h2 class="in-title" data-text="BM Energy Barabkunda Plant">BM Energy Barabkunda Plant</h2>
-      <p class="in-sub">Quality · Maintenance · Safety intelligence</p>
+      <p class="in-sub" id="inSub">Quality · Maintenance · Safety intelligence</p>
+      <div class="in-steps" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
     </div>
   </div>
   <div class="in-thumbs" aria-hidden="true"></div>
   <div class="in-bar" aria-hidden="true"><i></i></div>
+  <div class="in-count" aria-hidden="true">10</div>
   <button class="in-sound" type="button" hidden>♪ Tap for sound</button>
   <button class="in-skip" type="button">Skip ›</button>
 </div>
@@ -492,39 +496,71 @@ const NS = "http://www.w3.org/2000/svg";
 const bySev = (a, b) => (a.sev === b.sev ? 0 : a.sev === "red" ? -1 : 1);
 const inRep = (f, k) => f.rep === k || (f.secs || []).some((s) => (k === "cal") === s.startsWith("tp-"));
 
-/* ---------- welcome: 3 seconds, robot, thumbs up, glitch, synthesised intro music ---------- */
-const intro = document.getElementById("intro");
-let ac = null;
-function impulse(ctx, sec) { const n = ctx.sampleRate * sec, b = ctx.createBuffer(2, n, ctx.sampleRate); for (let c = 0; c < 2; c++) { const d = b.getChannelData(c); for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / n, 3); } return b; }
-function music(ctx) {
-  const t0 = ctx.currentTime + 0.05, comp = ctx.createDynamicsCompressor(), master = ctx.createGain(); master.gain.value = 0.5; master.connect(comp); comp.connect(ctx.destination);
-  const rev = ctx.createConvolver(); rev.buffer = impulse(ctx, 2.6); const rg = ctx.createGain(); rg.gain.value = 0.32; rev.connect(rg); rg.connect(master);
+/* ---------- welcome: 10 seconds, robot, thumbs up, glitch, synthesised 10-second intro music ---------- */
+const intro = document.getElementById("intro"), INTRO_MS = reduce ? 4000 : 10000;
+const SUBS = ["Quality · Maintenance · Safety intelligence", "Weight accuracy · Maintenance · TPM · Equipment", "{{flags_red}} red flags ready for management review", "Prepared by Akib Fateh · BM LP GAS™"];
+let ac = null, musicOut = null, introStart = performance.now();
+function impulse(ctx, sec) { const n = Math.floor(ctx.sampleRate * sec), b = ctx.createBuffer(2, n, ctx.sampleRate); for (let c = 0; c < 2; c++) { const d = b.getChannelData(c); for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / n, 3); } return b; }
+function music(ctx, off) {
+  // 10-second cue at 96 bpm: rise (0–2.5 s), groove A–F#m–D–E (2.5–8.75 s), final hit and fade (8.75–10 s).
+  // "off" = seconds already elapsed on the welcome screen, so sound and picture stay in step and end together.
+  const t0 = ctx.currentTime + 0.04 - off, ok = (st) => st >= off - 0.02;
+  const comp = ctx.createDynamicsCompressor(), master = ctx.createGain(); master.gain.value = 0.55; master.connect(comp); comp.connect(ctx.destination); musicOut = master;
+  const rev = ctx.createConvolver(); rev.buffer = impulse(ctx, 2.8); const rg = ctx.createGain(); rg.gain.value = 0.3; rev.connect(rg); rg.connect(master);
   const bus = ctx.createGain(); bus.connect(master); bus.connect(rev);
-  const tone = (type, f, start, end, pts, dest, det = 0) => { const o = ctx.createOscillator(), g = ctx.createGain(); o.type = type; o.frequency.value = f; o.detune.value = det; o.connect(g); g.connect(dest || bus); g.gain.setValueAtTime(0.0001, t0 + start); pts.forEach(([t, v]) => g.gain.exponentialRampToValueAtTime(Math.max(v, 0.0001), t0 + start + t)); o.start(t0 + start); o.stop(t0 + end); };
-  const noise = (start, dur) => { const b = ctx.createBuffer(1, Math.floor(ctx.sampleRate * dur), ctx.sampleRate), d = b.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; const s = ctx.createBufferSource(); s.buffer = b; s.start(t0 + start); return s; };
-  tone("sine", 55, 0, 3.3, [[0.8, 0.5], [2.2, 0.35], [3.2, 0.0001]]); tone("sine", 82.4, 0.2, 3.3, [[1.0, 0.18], [3.1, 0.0001]]);   // sub-bass swell
-  { const s = noise(0, 1.7), f = ctx.createBiquadFilter(), g = ctx.createGain(); f.type = "bandpass"; f.Q.value = 1.2; f.frequency.setValueAtTime(260, t0); f.frequency.exponentialRampToValueAtTime(7200, t0 + 1.45); s.connect(f); f.connect(g); g.connect(bus); g.gain.setValueAtTime(0.0001, t0); g.gain.exponentialRampToValueAtTime(0.26, t0 + 1.2); g.gain.exponentialRampToValueAtTime(0.0001, t0 + 1.6); }   // rising whoosh
-  const dl = ctx.createDelay(); dl.delayTime.value = 0.18; const fb = ctx.createGain(); fb.gain.value = 0.35; dl.connect(fb); fb.connect(dl); const dg = ctx.createGain(); dg.gain.value = 0.4; dl.connect(dg); dg.connect(bus);
-  [220, 329.63, 440, 554.37, 659.25, 987.77, 880, 1318.5].forEach((f, i) => { const st = 0.22 + i * 0.11; tone("triangle", f, st, st + 0.5, [[0.01, 0.16], [0.45, 0.0001]]); tone("sine", f * 2, st, st + 0.35, [[0.01, 0.05], [0.3, 0.0001]], dl); });   // A major add 9 arpeggio
-  { const o = ctx.createOscillator(), g = ctx.createGain(); o.frequency.setValueAtTime(140, t0 + 1.55); o.frequency.exponentialRampToValueAtTime(36, t0 + 1.95); o.connect(g); g.connect(master); g.gain.setValueAtTime(0.0001, t0 + 1.55); g.gain.exponentialRampToValueAtTime(0.95, t0 + 1.57); g.gain.exponentialRampToValueAtTime(0.0001, t0 + 2.3); o.start(t0 + 1.55); o.stop(t0 + 2.4); }   // impact
-  { const s = noise(1.55, 0.4), f = ctx.createBiquadFilter(), g = ctx.createGain(); f.type = "highpass"; f.frequency.value = 1200; s.connect(f); f.connect(g); g.connect(bus); g.gain.setValueAtTime(0.0001, t0 + 1.55); g.gain.exponentialRampToValueAtTime(0.22, t0 + 1.57); g.gain.exponentialRampToValueAtTime(0.0001, t0 + 1.95); }
-  { const f = ctx.createBiquadFilter(); f.type = "lowpass"; f.frequency.setValueAtTime(700, t0 + 1.55); f.frequency.exponentialRampToValueAtTime(2600, t0 + 2.4); f.connect(bus);
-    [110, 164.81, 220, 277.18, 329.63].forEach((fq) => { tone("sawtooth", fq, 1.55, 3.4, [[0.06, 0.07], [1.0, 0.05], [1.8, 0.0001]], f, -6); tone("sawtooth", fq, 1.55, 3.4, [[0.06, 0.05], [1.0, 0.035], [1.8, 0.0001]], f, 7); }); }   // pad chord
-  [[2.15, 1760], [2.27, 2637], [2.39, 3520]].forEach(([st, f]) => tone("sine", f, st, st + 0.8, [[0.01, 0.07], [0.75, 0.0001]]));   // sparkle
+  const dl = ctx.createDelay(); dl.delayTime.value = 0.3125; const fb = ctx.createGain(); fb.gain.value = 0.3; dl.connect(fb); fb.connect(dl); const dg = ctx.createGain(); dg.gain.value = 0.35; dl.connect(dg); dg.connect(bus);
+  const tone = (type, f, st, en, pts, dest, det = 0) => { if (!ok(st)) return; const o = ctx.createOscillator(), g = ctx.createGain(); o.type = type; o.frequency.value = f; o.detune.value = det; o.connect(g); g.connect(dest || bus); g.gain.setValueAtTime(0.0001, t0 + st); pts.forEach(([t, v]) => g.gain.exponentialRampToValueAtTime(Math.max(v, 0.0001), t0 + st + t)); o.start(t0 + st); o.stop(t0 + en); };
+  const noise = (st, dur, type, f0, f1, peak, at) => { if (!ok(st)) return; const b = ctx.createBuffer(1, Math.floor(ctx.sampleRate * dur), ctx.sampleRate), d = b.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; const s = ctx.createBufferSource(), f = ctx.createBiquadFilter(), g = ctx.createGain(); s.buffer = b; f.type = type; f.Q.value = 1; f.frequency.setValueAtTime(f0, t0 + st); if (f1) f.frequency.exponentialRampToValueAtTime(f1, t0 + st + dur * 0.9); s.connect(f); f.connect(g); g.connect(bus); g.gain.setValueAtTime(0.0001, t0 + st); g.gain.exponentialRampToValueAtTime(peak, t0 + st + at); g.gain.exponentialRampToValueAtTime(0.0001, t0 + st + dur); s.start(t0 + st); s.stop(t0 + st + dur + 0.05); };
+  const kick = (st, v = 0.8) => { if (!ok(st)) return; const o = ctx.createOscillator(), g = ctx.createGain(); o.frequency.setValueAtTime(150, t0 + st); o.frequency.exponentialRampToValueAtTime(40, t0 + st + 0.35); o.connect(g); g.connect(master); g.gain.setValueAtTime(0.0001, t0 + st); g.gain.exponentialRampToValueAtTime(v, t0 + st + 0.012); g.gain.exponentialRampToValueAtTime(0.0001, t0 + st + 0.6); o.start(t0 + st); o.stop(t0 + st + 0.7); };
+  const pad = (st, en, freqs, lvl) => { if (!ok(st)) return; const f = ctx.createBiquadFilter(); f.type = "lowpass"; f.frequency.setValueAtTime(600, t0 + st); f.frequency.exponentialRampToValueAtTime(2400, t0 + st + 0.8); f.connect(bus);
+    freqs.forEach((fq) => [-7, 7].forEach((d) => tone("sawtooth", fq, st, en, [[0.08, lvl], [Math.max(0.2, en - st - 0.3), lvl * 0.7], [en - st, 0.0001]], f, d))); };
+  const B = 0.625;   // one beat
+  // 1. rise
+  tone("sine", 55, 0, 2.7, [[1.2, 0.45], [2.5, 0.3], [2.7, 0.0001]]); tone("sine", 82.41, 0.3, 2.7, [[1.3, 0.16], [2.6, 0.0001]]);
+  noise(0, 2.5, "bandpass", 240, 7600, 0.24, 2.1);
+  [220, 329.63, 440, 554.37, 659.25, 880, 1108.73, 1318.51].forEach((f, i) => tone("triangle", f, 0.4 + i * 0.25, 0.4 + i * 0.25 + 0.6, [[0.01, 0.1 + i * 0.012], [0.55, 0.0001]]));
+  // 2. groove: A, F#m, D, E (two bars of two beats each per chord)
+  const prog = [[110, [220, 277.18, 329.63, 440, 554.37]], [92.5, [185, 220, 277.18, 369.99, 440]], [73.42, [146.83, 220, 293.66, 369.99, 440]], [82.41, [164.81, 246.94, 329.63, 415.3, 493.88]]];
+  const T2 = 2.5; kick(T2, 1.0); noise(T2, 0.5, "highpass", 1500, 0, 0.22, 0.01);
+  prog.forEach(([root, ch], c) => {
+    const st = T2 + c * 4 * B * 0.625;   // 1.5625 s per chord
+    pad(st, st + 1.6, ch.slice(0, 3), 0.035);
+    for (let k = 0; k < 5; k++) { const bt = st + k * 0.3125; tone("triangle", ch[(k * 2 + c) % ch.length] * 2, bt, bt + 0.32, [[0.008, 0.11], [0.3, 0.0001]]); tone("sine", ch[(k * 2 + c) % ch.length] * 4, bt, bt + 0.2, [[0.008, 0.03], [0.18, 0.0001]], dl); }
+    [0, 0.78].forEach((d) => { tone("sawtooth", root, st + d, st + d + 0.5, [[0.01, 0.12], [0.45, 0.0001]], null); kick(st + d, 0.55); });
+    [0.39, 1.17].forEach((d) => noise(st + d, 0.08, "highpass", 7000, 0, 0.06, 0.004));
+  });
+  noise(7.4, 1.35, "bandpass", 400, 9000, 0.2, 1.25);   // second rise into the finale
+  [8.2, 8.36, 8.52].forEach((st, i) => kick(st, 0.35 + i * 0.12));
+  // 3. finale
+  const T3 = 8.75; kick(T3, 1.0); noise(T3, 0.6, "highpass", 1200, 0, 0.25, 0.01);
+  pad(T3, 10.0, [110, 164.81, 220, 277.18, 329.63, 493.88], 0.05);
+  tone("sine", 55, T3, 10.0, [[0.05, 0.4], [1.2, 0.0001]]);
+  [[9.0, 1760], [9.15, 2217.46], [9.3, 2637.02], [9.45, 3520]].forEach(([st, f]) => tone("sine", f, st, st + 0.6, [[0.01, 0.06], [0.55, 0.0001]]));
+  master.gain.setValueAtTime(0.55, t0 + 9.4); master.gain.linearRampToValueAtTime(0.0001, t0 + 10.05);
 }
-function startSound() { try { ac = ac || new (window.AudioContext || window.webkitAudioContext)(); const go = () => { if (!intro.dataset.played) { intro.dataset.played = "1"; music(ac); } }; if (ac.state === "running") go(); else ac.resume().then(() => { if (ac.state === "running") go(); }).catch(() => {}); return ac; } catch (e) { return null; } }
+function startSound() {
+  try {
+    ac = ac || new (window.AudioContext || window.webkitAudioContext)();
+    const go = () => { if (intro.dataset.played || intro.classList.contains("out")) return; const off = (performance.now() - introStart) / 1000; if (off > 9) return; intro.dataset.played = "1"; music(ac, Math.max(0, off)); };
+    if (ac.state === "running") go(); else ac.resume().then(() => { if (ac.state === "running") go(); }).catch(() => {});
+    return ac;
+  } catch (e) { return null; }
+}
+function fadeMusic() { try { if (musicOut && ac) { const t = ac.currentTime; musicOut.gain.cancelScheduledValues(t); musicOut.gain.setValueAtTime(Math.max(musicOut.gain.value, 0.0001), t); musicOut.gain.linearRampToValueAtTime(0.0001, t + 0.7); } } catch (e) {} }
 function runIntro() {
   if (location.hash.startsWith("#r-")) return;
-  intro.hidden = false; document.documentElement.style.overflow = "hidden";
+  intro.hidden = false; document.documentElement.style.overflow = "hidden"; introStart = performance.now();
   const th = intro.querySelector(".in-thumbs");
-  for (let i = 0; i < 18; i++) { const s = document.createElement("span"); s.textContent = "👍"; s.style.left = (4 + Math.random() * 92) + "%"; s.style.setProperty("--s", (22 + Math.random() * 26) + "px"); s.style.setProperty("--d", (2 + Math.random() * 1.2) + "s"); s.style.setProperty("--dl", (Math.random() * 1.6) + "s"); s.style.setProperty("--x", (Math.random() * 120 - 60) + "px"); s.style.setProperty("--r", (Math.random() * 60 - 30) + "deg"); th.appendChild(s); }
-  const snd = intro.querySelector(".in-sound");
+  for (let i = 0; i < 44; i++) { const s = document.createElement("span"); s.textContent = "👍"; s.style.left = (3 + Math.random() * 94) + "%"; s.style.setProperty("--s", (22 + Math.random() * 28) + "px"); s.style.setProperty("--d", (2.6 + Math.random() * 1.8) + "s"); s.style.setProperty("--dl", (Math.random() * (INTRO_MS / 1000 - 3)) + "s"); s.style.setProperty("--x", (Math.random() * 140 - 70) + "px"); s.style.setProperty("--r", (Math.random() * 60 - 30) + "deg"); th.appendChild(s); }
+  const snd = intro.querySelector(".in-sound"), sub = document.getElementById("inSub"), steps = [...intro.querySelectorAll(".in-steps i")], cnt = intro.querySelector(".in-count");
+  let k = 0; const subT = setInterval(() => { k = (k + 1) % SUBS.length; sub.classList.add("swap"); setTimeout(() => { sub.textContent = SUBS[k]; sub.classList.remove("swap"); steps.forEach((x, j) => x.classList.toggle("on", j <= k)); }, 350); }, INTRO_MS / SUBS.length);
+  const cntT = setInterval(() => { const left = Math.max(0, Math.ceil((INTRO_MS - (performance.now() - introStart)) / 1000)); cnt.textContent = left; }, 250);
   const c = startSound(); setTimeout(() => { if (!c || c.state !== "running") snd.hidden = false; }, 250);
-  const done = () => { if (intro.classList.contains("out")) return; intro.classList.add("out"); document.documentElement.style.overflow = ""; setTimeout(() => { intro.hidden = true; }, 460); };
+  const done = () => { if (intro.classList.contains("out")) return; clearInterval(subT); clearInterval(cntT); fadeMusic(); intro.classList.add("out"); document.documentElement.style.overflow = ""; setTimeout(() => { intro.hidden = true; }, 460); };
   intro.addEventListener("pointerdown", (e) => { if (e.target.closest(".in-skip")) return; startSound(); snd.classList.add("on"); snd.textContent = "♪ Sound on"; });
   intro.querySelector(".in-skip").addEventListener("click", done);
   addEventListener("keydown", (e) => { if (e.key === "Escape" && !intro.hidden) done(); });
-  setTimeout(done, reduce ? 1200 : 3000);
+  setTimeout(done, INTRO_MS);
 }
 runIntro();
 
@@ -547,7 +583,7 @@ if (reduce || !("IntersectionObserver" in window)) document.documentElement.clas
 else {
   const io = new IntersectionObserver((es) => es.forEach((e) => { if (!e.isIntersecting) return; e.target.classList.add("in"); e.target.querySelectorAll("[data-count]").forEach(countUp); io.unobserve(e.target); }), { rootMargin: "0px 0px -8% 0px" });
   document.querySelectorAll(".rv").forEach((el) => io.observe(el));
-  const io2 = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { setTimeout(() => countUp(e.target), intro.hidden ? 0 : 3000); io2.unobserve(e.target); } }));
+  const io2 = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { setTimeout(() => countUp(e.target), intro.hidden ? 0 : INTRO_MS); io2.unobserve(e.target); } }));
   document.querySelectorAll(".hs [data-count]").forEach((el) => io2.observe(el));
 }
 const navLinks = [...document.querySelectorAll(".nav a")];
@@ -601,7 +637,10 @@ function drawFlags() {
 document.querySelectorAll(".catrow").forEach((b) => b.addEventListener("click", () => { fcat = b.dataset.c; drawFlags(); document.getElementById("fchips").scrollIntoView({ block: "center", behavior: reduce ? "auto" : "smooth" }); }));
 drawFlags();
 { const items = FLAGS.filter((f) => f.sev === "red").map((f) => `<button class="tk" data-open="${f.rep}" data-view="${f.view}" style="--c:${SEVC[f.sev]}"><i></i>${f.id} <b>${esc(f.title)}</b> · ${esc(f.now)}</button>`).join("");
-  document.getElementById("ticker").innerHTML = items + items.replace(/<button /g, '<button tabindex="-1" aria-hidden="true" '); }
+  const tr = document.getElementById("ticker"); tr.innerHTML = items + items.replace(/<button /g, '<button tabindex="-1" aria-hidden="true" ');
+  const pace = () => { const half = tr.scrollWidth / 2; if (half > 0) tr.style.animationDuration = Math.round(half / 38) + "s"; };   // about 38 pixels a second
+  pace(); addEventListener("load", pace); if (document.fonts) document.fonts.ready.then(pace).catch(() => {});
+  tr.addEventListener("click", (e) => { if (e.target.closest(".tk")) return; tr.style.animationPlayState = tr.style.animationPlayState === "paused" ? "" : "paused"; }); }
 const DR = document.getElementById("drawer"), drList = document.getElementById("drList"), drChips = document.getElementById("drChips"), drScope = document.getElementById("drScope");
 let drRep = "all";
 function drawDrawer() {
@@ -651,7 +690,7 @@ function reportHtml(k) {
   for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
   return cache[k] = new TextDecoder("utf-8").decode(bytes);
 }
-const RF_CSS = ".rf-box{position:relative;margin:0 0 16px;border:1px solid rgba(255,77,94,.38);border-left:4px solid #ff4d5e;border-radius:14px;background:linear-gradient(120deg,rgba(255,77,94,.13),rgba(255,77,94,.03));padding:12px 14px;font:14px/1.5 Inter,system-ui,sans-serif;color:inherit;box-shadow:0 0 30px -16px rgba(255,77,94,.9);text-align:left}"
+const RF_CSS = ".rf-box{position:relative;margin:0 0 16px;border:1px solid rgba(255,77,94,.38);border-left:4px solid #ff4d5e;border-radius:14px;background:linear-gradient(120deg,rgba(64,14,26,.95),rgba(18,14,28,.95));color:#f3f6fb;padding:12px 14px;font:14px/1.5 Inter,system-ui,sans-serif;color:inherit;box-shadow:0 0 30px -16px rgba(255,77,94,.9);text-align:left}"
   + ".rf-h{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font:700 12px/1.2 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:#ff6b78;margin-bottom:8px}.rf-h b{background:#ff4d5e;color:#fff;border-radius:99px;padding:3px 7px}"
   + ".rf-i{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 10px;padding:7px 0;border-top:1px dashed rgba(255,77,94,.25)}.rf-h+.rf-i{border-top:0}.rf-d{width:9px;height:9px;border-radius:50%;margin-top:6px}"
   + ".rf-t{font-weight:600}.rf-n{grid-column:2;font-size:13px;opacity:.85}.rf-n em{font-style:normal;opacity:.8}"
