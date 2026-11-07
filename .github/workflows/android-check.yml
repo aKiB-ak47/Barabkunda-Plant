@@ -21,7 +21,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [google_apis, default]
+        target: [google_apis]
     steps:
       - uses: actions/checkout@v4
 
