@@ -1,0 +1,39 @@
+plugins { id "com.android.application" }
+
+def props = new Properties()
+file("../version.properties").withInputStream { props.load(it) }
+
+android {
+    namespace "com.bmenergy.barabkunda"
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.bmenergy.barabkunda"
+        minSdk 24
+        targetSdk 34
+        versionCode((project.findProperty("versionCode") ?: props.VERSION_CODE) as int)
+        versionName props.VERSION_NAME
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            shrinkResources false
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    lint {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+    androidResources {
+        noCompress += ["html", "webp", "png", "webmanifest"]
+    }
+}
+
+dependencies {
+    implementation "androidx.webkit:webkit:1.11.0"
+    implementation "androidx.core:core-splashscreen:1.0.1"
+}

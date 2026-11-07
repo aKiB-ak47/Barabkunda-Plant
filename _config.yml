@@ -6,3 +6,5 @@ exclude:
   - README.md
   - UPDATE.md
   - .gitignore
+  - app
+  - .github

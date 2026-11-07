@@ -266,8 +266,23 @@ footer.foot .badge img { height: 76px } footer.foot b { color: #fff } footer.foo
 .in-bar { position: absolute; left: 50%; bottom: 46px; width: min(360px, 70vw); height: 3px; transform: translateX(-50%); background: rgba(120, 180, 255, .18); border-radius: 3px; overflow: hidden } .in-bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--cyan), var(--flame)); box-shadow: 0 0 12px var(--cyan); animation: load 10s linear forwards } @keyframes load { to { width: 100% } }
 .in-skip, .in-sound { position: absolute; bottom: 30px; appearance: none; border: 1px solid var(--line2); background: rgba(6, 18, 38, .7); color: #dcebfa; border-radius: 99px; padding: 8px 14px; font: 600 13px/1 var(--f-body); cursor: pointer }
 .in-skip { right: 22px } .in-sound { left: 22px } .in-sound.on { border-color: var(--cyan); color: #fff }
-@media (max-width: 620px) { .eyebrow .loc { display: none } .eyebrow { font-size: 12px } }
+@media (max-width: 620px) { .eyebrow .loc { display: none } .eyebrow { font-size: 11px; padding: 5px 12px } .hero h1 { font-size: 33px; margin: 14px 0 10px } .hero .lede { font-size: 15.5px } .prep .sig { font-size: 26px } .cta .go { padding: 10px 15px; font-size: 14px } }
 @media (max-width: 640px) { .in-logo { justify-content: center } .in-stage { flex-direction: column; text-align: center } .in-bubble { padding: 18px } .in-skip, .in-sound { bottom: 14px } .in-bar { bottom: 62px } }
+/* mobile app */
+.appgrid { display: grid; grid-template-columns: minmax(0, 330px) minmax(0, 1fr); gap: 28px; align-items: center }
+@media (max-width: 900px) { .appgrid { grid-template-columns: 1fr } .appcards { order: -1 } .phone { max-width: 270px; margin: 0 auto } }
+.phone { position: relative; border-radius: 46px; padding: 38px 12px 14px; background: linear-gradient(145deg, #1b2a44, #070d1a); box-shadow: 0 0 0 1px rgba(143, 233, 255, .25), 0 40px 90px -30px rgba(34, 211, 238, .55), inset 0 0 0 2px rgba(255, 255, 255, .06) }
+.phone::before { content: ""; position: absolute; top: 12px; left: 50%; width: 92px; height: 24px; transform: translateX(-50%); border-radius: 99px; background: #02050b; z-index: 2 }
+.phone img { width: 100%; height: auto; border-radius: 10px 10px 32px 32px; display: block; aspect-ratio: 390 / 844; object-fit: cover; object-position: top }
+.phone .glow { position: absolute; inset: -30px; z-index: -1; background: radial-gradient(closest-side, rgba(34, 211, 238, .35), transparent); filter: blur(20px) }
+.appcards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 14px }
+.ac h3 { font-size: 20px; display: flex; gap: 10px; align-items: center; margin-bottom: 8px } .ac h3 svg { width: 26px; height: 26px; flex: none }
+.ac p { font-size: 14.5px; color: var(--muted) } .ac ol { margin: 12px 0 0; padding-left: 20px; font-size: 14px; color: var(--text); display: grid; gap: 4px }
+.ac .go { margin-top: 14px } .ac small { display: block; margin-top: 8px; font: 500 12px/1.4 var(--f-code); color: var(--dim) }
+.ac.hl { border-color: rgba(34, 211, 238, .55); box-shadow: 0 0 40px -18px var(--cyan) }
+.qr { display: flex; gap: 16px; align-items: center } .qr svg { width: 128px; height: 128px; flex: none; border-radius: 12px; background: #fff; padding: 6px }
+.qr b { color: var(--ink); display: block; font-size: 16px; margin-bottom: 4px } .qr p { font-size: 14px; color: var(--muted) }
+.inapp [data-web-only] { display: none !important }
 [hidden] { display: none !important }
 </style>
 <div class="pagebg" aria-hidden="true"></div><div class="pagegrid" aria-hidden="true"></div><div class="pagewm" aria-hidden="true"></div><div class="pagetm" aria-hidden="true"></div>
@@ -314,7 +329,7 @@ footer.foot .badge img { height: 76px } footer.foot b { color: #fff } footer.foo
 <header class="bar" id="bar"><div class="wrap">
   <a class="logo" href="#top" aria-label="BM LP GAS, Barabkunda LPG Plant"><span class="badge"><img src="assets/logo.png" alt="BM LP GAS" width="53" height="40"></span>
     <span><b>Barabkunda LPG Plant</b><small>BM LP GAS™ · BM ENERGY (BD) LTD</small></span></a>
-  <nav class="nav" aria-label="Sections"><a href="#flags">Red flags</a><a href="#twin">Digital twin</a><a href="#metrics">At a glance</a><a href="#reports">Reports</a></nav>
+  <nav class="nav" aria-label="Sections"><a href="#flags">Red flags</a><a href="#twin">Digital twin</a><a href="#metrics">At a glance</a><a href="#reports">Reports</a><a href="#app" data-web-only>App</a></nav>
   <button class="fbtn" id="openFlags" type="button" aria-label="Open red flags">⚑ <span>Red flags</span> <b>{{flags_red}}</b></button>
   <button class="kbtn" id="openCmd" type="button" aria-label="Search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Search</span><kbd>Ctrl K</kbd></button>
   <span class="by">Akib Fateh</span>
@@ -329,7 +344,7 @@ footer.foot .badge img { height: 76px } footer.foot b { color: #fff } footer.foo
     <h1>Barabkunda LPG Plant: <em>quality and maintenance intelligence</em></h1>
     <p class="lede">Every cylinder at the right weight, every machine cared for before it breaks. Weight accuracy, maintenance, a world-class TPM programme, an illustrated guide to {{eq_n}} pieces of equipment and a red-flag centre for management, in one place.</p>
     <p class="prep">Prepared by <span class="sig">Akib Fateh</span><span>· Barabkunda LPG Plant (CTG) · BM Energy (BD) Limited</span></p>
-    <div class="cta"><a class="go red" href="#flags">⚑ {{flags_red}} red flags <span class="arr">→</span></a><button class="go main" data-open="cal" data-view="update">Weight accuracy <span class="arr">→</span></button><button class="go main" data-open="maint" data-view="summary">Maintenance <span class="arr">→</span></button><button class="go" data-open="maint" data-view="tpm">TPM programme</button><button class="go" data-open="maint" data-view="atlas">Equipment guide</button></div>
+    <div class="cta"><a class="go red" href="#flags">⚑ {{flags_red}} red flags <span class="arr">→</span></a><button class="go main" data-open="cal" data-view="update">Weight accuracy <span class="arr">→</span></button><button class="go main" data-open="maint" data-view="summary">Maintenance <span class="arr">→</span></button><button class="go" data-open="maint" data-view="tpm">TPM programme</button><button class="go" data-open="maint" data-view="atlas">Equipment guide</button><a class="go" href="#app" data-web-only><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg>Get the app</a></div>
   </div>
   <div class="hstats"><div class="wrap grid">
     <div class="hs" style="--c:var(--red)"><span class="t">2026 AVERAGE OVERFILL</span><span class="v" data-count>{{cal_mean26}} g</span><span class="s">per 12 kg cylinder · limit ±150 g</span></div>
@@ -442,6 +457,24 @@ footer.foot .badge img { height: 76px } footer.foot b { color: #fff } footer.foo
         <div class="btns"><button class="go main sm" data-open="maint" data-view="summary">Summary <span class="arr">→</span></button><button class="go sm" data-open="maint" data-view="tpm">TPM programme</button><button class="go sm" data-open="maint" data-view="atlas">Equipment</button><button class="go sm" data-open="maint" data-view="deep">Significance &amp; progress</button><button class="go sm" data-open="maint" data-view="predict">Forecasts</button><button class="go sm" data-open="maint" data-view="all">All orders</button></div>
       </div>
     </article>
+  </div>
+</section>
+
+<section class="blk" id="app" data-web-only>
+  <div class="sh rv"><span class="kick">Mobile app</span><h2>The Barabkunda app</h2><p>Everything on this site in an app on your phone: the red flags, both reports, the TPM programme and the equipment guide. It opens the latest data each time and keeps a copy for when there is no signal.</p></div>
+  <div class="appgrid">
+    <div class="phone rv"><div class="glow"></div><img src="assets/app/screen-phone.webp" width="390" height="844" loading="lazy" alt="The Barabkunda app on a phone, showing the red-flag command centre"></div>
+    <div class="appcards">
+      <article class="card ac rv" id="ac-android"><h3><svg viewBox="0 0 24 24" fill="#3ddc84"><path d="M6 10.5a1 1 0 0 1 2 0v5a1 1 0 0 1-2 0zm10 0a1 1 0 0 1 2 0v5a1 1 0 0 1-2 0zM8.5 9h7a.5.5 0 0 1 .5.5V17a1 1 0 0 1-1 1h-.5v2a1 1 0 0 1-2 0v-2h-1v2a1 1 0 0 1-2 0v-2H9a1 1 0 0 1-1-1V9.5a.5.5 0 0 1 .5-.5zm.2-1a3.5 3.5 0 0 1 1.6-2.6l-.7-1.2a.3.3 0 0 1 .5-.3l.7 1.2a3.9 3.9 0 0 1 2.4 0l.7-1.2a.3.3 0 0 1 .5.3l-.7 1.2A3.5 3.5 0 0 1 15.3 8zM10.5 6.5a.5.5 0 1 0 0 1 .5.5 0 0 0 0-1zm3 0a.5.5 0 1 0 0 1 .5.5 0 0 0 0-1z"/></svg>Android</h3><p>Download and install the app file directly; no app store needed.</p>
+        <a class="go main" href="download/BM-Barabkunda-Plant.apk" download>Download for Android <span class="arr">↓</span></a><small>APK · {{apk_size}} · version {{apk_ver}} · Android 7 or newer</small>
+        <ol><li>Tap <b>Download for Android</b> and open the file.</li><li>If asked, allow your browser to <b>install unknown apps</b>.</li><li>Tap <b>Install</b>, then open <b>Barabkunda</b>.</li></ol></article>
+      <article class="card ac rv" id="ac-ios"><h3><svg viewBox="0 0 24 24" fill="#e8eef7"><path d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9s-1.8-.9-3-.8a4.5 4.5 0 0 0-3.8 2.3c-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.8-2.3.9-1.3 1.3-2.6 1.3-2.6s-2.5-1-2.5-3.8zM14.1 5.8c.6-.8 1.1-1.9 1-3-.9 0-2.1.6-2.7 1.4-.6.7-1.1 1.8-1 2.9 1 .1 2.1-.5 2.7-1.3z"/></svg>iPhone and iPad</h3><p>Add the app to your home screen from Safari; it opens full screen, like any other app.</p>
+        <ol><li>Open this page in <b>Safari</b>.</li><li>Tap <b>Share</b> (the square with an arrow).</li><li>Choose <b>Add to Home Screen</b>, then <b>Add</b>.</li></ol></article>
+      <article class="card ac rv" id="ac-pc"><h3><svg viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Computer</h3><p>Install it as an app in Chrome or Edge: it gets its own window and a desktop icon.</p>
+        <button class="go main" id="installBtn" type="button" hidden>Install app <span class="arr">→</span></button>
+        <ol id="pcSteps"><li>Open this page in <b>Chrome</b> or <b>Edge</b>.</li><li>Select the <b>install</b> icon at the right of the address bar.</li><li>Choose <b>Install</b>.</li></ol></article>
+      <div class="card qr rv"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 37 37" shape-rendering="crispEdges" role="img" aria-label="QR code to open the Barabkunda app page"><rect width="37" height="37" fill="#fff"/><path fill="#030812" d="M2 2h7v1h-7zM11 2h2v1h-2zM14 2h1v1h-1zM18 2h1v1h-1zM20 2h3v1h-3zM25 2h1v1h-1zM28 2h7v1h-7zM2 3h1v1h-1zM8 3h1v1h-1zM12 3h2v1h-2zM17 3h1v1h-1zM20 3h1v1h-1zM24 3h1v1h-1zM28 3h1v1h-1zM34 3h1v1h-1zM2 4h1v1h-1zM4 4h3v1h-3zM8 4h1v1h-1zM10 4h1v1h-1zM13 4h2v1h-2zM16 4h1v1h-1zM22 4h3v1h-3zM28 4h1v1h-1zM30 4h3v1h-3zM34 4h1v1h-1zM2 5h1v1h-1zM4 5h3v1h-3zM8 5h1v1h-1zM10 5h2v1h-2zM13 5h1v1h-1zM17 5h1v1h-1zM20 5h1v1h-1zM25 5h2v1h-2zM28 5h1v1h-1zM30 5h3v1h-3zM34 5h1v1h-1zM2 6h1v1h-1zM4 6h3v1h-3zM8 6h1v1h-1zM10 6h2v1h-2zM13 6h1v1h-1zM16 6h4v1h-4zM22 6h2v1h-2zM25 6h2v1h-2zM28 6h1v1h-1zM30 6h3v1h-3zM34 6h1v1h-1zM2 7h1v1h-1zM8 7h1v1h-1zM10 7h2v1h-2zM13 7h2v1h-2zM20 7h2v1h-2zM23 7h1v1h-1zM26 7h1v1h-1zM28 7h1v1h-1zM34 7h1v1h-1zM2 8h7v1h-7zM10 8h1v1h-1zM12 8h1v1h-1zM14 8h1v1h-1zM16 8h1v1h-1zM18 8h1v1h-1zM20 8h1v1h-1zM22 8h1v1h-1zM24 8h1v1h-1zM26 8h1v1h-1zM28 8h7v1h-7zM10 9h1v1h-1zM12 9h3v1h-3zM16 9h1v1h-1zM18 9h1v1h-1zM20 9h5v1h-5zM2 10h1v1h-1zM4 10h5v1h-5zM13 10h4v1h-4zM19 10h1v1h-1zM21 10h2v1h-2zM24 10h1v1h-1zM26 10h1v1h-1zM28 10h5v1h-5zM2 11h3v1h-3zM6 11h2v1h-2zM12 11h8v1h-8zM21 11h3v1h-3zM25 11h2v1h-2zM28 11h2v1h-2zM31 11h2v1h-2zM34 11h1v1h-1zM5 12h1v1h-1zM8 12h1v1h-1zM11 12h1v1h-1zM13 12h7v1h-7zM22 12h1v1h-1zM26 12h3v1h-3zM30 12h1v1h-1zM32 12h2v1h-2zM4 13h2v1h-2zM7 13h1v1h-1zM10 13h1v1h-1zM12 13h1v1h-1zM15 13h1v1h-1zM18 13h3v1h-3zM23 13h5v1h-5zM30 13h3v1h-3zM34 13h1v1h-1zM2 14h2v1h-2zM5 14h1v1h-1zM8 14h2v1h-2zM11 14h2v1h-2zM16 14h1v1h-1zM18 14h1v1h-1zM21 14h2v1h-2zM24 14h1v1h-1zM27 14h1v1h-1zM29 14h3v1h-3zM4 15h1v1h-1zM6 15h1v1h-1zM9 15h1v1h-1zM17 15h1v1h-1zM20 15h1v1h-1zM25 15h1v1h-1zM27 15h1v1h-1zM29 15h1v1h-1zM33 15h2v1h-2zM6 16h9v1h-9zM16 16h3v1h-3zM22 16h1v1h-1zM26 16h3v1h-3zM31 16h1v1h-1zM33 16h1v1h-1zM2 17h4v1h-4zM10 17h6v1h-6zM17 17h1v1h-1zM23 17h3v1h-3zM27 17h3v1h-3zM31 17h2v1h-2zM2 18h1v1h-1zM4 18h1v1h-1zM7 18h3v1h-3zM14 18h2v1h-2zM17 18h1v1h-1zM19 18h1v1h-1zM25 18h3v1h-3zM29 18h3v1h-3zM34 18h1v1h-1zM5 19h1v1h-1zM9 19h1v1h-1zM14 19h3v1h-3zM20 19h6v1h-6zM28 19h2v1h-2zM31 19h2v1h-2zM34 19h1v1h-1zM2 20h1v1h-1zM4 20h2v1h-2zM7 20h5v1h-5zM13 20h6v1h-6zM20 20h1v1h-1zM22 20h2v1h-2zM29 20h2v1h-2zM32 20h2v1h-2zM3 21h3v1h-3zM9 21h1v1h-1zM12 21h3v1h-3zM18 21h1v1h-1zM21 21h4v1h-4zM26 21h1v1h-1zM29 21h5v1h-5zM2 22h1v1h-1zM5 22h1v1h-1zM7 22h4v1h-4zM15 22h2v1h-2zM20 22h1v1h-1zM24 22h4v1h-4zM29 22h3v1h-3zM2 23h1v1h-1zM4 23h1v1h-1zM6 23h1v1h-1zM12 23h2v1h-2zM15 23h1v1h-1zM17 23h2v1h-2zM22 23h4v1h-4zM28 23h1v1h-1zM31 23h2v1h-2zM34 23h1v1h-1zM2 24h1v1h-1zM5 24h1v1h-1zM7 24h2v1h-2zM10 24h2v1h-2zM19 24h3v1h-3zM23 24h2v1h-2zM29 24h1v1h-1zM31 24h3v1h-3zM2 25h1v1h-1zM4 25h4v1h-4zM11 25h5v1h-5zM18 25h1v1h-1zM20 25h4v1h-4zM26 25h2v1h-2zM31 25h3v1h-3zM2 26h2v1h-2zM5 26h1v1h-1zM7 26h5v1h-5zM14 26h2v1h-2zM19 26h3v1h-3zM26 26h5v1h-5zM10 27h1v1h-1zM12 27h1v1h-1zM14 27h2v1h-2zM18 27h7v1h-7zM26 27h1v1h-1zM30 27h1v1h-1zM32 27h1v1h-1zM34 27h1v1h-1zM2 28h7v1h-7zM12 28h2v1h-2zM16 28h4v1h-4zM23 28h1v1h-1zM25 28h2v1h-2zM28 28h1v1h-1zM30 28h1v1h-1zM32 28h2v1h-2zM2 29h1v1h-1zM8 29h1v1h-1zM10 29h2v1h-2zM14 29h1v1h-1zM16 29h2v1h-2zM19 29h5v1h-5zM25 29h2v1h-2zM30 29h3v1h-3zM34 29h1v1h-1zM2 30h1v1h-1zM4 30h3v1h-3zM8 30h1v1h-1zM10 30h2v1h-2zM13 30h1v1h-1zM15 30h1v1h-1zM18 30h1v1h-1zM21 30h1v1h-1zM24 30h1v1h-1zM26 30h6v1h-6zM2 31h1v1h-1zM4 31h3v1h-3zM8 31h1v1h-1zM10 31h4v1h-4zM15 31h1v1h-1zM17 31h1v1h-1zM19 31h2v1h-2zM23 31h3v1h-3zM27 31h1v1h-1zM30 31h2v1h-2zM33 31h2v1h-2zM2 32h1v1h-1zM4 32h3v1h-3zM8 32h1v1h-1zM10 32h5v1h-5zM17 32h3v1h-3zM24 32h1v1h-1zM28 32h2v1h-2zM2 33h1v1h-1zM8 33h1v1h-1zM11 33h3v1h-3zM16 33h2v1h-2zM20 33h1v1h-1zM23 33h2v1h-2zM27 33h2v1h-2zM30 33h3v1h-3zM2 34h7v1h-7zM10 34h2v1h-2zM16 34h2v1h-2zM19 34h1v1h-1zM25 34h2v1h-2zM29 34h1v1h-1zM33 34h1v1h-1z"/></svg><div><b>Scan to get the app</b><p>Point your phone camera at the code to open this page on your phone.</p></div></div>
+    </div>
   </div>
 </section>
 </div>
@@ -731,12 +764,27 @@ addEventListener("hashchange", route); addEventListener("popstate", route);
 if (document.readyState === "loading") addEventListener("DOMContentLoaded", route); else route();
 addEventListener("keydown", (e) => { if (e.key !== "Escape" || !intro.hidden) return; if (!DR.hidden) { closeDrawer(); return; } if (!V.hidden && CMD.hidden) document.getElementById("vclose").click(); });
 
+/* ---------- Android back button: close the open panel first ---------- */
+window.__appBack = () => { if (!intro.hidden) { intro.querySelector(".in-skip").click(); return true; } if (!CMD.hidden) { closeCmd(); return true; } if (!DR.hidden) { closeDrawer(); return true; } return false; };
+
+/* ---------- installed app: detection, offline support, install button ---------- */
+const inApp = /BMBarabkundaApp/.test(navigator.userAgent) || matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+if (inApp) document.documentElement.classList.add("inapp");
+if ("serviceWorker" in navigator && /(^|\.)github\.io$|^localhost$|^127\.0\.0\.1$/.test(location.hostname)) addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+{ const ua = navigator.userAgent, ios = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1), android = /Android/.test(ua);
+  const hl = document.getElementById(ios ? "ac-ios" : android ? "ac-android" : "ac-pc"); if (hl) hl.classList.add("hl");
+  let deferred = null; const ib = document.getElementById("installBtn"), steps = document.getElementById("pcSteps");
+  addEventListener("beforeinstallprompt", (e) => { e.preventDefault(); deferred = e; if (ib) { ib.hidden = false; steps.hidden = true; } });
+  if (ib) ib.addEventListener("click", async () => { if (!deferred) return; deferred.prompt(); try { await deferred.userChoice; } catch (e) {} deferred = null; ib.hidden = true; steps.hidden = false; });
+  addEventListener("appinstalled", () => { if (ib) ib.hidden = true; }); }
+
 /* ---------- command palette ---------- */
 const CMD = document.getElementById("cmd"), Q = document.getElementById("cmdq"), LIST = document.getElementById("cmdlist");
 const ITEMS = [
   ["Red-flag command centre", "red flags management limits warnings", () => jump("flags"), "⚑", "This page", "r"],
   ["All red flags (side panel)", "flags list drawer", () => { closeCmd(); openDrawer("all"); }, "⚑", "This page", "r"],
   ["Digital twin of the plant", "map twin plant spheres", () => jump("twin"), "M", "This page"],
+  ...(inApp ? [] : [["Get the mobile app", "app android iphone download install apk", () => jump("app"), "A", "This page"]]),
   ["Weight accuracy: latest results", "cal calibration overfill head weight update", ["cal", "update"], "1", "Report 1"],
   ["Weight accuracy: deep analysis", "cpk significance cost giveaway progress", ["cal", "deep"], "1", "Report 1"],
   ["Weight accuracy: dashboard", "dashboard heads forecast", ["cal", "dash"], "1", "Report 1"],

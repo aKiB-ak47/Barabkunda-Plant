@@ -145,6 +145,10 @@ FL = [
 for i, f in enumerate(FL): f["id"] = f"F{i + 1:02d}"
 hub["flags"] = FL
 T.update({"flags_n": str(len(FL)), "flags_red": str(sum(f["sev"] == "red" for f in FL)), "flags_amber": str(sum(f["sev"] == "amber" for f in FL))})
+# mobile app: version and download size (the signed APK is published under download/)
+_ver = dict(l.split("=", 1) for l in open("app/android/version.properties", encoding="utf8").read().split() if "=" in l)
+_apk = "download/BM-Barabkunda-Plant.apk"
+T.update({"apk_ver": _ver.get("VERSION_NAME", "1.0.0"), "apk_size": (f"{os.path.getsize(_apk) / 1048576:.1f} MB" if os.path.exists(_apk) else "about 4 MB")})
 for k, v in hub.get("tokens", {}).items(): src = src.replace("{{" + k + "}}", v)
 left = re.findall(r"\{\{\w+\}\}", src)
 assert not left, f"unfilled tokens: {left}"

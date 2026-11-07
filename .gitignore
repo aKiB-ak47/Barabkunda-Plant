@@ -1,2 +1,10 @@
 __pycache__/
 *.pyc
+# Android build output (the app is built on GitHub)
+app/android/.gradle/
+app/android/build/
+app/android/app/build/
+app/android/app/src/main/assets/www/
+app/android/local.properties
+*.p12
+*.jks
