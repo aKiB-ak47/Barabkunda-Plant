@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.webkit.RenderProcessGoneDetail;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -47,6 +48,17 @@ public class MainActivity extends Activity {
         splash.setKeepOnScreenCondition(() -> !ready);
         new Handler(Looper.getMainLooper()).postDelayed(() -> ready = true, 5000);
 
+        loader = new WebViewAssetLoader.Builder()
+                .setDomain(LOCAL_HOST)
+                .addPathHandler("/assets/", new WebViewAssetLoader.AssetsPathHandler(this))
+                .build();
+        buildWebView();
+        if (state != null && web.restoreState(state) != null) return;
+        web.loadUrl(startUrl(getIntent()));
+    }
+
+    @SuppressLint("SetJavaScriptEnabled")
+    private void buildWebView() {
         web = new WebView(this);
         web.setBackgroundColor(0xFF030812);
         setContentView(web);
@@ -65,11 +77,6 @@ public class MainActivity extends Activity {
         s.setAllowContentAccess(false);
         s.setCacheMode(online() ? WebSettings.LOAD_DEFAULT : WebSettings.LOAD_CACHE_ELSE_NETWORK);
         s.setUserAgentString(s.getUserAgentString() + " BMBarabkundaApp/" + versionName());
-
-        loader = new WebViewAssetLoader.Builder()
-                .setDomain(LOCAL_HOST)
-                .addPathHandler("/assets/", new WebViewAssetLoader.AssetsPathHandler(this))
-                .build();
 
         web.setWebChromeClient(new WebChromeClient());
         web.setWebViewClient(new WebViewClient() {
@@ -104,10 +111,18 @@ public class MainActivity extends Activity {
 
             @Override
             public void onPageFinished(WebView view, String url) { ready = true; }
-        });
 
-        if (state != null && web.restoreState(state) != null) return;
-        web.loadUrl(startUrl(getIntent()));
+            /** If the page's renderer stops (for example when the phone is short of memory), rebuild the view instead of closing the app. */
+            @Override
+            public boolean onRenderProcessGone(WebView view, RenderProcessGoneDetail detail) {
+                if (view != web) return true;
+                String url = usingLocal ? LOCAL : LIVE;
+                try { web.destroy(); } catch (Exception ignored) { }
+                buildWebView();
+                web.loadUrl(url);
+                return true;
+            }
+        });
     }
 
     private String startUrl(Intent intent) {

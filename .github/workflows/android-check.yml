@@ -18,6 +18,10 @@ jobs:
   check:
     runs-on: ubuntu-latest
     timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [google_apis, default]
     steps:
       - uses: actions/checkout@v4
 
@@ -31,7 +35,7 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 34
-          target: google_apis
+          target: ${{ matrix.target }}
           arch: x86_64
           profile: pixel_6
           disable-animations: true
@@ -42,9 +46,9 @@ jobs:
         if: always()
         run: |
           mkdir -p check && cd check
-          git init -q -b app-check
+          git init -q -b app-check-${{ matrix.target }}
           git config user.name "Akib Fateh"
           git config user.email "297658632+aKiB-ak47@users.noreply.github.com"
           git add -A
-          git commit -q -m "Android app check ${{ github.run_number }}" || true
-          git push -q -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" app-check
+          git commit -q -m "Android app check ${{ github.run_number }} (${{ matrix.target }})" || true
+          git push -q -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" app-check-${{ matrix.target }}

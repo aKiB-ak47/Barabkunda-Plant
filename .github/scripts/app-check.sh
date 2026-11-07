@@ -7,7 +7,7 @@ adb shell settings put global hide_error_dialogs 1 || true
 adb shell settings put global window_animation_scale 1 || true
 adb shell settings put global transition_animation_scale 1 || true
 adb shell settings put global animator_duration_scale 1 || true
-sleep 45   # let the emulator settle so system apps stop showing "not responding"
+sleep 75   # let the emulator settle so system apps stop showing "not responding"
 adb shell input keyevent KEYCODE_HOME
 adb install -r download/BM-Barabkunda-Plant.apk
 adb shell pm list packages | grep barabkunda
