@@ -21,7 +21,7 @@ html { background: var(--bg0); scroll-behavior: smooth; scroll-padding-top: 84px
 body { margin: 0; background: transparent; color: var(--text); font: 16px/1.65 var(--f-body); -webkit-font-smoothing: antialiased; overflow-x: hidden }
 a { color: var(--cyan) } button { font: inherit; color: inherit } img { max-width: 100%; display: block }
 :focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; border-radius: 10px }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto } *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition: none !important } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto } *, *::before, *::after { animation: none !important; transition: none !important } .in-bar i { width: 100% } }
 h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.15; color: var(--ink); letter-spacing: -.015em }
 p { margin: 0 }
 .wrap { max-width: 1280px; margin: 0 auto; padding-left: max(18px, env(safe-area-inset-left, 0px)); padding-right: max(18px, env(safe-area-inset-right, 0px)) }
@@ -531,7 +531,7 @@ const bySev = (a, b) => (a.sev === b.sev ? 0 : a.sev === "red" ? -1 : 1);
 const inRep = (f, k) => f.rep === k || (f.secs || []).some((s) => (k === "cal") === s.startsWith("tp-"));
 
 /* ---------- welcome: 10 seconds, robot, thumbs up, glitch, synthesised 10-second intro music ---------- */
-const intro = document.getElementById("intro"), INTRO_MS = reduce ? 4000 : 10000;
+const intro = document.getElementById("intro"), INTRO_MS = 10000;
 const SUBS = ["Quality · Maintenance · Safety intelligence", "Weight accuracy · Maintenance · TPM · Equipment", "{{flags_red}} red flags ready for management review", "Prepared by Akib Fateh · BM LP GAS™"];
 let ac = null, musicOut = null, introStart = performance.now();
 function impulse(ctx, sec) { const n = Math.floor(ctx.sampleRate * sec), b = ctx.createBuffer(2, n, ctx.sampleRate); for (let c = 0; c < 2; c++) { const d = b.getChannelData(c); for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / n, 3); } return b; }

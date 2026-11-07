@@ -6,6 +6,7 @@ shot() { adb exec-out screencap -p > "check/$1.png"; }
 adb shell settings put global hide_error_dialogs 1 || true
 adb shell settings put global window_animation_scale 1 || true
 adb shell settings put global transition_animation_scale 1 || true
+adb shell settings put global animator_duration_scale 1 || true
 sleep 45   # let the emulator settle so system apps stop showing "not responding"
 adb shell input keyevent KEYCODE_HOME
 adb install -r download/BM-Barabkunda-Plant.apk
@@ -14,8 +15,9 @@ adb shell dumpsys package com.bmenergy.barabkunda | grep -E "versionName|version
 adb logcat -c
 adb shell am start -W -n com.bmenergy.barabkunda/.MainActivity
 sleep 1;  shot 01-splash-1s
-sleep 4;  shot 02-welcome-5s
-sleep 5;  shot 03-welcome-10s
+sleep 3;  shot 02-welcome-4s
+sleep 3;  shot 03-welcome-7s
+sleep 3;  shot 03b-welcome-10s
 sleep 9;  shot 04-home-19s
 adb shell input swipe 540 1900 540 500 400; sleep 3; shot 05-scrolled
 adb shell input swipe 540 1900 540 500 400; sleep 3; shot 06-scrolled-more
