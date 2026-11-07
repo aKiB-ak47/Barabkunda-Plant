@@ -12,3 +12,11 @@ One page (`index.html`) with a welcome screen, a red-flag command centre for man
 Weight checks to 5 November 2026; maintenance record to 6 November 2026 (last SAP order 14 October 2026). For decision support, not control; safety-related calculations are for review by a qualified engineer (NFPA 58; LPG Rules 2004).
 
 How to update: [UPDATE.md](UPDATE.md).
+
+## Mobile app
+
+- **Android:** download `download/BM-Barabkunda-Plant.apk` from the site ("Get the app" section) and install it. The app opens the live site, so it always shows the latest data, and keeps a copy for use without internet.
+- **iPhone and iPad:** open the site in Safari, tap Share, then Add to Home Screen.
+- **Computer:** install from Chrome or Edge (install icon in the address bar).
+
+Prepared by Akib Fateh.

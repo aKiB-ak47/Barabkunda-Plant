@@ -45,3 +45,9 @@ python3 -I src/build_site.py
 | `src/reports/` | The two report pages |
 | `src/cal/` | Weight-check update and deep analysis |
 | `src/maint/` | Maintenance: orders, analysis, TPM, equipment guide, page builder |
+
+## Mobile app
+
+- Data updates need no new app: the app opens the live site and saves a copy for offline use (`sw.js`).
+- To change the app itself: edit `app/android/`, raise `VERSION_NAME` in `app/android/version.properties` and push. The "Android app" workflow builds an unsigned app on the `app-build` branch; sign it with the plant's key (kept privately) into `download/BM-Barabkunda-Plant.apk`, run `src/build_site.py` and push. The "Android app check" workflow then installs it on an emulator and saves screenshots on the `app-check` branch.
+- Installable-website files: `manifest.webmanifest`, `sw.js`, `assets/app/`.

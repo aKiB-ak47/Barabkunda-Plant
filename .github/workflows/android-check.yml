@@ -1,0 +1,50 @@
+# Installs the published Android app on an emulator, opens the reports, goes offline, and saves screenshots.
+name: Android app check
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["download/BM-Barabkunda-Plant.apk", ".github/workflows/android-check.yml", ".github/scripts/app-check.sh"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: android-check
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: Run the app on an emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          target: google_apis
+          arch: x86_64
+          profile: pixel_6
+          disable-animations: true
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim
+          script: bash .github/scripts/app-check.sh
+
+      - name: Hand the screenshots over (branch app-check)
+        if: always()
+        run: |
+          mkdir -p check && cd check
+          git init -q -b app-check
+          git config user.name "Akib Fateh"
+          git config user.email "297658632+aKiB-ak47@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Android app check ${{ github.run_number }}" || true
+          git push -q -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" app-check
